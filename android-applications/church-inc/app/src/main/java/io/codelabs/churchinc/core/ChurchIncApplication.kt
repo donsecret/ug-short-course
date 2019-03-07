@@ -1,9 +1,8 @@
 package io.codelabs.churchinc.core
 
 import android.app.Application
-import com.google.firebase.FirebaseApp
 import io.codelabs.churchinc.core.modules.firebaseModule
-import io.codelabs.churchinc.util.debugLog
+import io.codelabs.churchinc.core.modules.roomModule
 import org.koin.android.ext.android.startKoin
 
 /**
@@ -16,7 +15,7 @@ class ChurchIncApplication : Application() {
 
         // INITIALIZE KOIN HERE
         startKoin(
-            this@ChurchIncApplication, modules = listOf(firebaseModule)
+            this@ChurchIncApplication, modules = listOf(firebaseModule, roomModule)
         )
 
     }
