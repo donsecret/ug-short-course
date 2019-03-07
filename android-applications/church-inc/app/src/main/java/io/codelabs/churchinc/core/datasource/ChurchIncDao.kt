@@ -1,6 +1,5 @@
 package io.codelabs.churchinc.core.datasource
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 import io.codelabs.churchinc.model.User
 
