@@ -7,14 +7,12 @@
                                                    android:layout_height="wrap_content"
                                                    android:padding="@dimen/padding_normal">
 
-    <!--Title-->
+    <!--Content-->
     <TextView android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              tools:text="@string/dummy_placeholder"
+              tools:text="Anything goes here"
               android:fontFamily="@font/nunito_sans_semibold"
               app:layout_constraintTop_toTopOf="parent"
-              app:layout_constraintStart_toStartOf="parent"
-              app:layout_constraintEnd_toEndOf="parent"
               android:textSize="18sp"
               android:textColor="@android:color/black"
               android:id="@+id/todo_item_title"/>
@@ -22,11 +20,9 @@
     <!--Timestamp-->
     <TextView android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              tools:text="December 30, 2019"
+              tools:text="March 9, 2019"
               android:fontFamily="@font/nunito_sans_semibold"
               app:layout_constraintTop_toBottomOf="@id/todo_item_title"
-              app:layout_constraintStart_toStartOf="parent"
-              app:layout_constraintEnd_toEndOf="parent"
               android:textSize="14sp"
               android:id="@+id/todo_item_timestamp"/>
 

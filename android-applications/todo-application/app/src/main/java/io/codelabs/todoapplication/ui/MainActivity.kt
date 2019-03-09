@@ -27,8 +27,6 @@ import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity(), TodoTaskAdapter.ClickListener {
     private lateinit var viewModel: TodoTaskViewModel
-
-
     private val job = Job()
     private val ioScope = CoroutineScope(Dispatchers.IO + job)
     private val uiScope = CoroutineScope(Dispatchers.Main + job)

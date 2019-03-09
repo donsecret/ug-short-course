@@ -9,12 +9,12 @@ android {
         applicationId "io.codelabs.todoapplication"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode /*gitCommitCount*/ 2
-        versionName /*gitSha*/ "2.0"
+        versionCode gitCommitCount
+        versionName gitSha
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-//        buildConfigField 'String', 'GIT_SHA', "\"${gitSha}\""
-//        buildConfigField 'String', 'GIT_COMMIT', "\"${gitCommitCount}\""
+        buildConfigField 'String', 'GIT_SHA', "\"${gitSha}\""
+        buildConfigField 'String', 'GIT_COMMIT', "\"${gitCommitCount}\""
     }
     buildTypes {
         release {
@@ -39,7 +39,6 @@ dependencies {
     def koin = "2.0.0-beta-1"
     def room = "2.1.0-alpha04"
     def lifecycle = "2.0.0"
-    def glide = "4.9.0"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"

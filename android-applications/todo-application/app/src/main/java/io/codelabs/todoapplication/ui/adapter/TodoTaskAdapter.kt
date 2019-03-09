@@ -6,8 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import io.codelabs.todoapplication.R
 import io.codelabs.todoapplication.data.TodoItem
 
-class TodoTaskAdapter constructor(private val listener: ClickListener) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class TodoTaskAdapter constructor(private val listener: ClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     /**
      * Empty list of [TodoItem]s
      */
@@ -45,32 +44,62 @@ class TodoTaskAdapter constructor(private val listener: ClickListener) :
 
             TYPE_TODO -> {
                 if (holder is TodoViewHolder) {
-                    //todo: bind views
+                    // Get the todoItem for each position
+                    val todoItem = dataset[position]
+
+                    // Bind the content to the layout's title
+                    holder.v.todo_item_title.text = todoItem.content
+
+                    // Bind the timestamp to the timestamp field in the layout file
+                    val timestamp: String = DateUtils.getRelativeTimeString(
+                        todoItem.timestamp,
+                        System.currentTimeMillis(),
+                        DateUtils.SECONDS
+                    )
+
+                    // Set the timestamp to the result obtained
+                    holder.v.todo_item_timestamp.text = timestamp
+
+                    holder.v.setOnClickListener { listener.onClick(todoItem) }
+
                 }
             }
 
             TYPE_TODO_COMPLETED -> {
                 if (holder is TodoViewHolder) {
-                    //todo: bind views
+                    // Get the todoItem for each position
+                    val todoItem = dataset[position]
+
+                    // Bind the content to the layout's title
+                    holder.v.completed_todo_item_title.text = todoItem.content
+
+                    // Bind the timestamp to the timestamp field in the layout file
+                    val timestamp: String = DateUtils.getRelativeTimeString(
+                        todoItem.timestamp,
+                        System.currentTimeMillis(),
+                        DateUtils.SECONDS
+                    )
+
+                    // Set the timestamp to the result obtained
+                    holder.v.completed_todo_item_timestamp.text = timestamp
+
+                    holder.v.setOnClickListener { listener.onClick(todoItem) }
                 }
             }
 
         }
     }
 
-
-    // todo: create a function to add new items to the adapter through the activity
-    fun addItems(items: MutableList<TodoItem>) {
-        dataset.clear()
-        dataset.addAll(items)
+    // Add new items to the existing list of todoItems
+    fun addItems(newItems: MutableList<TodoItem>) {
+        dataset.clear() /*Empty the existing list*/
+        dataset.addAll(newItems)    /*Populate new items into it*/
         notifyDataSetChanged()
     }
 
-    interface ClickListener {
-
-        fun onClick(item: TodoItem)
-
-    }
+   interface ClickListener {
+       fun onClick(item: TodoItem)
+   }
 
     companion object {
         private const val TYPE_EMPTY = 0
