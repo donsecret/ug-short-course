@@ -57,7 +57,7 @@ interface TodoAppDao {
     /**
      * Update [todoItem]
      */
-    @Update(onConflict = OnConflictStrategy.REPLACE)
+    @Update
     fun updateTodoItem(vararg todoItem: TodoItem)
 
 }

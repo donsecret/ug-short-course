@@ -9,12 +9,15 @@ import io.codelabs.todoapplication.core.TodoApplication
 import io.codelabs.todoapplication.data.TodoItem
 import io.codelabs.todoapplication.room.viewmodel.TodoTaskViewModel
 import io.codelabs.todoapplication.room.viewmodel.factory.TodoTaskFactory
+import io.codelabs.todoapplication.util.createAlarm
+import io.codelabs.todoapplication.util.debugLog
 import io.codelabs.todoapplication.util.toast
 import kotlinx.android.synthetic.main.activity_create_todo.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import java.util.*
 
 /**
  * Create a new [TodoItem]
@@ -39,6 +42,7 @@ class CreateTodoActivity : AppCompatActivity() {
             val todoItem = intent.getParcelableExtra<TodoItem>(EXTRA_ITEM)
             todo_input.setText(todoItem.content)
         }
+
     }
 
     fun saveTodoItem(v: View?) {
@@ -50,14 +54,15 @@ class CreateTodoActivity : AppCompatActivity() {
             this@CreateTodoActivity.toast(message = "Please enter a task todo")
         } else {
             ioScope.launch {
-                if (intent.hasExtra(EXTRA_ITEM)) viewModel.update(intent.getParcelableExtra(EXTRA_ITEM))
+                if (intent.hasExtra(EXTRA_ITEM)) viewModel.update(intent.getParcelableExtra<TodoItem>(EXTRA_ITEM).apply {
+                    this.content = content
+                    this.timestamp = System.currentTimeMillis()
+                    debugLog("Applying changes")
+                })
                 else viewModel.insert(TodoItem(content))
 
                 // Update UI with callback
                 uiScope.launch {
-                    /* todo_input.text?.clear()
-                     todo_input.clearFocus()
-                     Snackbar.make(container,"Item added successfully",Snackbar.LENGTH_LONG).show()*/
                     toast("Create todo item successfully")
                     finishAfterTransition()
                 }

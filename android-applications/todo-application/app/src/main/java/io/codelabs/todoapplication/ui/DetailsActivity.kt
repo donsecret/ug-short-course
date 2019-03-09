@@ -113,6 +113,7 @@ class DetailsActivity : AppCompatActivity() {
                 // Store the item in the database
                 ioScope.launch {
                     viewModel.update(todoItem)
+
                     uiScope.launch {
                         this@DetailsActivity.toast(message = "Updated successfully")
                         finishAfterTransition()
