@@ -16,8 +16,7 @@
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
-            android:theme="@style/TodoAppTheme"
-            tools:ignore="GoogleAppIndexingWarning">
+            android:theme="@style/TodoAppTheme">
 
 
         <activity android:name=".ui.MainActivity">
@@ -26,10 +25,14 @@
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+            </intent-filter>
         </activity>
 
         <activity android:name=".ui.CreateTodoActivity"
-        android:label="@string/empty_text"/>
+                  android:label="@string/empty_text"/>
         <activity android:name=".ui.DetailsActivity"
                   android:label="@string/empty_text"/>
     </application>
