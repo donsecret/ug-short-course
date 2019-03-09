@@ -9,12 +9,12 @@ android {
         applicationId "io.codelabs.todoapplication"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode gitCommitCount
-        versionName gitSha
+        versionCode /*gitCommitCount*/ 2
+        versionName /*gitSha*/ "2.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField 'String', 'GIT_SHA', "\"${gitSha}\""
-        buildConfigField 'String', 'GIT_COMMIT', "\"${gitCommitCount}\""
+//        buildConfigField 'String', 'GIT_SHA', "\"${gitSha}\""
+//        buildConfigField 'String', 'GIT_COMMIT', "\"${gitCommitCount}\""
     }
     buildTypes {
         release {
