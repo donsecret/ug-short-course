@@ -9,6 +9,9 @@ import android.provider.MediaStore
 import android.widget.Toast
 import androidx.annotation.StringRes
 import io.codelabs.todoapplication.R
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import java.util.*
 
 /**
  * Prints a message of [Any] object to the console
@@ -21,11 +24,11 @@ fun Context.toast(message: Any? = "", @StringRes resId: Int = R.string.empty_tex
     Toast.LENGTH_LONG
 ).show()
 
-fun Context.createAlarm(message: String, hour: Int, minutes: Int) {
+fun Context.createAlarm(message: String) {
     val intent = Intent(AlarmClock.ACTION_SET_ALARM).apply {
         putExtra(AlarmClock.EXTRA_MESSAGE, message)
-        putExtra(AlarmClock.EXTRA_HOUR, hour)
-        putExtra(AlarmClock.EXTRA_MINUTES, minutes)
+        putExtra(AlarmClock.EXTRA_HOUR, Calendar.HOUR_OF_DAY)
+        putExtra(AlarmClock.EXTRA_MINUTES, Calendar.MINUTE)
     }
     if (intent.resolveActivity(packageManager) != null) {
         startActivity(intent)

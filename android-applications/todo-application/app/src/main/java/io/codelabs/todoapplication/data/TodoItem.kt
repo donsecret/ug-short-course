@@ -12,7 +12,7 @@ data class TodoItem constructor(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
     var content: String,
-    val timestamp: Long = System.currentTimeMillis(),
+    var timestamp: Long = System.currentTimeMillis(),
     var completed: Boolean = false
 ) : Parcelable {
 

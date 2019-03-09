@@ -87,6 +87,7 @@ class MainActivity : AppCompatActivity(), TodoTaskAdapter.ClickListener {
     override fun onClick(item: TodoItem) {
         if (item.completed) {
             val make = Snackbar.make(container, "Clear this item completely?", Snackbar.LENGTH_LONG)
+
             make.setAction("Delete") {
                 make.dismiss()
                 ioScope.launch {

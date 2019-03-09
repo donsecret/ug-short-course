@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import io.codelabs.todoapplication.R
 import io.codelabs.todoapplication.data.TodoItem
+import kotlinx.android.synthetic.main.item_todo.view.*
 
 class TodoTaskAdapter constructor(private val listener: ClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     /**
