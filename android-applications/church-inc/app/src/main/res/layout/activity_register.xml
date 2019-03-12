@@ -66,6 +66,7 @@
                                                            android:layout_gravity="end"
                                                            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
                                                            android:onClick="doRegister"
+                                                           android:id="@+id/register_button"
                                                            android:layout_marginTop="24dp"
                                                            android:text="Sign Up"/>
 
