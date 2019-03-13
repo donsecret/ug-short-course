@@ -1,5 +1,6 @@
 package io.codelabs.churchinc.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -51,7 +52,8 @@ class HomeActivity : RootActivity(), NavigationView.OnNavigationItemSelectedList
                 } else {
 
                     val displayName = auth.currentUser?.displayName
-                    headerView.findViewById<TextView>(R.id.user_full_name).text = if (displayName.isNullOrEmpty()) currentUser.name else displayName
+                    headerView.findViewById<TextView>(R.id.user_full_name).text =
+                        if (displayName.isNullOrEmpty()) currentUser.name else displayName
                     val avatar = headerView.findViewById<ImageView>(R.id.user_avatar)
                     headerView.findViewById<TextView>(R.id.user_email).text = auth.currentUser?.email
                     headerView.findViewById<TextView>(R.id.user_phone).text =
@@ -83,7 +85,9 @@ class HomeActivity : RootActivity(), NavigationView.OnNavigationItemSelectedList
             }
 
             R.id.menu_logout -> {
-                // todo: logout user
+                auth.signOut()
+                startActivity(Intent(this@HomeActivity, LoginActivity::class.java))
+                finishAfterTransition()
             }
         }
         return super.onOptionsItemSelected(item)
