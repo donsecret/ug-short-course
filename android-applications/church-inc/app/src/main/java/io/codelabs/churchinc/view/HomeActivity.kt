@@ -85,9 +85,17 @@ class HomeActivity : RootActivity(), NavigationView.OnNavigationItemSelectedList
             }
 
             R.id.menu_logout -> {
-                auth.signOut()
-                startActivity(Intent(this@HomeActivity, LoginActivity::class.java))
-                finishAfterTransition()
+                ioScope.launch {
+                    val currentUser = dao.getCurrentUser(auth.uid!!)
+                    dao.deleteUser(currentUser)
+
+                    uiScope.launch {
+                        auth.signOut()
+                        startActivity(Intent(this@HomeActivity, LoginActivity::class.java))
+                        finishAfterTransition()
+                    }
+                }
+
             }
         }
         return super.onOptionsItemSelected(item)
