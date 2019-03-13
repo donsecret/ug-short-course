@@ -43,7 +43,7 @@ class RegisterActivity : RootActivity() {
                     val firebaseUser = it.result?.user
 
                     // Create a new User instance from the firebase user above
-                    val currentUser = User(firebaseUser!!.uid, user_full_name.text.toString(), null)
+                    val currentUser = User(firebaseUser!!.uid, user_full_name.text.toString(), firebaseUser.photoUrl.toString())
 
                     // Store user data locally
                     ioScope.launch {
