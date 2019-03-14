@@ -12,7 +12,8 @@ data class User(
     @PrimaryKey(autoGenerate = false)
     override val key: String,
     override var name: String,
-    override var avatar: String?
+    override var avatar: String?,
+    var phone: String? = null
 ) : SearchableDataModel {
 
     @Ignore

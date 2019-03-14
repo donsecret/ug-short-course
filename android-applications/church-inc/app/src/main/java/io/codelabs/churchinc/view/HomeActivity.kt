@@ -12,6 +12,8 @@ import androidx.core.view.GravityCompat
 import com.google.android.material.navigation.NavigationView
 import io.codelabs.churchinc.R
 import io.codelabs.churchinc.core.RootActivity
+import io.codelabs.churchinc.core.datasource.remote.DataCallback
+import io.codelabs.churchinc.core.datasource.remote.getLiveUser
 import io.codelabs.churchinc.core.glide.GlideApp
 import io.codelabs.churchinc.model.User
 import io.codelabs.churchinc.util.toast
@@ -42,33 +44,56 @@ class HomeActivity : RootActivity(), NavigationView.OnNavigationItemSelectedList
 
     private fun setupHeader(headerView: View?) {
         if (headerView == null) return
-        ioScope.launch {
-            // get the user's information from the database
-            val currentUser: User? = dao.getCurrentUser(auth.uid!!)
 
-            uiScope.launch {
-                if (currentUser == null) {
+        getLiveUser(object : DataCallback<User> {
+            override fun onError(e: String?) {
+                toast(e)
+            }
+
+            override fun onComplete(result: User?) {
+                if (result == null) {
                     toast("User cannot be found")
                 } else {
 
                     val displayName = auth.currentUser?.displayName
                     headerView.findViewById<TextView>(R.id.user_full_name).text =
-                        if (displayName.isNullOrEmpty()) currentUser.name else displayName
+                        if (displayName.isNullOrEmpty()) result.name else displayName
                     val avatar = headerView.findViewById<ImageView>(R.id.user_avatar)
                     headerView.findViewById<TextView>(R.id.user_email).text = auth.currentUser?.email
                     headerView.findViewById<TextView>(R.id.user_phone).text =
                         auth.currentUser?.phoneNumber ?: "No phone number"
 
                     GlideApp.with(this@HomeActivity)
-                        .load(currentUser.avatar)
+                        .load(result.avatar)
                         .circleCrop()
                         .placeholder(R.drawable.avatar_header)
                         .error(R.drawable.avatar_header)
                         .into(avatar)
                 }
-
             }
-        }
+        })
+
+        /*dao.getLiveUser(auth.uid!!).observe(this@HomeActivity, Observer { currentUser ->
+            if (currentUser == null) {
+                toast("User cannot be found")
+            } else {
+
+                val displayName = auth.currentUser?.displayName
+                headerView.findViewById<TextView>(R.id.user_full_name).text =
+                    if (displayName.isNullOrEmpty()) currentUser.name else displayName
+                val avatar = headerView.findViewById<ImageView>(R.id.user_avatar)
+                headerView.findViewById<TextView>(R.id.user_email).text = auth.currentUser?.email
+                headerView.findViewById<TextView>(R.id.user_phone).text =
+                    auth.currentUser?.phoneNumber ?: "No phone number"
+
+                GlideApp.with(this@HomeActivity)
+                    .load(currentUser.avatar)
+                    .circleCrop()
+                    .placeholder(R.drawable.avatar_header)
+                    .error(R.drawable.avatar_header)
+                    .into(avatar)
+            }
+        })*/
     }
 
     // Attach menu to toolbar from here

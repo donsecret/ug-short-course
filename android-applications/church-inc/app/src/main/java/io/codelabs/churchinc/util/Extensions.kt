@@ -8,4 +8,4 @@ import android.widget.Toast
  */
 fun debugLog(msg: Any?) = println("ChurchInc -> ${msg.toString()}")
 
-fun Context.toast(message: String) = Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+fun Context.toast(message: String?) = Toast.makeText(this, message, Toast.LENGTH_LONG).show()
