@@ -16,7 +16,7 @@ android {
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = ["room.schemaLocation":
-                                     "$projectDir/schemas".toString()]
+                                     "$projectDir/backup".toString()]
             }
         }
     }
