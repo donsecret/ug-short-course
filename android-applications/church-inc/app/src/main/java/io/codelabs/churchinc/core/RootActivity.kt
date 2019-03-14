@@ -5,7 +5,7 @@ import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
-import io.codelabs.churchinc.core.datasource.ChurchIncDao
+import io.codelabs.churchinc.core.datasource.local.ChurchIncDao
 import io.codelabs.churchinc.util.debugLog
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

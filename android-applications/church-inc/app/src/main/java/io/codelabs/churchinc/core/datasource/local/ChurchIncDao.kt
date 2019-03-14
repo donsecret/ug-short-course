@@ -1,4 +1,4 @@
-package io.codelabs.churchinc.core.datasource
+package io.codelabs.churchinc.core.datasource.local
 
 import androidx.room.*
 import io.codelabs.churchinc.model.User
