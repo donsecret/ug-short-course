@@ -19,7 +19,8 @@ fun RootActivity.getLiveUser(callback: DataCallback<User>) {
                 callback.onError("User could not be found")
             } else {
                 ioScope.launch {
-                    dao.updateUser(user)
+                    val currentUser: User? = dao.getCurrentUser(auth.uid!!)
+                    if (currentUser == null) dao.createUser(user) else dao.updateUser(user)
 
                     uiScope.launch {
                         callback.onComplete(user)

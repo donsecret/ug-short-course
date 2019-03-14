@@ -61,7 +61,7 @@ class HomeActivity : RootActivity(), NavigationView.OnNavigationItemSelectedList
                     val avatar = headerView.findViewById<ImageView>(R.id.user_avatar)
                     headerView.findViewById<TextView>(R.id.user_email).text = auth.currentUser?.email
                     headerView.findViewById<TextView>(R.id.user_phone).text =
-                        auth.currentUser?.phoneNumber ?: "No phone number"
+                        result.phone ?: auth.currentUser?.phoneNumber
 
                     GlideApp.with(this@HomeActivity)
                         .load(result.avatar)
