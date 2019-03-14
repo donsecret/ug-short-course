@@ -44,7 +44,6 @@ class HomeActivity : RootActivity(), NavigationView.OnNavigationItemSelectedList
 
     private fun setupHeader(headerView: View?) {
         if (headerView == null) return
-
         getLiveUser(object : DataCallback<User> {
             override fun onError(e: String?) {
                 toast(e)
