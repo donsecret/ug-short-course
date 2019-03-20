@@ -16,7 +16,9 @@ import io.codelabs.churchinc.core.datasource.remote.DataCallback
 import io.codelabs.churchinc.core.datasource.remote.getLiveUser
 import io.codelabs.churchinc.core.glide.GlideApp
 import io.codelabs.churchinc.model.User
+import io.codelabs.churchinc.util.addFragment
 import io.codelabs.churchinc.util.toast
+import io.codelabs.churchinc.view.fragment.*
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.content_home.*
 import kotlinx.coroutines.launch
@@ -128,25 +130,25 @@ class HomeActivity : RootActivity(), NavigationView.OnNavigationItemSelectedList
     override fun onNavigationItemSelected(p0: MenuItem): Boolean {
         when (p0.itemId) {
             R.id.menu_background_info -> {
-                toast(p0.title.toString())
+                addFragment(BackgroundInfoFragment())
             }
             R.id.menu_location -> {
-                toast(p0.title.toString())
+                addFragment(LocationFragment())
             }
             R.id.menu_current_status -> {
-                toast(p0.title.toString())
+                addFragment(CurrentStatusFragment())
             }
             R.id.menu_meeting_days -> {
-                toast(p0.title.toString())
+                addFragment(MeetingDaysFragment())
             }
             R.id.menu_events -> {
-                toast(p0.title.toString())
+                addFragment(EventsFragment())
             }
             R.id.menu_devotion -> {
-                toast(p0.title.toString())
+                addFragment(DevotionFragment())
             }
             R.id.menu_bible_studies -> {
-                toast(p0.title.toString())
+                addFragment(BibleStudiesFragment())
             }
         }
 
