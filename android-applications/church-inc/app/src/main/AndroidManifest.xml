@@ -10,13 +10,13 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".view.HomeActivity">
+        <activity android:name=".view.ui.HomeActivity">
         </activity>
-        <activity android:name=".view.RegisterActivity">
+        <activity android:name=".view.ui.RegisterActivity">
         </activity>
-        <activity android:name=".view.LoginActivity">
+        <activity android:name=".view.ui.LoginActivity">
         </activity>
-        <activity android:name=".view.SplashActivity">
+        <activity android:name=".view.ui.SplashActivity">
 
             <!-- MAKES THIS THE DEFAULT ACTIVITY WHEN THE APPLICATION IS LAUNCHED -->
             <intent-filter>

@@ -1,4 +1,4 @@
-package io.codelabs.churchinc.view
+package io.codelabs.churchinc.view.ui
 
 import android.content.Intent
 import android.os.Bundle
