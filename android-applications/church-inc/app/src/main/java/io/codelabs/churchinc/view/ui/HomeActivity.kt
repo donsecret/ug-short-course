@@ -42,6 +42,7 @@ class HomeActivity : RootActivity(), NavigationView.OnNavigationItemSelectedList
         nav_view.setNavigationItemSelectedListener(this)
         val headerView = nav_view.getHeaderView(0)
         setupHeader(headerView)
+        addFragment(LocationFragment())
     }
 
     private fun setupHeader(headerView: View?) {
