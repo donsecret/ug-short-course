@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import io.codelabs.churchinc.R
 import io.codelabs.churchinc.core.RootFragment
+import kotlinx.android.synthetic.main.fragment_background_info.*
 
 class MeetingDaysFragment : RootFragment() {
 
@@ -15,5 +16,6 @@ class MeetingDaysFragment : RootFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        test_text.text = this::class.java.simpleName
     }
 }
