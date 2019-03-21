@@ -74,7 +74,7 @@ class HomeActivity : RootActivity(), NavigationView.OnNavigationItemSelectedList
                 }
             }
         })
-        
+
     }
 
     // Attach menu to toolbar from here

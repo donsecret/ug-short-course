@@ -16,6 +16,6 @@ class BackgroundInfoFragment : RootFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        test_text.text = this::class.java.simpleName
+        church_background_info.text = getString(R.string.about_church)
     }
 }
