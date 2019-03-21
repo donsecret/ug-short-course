@@ -74,28 +74,7 @@ class HomeActivity : RootActivity(), NavigationView.OnNavigationItemSelectedList
                 }
             }
         })
-
-        /*dao.getLiveUser(auth.uid!!).observe(this@HomeActivity, Observer { currentUser ->
-            if (currentUser == null) {
-                toast("User cannot be found")
-            } else {
-
-                val displayName = auth.currentUser?.displayName
-                headerView.findViewById<TextView>(R.id.user_full_name).text =
-                    if (displayName.isNullOrEmpty()) currentUser.name else displayName
-                val avatar = headerView.findViewById<ImageView>(R.id.user_avatar)
-                headerView.findViewById<TextView>(R.id.user_email).text = auth.currentUser?.email
-                headerView.findViewById<TextView>(R.id.user_phone).text =
-                    auth.currentUser?.phoneNumber ?: "No phone number"
-
-                GlideApp.with(this@HomeActivity)
-                    .load(currentUser.avatar)
-                    .circleCrop()
-                    .placeholder(R.drawable.avatar_header)
-                    .error(R.drawable.avatar_header)
-                    .into(avatar)
-            }
-        })*/
+        
     }
 
     // Attach menu to toolbar from here
