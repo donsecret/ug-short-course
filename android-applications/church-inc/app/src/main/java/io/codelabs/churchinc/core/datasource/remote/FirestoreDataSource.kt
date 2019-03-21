@@ -1,7 +1,9 @@
 package io.codelabs.churchinc.core.datasource.remote
 
 import io.codelabs.churchinc.core.RootActivity
+import io.codelabs.churchinc.model.Sermon
 import io.codelabs.churchinc.model.User
+import io.codelabs.churchinc.util.debugLog
 import kotlinx.coroutines.launch
 
 
@@ -29,6 +31,20 @@ fun RootActivity.getLiveUser(callback: DataCallback<User>) {
             }
 
         }
+}
+
+fun RootActivity.getSermons(callback: DataCallback<MutableList<Sermon>>) {
+    firestore.collection("sermons").addSnapshotListener(this) { snapshot, exception ->
+        if (exception != null) {
+            callback.onError(exception.localizedMessage)
+            return@addSnapshotListener
+        }
+
+        debugLog("Sermons are: ${snapshot?.documents}")
+        val sermons = snapshot?.toObjects(Sermon::class.java)
+        if (sermons == null) callback.onError("There are no sermons in the database")
+        else callback.onComplete(sermons)
+    }
 }
 
 interface DataCallback<T> {

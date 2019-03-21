@@ -1,7 +1,9 @@
 package io.codelabs.churchinc.view.ui
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.ContactsContract
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -17,6 +19,7 @@ import io.codelabs.churchinc.core.datasource.remote.getLiveUser
 import io.codelabs.churchinc.core.glide.GlideApp
 import io.codelabs.churchinc.model.User
 import io.codelabs.churchinc.util.addFragment
+import io.codelabs.churchinc.util.debugLog
 import io.codelabs.churchinc.util.toast
 import io.codelabs.churchinc.view.fragment.*
 import kotlinx.android.synthetic.main.activity_home.*
@@ -116,7 +119,8 @@ class HomeActivity : RootActivity(), NavigationView.OnNavigationItemSelectedList
                 addFragment(LocationFragment())
             }
             R.id.menu_current_status -> {
-                addFragment(CurrentStatusFragment())
+//                addFragment(CurrentStatusFragment())
+                selectContact()
             }
             R.id.menu_meeting_days -> {
                 addFragment(MeetingDaysFragment())
@@ -135,4 +139,25 @@ class HomeActivity : RootActivity(), NavigationView.OnNavigationItemSelectedList
         drawer_layout.closeDrawer(GravityCompat.START, true)
         return true
     }
+
+    val REQUEST_SELECT_CONTACT = 1
+
+    fun selectContact() {
+        val intent = Intent(Intent.ACTION_PICK).apply {
+            type = ContactsContract.Contacts.CONTENT_TYPE
+        }
+        if (intent.resolveActivity(packageManager) != null) {
+            startActivityForResult(intent, REQUEST_SELECT_CONTACT)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == REQUEST_SELECT_CONTACT && resultCode == RESULT_OK) {
+            val contactUri: Uri? = data?.data
+            // Do something with the selected contact at contactUri
+            debugLog("Contact is: $contactUri")
+            //...
+        }
+    }
+
 }

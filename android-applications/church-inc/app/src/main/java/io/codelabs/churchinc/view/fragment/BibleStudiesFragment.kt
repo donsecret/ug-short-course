@@ -6,7 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.codelabs.churchinc.R
+import io.codelabs.churchinc.core.RootActivity
 import io.codelabs.churchinc.core.RootFragment
+import io.codelabs.churchinc.core.datasource.remote.DataCallback
+import io.codelabs.churchinc.core.datasource.remote.getSermons
+import io.codelabs.churchinc.model.Sermon
+import io.codelabs.churchinc.util.toast
 import io.codelabs.churchinc.view.recyclerview.adapter.BibleStudiesAdapter
 import kotlinx.android.synthetic.main.fragment_recyclerview.*
 
@@ -24,8 +29,17 @@ class BibleStudiesFragment : RootFragment() {
          */
         content_recyclerview.layoutManager = LinearLayoutManager(requireContext())
         content_recyclerview.setHasFixedSize(true)
-        val adapter = BibleStudiesAdapter()
+        val adapter = BibleStudiesAdapter(requireContext())
         content_recyclerview.adapter = adapter
 
+        (requireActivity() as? RootActivity)?.getSermons(object: DataCallback<MutableList<Sermon>> {
+            override fun onError(e: String?) {
+                requireContext().toast(e)
+            }
+
+            override fun onComplete(result: MutableList<Sermon>?) {
+                if (result != null) adapter.addData(result)
+            }
+        })
     }
 }

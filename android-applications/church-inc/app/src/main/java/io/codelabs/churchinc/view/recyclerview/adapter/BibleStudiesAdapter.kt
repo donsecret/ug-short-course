@@ -1,5 +1,7 @@
 package io.codelabs.churchinc.view.recyclerview.adapter
 
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -7,8 +9,9 @@ import io.codelabs.churchinc.R
 import io.codelabs.churchinc.model.Sermon
 import io.codelabs.churchinc.view.recyclerview.ContentViewHolder
 import io.codelabs.churchinc.view.recyclerview.EmptyViewHolder
+import kotlinx.android.synthetic.main.item_bible_study.view.*
 
-class BibleStudiesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class BibleStudiesAdapter constructor(private val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val dataset: MutableList<Sermon> = mutableListOf()
 
     companion object {
@@ -48,10 +51,20 @@ class BibleStudiesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 }
             }
         }*/
-        if(getItemViewType(position) == TYPE_CONTENT && holder is ContentViewHolder) {
+        if (getItemViewType(position) == TYPE_CONTENT && holder is ContentViewHolder) {
+            val sermon = dataset[position]
+            holder.v.sermon_name.text = sermon.name
+            holder.v.sermon_keytext.text = sermon.keyText.trim()
+
             holder.v.setOnClickListener {
 
             }
         }
+    }
+
+    fun addData(listOfNewSermons: MutableList<Sermon>) {
+        dataset.clear()
+        dataset.addAll(listOfNewSermons)
+        notifyDataSetChanged()
     }
 }
