@@ -1,4 +1,4 @@
-package io.codelabs.churchinc.core.datasource
+package io.codelabs.churchinc.core.datasource.local
 
 import android.content.Context
 import androidx.room.Database

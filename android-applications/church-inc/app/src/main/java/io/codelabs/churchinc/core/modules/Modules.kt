@@ -5,7 +5,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import io.codelabs.churchinc.core.ChurchIncApplication
-import io.codelabs.churchinc.core.datasource.ChurchIncDatabase
+import io.codelabs.churchinc.core.datasource.local.ChurchIncDatabase
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module.module
 

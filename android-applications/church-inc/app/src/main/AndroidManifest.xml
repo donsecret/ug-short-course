@@ -11,13 +11,25 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".view.HomeActivity">
+
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/.
+        -->
+        <meta-data
+                android:name="com.google.android.geo.API_KEY"
+                android:value="@string/google_maps_key"/>
+        <activity android:name=".view.ui.HomeActivity">
         </activity>
-        <activity android:name=".view.RegisterActivity">
+        <activity android:name=".view.ui.RegisterActivity">
         </activity>
-        <activity android:name=".view.LoginActivity">
+        <activity android:name=".view.ui.LoginActivity">
         </activity>
-        <activity android:name=".view.SplashActivity">
+        <activity android:name=".view.ui.SplashActivity">
 
             <!-- MAKES THIS THE DEFAULT ACTIVITY WHEN THE APPLICATION IS LAUNCHED -->
             <intent-filter>

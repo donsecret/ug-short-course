@@ -9,8 +9,8 @@ android {
         applicationId "io.codelabs.churchinc"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "2.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         javaCompileOptions {
@@ -55,6 +55,8 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+
+    // Google Maps
     implementation 'com.google.android.gms:play-services-maps:16.1.0'
 
     // Firebase
