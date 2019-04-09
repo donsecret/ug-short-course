@@ -15,7 +15,7 @@ class UsersActivity : RootActivity() {
         if (intent.hasExtra(EXTRA_ROOM)) {
             debugLog(intent.getParcelableExtra<Room>(EXTRA_ROOM))
         }
-        
+
     }
 
     companion object {
