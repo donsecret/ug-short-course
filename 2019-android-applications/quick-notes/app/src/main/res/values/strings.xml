@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Quick Notes</string>
+    <string name="app_desc">Department of Computer Science</string>
+    <string name="welcome_text">Welcome Champ!</string>
+    <string name="welcome_desc">I\'m <b>QuickNotes</b>, what\'s your name?
+    </string>
+    <string name="username_hint">I\'m called…</string>
+
 </resources>
