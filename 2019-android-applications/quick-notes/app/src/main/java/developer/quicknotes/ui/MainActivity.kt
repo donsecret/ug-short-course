@@ -15,7 +15,11 @@ class MainActivity : AppCompatActivity() {
         // Send the user to the login screen when the Get Started button is clicked
         // We will make use of intents in this case
         get_started_button.setOnClickListener {
-            startActivity(Intent(/*From*/ this@MainActivity,/*To*/ LoginActivity::class.java))
+            startActivity(
+                Intent(
+                    /*From*/ this@MainActivity,/*To*/ LoginActivity::class.java
+                )
+            )
             finish()
         }
     }

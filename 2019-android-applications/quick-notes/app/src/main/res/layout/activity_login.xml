@@ -3,7 +3,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
         android:orientation="vertical"
         android:padding="16dp"
         android:gravity="center"
@@ -14,11 +14,13 @@
               android:layout_height="wrap_content"
               android:text="@string/welcome_text"
               android:layout_marginBottom="8dp"
-              android:textSize="26sp"/>
+              android:textAppearance="?textAppearanceHeadline5"
+    />
 
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
               android:text="@string/welcome_desc"
               android:paddingTop="4dp"
+              android:textAppearance="?textAppearanceBody1"
               android:paddingBottom="4dp"/>
 
     <com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent"
@@ -38,6 +40,7 @@
                                                        android:layout_height="wrap_content"
                                                        android:layout_marginTop="16dp"
                                                        android:text="Save"
+                                                       app:shapeAppearance="@style/ShapeAppearance.MyApp.SmallComponent.Button"
                                                        android:id="@+id/save_username"/>
 
 </LinearLayout>
