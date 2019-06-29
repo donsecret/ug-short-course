@@ -15,7 +15,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         save_username.setOnClickListener {
-            // Get thet text entered in the input layout
+            // Get that text entered in the input layout
             val name = username.text.toString()
 
             if (name.isNotEmpty()) {// Navigate to the Notes Activity
