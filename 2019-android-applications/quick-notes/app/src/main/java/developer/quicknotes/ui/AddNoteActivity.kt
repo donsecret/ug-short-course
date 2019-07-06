@@ -1,5 +1,6 @@
 package developer.quicknotes.ui
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import developer.quicknotes.R
@@ -30,6 +31,12 @@ class AddNoteActivity : AppCompatActivity() {
                 toast("Please enter a message first")
             } else addNote()
         }
+
+        // Handle receiving of texts from other applications
+        if (intent.action.isNullOrEmpty()) return
+        else if (intent.action == Intent.ACTION_SEND) {
+            note_input_field.setText(intent.getStringExtra(Intent.EXTRA_TEXT))
+        }
     }
 
     /**
@@ -40,7 +47,7 @@ class AddNoteActivity : AppCompatActivity() {
         val message = note_input_field.text.toString()
 
         // Create a new note object
-        val note = Note(message)
+        val note = Note(message.trim())
 
         ioScope.launch {
             // Add note to the database

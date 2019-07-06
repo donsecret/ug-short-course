@@ -34,9 +34,9 @@ interface NoteDAO {
     fun readSingleNote(id: Int): LiveData<Note>
 
     @Update
-    fun updateNote(note: Note)
+    fun updateNote(note: Note?   )
 
     @Delete
-    fun deleteNote(note: Note)
+    fun deleteNote(note: Note?)
 
 }
