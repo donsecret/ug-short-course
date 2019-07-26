@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
+apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
+apply from: 'https://raw.githubusercontent.com/passsy/gradle-GitVersioner/master/git-versioner.gradle'
 
 android {
     compileSdkVersion 29
@@ -11,8 +11,8 @@ android {
         applicationId "io.codelabs.ugcloudchat"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        versionCode gitVersion.version
+        versionName gitVersionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -25,6 +25,13 @@ android {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
     }
+
+    // Room version error fix
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+
 }
 
 dependencies {
@@ -43,6 +50,25 @@ dependencies {
     // Easy permissions
     implementation 'pub.devrel:easypermissions:3.0.0'
 
+    // Lifecycle
+    def lifecycle_version = "2.0.0"
+    // ViewModel and LiveData
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+
+    // Koin
+    def koin_version = "2.0.1"
+    implementation "org.koin:koin-android:$koin_version"
+    implementation "org.koin:koin-androidx-scope:$koin_version"
+    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
+
+    // Room
+    def room_version = "2.1.0"
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+
+    // WorkManager
+    def work_version = "2.1.0"
+    implementation "androidx.work:work-runtime-ktx:$work_version"
 
     // Firebase SDK
     implementation 'com.google.firebase:firebase-core:17.0.1'
