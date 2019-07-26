@@ -6,10 +6,13 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.codelabs.ugcloudchat.R
 import io.codelabs.ugcloudchat.util.debugThis
+import io.codelabs.ugcloudchat.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.activity_home.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
 
@@ -18,6 +21,8 @@ class HomeActivity : BaseActivity(),
 
     val perms = arrayOf(Manifest.permission.READ_CONTACTS, Manifest.permission.WRITE_CONTACTS)
     private lateinit var adapter: ChatAdapter
+
+    private val userViewModel by viewModel<UserViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,8 +67,10 @@ class HomeActivity : BaseActivity(),
     private fun getAllContacts() {
         if (EasyPermissions.hasPermissions(this, perms[0])) {
             debugThis("Has contacts read permission")
-            // todo: get all contacts on the application platform from the room database
-
+            userViewModel.users.observe(this@HomeActivity, Observer { users ->
+                debugThis("Observing data on ${users?.size ?: 0} users")
+                adapter.addChats(users)
+            })
         } else {
             EasyPermissions.requestPermissions(
                 this,

@@ -19,13 +19,15 @@ import io.codelabs.ugcloudchat.model.WhatsappUser
 import io.codelabs.ugcloudchat.util.DialogUtils
 import io.codelabs.ugcloudchat.util.debugThis
 import io.codelabs.ugcloudchat.util.toast
+import io.codelabs.ugcloudchat.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.concurrent.TimeUnit
 
 class MainActivity : BaseActivity() {
     private var code: String? = ""
-
+    private val viewModel by viewModel<UserViewModel>()
 
     private val snackbar: Snackbar by lazy {
         Snackbar.make(
@@ -137,7 +139,6 @@ class MainActivity : BaseActivity() {
         ioScope.launch {
             Tasks.await(userCollection.document(user.uid).set(currentUser, SetOptions.merge()))
             viewModel.setCurrentUser(currentUser)
-            prefs.uid = currentUser.uid
         }
     }
 

@@ -18,6 +18,11 @@ val Context.layoutInflater get() = LayoutInflater.from(this)
 fun Any?.debugThis(msg: Any?) = println("UGCloudChat: ${msg.toString()}")
 
 /**
- *
+ * Callback function
  */
 typealias Callback<TYPE> = (TYPE) -> Unit
+
+/**
+ * Creates a unique path for all chats
+ */
+fun String.getUniqueChatPathWith(uid: String) = if (this < uid) "$this$uid" else "$uid$this"

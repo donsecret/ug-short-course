@@ -23,6 +23,7 @@ class UserRepository private constructor(
 
     suspend fun setCurrentUser(user: WhatsappUser) = withContext(Dispatchers.IO) {
         dao.setCurrentUser(user)
+        prefs.uid = user.uid
     }
 
     fun getCurrentUser(): LiveData<WhatsappUser> = dao.getCurrentUser(prefs.uid)

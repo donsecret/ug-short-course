@@ -10,7 +10,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "chats")
 data class Chat(
     @PrimaryKey(autoGenerate = false)
-    val key: String,
+    var key: String,
     val message: String,
     val sender: String,
     val recipient: String,
@@ -19,4 +19,7 @@ data class Chat(
 
     @Ignore
     constructor() : this("", "", "", "")
+
+    @Ignore
+    constructor(recipient: String, message: String) : this("", message, "", recipient)
 }

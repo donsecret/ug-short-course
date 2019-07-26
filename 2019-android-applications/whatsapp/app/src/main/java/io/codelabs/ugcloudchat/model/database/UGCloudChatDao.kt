@@ -2,11 +2,13 @@ package io.codelabs.ugcloudchat.model.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import io.codelabs.ugcloudchat.model.Chat
 import io.codelabs.ugcloudchat.model.WhatsappUser
 
 @Dao
 interface UGCloudChatDao {
 
+    // region USERS
     /**
      * Get a single list of all the users
      */
@@ -64,4 +66,14 @@ interface UGCloudChatDao {
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun setCurrentUser(user: WhatsappUser)
+    // endregion USERS
+
+    // region CHATS
+    /**
+     * Gets all conversations between [sender] & [recipient]
+     */
+    @Query("SELECT * FROM chats WHERE sender = :sender AND recipient = :recipient ORDER BY timestamp DESC")
+    fun getChatsBetween(sender: String, recipient: String): LiveData<MutableList<Chat>>
+    // endregion CHATS
+
 }
