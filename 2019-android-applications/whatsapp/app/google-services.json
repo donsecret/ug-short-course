@@ -1,42 +1,42 @@
 {
   "project_info": {
-    "project_number": "772919177909",
-    "firebase_url": "https://ug-whatsapp.firebaseio.com",
-    "project_id": "ug-whatsapp",
-    "storage_bucket": "ug-whatsapp.appspot.com"
+    "project_number": "212931119394",
+    "firebase_url": "https://ugcloudchat.firebaseio.com",
+    "project_id": "ugcloudchat",
+    "storage_bucket": "ugcloudchat.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:772919177909:android:5e19ce97ac7fbebd",
+        "mobilesdk_app_id": "1:212931119394:android:1d7491cdf757c281",
         "android_client_info": {
-          "package_name": "io.codelabs.whatsappclone"
+          "package_name": "io.codelabs.ugcloudchat"
         }
       },
       "oauth_client": [
         {
-          "client_id": "772919177909-fsl85vq9dipfalv036cpvsn3nl23vpa9.apps.googleusercontent.com",
+          "client_id": "212931119394-vio2hf639st86isk29l3lqfth52o5gj6.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "io.codelabs.whatsappclone",
-            "certificate_hash": "c4734c6c578354429799c5d62fd99b60c57e65f7"
+            "package_name": "io.codelabs.ugcloudchat",
+            "certificate_hash": "b6c0c216debedfe32b3dd3cdf1f118bcd592ed4f"
           }
         },
         {
-          "client_id": "772919177909-2lc4dsfb4b8drg77a9nq15a067l70q3k.apps.googleusercontent.com",
+          "client_id": "212931119394-3fflsmmkttm5pdonde1o5jc4j2d7aoe4.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCGBRgFjMQTN7LJkiPXT93IC6tugHidJaI"
+          "current_key": "AIzaSyBNoY5J3R0fYUXjapK9pqs0KLcYZofmJDk"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "772919177909-2lc4dsfb4b8drg77a9nq15a067l70q3k.apps.googleusercontent.com",
+              "client_id": "212931119394-3fflsmmkttm5pdonde1o5jc4j2d7aoe4.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

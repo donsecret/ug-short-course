@@ -32,9 +32,14 @@ class MainActivity : BaseActivity() {
     private val callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks =
         object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             override fun onVerificationCompleted(p0: PhoneAuthCredential?) {
-                debugThis(p0?.smsCode)
+                debugThis("Sms code is: ${p0?.smsCode}")
                 code = p0?.smsCode
-                signInWithCredential(p0)
+
+                // Sign in with credentials
+                if (p0 != null) {
+                    debugThis("Signing in from verification complete")
+                    signInWithCredential(p0)
+                }
             }
 
             override fun onVerificationFailed(p0: FirebaseException?) {
@@ -50,10 +55,13 @@ class MainActivity : BaseActivity() {
                 super.onCodeSent(verificationId, token)
                 debugThis("Code has been sent with verification ID: $verificationId")
 
-                if (!verificationId.isNullOrEmpty() && !code.isNullOrEmpty()) {
-                    val credential = PhoneAuthProvider.getCredential(verificationId, code!!)
-                    signInWithCredential(credential)
-                } else debugThis("Verification ID is null")
+                DialogUtils.showInputDialog("Verification code", this@MainActivity) {
+                    code = it
+                    if (!verificationId.isNullOrEmpty() && !code.isNullOrEmpty()) {
+                        val credential = PhoneAuthProvider.getCredential(verificationId, code!!)
+                        signInWithCredential(credential)
+                    } else debugThis("Verification ID is null")
+                }
             }
 
             override fun onCodeAutoRetrievalTimeOut(p0: String?) {
@@ -162,21 +170,48 @@ class MainActivity : BaseActivity() {
                 if (input.isNullOrEmpty()) return
 
                 // 2: Make sure that the input matches the required phone number format +2335545464564
-                sign_in_button.isEnabled = Patterns.PHONE.matcher(input).matches()
+                sign_in_button.isEnabled =
+                    Patterns.PHONE.matcher(input).matches() && input.length >= 10
 
             }
         })
     }
 
     fun signIn(view: View?) {
+        // Ghana's country code
+        val defaultISO = "+233"
+
+        // Get the current phone number
+        var currentPhoneNumber = phone_number.text.toString()
+
+        // Check whether the phone number matches the Firebase required pattern
+        // In this use case, we would assume that the app will only be used in Ghana
+        // so we will have our country ISO format as +233
+        when {
+            !currentPhoneNumber.startsWith(defaultISO) -> {
+                if (currentPhoneNumber.startsWith("0")) {
+                    currentPhoneNumber = "$defaultISO${currentPhoneNumber.substring(1)}"
+                    debugThis("Current formatted phone number is: $currentPhoneNumber")
+                    startPhoneAuth(currentPhoneNumber)
+                }
+            }
+
+            else -> startPhoneAuth(currentPhoneNumber)
+        }
+    }
+
+
+    private fun startPhoneAuth(currentPhoneNumber: String) {
         showLoading()
+
+        // Proceed to login user
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
-            phone_number.text.toString(), // Phone number to verify
+            currentPhoneNumber, // Phone number to verify
             60, // Timeout duration
             TimeUnit.SECONDS, // Unit of timeout
             this, // Activity (for callback binding)
             callbacks
-        ) // OnVerificationStateChangedCallbacksPhoneAuthActivity.kt
+        )
     }
 
     override fun onStart() {

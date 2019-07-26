@@ -21,12 +21,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="96dp"
-        android:hint="Phone number(e.g. +233xxxxxxxx)">
+        android:hint="Phone number">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/phone_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:maxLength="13"
             android:inputType="phone" />
 
 
