@@ -58,8 +58,9 @@ class HomeActivity : BaseActivity(), OnChatItemClickListener {
     @AfterPermissionGranted(RC_CONTACTS)
     private fun getAllContacts() {
         if (EasyPermissions.hasPermissions(this, perms[0])) {
-            debugThis("has contacts read permission")
+            debugThis("Has contacts read permission")
             // todo: get all contacts on the application platform from the room database
+
         } else {
             EasyPermissions.requestPermissions(
                 this,

@@ -2,33 +2,75 @@ package io.codelabs.ugcloudchat
 
 import android.content.Context
 import android.database.Cursor
-import android.os.Bundle
-import androidx.loader.app.LoaderManager
-import androidx.loader.content.Loader
+import android.provider.ContactsContract
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class LocalContactsProvider private constructor(context: Context) :
-    LoaderManager.LoaderCallbacks<Cursor> {
-    
+/**
+ * Loader class for all contacts stored on a user's device
+ */
+class LocalContactsProvider private constructor() {
+
     /**
      * Returns all the local contacts on the user's phone
      */
-    suspend fun getLocalContacts() = withContext(Dispatchers.IO) {
+    suspend fun getLocalContacts(
+        context: Context,
+        callback: Callback<MutableList<LocalContact>>
+    ) = withContext(Dispatchers.IO) {
+        val contactsList = mutableListOf<LocalContact>()
 
-    }
+        val cursor: Cursor? = context.contentResolver.query(
+            ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, null
+        )
 
+        cursor?.apply {
+            while (moveToNext()) {
+                val id =
+                    getLong(getColumnIndex(ContactsContract.CommonDataKinds.Phone._ID))
 
-    override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+                var phone =
+                    getString(getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
 
-    override fun onLoadFinished(loader: Loader<Cursor>, data: Cursor?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+                // Cleanup the phone number
+                phone = phone.replace("(", "")
+                    .replace("-", "")
+                    .replace(")", "")
+                    .replace(" ", "")
 
-    override fun onLoaderReset(loader: Loader<Cursor>) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                val defaultISO = "+233"
+                if (!phone.startsWith(defaultISO)) {
+                    if (phone.startsWith("0")) {
+                        phone = "$defaultISO${phone.substring(1)}"
+                    }
+                }
+
+                val displayName =
+                    getString(getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME))
+
+                val lookupKey =
+                    getString(getColumnIndex(ContactsContract.CommonDataKinds.Phone.LOOKUP_KEY))
+
+                val photoUri =
+                    getString(getColumnIndex(ContactsContract.CommonDataKinds.Phone.PHOTO_URI))
+
+                val thumbNailUri =
+                    getString(getColumnIndex(ContactsContract.CommonDataKinds.Phone.PHOTO_THUMBNAIL_URI))
+
+                // Create new local contact
+                val contact =
+                    LocalContact(id, phone, displayName, lookupKey, photoUri, thumbNailUri)
+
+                // Add local contact to the list
+                contactsList.add(contact)
+            }
+
+            // Close cursor when done
+            close()
+        }
+
+        // Return callback
+        callback(contactsList)
     }
 
 
@@ -39,8 +81,8 @@ class LocalContactsProvider private constructor(context: Context) :
         /**
          * Get singleton instance of the local contacts provider class
          */
-        fun getInstance(context: Context): LocalContactsProvider = instance ?: synchronized(this) {
-            instance ?: LocalContactsProvider(context).also { instance = it }
+        fun getInstance(): LocalContactsProvider = instance ?: synchronized(this) {
+            instance ?: LocalContactsProvider().also { instance = it }
         }
     }
 }
