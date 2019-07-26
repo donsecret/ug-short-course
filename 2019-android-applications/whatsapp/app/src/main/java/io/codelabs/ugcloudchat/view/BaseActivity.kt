@@ -1,9 +1,10 @@
-package io.codelabs.ugcloudchat
+package io.codelabs.ugcloudchat.view
 
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.tasks.Tasks
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import io.codelabs.ugcloudchat.model.WhatsappUser
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 

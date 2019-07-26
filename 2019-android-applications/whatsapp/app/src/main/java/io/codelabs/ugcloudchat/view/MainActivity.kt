@@ -1,4 +1,4 @@
-package io.codelabs.ugcloudchat
+package io.codelabs.ugcloudchat.view
 
 import android.content.Intent
 import android.os.Bundle
@@ -13,6 +13,11 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthProvider
+import io.codelabs.ugcloudchat.*
+import io.codelabs.ugcloudchat.model.WhatsappUser
+import io.codelabs.ugcloudchat.util.DialogUtils
+import io.codelabs.ugcloudchat.util.debugThis
+import io.codelabs.ugcloudchat.util.toast
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
@@ -55,7 +60,10 @@ class MainActivity : BaseActivity() {
                 super.onCodeSent(verificationId, token)
                 debugThis("Code has been sent with verification ID: $verificationId")
 
-                DialogUtils.showInputDialog("Verification code", this@MainActivity) {
+                DialogUtils.showInputDialog(
+                    "Verification code",
+                    this@MainActivity
+                ) {
                     code = it
                     if (!verificationId.isNullOrEmpty() && !code.isNullOrEmpty()) {
                         val credential = PhoneAuthProvider.getCredential(verificationId, code!!)

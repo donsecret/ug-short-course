@@ -1,7 +1,8 @@
-package io.codelabs.ugcloudchat
+package io.codelabs.ugcloudchat.core
 
 import android.app.Application
 import com.google.firebase.FirebaseApp
+import io.codelabs.ugcloudchat.util.debugThis
 
 class WhatsappApplication : Application() {
 

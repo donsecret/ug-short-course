@@ -1,4 +1,4 @@
-package io.codelabs.ugcloudchat
+package io.codelabs.ugcloudchat.viewmodel
 
 /**
  * Custom mapper class to map any class[IN] to [OUT]

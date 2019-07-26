@@ -1,8 +1,9 @@
-package io.codelabs.ugcloudchat
+package io.codelabs.ugcloudchat.util
 
 import android.content.Context
 import android.text.InputType
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import io.codelabs.ugcloudchat.R
 import kotlinx.android.synthetic.main.dialog_input.view.*
 
 object DialogUtils {

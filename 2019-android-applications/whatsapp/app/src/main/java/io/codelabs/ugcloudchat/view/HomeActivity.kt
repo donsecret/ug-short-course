@@ -1,4 +1,4 @@
-package io.codelabs.ugcloudchat
+package io.codelabs.ugcloudchat.view
 
 import android.Manifest
 import android.content.Intent
@@ -7,11 +7,14 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
+import io.codelabs.ugcloudchat.R
+import io.codelabs.ugcloudchat.util.debugThis
 import kotlinx.android.synthetic.main.activity_home.*
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
 
-class HomeActivity : BaseActivity(), OnChatItemClickListener {
+class HomeActivity : BaseActivity(),
+    OnChatItemClickListener {
 
     val perms = arrayOf(Manifest.permission.READ_CONTACTS, Manifest.permission.WRITE_CONTACTS)
     private lateinit var adapter: ChatAdapter

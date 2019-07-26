@@ -1,8 +1,11 @@
-package io.codelabs.ugcloudchat
+package io.codelabs.ugcloudchat.view
 
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import io.codelabs.ugcloudchat.R
+import io.codelabs.ugcloudchat.model.WhatsappUser
+import io.codelabs.ugcloudchat.util.layoutInflater
 import kotlinx.android.synthetic.main.item_chat.view.*
 
 /**

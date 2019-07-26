@@ -1,8 +1,10 @@
-package io.codelabs.ugcloudchat
+package io.codelabs.ugcloudchat.viewmodel
 
 import android.content.Context
 import android.database.Cursor
 import android.provider.ContactsContract
+import io.codelabs.ugcloudchat.model.LocalContact
+import io.codelabs.ugcloudchat.util.Callback
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -59,7 +61,14 @@ class LocalContactsProvider private constructor() {
 
                 // Create new local contact
                 val contact =
-                    LocalContact(id, phone, displayName, lookupKey, photoUri, thumbNailUri)
+                    LocalContact(
+                        id,
+                        phone,
+                        displayName,
+                        lookupKey,
+                        photoUri,
+                        thumbNailUri
+                    )
 
                 // Add local contact to the list
                 contactsList.add(contact)
@@ -81,8 +90,10 @@ class LocalContactsProvider private constructor() {
         /**
          * Get singleton instance of the local contacts provider class
          */
-        fun getInstance(): LocalContactsProvider = instance ?: synchronized(this) {
-            instance ?: LocalContactsProvider().also { instance = it }
+        fun getInstance(): LocalContactsProvider = instance
+            ?: synchronized(this) {
+            instance
+                ?: LocalContactsProvider().also { instance = it }
         }
     }
 }

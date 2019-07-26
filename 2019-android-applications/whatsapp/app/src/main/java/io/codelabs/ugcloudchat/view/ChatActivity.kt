@@ -1,8 +1,12 @@
-package io.codelabs.ugcloudchat
+package io.codelabs.ugcloudchat.view
 
 import android.os.Bundle
 import android.view.View
 import com.google.android.gms.tasks.Tasks
+import io.codelabs.ugcloudchat.model.Chat
+import io.codelabs.ugcloudchat.R
+import io.codelabs.ugcloudchat.util.debugThis
+import io.codelabs.ugcloudchat.util.toast
 import kotlinx.android.synthetic.main.activity_chat.*
 import kotlinx.coroutines.launch
 
@@ -45,7 +49,12 @@ class ChatActivity : BaseActivity() {
         val messageId = senderRef.id
 
         // Create message
-        val chat = Chat(messageId, message_input.text.toString(), currentUser!!, uid!!)
+        val chat = Chat(
+            messageId,
+            message_input.text.toString(),
+            currentUser!!,
+            uid!!
+        )
         ioScope.launch {
             Tasks.await(senderRef.set(chat))
             Tasks.await(recipientRef.set(chat))

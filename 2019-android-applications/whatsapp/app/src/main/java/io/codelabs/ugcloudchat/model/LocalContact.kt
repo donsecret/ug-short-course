@@ -1,4 +1,4 @@
-package io.codelabs.ugcloudchat
+package io.codelabs.ugcloudchat.model
 
 
 /**
