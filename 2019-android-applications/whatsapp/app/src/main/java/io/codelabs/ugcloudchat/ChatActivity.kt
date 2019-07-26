@@ -1,4 +1,4 @@
-package io.codelabs.whatsappclone
+package io.codelabs.ugcloudchat
 
 import android.os.Bundle
 import android.view.View

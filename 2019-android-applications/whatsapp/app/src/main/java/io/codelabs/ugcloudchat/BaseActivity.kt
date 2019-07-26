@@ -1,4 +1,4 @@
-package io.codelabs.whatsappclone
+package io.codelabs.ugcloudchat
 
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.tasks.Tasks
