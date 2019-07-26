@@ -136,7 +136,7 @@ class MainActivity : BaseActivity() {
         // Send user's information to the database
         ioScope.launch {
             Tasks.await(userCollection.document(user.uid).set(currentUser, SetOptions.merge()))
-            dao.setCurrentUser(currentUser)
+            viewModel.setCurrentUser(currentUser)
             prefs.uid = currentUser.uid
         }
     }

@@ -9,6 +9,7 @@ import androidx.work.Constraints
 import androidx.work.NetworkType
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
+import io.codelabs.ugcloudchat.model.Chat
 import io.codelabs.ugcloudchat.model.WhatsappUser
 import io.codelabs.ugcloudchat.model.worker.LocalContactWorker
 import io.codelabs.ugcloudchat.util.UGCloudChatConstants
@@ -18,7 +19,7 @@ import io.codelabs.ugcloudchat.util.UGCloudChatConstants
  * Creates a [Room] database instance on the device
  */
 @Database(
-    entities = [WhatsappUser::class],
+    entities = [WhatsappUser::class, Chat::class],
     version = UGCloudChatDB.DATABASE_VERSION,
     exportSchema = true
 )
@@ -31,7 +32,7 @@ abstract class UGCloudChatDB : RoomDatabase() {
 
 
     companion object {
-        const val DATABASE_VERSION = 1
+        const val DATABASE_VERSION = 2
 
         @Volatile
         private var instance: UGCloudChatDB? = null
