@@ -6,7 +6,7 @@ package io.codelabs.ugcloudchat.model
  */
 data class LocalContact(
     val id: Long,
-    val phone: String,
+    val phone: String?,
     var displayName: String? = null,
     var lookupKey: String? = null,
     var photoUri: String? = null,

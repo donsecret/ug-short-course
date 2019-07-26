@@ -11,6 +11,7 @@ import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import io.codelabs.ugcloudchat.model.WhatsappUser
 import io.codelabs.ugcloudchat.model.worker.LocalContactWorker
+import io.codelabs.ugcloudchat.util.UGCloudChatConstants
 
 /**
  * [RoomDatabase] subclass
@@ -30,7 +31,6 @@ abstract class UGCloudChatDB : RoomDatabase() {
 
 
     companion object {
-        private const val DATABASE_NAME = "ugcloudchat_db"
         const val DATABASE_VERSION = 1
 
         @Volatile
@@ -43,7 +43,7 @@ abstract class UGCloudChatDB : RoomDatabase() {
             instance ?: Room.databaseBuilder(
                 context,
                 UGCloudChatDB::class.java,
-                DATABASE_NAME
+                UGCloudChatConstants.DATABASE_NAME
             )
                 .fallbackToDestructiveMigration()
                 .addCallback(object : Callback() {

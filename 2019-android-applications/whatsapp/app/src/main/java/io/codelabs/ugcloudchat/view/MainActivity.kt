@@ -13,7 +13,8 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthProvider
-import io.codelabs.ugcloudchat.*
+import com.google.firebase.firestore.SetOptions
+import io.codelabs.ugcloudchat.R
 import io.codelabs.ugcloudchat.model.WhatsappUser
 import io.codelabs.ugcloudchat.util.DialogUtils
 import io.codelabs.ugcloudchat.util.debugThis
@@ -129,18 +130,15 @@ class MainActivity : BaseActivity() {
             return
         }
 
+        // Create a new user object
+        val currentUser = WhatsappUser(user.uid, user.phoneNumber!!)
+
         // Send user's information to the database
         ioScope.launch {
-            Tasks.await(
-                userCollection.document(user.uid).set(
-                    WhatsappUser(
-                        user.uid,
-                        user.phoneNumber!!
-                    )
-                )
-            )
+            Tasks.await(userCollection.document(user.uid).set(currentUser, SetOptions.merge()))
+            dao.setCurrentUser(currentUser)
+            prefs.uid = currentUser.uid
         }
-
     }
 
     private fun showLoading() {
@@ -225,7 +223,7 @@ class MainActivity : BaseActivity() {
     override fun onStart() {
         super.onStart()
 
-        if (auth.currentUser != null) {
+        if (prefs.isLoggedIn) {
             debugThis("Logged in as : ${auth.currentUser?.uid}")
             startActivity(Intent(applicationContext, HomeActivity::class.java))
             finishAfterTransition()

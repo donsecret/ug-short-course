@@ -38,6 +38,9 @@ interface UGCloudChatDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addUsers(users: MutableList<WhatsappUser>)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun addSingleUser(user: WhatsappUser)
+
     /**
      * Remove users from the database
      */
@@ -48,17 +51,17 @@ interface UGCloudChatDao {
      * Update a list of users
      */
     @Update
-    fun updateUsers(vararg users: MutableList<WhatsappUser>)
-
-    /**
-     * Update a user
-     */
-    @Update
-    fun updateUser(user: WhatsappUser)
+    fun updateUsers(vararg users: WhatsappUser)
 
     /**
      * Gets the currently logged in user
      */
     @Query("SELECT * FROM users WHERE uid = :uid LIMIT 1")
     fun getCurrentUser(uid: String): LiveData<WhatsappUser>
+
+    /**
+     * Store the current user
+     */
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun setCurrentUser(user: WhatsappUser)
 }

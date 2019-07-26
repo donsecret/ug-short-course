@@ -5,8 +5,12 @@ import com.google.android.gms.tasks.Tasks
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import io.codelabs.ugcloudchat.model.WhatsappUser
+import io.codelabs.ugcloudchat.model.database.UGCloudChatDao
+import io.codelabs.ugcloudchat.model.preferences.UserSharedPreferences
+import io.codelabs.ugcloudchat.util.UGCloudChatConstants
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import org.koin.android.ext.android.inject
 
 abstract class BaseActivity : AppCompatActivity() {
 
@@ -23,18 +27,26 @@ abstract class BaseActivity : AppCompatActivity() {
     /**
      * Firebase Auth instance
      */
-    val auth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
+    val auth by inject<FirebaseAuth>()
 
     /**
      * Firestore instance
      */
-    val db: FirebaseFirestore by lazy { FirebaseFirestore.getInstance() }
+    val db by inject<FirebaseFirestore>()
+
+    /**
+     * DAO instance
+     */
+    val dao by inject<UGCloudChatDao>()
+    /**
+     * User shared preferences instance
+     */
+    val prefs by inject<UserSharedPreferences>()
 
     /**
      * Collection of all user documents
      */
-    val userCollection = db.collection("users")
-
+    val userCollection = db.collection(UGCloudChatConstants.USERS_COLLECTION)
 
     /**
      * Document of single user

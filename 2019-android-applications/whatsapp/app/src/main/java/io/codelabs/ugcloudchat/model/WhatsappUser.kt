@@ -12,9 +12,8 @@ data class WhatsappUser(
     @PrimaryKey(autoGenerate = false)
     val id: Long,
     val uid: String,
-    val phone: String,
+    val phone: String?,
     var displayName: String? = null,
-    var lookupKey: String? = null,
     var photoUri: String? = null,
     var thumbNailUri: String? = null,
     var timestamp: Long = System.currentTimeMillis()
