@@ -1,11 +1,15 @@
 package io.codelabs.ugcloudchat.model
 
+import androidx.room.Entity
+import androidx.room.Ignore
+import androidx.room.PrimaryKey
+
 /**
  * User data model
  */
-//@Entity(tableName = "users")
+@Entity(tableName = "users")
 data class WhatsappUser(
-//    @PrimaryKey(autoGenerate = false)
+    @PrimaryKey(autoGenerate = false)
     val id: Long,
     val uid: String,
     val phone: String,
@@ -19,10 +23,10 @@ data class WhatsappUser(
     /**
      * Needed by the Firestore SDK for serialization
      */
-//    @Ignore
+    @Ignore
     constructor() : this(0L, "", "")
 
-    //    @Ignore
+    @Ignore
     constructor(uid: String, phone: String) : this(0L, uid, phone)
 
 }

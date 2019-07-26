@@ -18,7 +18,7 @@ class LocalContactsProvider private constructor() {
      */
     suspend fun getLocalContacts(
         context: Context,
-        callback: Callback<MutableList<LocalContact>>
+        callback: Callback<MutableList<LocalContact>?>
     ) = withContext(Dispatchers.IO) {
         val contactsList = mutableListOf<LocalContact>()
 
