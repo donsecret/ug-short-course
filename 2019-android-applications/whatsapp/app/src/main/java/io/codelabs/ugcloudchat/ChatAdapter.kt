@@ -28,22 +28,13 @@ class ChatAdapter(private val listener: OnChatItemClickListener) :
         val user = dataset[position]
         holder.v.chat_phone_number.text = user.phone
         holder.v.setOnClickListener {
-            /*startActivity(Intent(applicationContext, ChatActivity::class.java).apply {
-                putExtras(
-                    bundleOf(
-                        Pair(ChatActivity.UID, user.uid),
-                        Pair(ChatActivity.PHONE_NUMBER, user.phone)
-                    )
-                )
-            })*/
-
             // Get user's information form the cursor
             listener.onChatClick(position, user.id)
 
         }
     }
 
-    fun addChat(users: MutableList<WhatsappUser>) {
+    fun addChats(users: MutableList<WhatsappUser>) {
         dataset.clear()
         dataset.addAll(users)
         notifyDataSetChanged()
