@@ -1,4 +1,4 @@
-package io.codelabs.ugcloudchat.viewmodel
+package io.codelabs.ugcloudchat.model.provider
 
 import android.content.Context
 import android.database.Cursor

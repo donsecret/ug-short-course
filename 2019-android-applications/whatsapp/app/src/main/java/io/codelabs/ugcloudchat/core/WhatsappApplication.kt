@@ -26,7 +26,15 @@ class WhatsappApplication : Application() {
         startKoin {
             androidContext(this@WhatsappApplication)
             androidLogger(if (BuildConfig.DEBUG) Level.DEBUG else Level.INFO)
-            modules(arrayListOf(prefsModule, roomModule, firebaseModule, providerModule))
+            modules(
+                arrayListOf(
+                    prefsModule,
+                    roomModule,
+                    firebaseModule,
+                    providerModule,
+                    androidModule
+                )
+            )
         }
     }
 

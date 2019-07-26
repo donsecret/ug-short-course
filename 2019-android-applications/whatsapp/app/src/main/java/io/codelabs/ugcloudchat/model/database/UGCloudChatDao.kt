@@ -57,7 +57,7 @@ interface UGCloudChatDao {
      * Gets the currently logged in user
      */
     @Query("SELECT * FROM users WHERE uid = :uid LIMIT 1")
-    fun getCurrentUser(uid: String): LiveData<WhatsappUser>
+    fun getCurrentUser(uid: String?): LiveData<WhatsappUser>
 
     /**
      * Store the current user

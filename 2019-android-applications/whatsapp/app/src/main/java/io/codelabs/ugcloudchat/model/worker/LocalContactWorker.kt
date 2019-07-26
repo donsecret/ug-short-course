@@ -10,7 +10,7 @@ import io.codelabs.ugcloudchat.model.WhatsappUser
 import io.codelabs.ugcloudchat.model.database.UGCloudChatDB
 import io.codelabs.ugcloudchat.util.UGCloudChatConstants
 import io.codelabs.ugcloudchat.util.debugThis
-import io.codelabs.ugcloudchat.viewmodel.LocalContactsProvider
+import io.codelabs.ugcloudchat.model.provider.LocalContactsProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -62,7 +62,7 @@ class LocalContactWorker(private val context: Context, params: WorkerParameters)
                                 else -> false
                             }
                         }
-                        
+
                         if (add) {
                             // Add user who currently matches the criteria above
                             dao.addSingleUser(whatsappUser)
