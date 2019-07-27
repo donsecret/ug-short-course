@@ -44,6 +44,10 @@ android {
         androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
     }
 
+    androidExtensions {
+        experimental = true
+    }
+
 }
 
 dependencies {

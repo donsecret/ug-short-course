@@ -2,47 +2,50 @@ package io.codelabs.ugcloudchat.view
 
 import android.os.Bundle
 import android.view.View
-import com.google.android.gms.tasks.Tasks
+import androidx.lifecycle.Observer
 import io.codelabs.ugcloudchat.R
 import io.codelabs.ugcloudchat.model.Chat
+import io.codelabs.ugcloudchat.model.WhatsappUser
 import io.codelabs.ugcloudchat.util.debugThis
 import io.codelabs.ugcloudchat.util.toast
+import io.codelabs.ugcloudchat.viewmodel.ChatViewModel
 import kotlinx.android.synthetic.main.activity_chat.*
-import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ChatActivity : BaseActivity() {
 
-//    private val viewModel by viewModel<ChatViewModel>()
+    private val viewModel by viewModel<ChatViewModel>()
 
     // Store recipient's details
-    private var phoneNumber: String? = null
-    private var uid: String? = null
+    private var user: WhatsappUser? = null
+    private var id: Long? = null
 
 
     // Store current user's uid
-    private val currentUser: String? by lazy { auth.currentUser?.uid }
+    private val currentUser: String? by lazy { prefs.uid }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
 
-        if (intent.hasExtra(UID)) {
-            debugThis(intent.getStringExtra(UID))
-            debugThis(intent.getStringExtra(PHONE_NUMBER))
+        if (intent.hasExtra(ID)) {
+            debugThis(intent.getLongExtra(ID, -1L))
+            debugThis(intent.getParcelableExtra(USER))
 
-            // todo: bind user interface here
-            uid = intent.getStringExtra(UID)
-            phoneNumber = intent.getStringExtra(PHONE_NUMBER)
+            id = intent.getLongExtra(ID, -1L)
+            user = intent.getParcelableExtra<WhatsappUser>(USER)
 
-            if (!uid.isNullOrEmpty()) {
-                /*viewModel.getChatsWith(uid!!).observe(this, Observer { pagedList ->
-                    debugThis("Loaded count of chats: ${pagedList?.loadedCount}")
+            debugThis("Showing chats with: $user")
+
+            if (id != null && id != -1L) {
+                viewModel.getMyChatsWith(id.toString()).observe(this, Observer { allChats ->
+                    //                    if(allChats != null) adapter.addChats(allChats)
+                    debugThis("Loading all chats as: $allChats")
                 })
-
-                viewModel.getState().observe(this, Observer { state ->
-                    debugThis("Database state: $state")
-                })*/
             }
+        } else {
+            toast("You cannot start a conversation with a user that does not exist")
+            finish()
         }
 
 
@@ -52,51 +55,18 @@ class ChatActivity : BaseActivity() {
      * Send message
      */
     fun sendMessage(view: View?) {
-        if (uid.isNullOrEmpty() && phoneNumber.isNullOrEmpty()) {
-            toast("Cannot send message to this user. He/ She has no valid details")
-            return
-        }
-
-
-        val senderRef = db.collection("users/$currentUser/chats/$uid/messages").document()
-        val recipientRef = db.collection("users/$uid/chats/$currentUser/messages").document()
-        val messageId = senderRef.id
-
         // Create message
         val chat = Chat(
-            messageId,
+            "",
             message_input.text.toString(),
             currentUser!!,
-            uid!!
+            user?.phone ?: user?.id.toString()
         )
-        ioScope.launch {
-            Tasks.await(senderRef.set(chat))
-            Tasks.await(recipientRef.set(chat))
-        }
-    }
-
-
-    private fun readAllMessages() {
-        if (uid.isNullOrEmpty() && phoneNumber.isNullOrEmpty()) {
-            toast("Cannot send message to this user. He/ She has no valid details")
-            return
-        }
-
-        db.collection("users/$currentUser/chats/$uid/messages")
-            .addSnapshotListener(this) { snapshot, exception ->
-                if (exception != null) {
-                    toast(exception.localizedMessage)
-                    return@addSnapshotListener
-                }
-
-                val chats = snapshot?.toObjects(Chat::class.java)
-                debugThis(chats)
-                // todo: add to adapter
-            }
+        viewModel.sendMessage(chat)
     }
 
     companion object {
-        const val UID = "uid"
-        const val PHONE_NUMBER = "phone_number"
+        const val ID = "id"
+        const val USER = "user"
     }
 }

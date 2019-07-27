@@ -1,12 +1,15 @@
 package io.codelabs.ugcloudchat.model
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
+import kotlinx.android.parcel.Parcelize
 
 /**
  * User data model
  */
+@Parcelize
 @Entity(tableName = "users")
 data class WhatsappUser(
     @PrimaryKey(autoGenerate = false)
@@ -17,7 +20,7 @@ data class WhatsappUser(
     var photoUri: String? = null,
     var thumbNailUri: String? = null,
     var timestamp: Long = System.currentTimeMillis()
-) {
+) : Parcelable {
 
     /**
      * Needed by the Firestore SDK for serialization

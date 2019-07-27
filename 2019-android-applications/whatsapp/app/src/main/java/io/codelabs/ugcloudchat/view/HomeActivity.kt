@@ -9,6 +9,7 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.codelabs.ugcloudchat.R
+import io.codelabs.ugcloudchat.model.WhatsappUser
 import io.codelabs.ugcloudchat.util.debugThis
 import io.codelabs.ugcloudchat.view.adapter.ChatAdapter
 import io.codelabs.ugcloudchat.viewmodel.UserViewModel
@@ -84,8 +85,11 @@ class HomeActivity : BaseActivity(),
         }
     }
 
-    override fun onChatClick(position: Int, id: Long) {
-
+    override fun onChatClick(user: WhatsappUser, id: Long) {
+        startActivity(Intent(this@HomeActivity, ChatActivity::class.java).apply {
+            putExtra(ChatActivity.ID, id)
+            putExtra(ChatActivity.USER, user)
+        })
     }
 
     override fun onRequestPermissionsResult(

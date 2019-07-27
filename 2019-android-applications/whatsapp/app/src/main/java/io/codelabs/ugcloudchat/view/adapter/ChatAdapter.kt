@@ -46,7 +46,7 @@ class ChatAdapter(private val listener: OnChatItemClickListener) :
 
         holder.v.setOnClickListener {
             // Get user's information form the cursor
-            listener.onChatClick(position, user.id)
+            listener.onChatClick(user, user.id)
 
         }
     }

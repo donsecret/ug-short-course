@@ -2,6 +2,8 @@ package io.codelabs.ugcloudchat.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import io.codelabs.ugcloudchat.model.Chat
 import io.codelabs.ugcloudchat.viewmodel.repository.ChatRepository
 import kotlinx.coroutines.CoroutineScope
@@ -53,6 +55,15 @@ class ChatViewModel constructor(
     fun sendMessage(chat: Chat) = ioScope.launch { repository.sendMessage(chat) }
 
     fun deleteChat(chat: String) = ioScope.launch { repository.deleteChat(chat) }
+
+    fun getMyChatsWith(recipient: String): LiveData<MutableList<Chat>> {
+        val liveData = MutableLiveData<MutableList<Chat>>()
+        ioScope.launch {
+            val conversation = repository.getMyChatsWith(recipient).value
+            liveData.postValue(conversation)
+        }
+        return liveData
+    }
 
 //    fun retry() = chatDataSourceFactory?.liveDataSource?.value?.retry()
 

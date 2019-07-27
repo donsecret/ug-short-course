@@ -18,10 +18,10 @@ class ChatRepository private constructor(
     val prefs: UserSharedPreferences,
     val db: FirebaseFirestore
 ) {
-    private var chats: LiveData<PagedList<Chat>>? = null
+//    private var chats: LiveData<PagedList<Chat>>? = null
 
-    // todo: get chats with contacts from firestore directly
-    fun getMyChatsWith(uid: String): LiveData<MutableList<Chat>> = TODO("To be implemented soon")
+    fun getMyChatsWith(uid: String): LiveData<MutableList<Chat>> =
+        dao.getChatsBetween(prefs.uid, uid)
 
     suspend fun sendMessage(chat: Chat) = withContext(Dispatchers.IO) {
         try {

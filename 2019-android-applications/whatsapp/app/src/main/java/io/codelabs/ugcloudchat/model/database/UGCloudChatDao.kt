@@ -75,9 +75,9 @@ interface UGCloudChatDao {
      */
     @Query("SELECT * FROM chats WHERE sender = :sender AND recipient = :recipient ORDER BY timestamp DESC")
     fun getChatsBetween(
-        sender: String,
-        recipient: String
-    ): DataSource.Factory<Int, Chat>
+        sender: String?,
+        recipient: String?
+    ): LiveData<MutableList<Chat>>
 
     /**
      * Add chats to the database locally
