@@ -28,6 +28,7 @@
             </intent-filter>
         </activity>
         <activity android:name="io.codelabs.ugcloudchat.view.HomeActivity" />
+        <activity android:name=".view.AddContactActivity" />
     </application>
 
 </manifest>

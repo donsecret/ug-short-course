@@ -5,5 +5,5 @@ package io.codelabs.ugcloudchat.viewmodel
  */
 interface UserMapper<OUT, IN> {
 
-    abstract fun map(input: IN): OUT
+    fun map(input: IN): OUT
 }

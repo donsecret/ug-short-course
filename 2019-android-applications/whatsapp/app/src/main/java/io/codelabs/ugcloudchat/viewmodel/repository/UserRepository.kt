@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import io.codelabs.ugcloudchat.model.WhatsappUser
 import io.codelabs.ugcloudchat.model.database.UGCloudChatDao
 import io.codelabs.ugcloudchat.model.preferences.UserSharedPreferences
+import io.codelabs.ugcloudchat.model.provider.LocalContactsProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -12,7 +13,8 @@ import kotlinx.coroutines.withContext
  */
 class UserRepository private constructor(
     private val dao: UGCloudChatDao,
-    private val prefs: UserSharedPreferences
+    private val prefs: UserSharedPreferences,
+    private val contactProvider: LocalContactsProvider
 ) {
 
     fun getAllUsers(): LiveData<MutableList<WhatsappUser>> = dao.getAllUsersAsync()
@@ -48,9 +50,13 @@ class UserRepository private constructor(
         @Volatile
         private var instance: UserRepository? = null
 
-        fun getInstance(dao: UGCloudChatDao, prefs: UserSharedPreferences): UserRepository =
+        fun getInstance(
+            dao: UGCloudChatDao,
+            prefs: UserSharedPreferences,
+            contactProvider: LocalContactsProvider
+        ): UserRepository =
             instance ?: synchronized(this) {
-                instance ?: UserRepository(dao, prefs).also { instance = it }
+                instance ?: UserRepository(dao, prefs, contactProvider).also { instance = it }
             }
     }
 }

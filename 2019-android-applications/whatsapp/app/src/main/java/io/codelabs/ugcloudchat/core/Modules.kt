@@ -50,7 +50,7 @@ val providerModule = module {
 
 val androidModule = module {
     /*Repositories*/
-    single { UserRepository.getInstance(get(), get()) }
+    single { UserRepository.getInstance(get(), get(), get()) }
     single { ChatRepository.getInstance(get(), get(), get()) }
 
     /*Factories*/

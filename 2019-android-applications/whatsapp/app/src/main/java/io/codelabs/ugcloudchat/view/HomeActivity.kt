@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.codelabs.ugcloudchat.R
 import io.codelabs.ugcloudchat.util.debugThis
+import io.codelabs.ugcloudchat.view.adapter.ChatAdapter
 import io.codelabs.ugcloudchat.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.activity_home.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -60,8 +61,10 @@ class HomeActivity : BaseActivity(),
         return super.onOptionsItemSelected(item)
     }
 
-    // todo: add new chat
-    fun addNewChat(view: View) {}
+    fun addNewChat(view: View) {
+        // Add new chat from the add contact page
+        startActivity(Intent(this@HomeActivity, AddContactActivity::class.java))
+    }
 
     @AfterPermissionGranted(RC_CONTACTS)
     private fun getAllContacts() {

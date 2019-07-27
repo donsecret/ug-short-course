@@ -8,9 +8,9 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import io.codelabs.ugcloudchat.model.WhatsappUser
 import io.codelabs.ugcloudchat.model.database.UGCloudChatDB
+import io.codelabs.ugcloudchat.model.provider.LocalContactsProvider
 import io.codelabs.ugcloudchat.util.UGCloudChatConstants
 import io.codelabs.ugcloudchat.util.debugThis
-import io.codelabs.ugcloudchat.model.provider.LocalContactsProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -27,7 +27,6 @@ class LocalContactWorker(private val context: Context, params: WorkerParameters)
     init {
         debugThis("LocalContactWorker started: ID${params.id}  & tags ${params.tags}")
     }
-
 
     private suspend fun getAndStoreContacts() = withContext(Dispatchers.IO) {
         try {

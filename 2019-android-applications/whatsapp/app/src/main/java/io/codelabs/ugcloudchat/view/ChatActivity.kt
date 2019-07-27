@@ -3,14 +3,17 @@ package io.codelabs.ugcloudchat.view
 import android.os.Bundle
 import android.view.View
 import com.google.android.gms.tasks.Tasks
-import io.codelabs.ugcloudchat.model.Chat
 import io.codelabs.ugcloudchat.R
+import io.codelabs.ugcloudchat.model.Chat
 import io.codelabs.ugcloudchat.util.debugThis
 import io.codelabs.ugcloudchat.util.toast
 import kotlinx.android.synthetic.main.activity_chat.*
 import kotlinx.coroutines.launch
 
 class ChatActivity : BaseActivity() {
+
+//    private val viewModel by viewModel<ChatViewModel>()
+
     // Store recipient's details
     private var phoneNumber: String? = null
     private var uid: String? = null
@@ -31,7 +34,18 @@ class ChatActivity : BaseActivity() {
             uid = intent.getStringExtra(UID)
             phoneNumber = intent.getStringExtra(PHONE_NUMBER)
 
+            if (!uid.isNullOrEmpty()) {
+                /*viewModel.getChatsWith(uid!!).observe(this, Observer { pagedList ->
+                    debugThis("Loaded count of chats: ${pagedList?.loadedCount}")
+                })
+
+                viewModel.getState().observe(this, Observer { state ->
+                    debugThis("Database state: $state")
+                })*/
+            }
         }
+
+
     }
 
     /**

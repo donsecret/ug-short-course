@@ -1,11 +1,13 @@
-package io.codelabs.ugcloudchat.view
+package io.codelabs.ugcloudchat.view.adapter
 
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import io.codelabs.ugcloudchat.R
 import io.codelabs.ugcloudchat.model.WhatsappUser
+import io.codelabs.ugcloudchat.util.glide.GlideApp
 import io.codelabs.ugcloudchat.util.layoutInflater
+import io.codelabs.ugcloudchat.view.OnChatItemClickListener
 import kotlinx.android.synthetic.main.item_chat.view.*
 
 /**
@@ -29,7 +31,19 @@ class ChatAdapter(private val listener: OnChatItemClickListener) :
 
     override fun onBindViewHolder(holder: ChatViewHolder, position: Int) {
         val user = dataset[position]
+        holder.v.chat_display_name.text = user.displayName
         holder.v.chat_phone_number.text = user.phone
+
+        // Set profile image
+        if (!user.photoUri.isNullOrEmpty()) {
+            GlideApp.with(holder.v.chat_avatar.context)
+                .load(user.photoUri)
+                .circleCrop()
+                .placeholder(R.drawable.chat_avatar)
+                .error(R.drawable.chat_avatar)
+                .into(holder.v.chat_avatar)
+        }
+
         holder.v.setOnClickListener {
             // Get user's information form the cursor
             listener.onChatClick(position, user.id)

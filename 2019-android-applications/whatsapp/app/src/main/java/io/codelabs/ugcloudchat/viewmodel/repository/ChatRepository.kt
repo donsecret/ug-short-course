@@ -1,6 +1,7 @@
 package io.codelabs.ugcloudchat.viewmodel.repository
 
 import androidx.lifecycle.LiveData
+import androidx.paging.PagedList
 import com.google.android.gms.tasks.Tasks
 import com.google.firebase.firestore.FirebaseFirestore
 import io.codelabs.ugcloudchat.model.Chat
@@ -13,14 +14,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class ChatRepository private constructor(
-    private val dao: UGCloudChatDao,
-    private val prefs: UserSharedPreferences,
-    private val db: FirebaseFirestore
+    val dao: UGCloudChatDao,
+    val prefs: UserSharedPreferences,
+    val db: FirebaseFirestore
 ) {
+    private var chats: LiveData<PagedList<Chat>>? = null
 
     // todo: get chats with contacts from firestore directly
-    fun getMyChatsWith(uid: String): LiveData<MutableList<Chat>> =
-        dao.getChatsBetween(prefs.uid!!, uid)
+    fun getMyChatsWith(uid: String): LiveData<MutableList<Chat>> = TODO("To be implemented soon")
 
     suspend fun sendMessage(chat: Chat) = withContext(Dispatchers.IO) {
         try {
@@ -28,7 +29,7 @@ class ChatRepository private constructor(
                 db.collection(
                     String.format(
                         UGCloudChatConstants.CHATS_COLLECTION,
-                        prefs.uid!!.getUniqueChatPathWith(chat.recipient)
+                        prefs.uid?.getUniqueChatPathWith(chat.recipient)
                     )
                 ).document().apply {
                     chat.key = id
@@ -38,6 +39,10 @@ class ChatRepository private constructor(
         } catch (e: Exception) {
             debugThis("Unable to send message: ${e.localizedMessage}")
         }
+    }
+
+    suspend fun deleteChat(chat: String) = withContext(Dispatchers.IO) {
+        /*todo: delete chat*/
     }
 
     companion object {

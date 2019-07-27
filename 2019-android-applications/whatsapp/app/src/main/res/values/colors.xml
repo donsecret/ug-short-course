@@ -3,4 +3,7 @@
     <color name="colorPrimary">#B49F94</color>
     <color name="colorPrimaryDark">#615359</color>
     <color name="colorAccent">#dbc8d5</color>
+
+
+    <color name="avatar_color">#eeeeee</color>
 </resources>

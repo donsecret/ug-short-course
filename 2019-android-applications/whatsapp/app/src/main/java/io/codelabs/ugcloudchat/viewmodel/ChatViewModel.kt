@@ -15,10 +15,46 @@ class ChatViewModel constructor(
 ) : AndroidViewModel(application) {
     private val job = Job()
     private val ioScope = CoroutineScope(Dispatchers.IO + job)
+//    private var chatDataSourceFactory: ChatDataSourceFactory? = null
 
-    fun getMyChatsWith(uid: String) = repository.getMyChatsWith(uid)
+//    private var chats: LiveData<PagedList<Chat>>? = null
+
+    /*fun getChatsWith(recipient: String): LiveData<PagedList<Chat>> {
+        chatDataSourceFactory =
+            ChatDataSourceFactory(
+                repository.db,
+                repository.dao,
+                recipient,
+                repository.prefs,
+                ioScope
+            )
+        val config = PagedList.Config.Builder()
+            .setPageSize(10)
+            .setEnablePlaceholders(false)
+            .setInitialLoadSizeHint(20)
+            .build()
+        chats = LivePagedListBuilder<String, Chat>(chatDataSourceFactory!!, config)
+            .setBoundaryCallback(ChatBoundaryCallback())
+            //.setInitialLoadKey(null)
+            .build()
+        return chats!!
+    }
+*/
+
+/*
+    fun getState(): LiveData<DatabaseState> =
+        Transformations.switchMap<ChatDataSource, DatabaseState>(
+            chatDataSourceFactory!!.liveDataSource, ChatDataSource::state
+        )
+*/
+
+//    val isEmptyChat: Boolean get() = chats?.value?.isEmpty() ?: true
 
     fun sendMessage(chat: Chat) = ioScope.launch { repository.sendMessage(chat) }
+
+    fun deleteChat(chat: String) = ioScope.launch { repository.deleteChat(chat) }
+
+//    fun retry() = chatDataSourceFactory?.liveDataSource?.value?.retry()
 
     override fun onCleared() {
         super.onCleared()
