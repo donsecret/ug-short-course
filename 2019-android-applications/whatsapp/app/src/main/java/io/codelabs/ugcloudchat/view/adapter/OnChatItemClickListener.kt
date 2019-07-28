@@ -1,4 +1,4 @@
-package io.codelabs.ugcloudchat.view
+package io.codelabs.ugcloudchat.view.adapter
 
 import io.codelabs.ugcloudchat.model.WhatsappUser
 

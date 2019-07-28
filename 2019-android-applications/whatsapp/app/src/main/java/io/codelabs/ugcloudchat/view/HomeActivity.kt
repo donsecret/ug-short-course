@@ -11,7 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import io.codelabs.ugcloudchat.R
 import io.codelabs.ugcloudchat.model.WhatsappUser
 import io.codelabs.ugcloudchat.util.debugThis
-import io.codelabs.ugcloudchat.view.adapter.ChatAdapter
+import io.codelabs.ugcloudchat.view.adapter.OnChatItemClickListener
+import io.codelabs.ugcloudchat.view.adapter.WhatsappUserAdapter
 import io.codelabs.ugcloudchat.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.activity_home.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -22,7 +23,7 @@ class HomeActivity : BaseActivity(),
     OnChatItemClickListener {
 
     val perms = arrayOf(Manifest.permission.READ_CONTACTS, Manifest.permission.WRITE_CONTACTS)
-    private lateinit var adapter: ChatAdapter
+    private lateinit var adapter: WhatsappUserAdapter
 
     private val userViewModel by viewModel<UserViewModel>()
 
@@ -35,7 +36,7 @@ class HomeActivity : BaseActivity(),
     }
 
     private fun setupRecyclerView() {
-        adapter = ChatAdapter(this)
+        adapter = WhatsappUserAdapter(this)
         chat_list.adapter = adapter
         chat_list.layoutManager = LinearLayoutManager(this)
 

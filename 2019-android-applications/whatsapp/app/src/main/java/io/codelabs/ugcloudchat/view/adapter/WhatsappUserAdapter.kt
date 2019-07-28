@@ -4,7 +4,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import io.codelabs.ugcloudchat.R
-import io.codelabs.ugcloudchat.model.LocalContact
+import io.codelabs.ugcloudchat.model.WhatsappUser
 import io.codelabs.ugcloudchat.util.glide.GlideApp
 import io.codelabs.ugcloudchat.util.layoutInflater
 import kotlinx.android.synthetic.main.item_chat.view.*
@@ -12,12 +12,12 @@ import kotlinx.android.synthetic.main.item_chat.view.*
 /**
  * Adapter implementation
  */
-class LocalUserAdapter(private val listener: OnContactClickListener) :
-    RecyclerView.Adapter<LocalUserAdapter.ContactViewHolder>() {
-    private val dataset = mutableListOf<LocalContact>()
+class WhatsappUserAdapter(private val listener: OnChatItemClickListener) :
+    RecyclerView.Adapter<WhatsappUserAdapter.ChatViewHolder>() {
+    private val dataset = mutableListOf<WhatsappUser>()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactViewHolder {
-        return ContactViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatViewHolder {
+        return ChatViewHolder(
             parent.context.layoutInflater.inflate(
                 R.layout.item_chat,
                 parent,
@@ -28,13 +28,13 @@ class LocalUserAdapter(private val listener: OnContactClickListener) :
 
     override fun getItemCount(): Int = dataset.size
 
-    override fun onBindViewHolder(holder: ContactViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ChatViewHolder, position: Int) {
         val user = dataset[position]
         holder.v.chat_display_name.text = user.displayName
         holder.v.chat_phone_number.text = user.phone
 
         // Set profile image
-        if(!user.photoUri.isNullOrEmpty()) {
+        if (!user.photoUri.isNullOrEmpty()) {
             GlideApp.with(holder.v.chat_avatar.context)
                 .load(user.photoUri)
                 .circleCrop()
@@ -43,26 +43,20 @@ class LocalUserAdapter(private val listener: OnContactClickListener) :
                 .into(holder.v.chat_avatar)
         }
 
-        // Add click listener
         holder.v.setOnClickListener {
             // Get user's information form the cursor
-            listener.onContactClicked(user)
+            listener.onChatClick(user, user.id)
+
         }
     }
 
-    fun addContacts(users: MutableList<LocalContact>) {
+    fun addChats(users: MutableList<WhatsappUser>) {
         dataset.clear()
         dataset.addAll(users)
         notifyDataSetChanged()
     }
 
 
-    inner class ContactViewHolder(val v: View) : RecyclerView.ViewHolder(v)
-
-    interface OnContactClickListener {
-
-        fun onContactClicked(contact: LocalContact)
-
-    }
+    inner class ChatViewHolder(val v: View) : RecyclerView.ViewHolder(v)
 
 }

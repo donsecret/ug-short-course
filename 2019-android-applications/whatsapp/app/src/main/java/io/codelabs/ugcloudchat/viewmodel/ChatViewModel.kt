@@ -65,6 +65,9 @@ class ChatViewModel constructor(
         return liveData
     }
 
+    // Replace with this method
+    fun getOnlineMessagesWith(recipient: String): LiveData<MutableList<Chat>>  = repository.getOnlineMessagesWith(recipient)
+
 //    fun retry() = chatDataSourceFactory?.liveDataSource?.value?.retry()
 
     override fun onCleared() {

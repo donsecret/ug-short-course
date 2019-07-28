@@ -26,6 +26,8 @@
         android:layout_height="?actionBarSize"
         android:orientation="horizontal"
         android:id="@+id/message_container"
+        android:paddingStart="@dimen/padding_normal"
+        android:paddingEnd="@dimen/padding_zero"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -35,9 +37,15 @@
             android:id="@+id/message_input"
             android:layout_weight="1"
             android:background="@null"
+            android:layout_marginEnd="@dimen/padding_medium"
             android:inputType="textCapSentences|textMultiLine|textAutoComplete|textAutoCorrect"/>
 
-
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Send"
+            android:onClick="sendMessage"
+            style="@style/Widget.MaterialComponents.Button.TextButton"/>
 
     </LinearLayout>
 

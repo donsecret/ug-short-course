@@ -1,63 +1,131 @@
 package io.codelabs.ugcloudchat.view.adapter
 
+import android.content.Context
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import io.codelabs.ugcloudchat.R
-import io.codelabs.ugcloudchat.model.WhatsappUser
-import io.codelabs.ugcloudchat.util.glide.GlideApp
+import io.codelabs.ugcloudchat.model.Chat
+import io.codelabs.ugcloudchat.model.preferences.UserSharedPreferences
 import io.codelabs.ugcloudchat.util.layoutInflater
-import io.codelabs.ugcloudchat.view.OnChatItemClickListener
-import kotlinx.android.synthetic.main.item_chat.view.*
+import kotlinx.android.synthetic.main.item_message_sender.view.*
 
-/**
- * Adapter implementation
- */
-class ChatAdapter(private val listener: OnChatItemClickListener) :
-    RecyclerView.Adapter<ChatAdapter.ChatViewHolder>() {
-    private val dataset = mutableListOf<WhatsappUser>()
+class ChatAdapter(
+    private val context: Context,
+    private val listener: OnConversationClickListener,
+    private val prefs: UserSharedPreferences
+) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    private val dataset = mutableListOf<Chat>()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatViewHolder {
-        return ChatViewHolder(
-            parent.context.layoutInflater.inflate(
-                R.layout.item_chat,
-                parent,
-                false
+
+    override fun getItemViewType(position: Int): Int {
+        return when {
+            dataset.isNotEmpty() -> when {
+                // For sender
+                dataset[position].sender == prefs.uid -> R.layout.item_message_sender
+
+                // For recipient
+                else -> R.layout.item_message_recipient
+            }
+
+            // For empty messages
+            else -> R.layout.item_message_empty
+        }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return when (viewType) {
+
+            R.layout.item_message_sender -> ConversationViewHolder(
+                context.layoutInflater.inflate(
+                    viewType,
+                    parent,
+                    false
+                )
             )
-        )
-    }
+            R.layout.item_message_recipient -> ConversationViewHolder(
+                context.layoutInflater.inflate(
+                    viewType,
+                    parent,
+                    false
+                )
+            )
+            R.layout.item_message_empty -> EmptyViewHolder(
+                context.layoutInflater.inflate(
+                    viewType,
+                    parent,
+                    false
+                )
+            )
 
-    override fun getItemCount(): Int = dataset.size
-
-    override fun onBindViewHolder(holder: ChatViewHolder, position: Int) {
-        val user = dataset[position]
-        holder.v.chat_display_name.text = user.displayName
-        holder.v.chat_phone_number.text = user.phone
-
-        // Set profile image
-        if (!user.photoUri.isNullOrEmpty()) {
-            GlideApp.with(holder.v.chat_avatar.context)
-                .load(user.photoUri)
-                .circleCrop()
-                .placeholder(R.drawable.chat_avatar)
-                .error(R.drawable.chat_avatar)
-                .into(holder.v.chat_avatar)
-        }
-
-        holder.v.setOnClickListener {
-            // Get user's information form the cursor
-            listener.onChatClick(user, user.id)
-
+            else -> throw IllegalStateException("Cannot create an instance of this viewholder")
         }
     }
 
-    fun addChats(users: MutableList<WhatsappUser>) {
-        dataset.clear()
-        dataset.addAll(users)
+    // Get the number of items to show in the recyclerview
+    override fun getItemCount(): Int = if (dataset.isEmpty()) 1 else dataset.size
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        when (getItemViewType(position)) {
+            R.layout.item_message_sender -> bindSenderUI(
+                dataset[position],
+                holder as ConversationViewHolder,
+                position
+            )
+
+            R.layout.item_message_recipient -> bindRecipientUI(
+                dataset[position],
+                holder as ConversationViewHolder,
+                position
+            )
+
+            R.layout.item_message_empty -> bindEmptyView(holder as EmptyViewHolder)
+        }
+    }
+
+    private fun bindEmptyView(holder: EmptyViewHolder) {
+        // todo: bind the empty view
+    }
+
+    private fun bindSenderUI(
+        chat: Chat,
+        holder: ConversationViewHolder,
+        position: Int
+    ) {
+        holder.v.sender_text_message.text = chat.message.trim()
+        // todo: add support for user's profile image in the future
+
+        // Click action
+        holder.v.setOnClickListener { listener.onClick(chat, position) }
+    }
+
+    private fun bindRecipientUI(
+        chat: Chat,
+        holder: ConversationViewHolder,
+        position: Int
+    ) {
+        // todo: bind the recipient for each message
+    }
+
+    fun addNewMessages(chats: MutableList<Chat>?) {
+        // Return when the new messages list is null or empty
+        if (chats.isNullOrEmpty()) return
+
+        // Add new messages to the existing list
+        this.dataset.clear()
+        this.dataset.addAll(chats)
         notifyDataSetChanged()
     }
 
 
-    inner class ChatViewHolder(val v: View) : RecyclerView.ViewHolder(v)
+    /**
+     * ViewHolder for each line of conversation in the chat
+     */
+    class ConversationViewHolder(val v: View) : RecyclerView.ViewHolder(v)
 
+    /**
+     * Shows an empty view for no messages
+     */
+    class EmptyViewHolder(val v: View) : RecyclerView.ViewHolder(v)
 }
