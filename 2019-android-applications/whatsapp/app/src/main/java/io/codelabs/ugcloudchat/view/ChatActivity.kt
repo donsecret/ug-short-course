@@ -48,13 +48,12 @@ class ChatActivity : BaseActivity() {
             finish()
         }
 
-
     }
 
     /**
      * Send message
      */
-    fun sendMessage(view: View?) {
+    private fun sendMessage() {
         // Create message
         val chat = Chat(
             "",
@@ -62,6 +61,8 @@ class ChatActivity : BaseActivity() {
             currentUser!!,
             user?.phone ?: user?.id.toString()
         )
+        
+        // Send message to the database
         viewModel.sendMessage(chat)
     }
 
