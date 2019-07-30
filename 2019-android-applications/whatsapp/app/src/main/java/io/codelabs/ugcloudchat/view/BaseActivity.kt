@@ -10,19 +10,21 @@ import io.codelabs.ugcloudchat.model.preferences.UserSharedPreferences
 import io.codelabs.ugcloudchat.util.UGCloudChatConstants
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import org.koin.android.ext.android.inject
 
 abstract class BaseActivity : AppCompatActivity() {
+    private val job = Job()
 
     /**
      * Background Thread
      */
-    val ioScope = CoroutineScope(Dispatchers.IO)
+    val ioScope = CoroutineScope(Dispatchers.IO + job)
 
     /**
      * Main Thread
      */
-    val uiScope = CoroutineScope(Dispatchers.Main)
+    val uiScope = CoroutineScope(Dispatchers.Main + job)
 
     /**
      * Firebase Auth instance
@@ -55,4 +57,8 @@ abstract class BaseActivity : AppCompatActivity() {
         return Tasks.await(userCollection.document(uid).get()).toObject(WhatsappUser::class.java)
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        job.cancel()
+    }
 }
