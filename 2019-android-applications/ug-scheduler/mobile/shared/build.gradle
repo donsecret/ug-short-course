@@ -52,8 +52,10 @@ dependencies {
     api "com.jakewharton.timber:timber:$timber_version"
 
     // Add domain
-    implementation project(':data')
+    api project(':data')
     implementation project(':domain')
+
+    api 'androidx.legacy:legacy-support-v4:1.0.0'
 }
 kapt {
     useBuildCache = true

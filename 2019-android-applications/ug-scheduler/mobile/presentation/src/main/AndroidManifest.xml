@@ -18,14 +18,14 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.MainActivity">
+        <activity android:name="dev.ugscheduler.ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.LauncherActivity"
-            android:configChanges="orientation|screenLayout|screenSize"
+            android:name="dev.ugscheduler.ui.LauncherActivity"
+            android:configChanges="screenSize|screenLayout|orientation"
             android:theme="@style/AppTheme.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
