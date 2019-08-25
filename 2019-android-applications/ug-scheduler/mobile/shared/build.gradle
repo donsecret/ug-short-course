@@ -35,8 +35,6 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'androidx.core:core-ktx:1.0.2'
 
     // Debugging
     def timber_version = '4.7.1'
@@ -45,7 +43,6 @@ dependencies {
     // Add domain
     implementation project(':data')
     implementation project(':domain')
-
 }
 kapt {
     useBuildCache = true

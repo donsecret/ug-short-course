@@ -23,7 +23,10 @@
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.LauncherActivity">
+        <activity
+            android:name=".ui.LauncherActivity"
+            android:configChanges="orientation|screenLayout|screenSize"
+            android:theme="@style/AppTheme.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
