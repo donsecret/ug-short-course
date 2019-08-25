@@ -23,7 +23,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dev.ugscheduler.data.model.Theme
 import dev.ugscheduler.data.model.Theme.DARK
 import dev.ugscheduler.shared.R
-import dev.ugscheduler.shared.widgets.CustomSwipeRefreshLayout
 import timber.log.Timber
 
 @BindingAdapter("goneUnless")
@@ -92,11 +91,12 @@ fun imageUrl(imageView: ImageView, imageUrl: String?, placeholder: Drawable?) {
 /**
  * Sets the colors of the [CustomSwipeRefreshLayout] loading indicator.
  */
-@BindingAdapter("swipeRefreshColors")
-fun setSwipeRefreshColors(swipeRefreshLayout: CustomSwipeRefreshLayout, colorResIds: IntArray) {
-    // todo:
-    //swipeRefreshLayout.setColorSchemeColors(*colorResIds)
-}
+// todo:
+//@BindingAdapter("swipeRefreshColors")
+//fun setSwipeRefreshColors(swipeRefreshLayout: CustomSwipeRefreshLayout, colorResIds: IntArray) {
+//
+//    swipeRefreshLayout.setColorSchemeColors(*colorResIds)
+//}
 
 /** Set text on a [TextView] from a string resource. */
 @BindingAdapter("android:text")
