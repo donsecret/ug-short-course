@@ -12,8 +12,10 @@ android {
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode gitVersion.version /*1*/
-        versionName gitVersionName /*"1.0"*/
+        versionCode gitVersion.version
+        versionName gitVersionName
+
+        buildConfigField("String", "REMOTE_BASE_URL", "\"${backend}\"")
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
