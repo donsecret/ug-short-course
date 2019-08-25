@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
-apply from: 'https://raw.githubusercontent.com/passsy/gradle-GitVersioner/master/git-versioner.gradle'
+//apply from: 'https://raw.githubusercontent.com/passsy/gradle-GitVersioner/master/git-versioner.gradle'
 
 android {
     signingConfigs {
@@ -20,8 +20,8 @@ android {
         applicationId "dev.ugscheduler"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode gitVersion.version
-        versionName gitVersionName
+        versionCode /*gitVersion.version*/ 1
+        versionName /*gitVersionName*/ "1.0"
         archivesBaseName = "ug-scheduler"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -47,7 +47,7 @@ android {
             minifyEnabled false
             debuggable true
             manifestPlaceholders = [released: false]
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
         }
     }
 
@@ -98,7 +98,6 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.0.0'
 
     implementation project(':shared')
-    //implementation 'com.firebase:geofire-java:3.0.0'
 }
 
 kapt {
