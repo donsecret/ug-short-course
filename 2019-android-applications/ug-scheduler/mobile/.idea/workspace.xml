@@ -9,26 +9,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f2031c26-e22b-4f3d-95e3-162de0edb2ca" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/data/src/main/java/dev/ugscheduler/data/datasource/SchedulerCourseDataSource.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/src/main/java/dev/ugscheduler/data/datasource/SchedulerUserDataSource.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/src/main/java/dev/ugscheduler/data/repository/SchedulerCourseRepository.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/src/main/java/dev/ugscheduler/data/repository/SchedulerUserRepository.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/domain/src/main/java/dev/ugscheduler/domain/MediatorUseCase.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/domain/src/main/java/dev/ugscheduler/domain/UseCase.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/domain/src/main/java/dev/ugscheduler/domain/datasource/CourseDataSource.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/domain/src/main/java/dev/ugscheduler/domain/datasource/UserDataSource.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/domain/src/main/java/dev/ugscheduler/domain/internal/IOSchedHandler.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/domain/src/main/java/dev/ugscheduler/domain/internal/Scheduler.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/domain/src/main/java/dev/ugscheduler/domain/model/Schedule.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/domain/src/main/java/dev/ugscheduler/domain/result/Event.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/domain/src/main/java/dev/ugscheduler/domain/result/Result.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/Dennis_Bilson.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/Dennis_Bilson.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/domain/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/src/main/java/dev/ugscheduler/domain/repository/CourseRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/domain/src/main/java/dev/ugscheduler/domain/repository/CourseRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/src/main/java/dev/ugscheduler/domain/repository/UserRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/domain/src/main/java/dev/ugscheduler/domain/repository/UserRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/dev/ugscheduler/core/UGScheduler.kt" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/src/main/java/dev/ugscheduler/core/UGScheduler.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/shared/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/presentation/src/main/java/dev/ugscheduler/ui/course/CourseFragment.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/presentation/src/main/java/dev/ugscheduler/ui/course/CourseViewModel.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/presentation/src/main/java/dev/ugscheduler/ui/schedule/ScheduleFragment.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/presentation/src/main/java/dev/ugscheduler/ui/schedule/ScheduleViewModel.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/presentation/src/main/java/dev/ugscheduler/ui/search/SearchFragment.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/presentation/src/main/java/dev/ugscheduler/ui/search/SearchViewModel.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/presentation/src/main/java/dev/ugscheduler/ui/settings/SettingsFragment.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/presentation/src/main/java/dev/ugscheduler/ui/settings/SettingsViewModel.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/presentation/src/main/java/dev/ugscheduler/ui/user/UserFragment.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/presentation/src/main/java/dev/ugscheduler/ui/user/UserViewModel.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/presentation/src/main/res/layout/course_fragment.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/presentation/src/main/res/layout/schedule_fragment.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/presentation/src/main/res/layout/search_fragment.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/presentation/src/main/res/layout/settings_fragment.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/presentation/src/main/res/layout/user_fragment.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/dev/ugscheduler/ui/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/src/main/java/dev/ugscheduler/ui/MainActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/dev/ugscheduler/ui/ui/main/MainFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/src/main/java/dev/ugscheduler/ui/main/MainFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/dev/ugscheduler/ui/ui/main/MainViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/src/main/java/dev/ugscheduler/ui/main/MainViewModel.kt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -103,7 +105,7 @@
     <option name="REMEMBER_PASSWORDS" value="true" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
   </component>
   <component name="ProjectId" id="1PtoLxAfNkPv7Yu4OWLpUVcTYvN" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -120,14 +122,13 @@
     <property name="ExportApk.BuildVariants" value="release" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="android.sdk.path" value="C:/Android/sdk" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/presentation/debug/ug-scheduler-debug.aab" />
-    <property name="settings.editor.selected.configurable" value="project.kotlinCompiler" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/shared/sampledata" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
     <property name="show.inlinked.gradle.project.popup" value="false" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\GitHub\ug-short-course\2019-android-applications\ug-scheduler" />
-      <recent name="E:\GitHub\ug-short-course\2019-android-applications\ug-scheduler\presentation" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\GitHub\ug-short-course\2019-android-applications\ug-scheduler\shared\src\main\res\values" />
     </key>
     <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
       <recent name="dev.ugscheduler.domain.datasource" />
@@ -137,10 +138,12 @@
       <recent name="dev.ugscheduler.ui" />
     </key>
     <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
+      <recent name="dev.ugscheduler.ui.main" />
       <recent name="dev.ugscheduler.domain.model" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\GitHub\ug-short-course\2019-android-applications\ug-scheduler\shared\src\main\res\values" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\GitHub\ug-short-course\2019-android-applications\ug-scheduler" />
+      <recent name="E:\GitHub\ug-short-course\2019-android-applications\ug-scheduler\presentation" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -271,5 +274,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/../.." />
+    </ignored-roots>
   </component>
 </project>
