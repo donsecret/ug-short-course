@@ -2,6 +2,9 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
+//apply from: '../aac.gradle'
+apply from: '../location.gradle'
+apply from: '../network.gradle'
 //apply from: 'https://raw.githubusercontent.com/passsy/gradle-GitVersioner/master/git-versioner.gradle'
 
 android {
@@ -46,7 +49,13 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.0.2'
+
+    implementation 'androidx.core:core-ktx:1.2.0-alpha03'
+    implementation project(':domain')
+
+    // Debugging
+    def timber_version = '4.7.1'
+    implementation "com.jakewharton.timber:timber:$timber_version"
 }
 kapt {
     useBuildCache = true

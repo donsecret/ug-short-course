@@ -2,6 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
+apply from: '../app.gradle'
 //apply from: 'https://raw.githubusercontent.com/passsy/gradle-GitVersioner/master/git-versioner.gradle'
 
 android {
@@ -40,6 +41,7 @@ dependencies {
     // Add domain
     implementation project(':data')
     implementation project(':domain')
+
 }
 kapt {
     useBuildCache = true
