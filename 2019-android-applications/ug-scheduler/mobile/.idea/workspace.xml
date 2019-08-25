@@ -9,28 +9,166 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f2031c26-e22b-4f3d-95e3-162de0edb2ca" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/presentation/src/main/java/dev/ugscheduler/ui/course/CourseFragment.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presentation/src/main/java/dev/ugscheduler/ui/course/CourseViewModel.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presentation/src/main/java/dev/ugscheduler/ui/schedule/ScheduleFragment.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presentation/src/main/java/dev/ugscheduler/ui/schedule/ScheduleViewModel.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presentation/src/main/java/dev/ugscheduler/ui/search/SearchFragment.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presentation/src/main/java/dev/ugscheduler/ui/search/SearchViewModel.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presentation/src/main/java/dev/ugscheduler/ui/settings/SettingsFragment.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presentation/src/main/java/dev/ugscheduler/ui/settings/SettingsViewModel.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presentation/src/main/java/dev/ugscheduler/ui/user/UserFragment.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presentation/src/main/java/dev/ugscheduler/ui/user/UserViewModel.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presentation/src/main/res/layout/course_fragment.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presentation/src/main/res/layout/schedule_fragment.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presentation/src/main/res/layout/search_fragment.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presentation/src/main/res/layout/settings_fragment.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presentation/src/main/res/layout/user_fragment.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/animator/active_alpha.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/color/map_variant_icon.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/color/map_variant_text.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/color/navigation_item_background_tint.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/color/schedule_day_indicator_text.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable-anydpi-v23/preview_window.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable-anydpi-v23/preview_window_logo.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/arcore_gray.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/asld_reservation.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/asld_star_event.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/avd_pending_to_reservable.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/avd_pending_to_reserved.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/avd_pending_to_waitlisted.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/avd_reservable_to_pending.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/avd_reserved_to_pending.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/avd_star_event.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/avd_unstar_event.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/avd_waitlisted_to_pending.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/bullet_small.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/divider_empty_margin_normal.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/divider_slash.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/event_header_afterhours.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/event_header_codelabs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/event_header_meals.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/event_header_office_hours.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/event_header_sandbox.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/event_header_sessions.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/event_narrow_afterhours.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/event_narrow_app_reviews1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/event_narrow_app_reviews2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/event_narrow_app_reviews3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/event_narrow_game_reviews1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/event_narrow_game_reviews2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/event_narrow_game_reviews3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/event_narrow_keynote.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/event_narrow_office_hours1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/event_narrow_office_hours2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/event_narrow_office_hours3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/event_narrow_other.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/event_narrow_session1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/event_narrow_session2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/event_narrow_session3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/event_narrow_session4.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/event_placeholder_keynote.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/event_placeholder_session1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/event_placeholder_session2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/event_placeholder_session3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/event_placeholder_session4.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/fading_snackbar_background.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/filters_sheet_background.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/filters_sheet_header_shadow.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/generic_placeholder.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/hashtag_io19.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/ic_account_box.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/ic_agenda_after_hours.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/ic_agenda_badge.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/ic_agenda_codelab.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/ic_agenda_concert.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/ic_agenda_keynote.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/ic_agenda_meal.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/ic_agenda_office_hours.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/ic_agenda_sandbox.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/ic_agenda_session.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/ic_agenda_store.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/ic_arrow_back.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/ic_clear_all.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/ic_default_avatar_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/ic_default_avatar_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/ic_default_avatar_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/ic_default_profile_avatar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/ic_expand_more.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/ic_filter.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/ic_launch.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/ic_layers.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/ic_login.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/ic_logo_assistant.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/ic_logo_components.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/ic_logout.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/ic_map_after_dark.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/ic_map_concert.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/ic_map_daytime.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/ic_menu.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/ic_my_location.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/ic_nav_agenda.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/ic_nav_codelabs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/ic_nav_home.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/ic_nav_info.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/ic_nav_map.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/ic_nav_schedule.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/ic_nav_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/ic_nav_signpost.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/ic_play.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/ic_play_circle_outline.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/ic_question_answer.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/ic_reservable.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/ic_reservation.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/ic_reservation_disabled.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/ic_reservation_pending.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/ic_reserved.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/ic_search.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/ic_share.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/ic_waitlist_available.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/ic_waitlisted.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/io_logo_color.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/list_divider.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/map_marker_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/map_marker_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/map_marker_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/map_marker_4.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/map_marker_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/map_marker_6.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/map_marker_7.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/map_marker_8.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/map_marker_a.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/map_marker_b.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/map_marker_bike.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/map_marker_c.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/map_marker_charging.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/map_marker_d.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/map_marker_drink.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/map_marker_e.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/map_marker_f.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/map_marker_food.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/map_marker_g.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/map_marker_h.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/map_marker_handicap.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/map_marker_i.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/map_marker_info.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/map_marker_label_background.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/map_marker_lounge.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/map_marker_medical.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/map_marker_mothers_room.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/map_marker_parking.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/map_marker_restroom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/map_marker_rideshare.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/map_marker_service_dog.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/map_marker_shuttle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/map_marker_star.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/map_marker_store.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/map_marker_water.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/navigation_item_background.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/no_items_found_204.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/onboarding_io_19.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/onboarding_io_date_2019.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/onboarding_schedule.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/page_margin.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/preview_window.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/signal_wifi_off.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/tab_indicator.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/drawable/unrated_thumb.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/values/attrs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/values/config.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/values/dimens.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/values/ids.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/res/values/themes.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/dev/ugscheduler/ui/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/src/main/java/dev/ugscheduler/ui/MainActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/dev/ugscheduler/ui/ui/main/MainFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/src/main/java/dev/ugscheduler/ui/main/MainFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/dev/ugscheduler/ui/ui/main/MainViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/presentation/src/main/java/dev/ugscheduler/ui/main/MainViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/font/poppins.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/res/font/poppins.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/font/raleway.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/res/font/raleway.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/res/values/colors.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/res/values/styles.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -122,12 +260,13 @@
     <property name="ExportApk.BuildVariants" value="release" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="android.sdk.path" value="C:/Android/sdk" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/shared/sampledata" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/shared/src/main/res" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
     <property name="show.inlinked.gradle.project.popup" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\GitHub\ug-short-course\2019-android-applications\ug-scheduler\mobile\shared\src\main\res" />
       <recent name="E:\GitHub\ug-short-course\2019-android-applications\ug-scheduler\shared\src\main\res\values" />
     </key>
     <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
@@ -142,6 +281,9 @@
       <recent name="dev.ugscheduler.domain.model" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\GitHub\ug-short-course\2019-android-applications\ug-scheduler\mobile\shared\src\main\res" />
+      <recent name="E:\GitHub\ug-short-course\2019-android-applications\ug-scheduler\mobile\shared\src\main\res\values" />
+      <recent name="E:\GitHub\ug-short-course\2019-android-applications\ug-scheduler\mobile\shared\sampledata" />
       <recent name="E:\GitHub\ug-short-course\2019-android-applications\ug-scheduler" />
       <recent name="E:\GitHub\ug-short-course\2019-android-applications\ug-scheduler\presentation" />
     </key>
