@@ -2,7 +2,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
-//apply from: 'https://raw.githubusercontent.com/passsy/gradle-GitVersioner/master/git-versioner.gradle'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
+apply from: 'https://raw.githubusercontent.com/passsy/gradle-GitVersioner/master/git-versioner.gradle'
 
 android {
     signingConfigs {
@@ -20,8 +21,8 @@ android {
         applicationId "dev.ugscheduler"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode /*gitVersion.version*/ 1
-        versionName /*gitVersionName*/ "1.0"
+        versionCode gitVersion.version
+        versionName gitVersionName
         archivesBaseName = "ug-scheduler"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
