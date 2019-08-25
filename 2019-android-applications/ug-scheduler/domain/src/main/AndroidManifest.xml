@@ -1,2 +1,1 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="dev.ugscheduler.domain" />
+<manifest package="dev.ugscheduler.domain" />

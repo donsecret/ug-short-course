@@ -1,7 +1,7 @@
 package dev.ugscheduler.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import dev.ugscheduler.R
 import dev.ugscheduler.ui.ui.main.MainFragment
 
