@@ -1,4 +1,4 @@
-package dev.ugscheduler
+package dev.ugscheduler.shared
 
 import org.junit.Test
 
