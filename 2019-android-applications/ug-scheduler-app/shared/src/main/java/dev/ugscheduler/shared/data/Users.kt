@@ -14,8 +14,8 @@ import java.util.*
 @Entity(tableName = "anonymous_users")
 data class Anonymous constructor(
     @PrimaryKey
-    /*override*/ val id: String,
-    /*override*/ val timestamp: Long
+    override val id: String,
+    override val timestamp: Long
 ) : BaseUser {
 
     @Ignore
@@ -30,8 +30,8 @@ data class Anonymous constructor(
 data class Student constructor(
     @PrimaryKey
     @NonNull
-    /*override*/ val id: String,
-    /*override*/ val timestamp: Long,
+    override val id: String,
+    override val timestamp: Long,
     val email: String,
     var phone: String?,
     var avatar: String?,
@@ -70,8 +70,8 @@ data class Student constructor(
 @Parcelize
 data class Facilitator constructor(
     @PrimaryKey
-    /*override*/ val id: String,
-    /*override*/ val timestamp: Long,
+    override val id: String,
+    override val timestamp: Long,
     var avatar: String?,
     var email: String,
     var fullName: String,
@@ -82,5 +82,13 @@ data class Facilitator constructor(
 ) : BaseUser {
 
     @Ignore
-    constructor() : this(UUID.randomUUID().toString(), System.currentTimeMillis(), "", "", "", 1.0,"")
+    constructor() : this(
+        UUID.randomUUID().toString(),
+        System.currentTimeMillis(),
+        "",
+        "",
+        "",
+        1.0,
+        ""
+    )
 }

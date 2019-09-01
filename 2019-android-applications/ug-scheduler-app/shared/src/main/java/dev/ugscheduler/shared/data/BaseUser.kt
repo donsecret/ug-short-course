@@ -6,6 +6,8 @@ import android.os.Parcelable
  * Base interface for all users
  */
 interface BaseUser : Parcelable {
-   /* val id: String
-    val timestamp: Long*/
+    val id: String
+    val timestamp: Long
 }
+
+fun BaseUser.isSignedIn(): Boolean = id.isNotEmpty()

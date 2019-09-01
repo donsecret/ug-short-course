@@ -6,14 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
-import dev.ugscheduler.databinding.SignInFragmentBinding
+import dev.ugscheduler.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 
-class SignInFragment : DialogFragment() {
-    private lateinit var binding: SignInFragmentBinding
-
+class SignOutFragment : DialogFragment() {
     private val job = Job()
     private val ioScope = CoroutineScope(Dispatchers.IO)
     private val uiScope = CoroutineScope(Dispatchers.Main + job)
@@ -24,8 +22,7 @@ class SignInFragment : DialogFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = SignInFragmentBinding.inflate(inflater, container, false)
-        return binding.root
+        return inflater.inflate(R.layout.sign_out_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

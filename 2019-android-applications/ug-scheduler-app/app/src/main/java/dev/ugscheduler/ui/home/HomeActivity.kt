@@ -186,10 +186,10 @@ class HomeActivity : BaseActivity(), NavigationHost {
     }
 
     private fun openSignInDialog() {
-        // todo: login dialog
+        navigateTo(R.id.navigation_login)
     }
 
     private fun openSignOutDialog() {
-        // todo: logout dialog
+        navigateTo(R.id.navigation_logout)
     }
 }

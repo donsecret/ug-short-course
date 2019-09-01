@@ -55,4 +55,14 @@
         android:name="dev.ugscheduler.ui.courses.MyCoursesFragment"
         android:label="@string/title_my_courses"
         tools:layout="@layout/fragment_my_courses" />
+    <dialog
+        android:id="@id/navigation_login"
+        android:name="dev.ugscheduler.ui.auth.SignInFragment"
+        android:label="Sign In"
+        tools:layout="@layout/sign_in_fragment"/>
+    <dialog
+        android:id="@id/navigation_logout"
+        android:name="dev.ugscheduler.ui.auth.SignOutFragment"
+        android:label="Sign Out"
+        tools:layout="@layout/sign_out_fragment"/>
 </navigation>
