@@ -1,7 +1,21 @@
 package dev.ugscheduler.ui.settings
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 
-class SettingsViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
+// todo: setup repositories
+class SettingsViewModelFactory(/*private val localRepository: LocalRepository, private val remoteRepository: RemoteRepository*/) :
+    ViewModelProvider.NewInstanceFactory() {
+
+    @Suppress("UNCHECKED_CAST")
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        return SettingsViewModel(/*localRepository,remoteRepository*/) as T
+    }
+}
+
+class SettingsViewModel(/*private val localRepository: LocalRepository, private val remoteRepository: RemoteRepository*/) :
+    ViewModel() {
+
+
+
 }

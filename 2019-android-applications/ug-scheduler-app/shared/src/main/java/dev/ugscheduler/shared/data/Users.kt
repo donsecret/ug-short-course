@@ -38,7 +38,9 @@ data class Student constructor(
     var dob: String?,
     var fullName: String,
     var residence: String?,
+    var address: String?,
     var organisation: String?,
+    var position: String?,
     var eduBackground: String?/*,
     @Ignore
     var prevCourses: MutableList<String> = mutableListOf()*/
@@ -48,6 +50,8 @@ data class Student constructor(
     constructor() : this(
         UUID.randomUUID().toString(),
         System.currentTimeMillis(),
+        "",
+        "",
         "",
         "",
         "",
@@ -71,11 +75,12 @@ data class Facilitator constructor(
     var avatar: String?,
     var email: String,
     var fullName: String,
+    var rating: Double,
     var phone: String?/*,
     @Ignore
     var courses: MutableList<String> = mutableListOf()*/
 ) : BaseUser {
 
     @Ignore
-    constructor() : this(UUID.randomUUID().toString(), System.currentTimeMillis(), "", "", "", "")
+    constructor() : this(UUID.randomUUID().toString(), System.currentTimeMillis(), "", "", "", 1.0,"")
 }

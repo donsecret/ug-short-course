@@ -7,6 +7,9 @@ import dev.ugscheduler.shared.util.BaseActivity
 import dev.ugscheduler.shared.util.intentTo
 import dev.ugscheduler.ui.home.HomeActivity
 
+/**
+ * Main entry point of application
+ */
 class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,8 +17,5 @@ class MainActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
     }
 
-    fun getStarted(view: View) {
-        // todo: Start the application in guest mode
-        intentTo(HomeActivity::class.java, true)
-    }
+    fun getStarted(view: View) = intentTo(HomeActivity::class.java, true)
 }

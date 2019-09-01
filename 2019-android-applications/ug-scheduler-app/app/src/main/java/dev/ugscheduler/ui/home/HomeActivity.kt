@@ -24,6 +24,7 @@ import dev.ugscheduler.util.NavigationHost
 import org.koin.android.ext.android.inject
 
 class HomeActivity : BaseActivity(), NavigationHost {
+
     private val prefs by inject<UserSharedPreferences>()
 
     companion object {
@@ -182,5 +183,13 @@ class HomeActivity : BaseActivity(), NavigationHost {
             return // user tapped the current item
         }
         navController.navigate(navId)
+    }
+
+    private fun openSignInDialog() {
+        // todo: login dialog
+    }
+
+    private fun openSignOutDialog() {
+        // todo: logout dialog
     }
 }

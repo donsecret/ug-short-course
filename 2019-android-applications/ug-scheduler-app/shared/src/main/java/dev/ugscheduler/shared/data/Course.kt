@@ -11,19 +11,20 @@ import java.util.*
 @Entity(tableName = "courses")
 data class Course(
     @PrimaryKey
-    val id: String, var name: String,
+    val id: String,
+    var name: String,
     var icon: String?,
     var session: String,
+    var maxStudents: Int,
     var facilitator: String,
     var startDate: Long,
     var endDate: Long
 ) : Parcelable {
     @Ignore
     constructor() : this(
-        UUID.randomUUID().toString(), "", "", "", "", System.currentTimeMillis(),
+        UUID.randomUUID().toString(), "", "", "", 10,"", System.currentTimeMillis(),
         System.currentTimeMillis()
     )
-
 }
 
 fun Course.isInProgress(): Boolean = System.currentTimeMillis() in (startDate + 1) until endDate

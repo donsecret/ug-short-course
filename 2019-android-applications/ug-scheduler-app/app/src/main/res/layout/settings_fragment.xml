@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -28,6 +29,237 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
+        <dev.ugscheduler.shared.widgets.CustomSwipeRefreshLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/swipe_refresh"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="@dimen/margin_normal">
+
+                <ImageView
+                    android:id="@+id/user_avatar"
+                    android:layout_width="@dimen/speaker_large_headshot_size"
+                    android:layout_height="@dimen/speaker_large_headshot_size"
+                    android:src="@drawable/ic_default_avatar_3" />
+
+
+                <TextView
+                    android:id="@+id/user_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_normal"
+                    android:fontFamily="@font/google_sans_medium"
+                    android:gravity="center"
+                    android:padding="@dimen/spacing_micro"
+                    android:textAppearance="?textAppearanceHeadline6"
+                    tools:text="@tools:sample/lorem" />
+
+
+                <TextView
+                    android:id="@+id/user_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_normal"
+                    android:alpha="?alphaMedium"
+                    android:fontFamily="@font/google_sans"
+                    android:gravity="center"
+                    android:textAppearance="?textAppearanceSubtitle2"
+                    tools:text="@tools:sample/lorem" />
+
+                <View
+                    android:layout_width="@dimen/nav_drawer_width"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="@dimen/speaker_large_headshot_size"
+                    android:layout_marginTop="@dimen/margin_normal"
+                    android:layout_marginEnd="@dimen/speaker_large_headshot_size"
+                    android:layout_marginBottom="@dimen/margin_normal"
+                    android:background="?android:attr/listDivider" />
+
+                <androidx.core.widget.NestedScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/speaker_large_headshot_size"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:layout_marginStart="@dimen/margin_normal"
+                            android:layout_marginTop="@dimen/margin_normal"
+                            android:fontFamily="@font/google_sans_medium"
+                            android:text="Phone Number"
+                            android:textStyle="bold" />
+
+                        <com.google.android.material.button.MaterialButton
+                            style="@style/Widget.MaterialComponents.Button.TextButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/spacing_micro"
+                            android:alpha="?alphaMedium"
+                            android:clickable="false"
+                            android:gravity="center"
+                            android:textColor="?colorPrimary"
+                            tools:text="@tools:sample/lorem" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:layout_marginStart="@dimen/margin_normal"
+                            android:layout_marginTop="@dimen/margin_normal"
+                            android:fontFamily="@font/google_sans_medium"
+                            android:text="Residence"
+                            android:textStyle="bold" />
+
+                        <com.google.android.material.button.MaterialButton
+                            style="@style/Widget.MaterialComponents.Button.TextButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_normal"
+                            android:layout_marginTop="@dimen/spacing_micro"
+                            android:alpha="?alphaMedium"
+                            android:clickable="false"
+                            android:gravity="center"
+                            android:textColor="?colorPrimary"
+                            tools:text="@tools:sample/lorem" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:layout_marginStart="@dimen/margin_normal"
+                            android:layout_marginTop="@dimen/margin_normal"
+                            android:fontFamily="@font/google_sans_medium"
+                            android:text="Address"
+                            android:textStyle="bold" />
+
+                        <com.google.android.material.button.MaterialButton
+                            style="@style/Widget.MaterialComponents.Button.TextButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_normal"
+                            android:layout_marginTop="@dimen/spacing_micro"
+                            android:alpha="?alphaMedium"
+                            android:clickable="false"
+                            android:gravity="center"
+                            android:textColor="?colorPrimary"
+                            tools:text="@tools:sample/lorem" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:layout_marginStart="@dimen/margin_normal"
+                            android:layout_marginTop="@dimen/margin_normal"
+                            android:fontFamily="@font/google_sans_medium"
+                            android:text="Date of Birth"
+                            android:textStyle="bold" />
+
+                        <com.google.android.material.button.MaterialButton
+                            style="@style/Widget.MaterialComponents.Button.TextButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_normal"
+                            android:layout_marginTop="@dimen/spacing_micro"
+                            android:alpha="?alphaMedium"
+                            android:clickable="false"
+                            android:gravity="center"
+                            android:textColor="?colorPrimary"
+                            tools:text="@tools:sample/lorem" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:layout_marginStart="@dimen/margin_normal"
+                            android:layout_marginTop="@dimen/margin_normal"
+                            android:fontFamily="@font/google_sans_medium"
+                            android:text="Organisation"
+                            android:textStyle="bold" />
+
+                        <com.google.android.material.button.MaterialButton
+                            style="@style/Widget.MaterialComponents.Button.TextButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_normal"
+                            android:layout_marginTop="@dimen/spacing_micro"
+                            android:alpha="?alphaMedium"
+                            android:clickable="false"
+                            android:gravity="center"
+                            android:textColor="?colorPrimary"
+                            tools:text="@tools:sample/lorem" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:layout_marginStart="@dimen/margin_normal"
+                            android:layout_marginTop="@dimen/margin_normal"
+                            android:fontFamily="@font/google_sans_medium"
+                            android:text="Position"
+                            android:textStyle="bold" />
+
+                        <com.google.android.material.button.MaterialButton
+                            style="@style/Widget.MaterialComponents.Button.TextButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_normal"
+                            android:layout_marginTop="@dimen/spacing_micro"
+                            android:alpha="?alphaMedium"
+                            android:clickable="false"
+                            android:textColor="?colorPrimary"
+                            tools:text="@tools:sample/lorem" />
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:layout_marginStart="@dimen/margin_normal"
+                            android:layout_marginTop="@dimen/margin_normal"
+                            android:fontFamily="@font/google_sans_medium"
+                            android:text="Educational Background"
+                            android:textStyle="bold" />
+
+                        <com.google.android.material.button.MaterialButton
+                            style="@style/Widget.MaterialComponents.Button.TextButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_normal"
+                            android:layout_marginTop="@dimen/spacing_micro"
+                            android:alpha="?alphaMedium"
+                            android:clickable="false"
+                            android:textColor="?colorPrimary"
+                            tools:text="@tools:sample/lorem" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/logout"
+                            android:layout_width="@dimen/feed_session_dimension"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/margin_large"
+                            android:gravity="center"
+                            android:text="Sign out" />
+
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                </androidx.core.widget.NestedScrollView>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </dev.ugscheduler.shared.widgets.CustomSwipeRefreshLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
