@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import dev.ugscheduler.shared.data.Student
+import dev.ugscheduler.shared.util.debugger
 
 class AuthViewModelFactory(): ViewModelProvider.NewInstanceFactory() {
 
@@ -29,5 +30,8 @@ class AuthViewModel : ViewModel() {
 
     fun onCancel() {}
 
-    fun onProfileClicked() {}
+    fun onProfileClicked() {
+        debugger("Profile clicked")
+        SignInFragment().showsDialog = true
+    }
 }
