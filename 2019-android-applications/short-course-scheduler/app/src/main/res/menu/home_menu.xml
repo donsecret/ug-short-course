@@ -30,10 +30,10 @@
             android:title="@string/title_sessions" />
 
         <item
-            android:id="@id/navigation_info"
-            android:contentDescription="@string/title_info"
-            android:icon="@drawable/ic_nav_info"
-            android:title="@string/title_info" />
+            android:id="@id/navigation_map"
+            android:contentDescription="@string/title_map"
+            android:icon="@drawable/ic_nav_map"
+            android:title="@string/title_map" />
 
     </group>
 

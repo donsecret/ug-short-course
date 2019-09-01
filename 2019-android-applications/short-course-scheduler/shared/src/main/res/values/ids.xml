@@ -5,6 +5,7 @@
          Each menu item and nav graph fragment represent the same logical item. -->
     <item name="navigation_home" type="id" />
     <item name="navigation_courses" type="id" />
+    <item name="navigation_course_details" type="id" />
     <item name="navigation_my_courses" type="id" />
     <item name="navigation_info" type="id" />
     <item name="navigation_map" type="id" />
