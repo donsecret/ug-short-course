@@ -5,6 +5,7 @@ import android.view.View
 import dev.ugscheduler.R
 import dev.ugscheduler.shared.util.BaseActivity
 import dev.ugscheduler.shared.util.intentTo
+import dev.ugscheduler.ui.home.HomeActivity
 
 class MainActivity : BaseActivity() {
 

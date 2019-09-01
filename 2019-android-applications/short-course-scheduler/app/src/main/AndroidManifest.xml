@@ -43,8 +43,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.HomeActivity"
-            android:theme="@style/AppTheme"/>
+        <activity
+            android:name=".ui.home.HomeActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ui.onboarding.OnboardingActivity"
+            android:theme="@style/AppTheme.Onboarding" />
     </application>
 
 </manifest>
