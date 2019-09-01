@@ -35,9 +35,9 @@ import com.google.firebase.firestore.GeoPoint
 import dev.ugscheduler.shared.R
 import timber.log.Timber
 
-fun debugger(msg: Any?) {
-    Timber.d("UGScheduler ==> ${msg.toString()}")
-    // println("UGScheduler ==> ${msg.toString()}")
+fun Any.debugger(msg: Any?) {
+    Timber.d("${this::class.java.simpleName} ==> UGScheduler ==> ${msg.toString()}")
+    // println("${this::class.java.simpleName} ==> UGScheduler ==> ${msg.toString()}")
 }
 
 fun BaseActivity.intentTo(

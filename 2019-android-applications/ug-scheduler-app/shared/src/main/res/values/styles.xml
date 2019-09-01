@@ -31,6 +31,7 @@
         <item name="android:textSize">16sp</item>
         <item name="android:textAlignment">viewStart</item>
         <item name="android:lineSpacingExtra">4sp</item>
+        <item name="fontFamily">@font/google_sans</item>
     </style>
 
     <style name="AlertDialog.ButtonBar" parent ="@style/Widget.AppCompat.ButtonBar.AlertDialog">
@@ -244,6 +245,7 @@
     <style name="Widget.IOSched.BorderlessButton.NormalText" parent="@style/Widget.MaterialComponents.Button.TextButton">
         <item name="android:textAppearance">?android:textAppearance</item>
         <item name="android:textColor">?android:textColorSecondary</item>
+        <item name="android:fontFamily">@font/google_sans</item>
     </style>
 
     <style name="Widget.IOSched.AccountDialog.ActionButton" parent="">
