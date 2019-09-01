@@ -1,11 +1,12 @@
 package dev.ugscheduler.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import dev.ugscheduler.R
+import dev.ugscheduler.shared.util.BaseActivity
+import dev.ugscheduler.shared.util.intentTo
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -14,5 +15,6 @@ class MainActivity : AppCompatActivity() {
 
     fun getStarted(view: View) {
         // todo: Start the application in guest mode
+        intentTo(HomeActivity::class.java, true)
     }
 }
