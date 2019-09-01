@@ -3,6 +3,7 @@
     <item name="tag_speaker_id" type="id" />
     <!-- These ids are used in both the menu (navigation.xml) and the nav graph (nav_graph.xml).
          Each menu item and nav graph fragment represent the same logical item. -->
+    <item name="navigation_home" type="id" />
     <item name="navigation_courses" type="id" />
     <item name="navigation_my_courses" type="id" />
     <item name="navigation_info" type="id" />
@@ -11,4 +12,6 @@
     <item name="navigation_sessions" type="id" />
     <item name="navigation_settings" type="id" />
     <item name="navigation_about" type="id" />
+    <item name="navigation_chat" type="id" />
+    <item name="navigation_search" type="id" />
 </resources>

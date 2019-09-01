@@ -1,19 +1,14 @@
 package dev.ugscheduler.ui.onboarding
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import androidx.lifecycle.ViewModelProviders
 import dev.ugscheduler.R
+import dev.ugscheduler.util.MainNavigationFragment
 
-class OnboardingFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = OnboardingFragment()
-    }
+class OnboardingFragment : MainNavigationFragment() {
 
     private lateinit var viewModel: OnboardingViewModel
 

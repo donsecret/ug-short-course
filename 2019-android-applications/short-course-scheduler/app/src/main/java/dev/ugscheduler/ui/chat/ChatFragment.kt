@@ -8,12 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 
 import dev.ugscheduler.R
+import dev.ugscheduler.util.MainNavigationFragment
 
-class ChatFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = ChatFragment()
-    }
+class ChatFragment : MainNavigationFragment() {
 
     private lateinit var viewModel: ChatViewModel
 

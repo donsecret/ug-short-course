@@ -1,19 +1,15 @@
 package dev.ugscheduler.ui.settings
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import androidx.lifecycle.ViewModelProviders
 import dev.ugscheduler.R
+import dev.ugscheduler.util.MainNavigationFragment
 
-class SettingsFragment : Fragment() {
+class SettingsFragment : MainNavigationFragment() {
 
-    companion object {
-        fun newInstance() = SettingsFragment()
-    }
 
     private lateinit var viewModel: SettingsViewModel
 

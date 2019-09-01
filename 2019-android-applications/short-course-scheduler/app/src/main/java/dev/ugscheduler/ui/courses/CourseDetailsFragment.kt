@@ -8,11 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 
 import dev.ugscheduler.R
+import dev.ugscheduler.util.MainNavigationFragment
 
-/**
- * A simple [Fragment] subclass.
- */
-class CourseDetailsFragment : Fragment() {
+
+class CourseDetailsFragment : MainNavigationFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

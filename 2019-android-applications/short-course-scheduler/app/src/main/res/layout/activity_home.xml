@@ -2,7 +2,7 @@
 <dev.ugscheduler.shared.widgets.NavigationBarContentFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frame_home"
+    android:id="@+id/drawer_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -18,14 +18,13 @@
             android:layout_height="match_parent"
             android:fitsSystemWindows="true">
 
-            <!--<fragment
-                android:id="@+id/student_nav_graph_fragment"
-                android:name="androidx.navigation.fragment.NavHostFragment"
+            <fragment
+                android:id="@+id/nav_host_fragment"
+                android:name="dev.ugscheduler.util.DispatchInsetsNavHostFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:defaultNavHost="true"
                 app:navGraph="@navigation/home_graph" />
--->
 
             <View
                 android:id="@+id/status_bar_scrim"
@@ -36,7 +35,7 @@
         </FrameLayout>
 
         <com.google.android.material.navigation.NavigationView
-            android:id="@+id/nav_view"
+            android:id="@+id/navigation"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"

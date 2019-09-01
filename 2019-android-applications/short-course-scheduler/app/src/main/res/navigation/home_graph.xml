@@ -1,5 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/home_graph.xml">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_graph.xml"
+    app:startDestination="@id/navigation_home">
 
+    <fragment
+        android:id="@id/navigation_home"
+        android:name="dev.ugscheduler.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="dev.ugscheduler.ui.chat.ChatFragment"
+        android:label="ChatFragment" />
+    <fragment
+        android:id="@+id/courseFragment"
+        android:name="dev.ugscheduler.ui.courses.CourseFragment"
+        android:label="CourseFragment" />
+    <fragment
+        android:id="@+id/sessionFragment"
+        android:name="dev.ugscheduler.ui.session.SessionFragment"
+        android:label="SessionFragment" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="dev.ugscheduler.ui.settings.SettingsFragment"
+        android:label="SettingsFragment" />
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="dev.ugscheduler.ui.about.AboutFragment"
+        android:label="fragment_about"
+        tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="dev.ugscheduler.ui.search.SearchFragment"
+        android:label="search_fragment"
+        tools:layout="@layout/search_fragment" />
 </navigation>

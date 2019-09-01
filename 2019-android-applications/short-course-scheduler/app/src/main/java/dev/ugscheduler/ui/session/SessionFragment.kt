@@ -8,12 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 
 import dev.ugscheduler.R
+import dev.ugscheduler.util.MainNavigationFragment
 
-class SessionFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = SessionFragment()
-    }
+class SessionFragment : MainNavigationFragment() {
 
     private lateinit var viewModel: SessionViewModel
 

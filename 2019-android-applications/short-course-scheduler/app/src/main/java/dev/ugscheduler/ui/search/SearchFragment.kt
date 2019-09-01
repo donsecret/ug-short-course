@@ -1,19 +1,15 @@
 package dev.ugscheduler.ui.search
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import androidx.lifecycle.ViewModelProviders
 import dev.ugscheduler.R
+import dev.ugscheduler.util.MainNavigationFragment
 
-class SearchFragment : Fragment() {
+class SearchFragment : MainNavigationFragment() {
 
-    companion object {
-        fun newInstance() = SearchFragment()
-    }
 
     private lateinit var viewModel: SearchViewModel
 
