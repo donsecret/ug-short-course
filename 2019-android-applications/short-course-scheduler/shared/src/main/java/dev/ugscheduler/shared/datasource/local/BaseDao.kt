@@ -1,4 +1,4 @@
-package dev.ugscheduler.shared
+package dev.ugscheduler.shared.datasource.local
 
 import androidx.room.Delete
 import androidx.room.Insert

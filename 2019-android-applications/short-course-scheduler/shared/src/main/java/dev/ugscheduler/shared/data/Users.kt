@@ -1,5 +1,6 @@
 package dev.ugscheduler.shared.data
 
+import androidx.annotation.NonNull
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
@@ -11,10 +12,10 @@ import java.util.*
  */
 @Parcelize
 @Entity(tableName = "anonymous_users")
-data class Anonymous(
+data class Anonymous constructor(
     @PrimaryKey
-    override val id: String,
-    override val timestamp: Long
+    /*override*/ val id: String,
+    /*override*/ val timestamp: Long
 ) : BaseUser {
 
     @Ignore
@@ -26,17 +27,21 @@ data class Anonymous(
  */
 @Entity(tableName = "students")
 @Parcelize
-data class Student(
+data class Student constructor(
     @PrimaryKey
-    override val id: String,
-    override val timestamp: Long,
+    @NonNull
+    /*override*/ val id: String,
+    /*override*/ val timestamp: Long,
     val email: String,
     var phone: String?,
     var avatar: String?,
-    var dob: String?, var fullName: String,
-    var residence: String?, var organisation: String?,
-    var eduBackground: String?,
-    var prevCourses: MutableList<String> = mutableListOf()
+    var dob: String?,
+    var fullName: String,
+    var residence: String?,
+    var organisation: String?,
+    var eduBackground: String?/*,
+    @Ignore
+    var prevCourses: MutableList<String> = mutableListOf()*/
 ) : BaseUser {
 
     @Ignore
@@ -59,13 +64,16 @@ data class Student(
  */
 @Entity(tableName = "facilitators")
 @Parcelize
-data class Facilitator(
+data class Facilitator constructor(
     @PrimaryKey
-    override val id: String,
-    override val timestamp: Long,
+    /*override*/ val id: String,
+    /*override*/ val timestamp: Long,
     var avatar: String?,
-    var email: String, var fullName: String,
-    var phone: String?, var courses: MutableList<String> = mutableListOf()
+    var email: String,
+    var fullName: String,
+    var phone: String?/*,
+    @Ignore
+    var courses: MutableList<String> = mutableListOf()*/
 ) : BaseUser {
 
     @Ignore
