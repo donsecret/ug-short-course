@@ -8,6 +8,7 @@ import android.view.MenuItem
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.MenuItemCompat
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
@@ -17,17 +18,20 @@ import dev.ugscheduler.R
 import dev.ugscheduler.shared.data.Student
 import dev.ugscheduler.shared.data.isSignedIn
 import dev.ugscheduler.shared.util.glide.asGlideTarget
+import dev.ugscheduler.shared.util.prefs.UserSharedPreferences
 import dev.ugscheduler.ui.auth.AuthViewModel
 
 
 fun Toolbar.setupProfileMenuItem(
     viewModel: AuthViewModel,
+    fm: FragmentManager,
+    prefs: UserSharedPreferences,
     lifecycleOwner: LifecycleOwner
 ) {
     inflateMenu(R.menu.profile)
     val profileItem = menu.findItem(R.id.action_profile) ?: return
     profileItem.setOnMenuItemClickListener {
-        viewModel.onProfileClicked()
+        viewModel.onProfileClicked(fm, prefs.isLoggedIn)
         true
     }
     viewModel.currentUserInfo.observe(lifecycleOwner, Observer {

@@ -5,8 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.ViewModelProvider
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import dev.ugscheduler.R
 import dev.ugscheduler.databinding.SignInFragmentBinding
+import dev.ugscheduler.shared.util.activityViewModelProvider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -28,15 +31,37 @@ class SignInFragment : DialogFragment() {
         return binding.root
     }
 
+    // Google sign in options
+    private val gso by lazy {
+        GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+    }
+
+    // Google Sign in client
+    private val googleClient by lazy { GoogleSignIn.getClient(requireActivity(), gso) }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(AuthViewModel::class.java)
-        // TODO: Use the ViewModel
+        viewModel = activityViewModelProvider(AuthViewModelFactory())
     }
 
     override fun onDestroy() {
         super.onDestroy()
         job.cancel()
+    }
+
+    override fun onResume() {
+        dialog?.window?.setLayout(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+        super.onResume()
+    }
+
+    companion object {
+        private const val RC_AUTH = 9
     }
 
 }

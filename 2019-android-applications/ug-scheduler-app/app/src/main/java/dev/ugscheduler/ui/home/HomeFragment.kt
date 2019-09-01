@@ -9,9 +9,11 @@ import androidx.lifecycle.ViewModelProvider
 import dev.ugscheduler.databinding.FragmentHomeBinding
 import dev.ugscheduler.shared.util.activityViewModelProvider
 import dev.ugscheduler.shared.util.doOnApplyWindowInsets
+import dev.ugscheduler.shared.util.prefs.UserSharedPreferences
 import dev.ugscheduler.ui.auth.AuthViewModelFactory
 import dev.ugscheduler.util.MainNavigationFragment
 import dev.ugscheduler.util.setupProfileMenuItem
+import org.koin.android.ext.android.get
 
 class HomeFragment : MainNavigationFragment() {
     private lateinit var binding: FragmentHomeBinding
@@ -35,6 +37,7 @@ class HomeFragment : MainNavigationFragment() {
 
         binding.toolbar.setupProfileMenuItem(
             activityViewModelProvider(AuthViewModelFactory()),
+            childFragmentManager, get(),
             viewLifecycleOwner
         )
     }

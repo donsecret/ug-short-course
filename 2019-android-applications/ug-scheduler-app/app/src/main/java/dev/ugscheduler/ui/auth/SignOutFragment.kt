@@ -36,4 +36,12 @@ class SignOutFragment : DialogFragment() {
         job.cancel()
     }
 
+    override fun onResume() {
+        dialog?.window?.setLayout(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+        super.onResume()
+    }
+
 }

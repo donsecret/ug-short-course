@@ -1,6 +1,7 @@
 package dev.ugscheduler.ui.auth
 
 import android.net.Uri
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import dev.ugscheduler.shared.data.Student
 import dev.ugscheduler.shared.util.debugger
 
-class AuthViewModelFactory(): ViewModelProvider.NewInstanceFactory() {
+class AuthViewModelFactory() : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
@@ -30,8 +31,8 @@ class AuthViewModel : ViewModel() {
 
     fun onCancel() {}
 
-    fun onProfileClicked() {
+    fun onProfileClicked(fm: FragmentManager, loggedIn: Boolean) {
         debugger("Profile clicked")
-        SignInFragment().showsDialog = true
+        if (loggedIn) SignOutFragment().show(fm, null) else SignInFragment().show(fm, null)
     }
 }

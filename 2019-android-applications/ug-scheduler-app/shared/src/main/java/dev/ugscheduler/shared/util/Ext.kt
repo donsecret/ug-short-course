@@ -33,8 +33,12 @@ import androidx.lifecycle.MediatorLiveData
 import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.firestore.GeoPoint
 import dev.ugscheduler.shared.R
+import timber.log.Timber
 
-fun debugger(msg: Any?) = println("UGScheduler ==> ${msg.toString()}")
+fun debugger(msg: Any?) {
+    Timber.d("UGScheduler ==> ${msg.toString()}")
+    // println("UGScheduler ==> ${msg.toString()}")
+}
 
 fun BaseActivity.intentTo(
     target: Class<out BaseActivity>,
