@@ -126,4 +126,5 @@
         <attr name="android:drawable" />
         <attr name="margin" format="dimension" />
     </declare-styleable>
+
 </resources>

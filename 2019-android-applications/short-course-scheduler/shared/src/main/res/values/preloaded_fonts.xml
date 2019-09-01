@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright 2018 Google LLC
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,5 +17,6 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/google_sans</item>
+        <item>@font/google_sans_medium</item>
     </array>
 </resources>

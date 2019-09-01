@@ -65,7 +65,7 @@
     <style name="AppTheme" parent="Base.AppTheme" />
 
     <style name="AppTheme.Launcher">
-        <item name="android:windowBackground">@drawable/preview_window</item>
+<!--        <item name="android:windowBackground">@drawable/preview_window_logo</item>-->
     </style>
 
     <style name="AppTheme.Onboarding">

@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">UG Scheduler</string>
+    <string name="default_app_name">UG Scheduler©</string>
+    <string name="get_started">Get started</string>
 </resources>

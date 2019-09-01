@@ -30,9 +30,9 @@
     <color name="black">#000</color>
     <color name="transparent">#0fff</color>
 
-    <color name="color_primary">@color/color_two</color>
-    <color name="color_primary_dark">@color/color_one</color>
-    <color name="color_on_secondary">@color/color_four</color>
+    <color name="color_primary">@color/warm_blue</color>
+    <color name="color_primary_dark">@color/warm_blue</color>
+    <color name="color_on_secondary">@color/cornflower_blue</color>
 
     <color name="color_control_light">#39000000</color> <!-- Same as textColorPrimary disabled -->
 
