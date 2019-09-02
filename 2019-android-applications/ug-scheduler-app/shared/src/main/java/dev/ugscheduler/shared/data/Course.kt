@@ -13,6 +13,7 @@ data class Course(
     @PrimaryKey
     val id: String,
     var name: String,
+    var desc: String,
     var icon: String?,
     var session: String,
     var maxStudents: Int,
@@ -22,7 +23,7 @@ data class Course(
 ) : Parcelable {
     @Ignore
     constructor() : this(
-        UUID.randomUUID().toString(), "", "", "", 10,"", System.currentTimeMillis(),
+        UUID.randomUUID().toString(), "", "", "","", 10,"", System.currentTimeMillis(),
         System.currentTimeMillis()
     )
 }

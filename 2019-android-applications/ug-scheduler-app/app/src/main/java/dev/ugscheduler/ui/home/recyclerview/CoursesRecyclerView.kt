@@ -59,9 +59,9 @@ interface ItemClickListener {
 
 @BindingAdapter("startTime", "endTime", requireAll = true)
 fun setupCourseInfo(view: TextView, startTime: Long, endTime: Long) {
-    if (startTime != -1L && endTime != -1L) {
+    if (startTime > -1L && endTime > -1L) {
         val start = DateFormatter(view.context).getTimestamp(startTime)
         val end = DateFormatter(view.context).getTimestamp(endTime)
         view.text = String.format("%s - %s", start, end)
-    }
+    } else view.text = "12:00 AM - 3:00PM"
 }

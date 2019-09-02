@@ -31,8 +31,25 @@
     <color name="transparent">#0fff</color>
 
     <color name="color_primary">@color/warm_blue</color>
-    <color name="color_primary_dark">@color/warm_blue</color>
-    <color name="color_on_secondary">@color/cornflower_blue</color>
+    <color name="color_primary_variant">@color/zeber_primary_dark_new</color>
+    <color name="color_secondary">@color/zeber_primary_super_dark</color>
+    <!--    <color name="color_secondary">#ae6e79</color>-->
+    <color name="color_secondary_variant">@color/zeber_primary_super_dark</color>
+
+    <!--	<color name="color_background">#DEDCE0</color>-->
+    <color name="color_background">#ffffff</color>
+    <color name="color_surface">#ffffff</color>
+    <color name="color_error">#CA491C</color>
+
+    <color name="color_on_primary">#ffffff</color>
+    <color name="color_on_secondary">#000000</color>
+    <color name="color_on_background">#000000</color>
+    <color name="color_on_surface">#000000</color>
+    <color name="color_on_error">#ffffff</color>
+    <color name="color_scrim">#99cfcfcf</color>
+
+    <!--    <color name="color_primary_dark">@color/warm_blue</color>-->
+    <!--    <color name="color_on_secondary">@color/cornflower_blue</color>-->
 
     <color name="color_control_light">#39000000</color> <!-- Same as textColorPrimary disabled -->
 
@@ -73,4 +90,11 @@
     <color name="color_four">#d7d7d8</color>
     <color name="color_five">#e6e8f5</color>
 
+
+    <!--zeber x-->
+    <color name="zeber_primary">#c0c0c8</color>
+    <color name="zeber_accent">#1fbad6</color>
+    <color name="zeber_primary_dark_old">#09091a</color>
+    <color name="zeber_primary_dark_new">#222233</color>
+    <color name="zeber_primary_super_dark">#161629</color>
 </resources>

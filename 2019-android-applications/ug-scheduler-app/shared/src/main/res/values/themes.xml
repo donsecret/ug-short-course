@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright 2019 Google LLC
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,16 +22,33 @@
         <item name="alphaDisabled">0.3</item>
         <item name="alphaHigh">1.0</item>
         <!-- Customize your theme here. -->
+        <!--        <item name="colorPrimary">@color/color_primary</item>-->
+        <!--        <item name="colorSecondary">?attr/colorPrimary</item>-->
+        <!--        <item name="colorOnSecondary">@color/color_on_secondary</item>-->
+        <!--        <item name="colorOnBackground">@color/color_on_background</item>-->
+        <!--        <item name="android:colorBackground">@color/color_background</item>-->
         <item name="colorPrimary">@color/color_primary</item>
-        <item name="colorPrimaryDark">@color/color_primary_dark</item>
-        <item name="colorSecondary">?attr/colorPrimary</item>
-        <item name="colorOnSecondary">@color/color_on_secondary</item>
+        <item name="colorPrimaryDark">@color/color_primary_variant</item>
+        <item name="colorSecondary">@color/color_secondary</item>
+        <item name="android:colorBackground">@color/color_background</item>
         <item name="colorControlLight">@color/color_control_light</item>
+        <item name="colorError">@color/color_error</item>
+        <item name="colorPrimaryVariant">@color/color_primary_variant</item>
+        <item name="colorSecondaryVariant">@color/color_secondary_variant</item>
+        <item name="colorSurface">@color/color_surface</item>
+        <item name="colorOnPrimary">@color/color_on_primary</item>
+        <item name="colorOnSecondary">@color/color_on_secondary</item>
+        <item name="colorOnBackground">@color/color_on_background</item>
+        <item name="colorOnError">@color/color_on_error</item>
+        <item name="colorOnSurface">@color/color_on_surface</item>
+        <item name="scrimBackground">@color/color_scrim</item>
 
         <!-- Window decor -->
         <item name="android:windowLightStatusBar" tools:targetApi="m">@bool/use_light_status</item>
         <item name="android:statusBarColor">@color/transparent</item>
-        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">@bool/use_light_navigation</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">
+            @bool/use_light_navigation
+        </item>
         <item name="android:navigationBarColor">@color/nav_bar_scrim</item>
 
         <!-- Widget styles -->
@@ -68,7 +84,7 @@
     <style name="AppTheme" parent="Base.AppTheme" />
 
     <style name="AppTheme.Launcher">
-<!--        <item name="android:windowBackground">@drawable/preview_window_logo</item>-->
+        <!--        <item name="android:windowBackground">@drawable/preview_window_logo</item>-->
     </style>
 
     <style name="AppTheme.Onboarding">

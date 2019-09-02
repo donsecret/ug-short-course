@@ -116,7 +116,7 @@ fun openWebsiteUri(context: Context, uri: Uri) {
     if (context.isChromeCustomTabsSupported()) {
         CustomTabsIntent.Builder()
             .setToolbarColor(ContextCompat.getColor(context, R.color.color_primary))
-            .setSecondaryToolbarColor(ContextCompat.getColor(context, R.color.color_primary_dark))
+            .setSecondaryToolbarColor(ContextCompat.getColor(context, R.color.color_primary_variant))
             .build()
             .launchUrl(context, uri)
     } else {
