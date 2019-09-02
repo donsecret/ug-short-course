@@ -3,17 +3,30 @@ package dev.ugscheduler.shared.worker
 import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
+import dev.ugscheduler.shared.data.Course
+import dev.ugscheduler.shared.datasource.local.CourseDao
+import dev.ugscheduler.shared.datasource.local.LocalDataSource
 import dev.ugscheduler.shared.util.debugger
+import dev.ugscheduler.shared.util.deserializer.getCourses
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 /**
  * Worker for handling [Course] information retrieval from the remote database to the local database
  */
 class CourseWorker(context: Context, params: WorkerParameters) : CoroutineWorker(context, params) {
-    // todo: get remote and local data sources
+    private val dao: CourseDao by lazy { LocalDataSource.get(context).courseDao() }
 
     override suspend fun doWork(): Result {
-        // todo: Get all courses from the database
-        debugger("Staring work for online courses")
+        debugger("De-serializing and adding courses")
+
+        // Get all courses and deserialize
+        val courses = getCourses(applicationContext)
+
+        // Needed to be called on the background thread
+        withContext(Dispatchers.IO) {
+            dao.insertAll(courses)
+        }
         return Result.success()
     }
 }

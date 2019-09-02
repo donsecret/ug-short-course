@@ -38,7 +38,6 @@ class HomeActivity : BaseActivity(), NavigationHost {
 
         private val TOP_LEVEL_DESTINATIONS = setOf(
             R.id.navigation_home,
-            R.id.navigation_courses,
             R.id.navigation_my_courses,
             R.id.navigation_map,
             R.id.navigation_info,
@@ -185,11 +184,11 @@ class HomeActivity : BaseActivity(), NavigationHost {
         navController.navigate(navId)
     }
 
-    private fun openSignInDialog() {
+    /*private fun openSignInDialog() {
         navigateTo(R.id.navigation_login)
     }
 
     private fun openSignOutDialog() {
         navigateTo(R.id.navigation_logout)
-    }
+    }*/
 }

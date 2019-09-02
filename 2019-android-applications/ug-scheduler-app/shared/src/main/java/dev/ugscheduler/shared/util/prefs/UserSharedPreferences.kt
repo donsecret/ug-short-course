@@ -21,6 +21,9 @@ class UserSharedPreferences private constructor(context: Context) {
     val liveLoginState: LiveData<Boolean> = _liveLoginState
     var isLoggedIn: Boolean = false
 
+    val uid: String
+        get() = prefs.getString("user_id", "")!!
+
     fun login(uid: String?) {
         isLoggedIn = !uid.isNullOrEmpty()
 

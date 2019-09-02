@@ -5,6 +5,13 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="dev.ugscheduler.ui.settings.SettingsViewModel" />
+
+        <variable
+            name="student"
+            type="dev.ugscheduler.shared.data.Student" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -30,9 +37,9 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <dev.ugscheduler.shared.widgets.CustomSwipeRefreshLayout
+            android:id="@+id/swipe_refresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/swipe_refresh"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
             <androidx.appcompat.widget.LinearLayoutCompat
@@ -46,8 +53,10 @@
                     android:id="@+id/user_avatar"
                     android:layout_width="@dimen/speaker_large_headshot_size"
                     android:layout_height="@dimen/speaker_large_headshot_size"
-                    android:src="@drawable/ic_default_avatar_3" />
-
+                    android:src="@drawable/ic_default_avatar_3"
+                    app:imageUrl="@{student.avatar}"
+                    app:clipToCircle="@{true}"
+                    app:placeholder="@{@drawable/ic_default_avatar_2}" />
 
                 <TextView
                     android:id="@+id/user_name"
@@ -57,9 +66,9 @@
                     android:fontFamily="@font/google_sans_medium"
                     android:gravity="center"
                     android:padding="@dimen/spacing_micro"
+                    android:text="@{student.fullName}"
                     android:textAppearance="?textAppearanceHeadline6"
                     tools:text="@tools:sample/lorem" />
-
 
                 <TextView
                     android:id="@+id/user_email"
@@ -69,6 +78,7 @@
                     android:alpha="?alphaMedium"
                     android:fontFamily="@font/google_sans"
                     android:gravity="center"
+                    android:text="@{student.email}"
                     android:textAppearance="?textAppearanceSubtitle2"
                     tools:text="@tools:sample/lorem" />
 
@@ -109,6 +119,7 @@
                             android:alpha="?alphaMedium"
                             android:clickable="false"
                             android:gravity="center"
+                            android:text="@{student.phone, default=`Not available`}"
                             android:textColor="?colorPrimary"
                             tools:text="@tools:sample/lorem" />
 
@@ -131,6 +142,7 @@
                             android:alpha="?alphaMedium"
                             android:clickable="false"
                             android:gravity="center"
+                            android:text="@{student.residence, default=`Not available`}"
                             android:textColor="?colorPrimary"
                             tools:text="@tools:sample/lorem" />
 
@@ -153,6 +165,7 @@
                             android:alpha="?alphaMedium"
                             android:clickable="false"
                             android:gravity="center"
+                            android:text="@{student.address, default=`Not available`}"
                             android:textColor="?colorPrimary"
                             tools:text="@tools:sample/lorem" />
 
@@ -175,6 +188,7 @@
                             android:alpha="?alphaMedium"
                             android:clickable="false"
                             android:gravity="center"
+                            android:text="@{student.dob, default=`Not available`}"
                             android:textColor="?colorPrimary"
                             tools:text="@tools:sample/lorem" />
 
@@ -197,6 +211,7 @@
                             android:alpha="?alphaMedium"
                             android:clickable="false"
                             android:gravity="center"
+                            android:text="@{student.organisation, default=`Not available`}"
                             android:textColor="?colorPrimary"
                             tools:text="@tools:sample/lorem" />
 
@@ -218,6 +233,7 @@
                             android:layout_marginTop="@dimen/spacing_micro"
                             android:alpha="?alphaMedium"
                             android:clickable="false"
+                            android:text="@{student.position, default=`Not available`}"
                             android:textColor="?colorPrimary"
                             tools:text="@tools:sample/lorem" />
 
@@ -240,17 +256,9 @@
                             android:layout_marginTop="@dimen/spacing_micro"
                             android:alpha="?alphaMedium"
                             android:clickable="false"
+                            android:text="@{student.eduBackground, default=`Not available`}"
                             android:textColor="?colorPrimary"
                             tools:text="@tools:sample/lorem" />
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/logout"
-                            android:layout_width="@dimen/feed_session_dimension"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="@dimen/margin_large"
-                            android:gravity="center"
-                            android:text="Sign out" />
 
 
                     </androidx.appcompat.widget.LinearLayoutCompat>

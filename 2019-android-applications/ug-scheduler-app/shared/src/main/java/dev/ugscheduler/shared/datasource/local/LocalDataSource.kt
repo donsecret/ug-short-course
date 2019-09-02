@@ -28,6 +28,7 @@ import dev.ugscheduler.shared.worker.CourseWorker
 abstract class LocalDataSource : RoomDatabase(), DataSource {
 
     abstract fun studentDao(): StudentDao
+    abstract fun courseDao(): CourseDao
 
     companion object {
         @Volatile

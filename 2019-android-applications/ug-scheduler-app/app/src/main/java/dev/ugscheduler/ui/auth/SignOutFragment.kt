@@ -5,13 +5,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.ViewModelProvider
-import dev.ugscheduler.R
+import androidx.lifecycle.Observer
+import com.google.firebase.auth.FirebaseAuth
+import dev.ugscheduler.databinding.SignOutFragmentBinding
+import dev.ugscheduler.shared.datasource.local.StudentDao
+import dev.ugscheduler.shared.util.activityViewModelProvider
+import dev.ugscheduler.shared.util.prefs.UserSharedPreferences
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import org.koin.android.ext.android.get
 
 class SignOutFragment : DialogFragment() {
+    private lateinit var binding: SignOutFragmentBinding
+
     private val job = Job()
     private val ioScope = CoroutineScope(Dispatchers.IO)
     private val uiScope = CoroutineScope(Dispatchers.Main + job)
@@ -22,13 +29,28 @@ class SignOutFragment : DialogFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.sign_out_fragment, container, false)
+        binding = SignOutFragmentBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(AuthViewModel::class.java)
-        // TODO: Use the ViewModel
+        viewModel = activityViewModelProvider(AuthViewModelFactory())
+
+        binding.viewModel = viewModel
+        val dao: StudentDao = get()
+        val auth: FirebaseAuth = get()
+        val prefs: UserSharedPreferences = get()
+        dao.getStudent(prefs.uid).observe(viewLifecycleOwner, Observer { student ->
+            binding.apply {
+                this.student = student
+                this.signOut.setOnClickListener {
+                    auth.signOut()
+                    prefs.logout()
+                    dismiss()
+                }
+            }
+        })
     }
 
     override fun onDestroy() {

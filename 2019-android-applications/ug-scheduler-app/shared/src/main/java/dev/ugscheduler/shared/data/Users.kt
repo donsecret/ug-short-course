@@ -36,7 +36,7 @@ data class Student constructor(
     var phone: String?,
     var avatar: String?,
     var dob: String?,
-    var fullName: String,
+    var fullName: String?,
     var residence: String?,
     var address: String?,
     var organisation: String?,
@@ -51,15 +51,15 @@ data class Student constructor(
         UUID.randomUUID().toString(),
         System.currentTimeMillis(),
         "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        ""
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
     )
 }
 
@@ -74,7 +74,7 @@ data class Facilitator constructor(
     override val timestamp: Long,
     var avatar: String?,
     var email: String,
-    var fullName: String,
+    var fullName: String?,
     var rating: Double,
     var phone: String?/*,
     @Ignore
@@ -85,10 +85,10 @@ data class Facilitator constructor(
     constructor() : this(
         UUID.randomUUID().toString(),
         System.currentTimeMillis(),
+        null,
         "",
-        "",
-        "",
+        null,
         1.0,
-        ""
+        null
     )
 }

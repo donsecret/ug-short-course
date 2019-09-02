@@ -25,12 +25,6 @@ class AuthViewModel : ViewModel() {
     private val _userInfo = MutableLiveData<Student?>()
     val currentUserInfo: LiveData<Student?> = _userInfo
 
-    fun onSignIn() {}
-
-    fun onSignOut() {}
-
-    fun onCancel() {}
-
     fun onProfileClicked(fm: FragmentManager, loggedIn: Boolean) {
         debugger("Profile clicked")
         if (loggedIn) SignOutFragment().show(fm, null) else SignInFragment().show(fm, null)

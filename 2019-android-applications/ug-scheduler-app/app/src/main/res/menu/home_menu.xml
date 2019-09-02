@@ -11,15 +11,9 @@
             android:title="@string/title_home" />
 
         <item
-            android:id="@id/navigation_courses"
-            android:contentDescription="@string/title_courses"
-            android:icon="@drawable/ic_nav_codelabs"
-            android:title="@string/title_courses" />
-
-        <item
             android:id="@id/navigation_my_courses"
             android:contentDescription="@string/title_my_courses"
-            android:icon="@drawable/ic_agenda_store"
+            android:icon="@drawable/ic_nav_codelabs"
             android:title="@string/title_my_courses" />
 
         <item

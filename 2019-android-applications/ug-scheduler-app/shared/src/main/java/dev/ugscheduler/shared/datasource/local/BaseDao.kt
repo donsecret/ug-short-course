@@ -13,6 +13,9 @@ interface BaseDao<T> {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(item: T)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertAll(item: MutableList<T>)
+
     @Update(onConflict = OnConflictStrategy.REPLACE)
     fun update(item: T)
 

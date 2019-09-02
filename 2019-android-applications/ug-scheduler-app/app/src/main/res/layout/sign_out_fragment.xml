@@ -4,9 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="dev.ugscheduler.ui.auth.AuthViewModel" />
+
+        <variable
+            name="student"
+            type="dev.ugscheduler.shared.data.Student" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -35,8 +40,8 @@
             android:gravity="center_vertical"
             android:minHeight="@dimen/profile_dialog_header_height"
             android:orientation="vertical"
-            android:paddingBottom="@dimen/margin_normal"
             android:paddingTop="@dimen/margin_normal"
+            android:paddingBottom="@dimen/margin_normal"
             app:layout_constraintEnd_toStartOf="@id/guideline_end"
             app:layout_constraintStart_toEndOf="@id/user_avatar"
             app:layout_constraintTop_toTopOf="parent">
@@ -46,6 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:lines="1"
+                android:text="@{student.fullName}"
                 android:textAppearance="@style/TextAppearance.IOSched.AccountDialog.Username"
                 tools:text="User Name" />
 
@@ -54,6 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:lines="1"
+                android:text="@{student.email}"
                 tools:text="user@email.com" />
         </LinearLayout>
 
@@ -63,9 +70,11 @@
             android:layout_height="@dimen/profile_dialog_account_image_size"
             android:contentDescription="@null"
             app:clipToCircle="@{true}"
+            app:imageUrl="@{student.avatar}"
             app:layout_constraintBottom_toBottomOf="@id/username_email_container"
             app:layout_constraintStart_toEndOf="@id/guideline_start"
             app:layout_constraintTop_toTopOf="parent"
+            app:placeholder="@{@drawable/ic_default_profile_avatar}"
             tools:src="@drawable/ic_default_profile_avatar" />
 
         <Button
@@ -96,12 +105,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_normal"
+            android:fontFamily="@font/google_sans"
             android:text="@string/dialog_sign_out_content"
             app:layout_constraintEnd_toStartOf="@id/guideline_end"
             app:layout_constraintStart_toEndOf="@id/guideline_start"
             app:layout_constraintTop_toBottomOf="@id/divider1"
-            tools:style="@style/AlertDialog.BodyText"
-            tools:ignore="PrivateResource" />
+            tools:ignore="PrivateResource"
+            tools:style="@style/AlertDialog.BodyText" />
 
         <TextView
             android:id="@+id/sign_out"
@@ -110,7 +120,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_normal"
             android:drawableStart="@drawable/ic_logout"
-            android:onClick="@{() -> viewModel.onSignOut()}"
             android:text="@string/sign_out"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
