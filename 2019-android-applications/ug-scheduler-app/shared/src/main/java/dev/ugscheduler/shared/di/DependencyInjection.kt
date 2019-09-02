@@ -26,5 +26,6 @@ private val appPrefsModule = module {
     single { UserSharedPreferences.getInstance(androidContext()) }
     single { LocalDataSource.get(androidContext()) }
     single { get<LocalDataSource>().studentDao() }
+    single { get<LocalDataSource>().courseDao() }
 }
 

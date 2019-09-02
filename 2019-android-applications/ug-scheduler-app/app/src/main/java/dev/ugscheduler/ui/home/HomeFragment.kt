@@ -6,12 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.core.view.updatePaddingRelative
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import dev.ugscheduler.R
 import dev.ugscheduler.databinding.FragmentHomeBinding
 import dev.ugscheduler.shared.data.Course
+import dev.ugscheduler.shared.datasource.local.CourseDao
 import dev.ugscheduler.shared.util.activityViewModelProvider
 import dev.ugscheduler.shared.util.doOnApplyWindowInsets
 import dev.ugscheduler.ui.auth.AuthViewModelFactory
@@ -19,6 +21,7 @@ import dev.ugscheduler.ui.home.recyclerview.CourseAdapter
 import dev.ugscheduler.ui.home.recyclerview.ItemClickListener
 import dev.ugscheduler.util.MainNavigationFragment
 import dev.ugscheduler.util.setupProfileMenuItem
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.get
 
 class HomeFragment : MainNavigationFragment() {
@@ -61,6 +64,12 @@ class HomeFragment : MainNavigationFragment() {
             setHasFixedSize(false)
             this.adapter = adapter
             this.itemAnimator = DefaultItemAnimator()
+
+            // todo: Get courses from viewModel not directly from dao
+            val dao: CourseDao = get()
+            dao.getAllCourses().observe(viewLifecycleOwner, Observer { courses ->
+                adapter.submitList(courses)
+            })
         }
     }
 
