@@ -4,6 +4,9 @@
 
     <data>
 
+        <variable
+            name="course"
+            type="dev.ugscheduler.shared.data.Course" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

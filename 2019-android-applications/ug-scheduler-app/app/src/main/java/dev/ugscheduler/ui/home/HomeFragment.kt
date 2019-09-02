@@ -50,7 +50,6 @@ class HomeFragment : MainNavigationFragment() {
         // Create adapter
         val adapter = CourseAdapter(object : ItemClickListener {
             override fun onClick(course: Course) {
-                // todo: navigate to details
                 findNavController().navigate(
                     R.id.navigation_course_details, bundleOf(
                         Pair("extra_course", course)
