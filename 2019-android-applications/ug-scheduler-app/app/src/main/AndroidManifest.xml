@@ -57,6 +57,7 @@
         </activity>
         <activity
             android:name=".ui.home.HomeActivity"
+            android:configChanges="screenLayout|screenSize|orientation"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.onboarding.OnboardingActivity"
