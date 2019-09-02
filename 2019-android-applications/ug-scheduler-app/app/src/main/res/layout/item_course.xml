@@ -27,47 +27,50 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/icon"
             android:layout_width="@dimen/agenda_icon_width"
             android:layout_height="wrap_content"
             android:contentDescription="@null"
-            android:src="@drawable/ic_default_avatar_1"
+            app:clipToCircle="@{true}"
             app:imageUrl="@{course.icon}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:placeholder="@{@drawable/ic_default_avatar_2}"
+            tools:src="@drawable/ic_default_avatar_1" />
 
         <TextView
-            android:id="@+id/agenda_title"
+            android:id="@+id/course_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_normal"
             android:layout_marginTop="@dimen/agenda_block_padding_vertical"
             android:layout_marginEnd="@dimen/margin_normal"
             android:text="@{course.name}"
             android:textAlignment="viewStart"
-            android:textColor="?colorOnBackground"
             android:textAppearance="?textAppearanceListItem"
+            android:textColor="?colorOnBackground"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/icon"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="@tools:sample/lorem" />
 
         <TextView
-            android:id="@+id/duration"
+            android:id="@+id/course_duration"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:alpha="?alphaMedium"
             android:paddingBottom="@dimen/agenda_block_padding_vertical"
             android:textAlignment="viewStart"
             android:textAppearance="?textAppearanceBody2"
             android:textColor="?colorOnBackground"
-            android:alpha="?alphaMedium"
             app:endTime="@{course.endDate}"
-            app:layout_constraintEnd_toEndOf="@id/agenda_title"
-            app:layout_constraintStart_toStartOf="@id/agenda_title"
-            app:layout_constraintTop_toBottomOf="@id/agenda_title"
+            app:layout_constraintEnd_toEndOf="@id/course_name"
+            app:layout_constraintStart_toStartOf="@id/course_name"
+            app:layout_constraintTop_toBottomOf="@id/course_name"
             app:startTime="@{course.startDate}"
             tools:text="8:00 AM - 7:00 PM" />
 
