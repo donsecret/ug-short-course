@@ -61,7 +61,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/google_sans"
                         android:text="@{course.desc}"
-                        android:layout_marginTop="@dimen/margin_small"
+                        android:layout_marginTop="@dimen/margin_normal"
                         android:textAppearance="?textAppearanceBody2"
                         tools:maxLines="12"
                         tools:text="@tools:sample/lorem/random" />

@@ -22,6 +22,8 @@ import dev.ugscheduler.ui.home.recyclerview.CourseAdapter
 import dev.ugscheduler.ui.home.recyclerview.ItemClickListener
 import dev.ugscheduler.util.MainNavigationFragment
 import dev.ugscheduler.util.setupProfileMenuItem
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.get
 
 class HomeFragment : MainNavigationFragment() {
@@ -60,6 +62,15 @@ class HomeFragment : MainNavigationFragment() {
                 )
             }
         })
+
+        binding.swipeRefresh.setOnRefreshListener {
+            // todo: remove this and replace with actual call to remote data source
+            uiScope.launch {
+                delay(1800)
+                binding.swipeRefresh.isRefreshing = false
+            }
+        }
+
         binding.recyclerView.apply {
             setHasFixedSize(false)
             this.adapter = adapter
