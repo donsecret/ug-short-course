@@ -57,6 +57,9 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
+    // Date Formatter
+    api project(':date-formatter')
+
     // Application
     api 'androidx.appcompat:appcompat:1.1.0-rc01'
     api 'androidx.constraintlayout:constraintlayout:1.1.3'
