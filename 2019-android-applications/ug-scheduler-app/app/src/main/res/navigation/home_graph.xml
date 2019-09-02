@@ -57,6 +57,9 @@
             app:destination="@id/navigation_home"
             app:popUpTo="@id/navigation_home"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_navigation_course_details_to_navigation_enrol"
+            app:destination="@id/navigation_enrol" />
     </fragment>
     <fragment
         android:id="@id/navigation_map"
@@ -67,7 +70,11 @@
         android:id="@id/navigation_my_courses"
         android:name="dev.ugscheduler.ui.courses.MyCoursesFragment"
         android:label="@string/title_my_courses"
-        tools:layout="@layout/fragment_my_courses" />
+        tools:layout="@layout/fragment_my_courses" >
+        <argument
+            android:name="extra_course"
+            app:argType="dev.ugscheduler.shared.data.Course" />
+    </fragment>
     <dialog
         android:id="@id/navigation_login"
         android:name="dev.ugscheduler.ui.auth.SignInFragment"
@@ -78,4 +85,9 @@
         android:name="dev.ugscheduler.ui.auth.SignOutFragment"
         android:label="Sign Out"
         tools:layout="@layout/sign_out_fragment" />
+    <fragment
+        android:id="@id/navigation_enrol"
+        android:name="dev.ugscheduler.ui.enrol.EnrolFragment"
+        android:label="@string/title_enrol"
+        tools:layout="@layout/fragment_enrol" />
 </navigation>

@@ -38,4 +38,5 @@
     <string name="no_network_connection">No internet connection.</string>
     <string name="no_network_description">To use UG Scheduler, try:\\n\\n - Turning off airplane mode\\n\\n - Turning on mobile data or Wi-Fi\\n\\n - Checking the signal in your area</string>
     <string name="onboarding_welcome_to_app">Welcome to UGScheduler</string>
+    <string name="title_enrol">Enrolment</string>
 </resources>
