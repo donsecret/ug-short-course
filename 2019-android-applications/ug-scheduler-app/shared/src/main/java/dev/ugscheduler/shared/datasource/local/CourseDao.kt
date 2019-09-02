@@ -11,7 +11,7 @@ interface CourseDao : BaseDao<Course> {
     @Query("select * from courses where id = :id")
     fun getCourseDetails(id: String): LiveData<Course>
 
-    @Query("select * from courses order by name desc")
+    @Query("select * from courses order by name asc")
     fun getAllCourses(): LiveData<MutableList<Course>>
 
 }

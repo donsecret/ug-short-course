@@ -11,6 +11,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Tasks
+import com.google.android.material.snackbar.BaseTransientBottomBar
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
@@ -36,6 +38,13 @@ class SignInFragment : DialogFragment() {
     private val job = Job()
     private val ioScope = CoroutineScope(Dispatchers.IO)
     private val uiScope = CoroutineScope(Dispatchers.Main + job)
+    private val snackbar by lazy {
+        Snackbar.make(
+            binding.root,
+            "Signing you into your account",
+            Snackbar.LENGTH_INDEFINITE
+        )
+    }
 
     private lateinit var viewModel: AuthViewModel
 
@@ -90,6 +99,9 @@ class SignInFragment : DialogFragment() {
                         val account = GoogleSignIn.getSignedInAccountFromIntent(data)
                             .getResult(ApiException::class.java)
                         val auth: FirebaseAuth = get()
+
+                        // Login with credentials on Firebase
+                        snackbar.show()
                         auth.signInWithCredential(
                             GoogleAuthProvider.getCredential(
                                 account?.idToken,
@@ -98,18 +110,25 @@ class SignInFragment : DialogFragment() {
                         )
                             .addOnFailureListener(requireActivity()) { ex ->
                                 debugger(ex.localizedMessage)
-                                // todo: show login failed
-                                dismiss()
+                                snackbar.setText("Login failed. Please check your internet connection")
+                                    .addCallback(object :
+                                        BaseTransientBottomBar.BaseCallback<Snackbar?>() {
+                                        override fun onDismissed(
+                                            transientBottomBar: Snackbar?,
+                                            event: Int
+                                        ) {
+                                            dismiss()
+                                        }
+                                    }).show()
                             }
-                            .addOnCompleteListener(requireActivity()) { user ->
-                                if (user.isSuccessful) {
-                                    val firebaseUser = user.result?.user
+                            .addOnCompleteListener(requireActivity()) { task ->
+                                if (task.isSuccessful) {
+                                    val firebaseUser = task.result?.user
                                     val student = firebaseUser?.toUser()
                                     val prefs: UserSharedPreferences = get()
                                     val db: FirebaseFirestore = get()
                                     prefs.login(student?.id)
                                     debugger(student)
-
                                     ioScope.launch {
                                         val dao: StudentDao = get()
                                         if (student != null) {
@@ -125,6 +144,17 @@ class SignInFragment : DialogFragment() {
                                             dismiss()
                                         }
                                     }
+                                } else {
+                                    snackbar.setText("Login failed. ${task.exception?.localizedMessage}")
+                                        .addCallback(object :
+                                            BaseTransientBottomBar.BaseCallback<Snackbar?>() {
+                                            override fun onDismissed(
+                                                transientBottomBar: Snackbar?,
+                                                event: Int
+                                            ) {
+                                                dismiss()
+                                            }
+                                        }).show()
                                 }
                             }
                     } catch (ex: Exception) {

@@ -17,9 +17,7 @@
         android:paddingStart="@dimen/margin_normal"
         android:paddingTop="@dimen/spacing_micro"
         android:paddingEnd="@dimen/margin_normal"
-        android:paddingBottom="@dimen/spacing_micro"
-        android:theme="@style/ThemeOverlay.MaterialComponents.Dark"
-        tools:ignore="RtlSymmetry,UnusedAttribute">
+        android:paddingBottom="@dimen/spacing_micro">
 
         <View
             android:layout_width="0dp"
@@ -31,6 +29,7 @@
 
         <ImageView
             android:id="@+id/icon"
+            android:visibility="gone"
             android:layout_width="@dimen/agenda_icon_width"
             android:layout_height="wrap_content"
             android:contentDescription="@null"
@@ -52,7 +51,6 @@
             android:text="@{course.name}"
             android:textAlignment="viewStart"
             android:textAppearance="?textAppearanceListItem"
-            android:textColor="?colorOnBackground"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/icon"
             app:layout_constraintTop_toTopOf="parent"
@@ -66,7 +64,6 @@
             android:paddingBottom="@dimen/agenda_block_padding_vertical"
             android:textAlignment="viewStart"
             android:textAppearance="?textAppearanceBody2"
-            android:textColor="?colorOnBackground"
             app:endTime="@{course.endDate}"
             app:layout_constraintEnd_toEndOf="@id/course_name"
             app:layout_constraintStart_toStartOf="@id/course_name"
