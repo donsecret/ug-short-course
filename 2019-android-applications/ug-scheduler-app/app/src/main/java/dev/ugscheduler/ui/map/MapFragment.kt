@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.view.updatePaddingRelative
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -18,6 +19,7 @@ import com.google.android.gms.tasks.Tasks
 import dev.ugscheduler.R
 import dev.ugscheduler.databinding.MapFragmentBinding
 import dev.ugscheduler.shared.util.debugger
+import dev.ugscheduler.shared.util.doOnApplyWindowInsets
 import dev.ugscheduler.shared.util.toLatLng
 import dev.ugscheduler.util.MainNavigationFragment
 import kotlinx.coroutines.launch
@@ -97,7 +99,9 @@ class MapFragment : MainNavigationFragment(), OnMapReadyCallback {
         val mapFragment =
             childFragmentManager.findFragmentById(R.id.google_map) as? SupportMapFragment
         mapFragment?.getMapAsync(this)
-
+        binding.container.doOnApplyWindowInsets { v, insets, padding ->
+            v.updatePaddingRelative(bottom = padding.bottom + insets.systemWindowInsetBottom)
+        }
     }
 
     override fun onRequestPermissionsResult(

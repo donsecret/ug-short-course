@@ -83,6 +83,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/google_sans_medium"
                     android:gravity="center"
+                    android:padding="@dimen/margin_normal"
                     android:text="This application would not have been possible without these libraries" />
 
                 <androidx.recyclerview.widget.RecyclerView
