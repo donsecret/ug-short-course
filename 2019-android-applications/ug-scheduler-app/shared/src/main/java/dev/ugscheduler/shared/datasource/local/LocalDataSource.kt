@@ -22,7 +22,7 @@ class LocalDataSource constructor(
     private val facilitatorDao: FacilitatorDao
 ) : DataSource {
     private val ioScope = CoroutineScope(Dispatchers.IO)
-    
+
     override fun sendFeedback(feedback: Feedback) = feedbackDao.insert(feedback)
 
     override fun getStudentById(studentId: String): LiveData<Student> =
