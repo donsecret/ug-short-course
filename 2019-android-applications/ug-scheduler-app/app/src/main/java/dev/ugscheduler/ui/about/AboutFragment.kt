@@ -2,23 +2,40 @@ package dev.ugscheduler.ui.about
 
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
-import dev.ugscheduler.R
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.RecyclerView
+import dev.ugscheduler.databinding.FragmentAboutBinding
+import dev.ugscheduler.shared.util.debugger
 import dev.ugscheduler.util.MainNavigationFragment
 
 
 class AboutFragment : MainNavigationFragment() {
 
+    private lateinit var binding: FragmentAboutBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_about, container, false)
+        binding = FragmentAboutBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        val adapter = AboutLibsAdapter()
+        val libs = LibraryDeserializer.deserialize(requireContext())
+        debugger(libs)
+        adapter.submitList(libs)
+        with(binding.libsList) {
+            this.adapter = adapter
+            this.setHasFixedSize(false)
+            this.itemAnimator = DefaultItemAnimator() as RecyclerView.ItemAnimator?
+        }
     }
 
 

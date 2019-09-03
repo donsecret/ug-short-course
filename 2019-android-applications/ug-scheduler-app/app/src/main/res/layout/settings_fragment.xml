@@ -24,7 +24,8 @@
             style="@style/Widget.IOSched.AppBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fitsSystemWindows="true">
+            android:fitsSystemWindows="true"
+            app:liftOnScroll="true">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -54,8 +55,8 @@
                     android:layout_width="@dimen/speaker_large_headshot_size"
                     android:layout_height="@dimen/speaker_large_headshot_size"
                     android:src="@drawable/ic_default_avatar_3"
-                    app:imageUrl="@{student.avatar}"
                     app:clipToCircle="@{true}"
+                    app:imageUrl="@{student.avatar}"
                     app:placeholder="@{@drawable/ic_default_avatar_2}" />
 
                 <TextView

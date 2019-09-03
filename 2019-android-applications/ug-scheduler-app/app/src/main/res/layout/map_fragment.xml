@@ -15,6 +15,7 @@
             android:id="@+id/appbar"
             style="@style/Widget.IOSched.AppBar"
             android:layout_width="match_parent"
+            app:liftOnScroll="true"
             android:layout_height="wrap_content"
             android:fitsSystemWindows="true">
 
