@@ -47,7 +47,7 @@ class CourseDetailsFragment : MainNavigationFragment() {
         val course = arguments?.get("extra_course") as? Course
         binding.course = course
 
-        if (course != null) {
+        if (course != null && course.facilitator.isNotEmpty()) {
             val liveFacilitator = viewModel.getFacilitatorById(course.facilitator, true)
             // todo: Get facilitator information
             liveFacilitator.observe(viewLifecycleOwner, Observer { facilitator ->
