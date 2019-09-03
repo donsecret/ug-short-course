@@ -9,8 +9,10 @@ import androidx.core.view.updatePaddingRelative
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.RecyclerView
 import dev.ugscheduler.databinding.FragmentAboutBinding
+import dev.ugscheduler.shared.util.debugger
 import dev.ugscheduler.shared.util.doOnApplyWindowInsets
 import dev.ugscheduler.util.MainNavigationFragment
+import java.util.*
 
 
 class AboutFragment : MainNavigationFragment() {
