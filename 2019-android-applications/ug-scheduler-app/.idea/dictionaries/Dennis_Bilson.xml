@@ -3,7 +3,9 @@
     <words>
       <w>coroutine</w>
       <w>coroutines</w>
+      <w>datasource</w>
       <w>firebase</w>
+      <w>firestore</w>
       <w>sublevel</w>
       <w>ugscheduler</w>
     </words>

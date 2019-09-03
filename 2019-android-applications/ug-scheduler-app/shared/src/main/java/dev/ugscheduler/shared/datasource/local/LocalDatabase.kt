@@ -17,7 +17,6 @@ import dev.ugscheduler.shared.data.Course
 import dev.ugscheduler.shared.data.Facilitator
 import dev.ugscheduler.shared.data.Feedback
 import dev.ugscheduler.shared.data.Student
-import dev.ugscheduler.shared.datasource.DataSource
 import dev.ugscheduler.shared.util.Constants
 import dev.ugscheduler.shared.worker.CourseWorker
 
@@ -31,6 +30,8 @@ abstract class LocalDatabase : RoomDatabase() {
 
     abstract fun studentDao(): StudentDao
     abstract fun courseDao(): CourseDao
+    abstract fun feedbackDao(): FeedbackDao
+    abstract fun facilitatorDao(): FacilitatorDao
 
     companion object {
         @Volatile

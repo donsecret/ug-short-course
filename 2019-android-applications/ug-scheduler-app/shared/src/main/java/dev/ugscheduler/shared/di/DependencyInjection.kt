@@ -9,14 +9,17 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.storage.FirebaseStorage
+import dev.ugscheduler.shared.datasource.local.LocalDataSource
 import dev.ugscheduler.shared.datasource.local.LocalDatabase
+import dev.ugscheduler.shared.datasource.remote.RemoteDataSource
+import dev.ugscheduler.shared.repository.AppRepository
 import dev.ugscheduler.shared.util.Constants
 import dev.ugscheduler.shared.util.prefs.UserSharedPreferences
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
 // Load all modules declared below from here
-fun loadAppModules() = mutableListOf(firebaseModule, appPrefsModule)
+fun loadAppModules() = mutableListOf(firebaseModule, appPrefsModule, datasourceModule)
 
 private val firebaseModule = module {
     single { FirebaseApp.initializeApp(androidContext()) }
@@ -31,5 +34,13 @@ private val appPrefsModule = module {
     single { LocalDatabase.get(androidContext()) }
     single { get<LocalDatabase>().studentDao() }
     single { get<LocalDatabase>().courseDao() }
+    single { get<LocalDatabase>().feedbackDao() }
+    single { get<LocalDatabase>().facilitatorDao() }
+}
+
+private val datasourceModule = module {
+    factory { RemoteDataSource(get(), get()) }
+    factory { LocalDataSource(get(), get(), get(), get()) }
+    single { AppRepository(get(), get(), get()) }
 }
 
