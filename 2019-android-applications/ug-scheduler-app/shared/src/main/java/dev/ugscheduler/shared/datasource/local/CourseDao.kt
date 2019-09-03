@@ -18,4 +18,6 @@ interface CourseDao : BaseDao<Course> {
     @Query("select * from courses order by name asc")
     fun getAllCourses(): LiveData<MutableList<Course>>
 
+    @Query("select * from courses where facilitator = :facilitator order by name asc")
+    fun getCoursesForFacilitator(facilitator: String): MutableList<Course>
 }

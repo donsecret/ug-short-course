@@ -15,4 +15,5 @@ object Constants {
     const val FACILITATORS = "facilitators"
     const val COURSES = "courses"
     const val FEEDBACK = "feedback"
+    const val ENROLMENTS = "enrolments"
 }

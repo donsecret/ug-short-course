@@ -40,7 +40,7 @@ private val appPrefsModule = module {
 
 private val datasourceModule = module {
     factory { RemoteDataSource(get(), get()) }
-    factory { LocalDataSource(get(), get(), get(), get()) }
+    factory { LocalDataSource(get(), get(), get(), get(), get()) }
     single { AppRepository(get(), get(), get()) }
 }
 
