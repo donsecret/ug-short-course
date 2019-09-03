@@ -10,7 +10,8 @@ import timber.log.Timber
 
 // For debugging
 fun Any.debugger(msg: Any?) =
-    Timber.d("${this::class.java.simpleName} ==> GitRepo ${msg.toString()}")
+    //Timber.d("${this::class.java.simpleName} ==> GitRepo ${msg.toString()}")
+    println("${this::class.java.simpleName} ==> GitRepo ${msg.toString()}")
 
 // Handles intent in a graceful manner
 fun BaseActivity.intentTo(target: Class<out BaseActivity>, finished: Boolean = false) {

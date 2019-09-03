@@ -4,6 +4,7 @@
 
 package io.codelabs.githubrepo.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.databinding.DataBindingUtil
@@ -39,6 +40,8 @@ class MainActivity : BaseActivity() {
                 intentTo(HomeActivity::class.java, true)
             }
         })
+
+        onNewIntent(intent)
     }
 
     fun login(view: View) = setupGitHubAuthFlow()
@@ -76,5 +79,10 @@ class MainActivity : BaseActivity() {
                         // Handle failure
                     }
         }
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        debugger(intent?.data)
     }
 }
