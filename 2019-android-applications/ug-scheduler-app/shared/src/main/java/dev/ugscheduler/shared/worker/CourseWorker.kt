@@ -9,7 +9,7 @@ import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import dev.ugscheduler.shared.data.Course
 import dev.ugscheduler.shared.datasource.local.CourseDao
-import dev.ugscheduler.shared.datasource.local.LocalDataSource
+import dev.ugscheduler.shared.datasource.local.LocalDatabase
 import dev.ugscheduler.shared.util.debugger
 import dev.ugscheduler.shared.util.deserializer.getCourses
 import kotlinx.coroutines.Dispatchers
@@ -19,7 +19,7 @@ import kotlinx.coroutines.withContext
  * Worker for handling [Course] information retrieval from the remote database to the local database
  */
 class CourseWorker(context: Context, params: WorkerParameters) : CoroutineWorker(context, params) {
-    private val dao: CourseDao by lazy { LocalDataSource.get(context).courseDao() }
+    private val dao: CourseDao by lazy { LocalDatabase.get(context).courseDao() }
 
     override suspend fun doWork(): Result {
         debugger("De-serializing and adding courses")

@@ -9,5 +9,4 @@ import dev.ugscheduler.shared.datasource.DataSource
 /**
  * Remote data source
  */
-class RemoteDataSource : DataSource {
-}
+class RemoteDataSource : DataSource

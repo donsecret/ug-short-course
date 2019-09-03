@@ -9,7 +9,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.storage.FirebaseStorage
-import dev.ugscheduler.shared.datasource.local.LocalDataSource
+import dev.ugscheduler.shared.datasource.local.LocalDatabase
 import dev.ugscheduler.shared.util.Constants
 import dev.ugscheduler.shared.util.prefs.UserSharedPreferences
 import org.koin.android.ext.koin.androidContext
@@ -28,8 +28,8 @@ private val firebaseModule = module {
 
 private val appPrefsModule = module {
     single { UserSharedPreferences.getInstance(androidContext()) }
-    single { LocalDataSource.get(androidContext()) }
-    single { get<LocalDataSource>().studentDao() }
-    single { get<LocalDataSource>().courseDao() }
+    single { LocalDatabase.get(androidContext()) }
+    single { get<LocalDatabase>().studentDao() }
+    single { get<LocalDatabase>().courseDao() }
 }
 
