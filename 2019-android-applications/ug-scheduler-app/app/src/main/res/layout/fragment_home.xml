@@ -26,9 +26,8 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        <dev.ugscheduler.shared.widgets.CustomSwipeRefreshLayout
             android:id="@+id/swipe_refresh"
-
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
@@ -43,7 +42,7 @@
                 android:paddingBottom="@dimen/spacing_normal"
                 app:layoutManager="LinearLayoutManager" />
 
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        </dev.ugscheduler.shared.widgets.CustomSwipeRefreshLayout>
 
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -16,13 +16,13 @@ import dev.ugscheduler.shared.data.Course
 import dev.ugscheduler.shared.datasource.local.CourseDao
 import dev.ugscheduler.shared.util.activityViewModelProvider
 import dev.ugscheduler.shared.util.debugger
+import dev.ugscheduler.shared.util.deserializer.getCourses
 import dev.ugscheduler.shared.util.doOnApplyWindowInsets
 import dev.ugscheduler.ui.auth.AuthViewModelFactory
 import dev.ugscheduler.ui.home.recyclerview.CourseAdapter
 import dev.ugscheduler.ui.home.recyclerview.ItemClickListener
 import dev.ugscheduler.util.MainNavigationFragment
 import dev.ugscheduler.util.setupProfileMenuItem
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.get
 
@@ -64,10 +64,18 @@ class HomeFragment : MainNavigationFragment() {
         })
 
         binding.swipeRefresh.setOnRefreshListener {
-            // todo: remove this and replace with actual call to remote data source
-            uiScope.launch {
-                delay(1800)
-                binding.swipeRefresh.isRefreshing = false
+            // todo: Get courses from viewModel not directly from dao
+            ioScope.launch {
+                val courses = getCourses(requireContext())
+                val dao: CourseDao = get()
+                dao.insertAll(courses)
+                uiScope.launch {
+                    dao.getAllCourses().removeObservers(viewLifecycleOwner)
+                    dao.getAllCourses().observe(viewLifecycleOwner, Observer {
+                        adapter.submitList(it)
+                    })
+                    binding.swipeRefresh.isRefreshing = false
+                }
             }
         }
 

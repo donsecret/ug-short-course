@@ -58,6 +58,7 @@ open class MainNavigationFragment : Fragment(), NavigationDestination {
         job.cancel()
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         // If we have a toolbar and we are attached to a proper navigation host, set up the toolbar
         // navigation icon.
@@ -66,5 +67,15 @@ open class MainNavigationFragment : Fragment(), NavigationDestination {
         mainToolbar.apply {
             host.registerToolbarWithNavigation(this)
         }
+
+        /*try {
+            mainToolbar.setupProfileMenuItem(
+                activityViewModelProvider(AuthViewModelFactory()),
+                childFragmentManager, get(),
+                viewLifecycleOwner
+            )
+        } catch (e: Exception) {
+            debugger("Toolbar missing:  ${e.cause}")
+        }*/
     }
 }

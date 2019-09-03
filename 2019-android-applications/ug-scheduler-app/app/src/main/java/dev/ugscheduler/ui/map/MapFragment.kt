@@ -62,14 +62,20 @@ class MapFragment : MainNavigationFragment(), OnMapReadyCallback {
             // Get user's last location asynchronously
             val location =
                 Tasks.await(LocationServices.getFusedLocationProviderClient(requireActivity()).lastLocation)
-            debugger("Current location is: ${location.toLatLng()}")
+            if (location != null) {
+                debugger("Current location is: ${location.toLatLng()}")
 
-            uiScope.launch {
-                // Animate camera target to user's location
-                map.animateCamera(CameraUpdateFactory.newLatLngZoom(location.toLatLng(), 16f), 550, null)
+                uiScope.launch {
+                    // Animate camera target to user's location
+                    map.animateCamera(
+                        CameraUpdateFactory.newLatLngZoom(location.toLatLng(), 16f),
+                        550,
+                        null
+                    )
 
-                // todo: show button to help them navigate to department for lectures
-            }
+                    // todo: show button to help them navigate to department for lectures
+                }
+            } else debugger("Your last location could not be determined")
         }
     }
 
