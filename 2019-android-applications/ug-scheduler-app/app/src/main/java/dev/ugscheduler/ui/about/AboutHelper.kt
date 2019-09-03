@@ -31,9 +31,10 @@ object LibraryDeserializer {
         val gson = GsonBuilder().setPrettyPrinting().create()
         val type = object : TypeToken<List<Library>>() {}.type
         try {
-            gson.fromJson<List<Library>>(
+            val items = gson.fromJson<List<Library>>(
                 InputStreamReader(context.assets.open("libs.json")), type
             )
+            libs.addAll(items)
         } catch (ex: IOException) {
             debugger(ex.localizedMessage)
         }
