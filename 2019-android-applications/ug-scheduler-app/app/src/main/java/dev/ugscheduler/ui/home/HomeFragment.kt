@@ -10,28 +10,25 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.core.view.updatePaddingRelative
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import dev.ugscheduler.R
 import dev.ugscheduler.databinding.FragmentHomeBinding
 import dev.ugscheduler.shared.data.Course
-import dev.ugscheduler.shared.datasource.local.CourseDao
 import dev.ugscheduler.shared.util.activityViewModelProvider
-import dev.ugscheduler.shared.util.deserializer.getCourses
 import dev.ugscheduler.shared.util.doOnApplyWindowInsets
+import dev.ugscheduler.shared.viewmodel.AppViewModel
+import dev.ugscheduler.shared.viewmodel.AppViewModelFactory
 import dev.ugscheduler.ui.auth.AuthViewModelFactory
 import dev.ugscheduler.ui.home.recyclerview.CourseAdapter
 import dev.ugscheduler.ui.home.recyclerview.ItemClickListener
 import dev.ugscheduler.util.MainNavigationFragment
 import dev.ugscheduler.util.setupProfileMenuItem
-import kotlinx.coroutines.launch
 import org.koin.android.ext.android.get
 
 class HomeFragment : MainNavigationFragment() {
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var viewModel: HomeViewModel
+    private lateinit var viewModel: AppViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,7 +44,7 @@ class HomeFragment : MainNavigationFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+        viewModel = activityViewModelProvider(AppViewModelFactory(get()))
 
         binding.toolbar.setupProfileMenuItem(
             activityViewModelProvider(AuthViewModelFactory()),
@@ -67,19 +64,8 @@ class HomeFragment : MainNavigationFragment() {
         })
 
         binding.swipeRefresh.setOnRefreshListener {
-            // todo: Get courses from viewModel not directly from dao
-            ioScope.launch {
-                val courses = getCourses(requireContext())
-                val dao: CourseDao = get()
-                dao.insertAll(courses)
-                uiScope.launch {
-                    dao.getAllCourses().removeObservers(viewLifecycleOwner)
-                    dao.getAllCourses().observe(viewLifecycleOwner, Observer {
-                        adapter.submitList(it)
-                    })
-                    binding.swipeRefresh.isRefreshing = false
-                }
-            }
+            adapter.submitList(viewModel.getAllCourses(requireContext(), true))
+            binding.swipeRefresh.isRefreshing = false
         }
 
         binding.recyclerView.apply {
@@ -87,11 +73,8 @@ class HomeFragment : MainNavigationFragment() {
             this.adapter = adapter
             this.itemAnimator = DefaultItemAnimator()
 
-            // todo: Get courses from viewModel not directly from dao
-            val dao: CourseDao = get()
-            dao.getAllCourses().observe(viewLifecycleOwner, Observer { courses ->
-                adapter.submitList(courses)
-            })
+            // Get courses and add to adapter
+            adapter.submitList(viewModel.getAllCourses(requireContext(), false))
         }
     }
 
