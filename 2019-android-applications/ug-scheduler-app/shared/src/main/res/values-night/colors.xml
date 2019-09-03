@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2019.. Designed & developed by Quabynah Codelabs(c). For the love of Android development.
+  -->
+
 <resources>
     <color name="color_primary">@color/cornflower_blue</color>
     <color name="color_primary_variant">@color/zeber_primary_dark_new</color>

@@ -1,3 +1,7 @@
+<!--
+  ~ Copyright (c) 2019.. Designed & developed by Quabynah Codelabs(c). For the love of Android development.
+  -->
+
 <resources>
     <string name="default_app_name">UGScheduler</string>
     <string name="get_started">Get started</string>
