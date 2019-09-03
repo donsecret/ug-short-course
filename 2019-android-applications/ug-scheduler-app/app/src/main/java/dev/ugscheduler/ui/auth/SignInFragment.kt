@@ -69,7 +69,7 @@ class SignInFragment : DialogFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = activityViewModelProvider(AppViewModelFactory())
+        viewModel = activityViewModelProvider(AppViewModelFactory(get()))
         binding.signIn.setOnClickListener {
             with(googleClient) {
                 startActivityForResult(signInIntent, RC_AUTH)

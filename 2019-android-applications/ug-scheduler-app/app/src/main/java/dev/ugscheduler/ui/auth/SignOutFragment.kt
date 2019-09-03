@@ -33,7 +33,7 @@ class SignOutFragment : DialogFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = activityViewModelProvider(AppViewModelFactory())
+        viewModel = activityViewModelProvider(AppViewModelFactory(get()))
 
         binding.viewModel = viewModel
         val dao: StudentDao = get()
@@ -43,7 +43,7 @@ class SignOutFragment : DialogFragment() {
             binding.apply {
                 this.student = student
                 this.signOut.setOnClickListener {
-                    viewModel.logout()
+                    viewModel?.logout()
                     dismiss()
                 }
             }
