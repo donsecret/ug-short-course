@@ -14,6 +14,9 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import timber.log.Timber
 
+/**
+ * Entry point to the application
+ */
 class GitRepoApp : Application() {
 
     override fun onCreate() {
@@ -25,11 +28,11 @@ class GitRepoApp : Application() {
         }
 
         // Timber
-        if (DEBUG) {
+//        if (DEBUG) {
             Timber.plant(Timber.DebugTree())
-        } else {
-            Timber.plant(AppCustomTree())
-        }
+//        } else {
+//            Timber.plant(AppCustomTree())
+//        }
 
         // Koin DSL for dependency injection
         startKoin {

@@ -4,7 +4,13 @@
 
 package io.codelabs.githubrepo.shared.datasource
 
+import io.codelabs.githubrepo.shared.data.Repo
+
 interface DataSource {
-    fun getAllRepos()
-    fun requestUserIdentity(uid: String)
+    // Required
+    // Returns a list of repositories from GitHub
+    suspend fun getAllRepos(refresh: Boolean): MutableList<Repo>
+
+    // todo: This is an optional call
+    suspend fun requestUserIdentity(uid: String) {}
 }

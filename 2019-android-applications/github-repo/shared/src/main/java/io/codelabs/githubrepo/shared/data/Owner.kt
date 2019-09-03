@@ -10,17 +10,19 @@ import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
+/**
+ * [Repo] owner
+ */
 @Parcelize
-@Entity(tableName = "repos")
-data class Repo(
+@Entity(tableName = "owner")
+data class Owner(
     @PrimaryKey
     val id: Int,
+    @SerializedName("avatar_url")
+    val avatar: String?,
     val url: String,
-    @SerializedName("html_url")
-    val htmlUrl: String,
-//    val owner: String,
-    val name: String,
-    @SerializedName("full_name")
-    val fullName: String,
-    val description: String
-) : Parcelable
+    @SerializedName("repos_url")
+    val reposUrl: String,
+    val type: String
+) : Parcelable {
+}

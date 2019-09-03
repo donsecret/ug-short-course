@@ -7,6 +7,7 @@ package io.codelabs.githubrepo.ui
 import android.os.Bundle
 import android.view.View
 import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.OAuthProvider
@@ -25,10 +26,11 @@ class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView<ActivityMainBinding>(
+        @Suppress("CAST_NEVER_SUCCEEDS")
+        binding = DataBindingUtil.setContentView<ViewDataBinding>(
             this,
             R.layout.activity_main
-        )
+        ) as ActivityMainBinding
 
         // Listen for live events of user login
         prefs.liveLoginStatus.observe(this, Observer { state ->
