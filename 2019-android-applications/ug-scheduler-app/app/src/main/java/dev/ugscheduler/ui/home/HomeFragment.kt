@@ -15,7 +15,6 @@ import dev.ugscheduler.databinding.FragmentHomeBinding
 import dev.ugscheduler.shared.data.Course
 import dev.ugscheduler.shared.datasource.local.CourseDao
 import dev.ugscheduler.shared.util.activityViewModelProvider
-import dev.ugscheduler.shared.util.debugger
 import dev.ugscheduler.shared.util.deserializer.getCourses
 import dev.ugscheduler.shared.util.doOnApplyWindowInsets
 import dev.ugscheduler.ui.auth.AuthViewModelFactory
@@ -87,7 +86,6 @@ class HomeFragment : MainNavigationFragment() {
             // todo: Get courses from viewModel not directly from dao
             val dao: CourseDao = get()
             dao.getAllCourses().observe(viewLifecycleOwner, Observer { courses ->
-                debugger("Showing ${courses.size} courses")
                 adapter.submitList(courses)
             })
         }
