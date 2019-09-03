@@ -49,7 +49,8 @@ class MainActivity : BaseActivity() {
     // Creates the Sign-In flow for GitHub
     private fun setupGitHubAuthFlow() {
         val provider = OAuthProvider.newBuilder("github.com")
-        //provider.addCustomParameter("login", "codelbas.quabynah@gmail.com")
+
+        // Start login with OAuth
         with(auth.pendingAuthResult) {
             // There is a sign-in here
             this?.addOnSuccessListener(this@MainActivity) { task ->
