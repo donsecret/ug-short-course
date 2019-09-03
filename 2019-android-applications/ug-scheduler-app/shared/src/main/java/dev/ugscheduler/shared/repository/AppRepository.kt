@@ -98,5 +98,21 @@ class AppRepository constructor(
         else localDataSource.getStudentById(studentId)
     }
 
+    fun loginStudent(student: Student?) {
+        localDataSource.addStudent(student).apply { remoteDataSource.addStudent(student) }
+        prefs.login(student?.id)
+    }
+
+    fun loginFacilitator(facilitator: Facilitator?) {
+        localDataSource.addFacilitator(facilitator)
+            .apply { remoteDataSource.addFacilitator(facilitator) }
+        prefs.login(facilitator?.id)
+    }
+
+    fun logout() {
+        remoteDataSource.auth.signOut()
+        prefs.logout()
+    }
+
     fun invalidateLocalCaches() = localDataSource.clearDatabase()
 }

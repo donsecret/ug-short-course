@@ -11,7 +11,7 @@
 
         <variable
             name="viewModel"
-            type="dev.ugscheduler.ui.auth.AuthViewModel" />
+            type="dev.ugscheduler.shared.viewmodel.AppViewModel" />
 
         <variable
             name="student"

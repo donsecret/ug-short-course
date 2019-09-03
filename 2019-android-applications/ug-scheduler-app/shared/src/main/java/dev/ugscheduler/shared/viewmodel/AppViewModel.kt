@@ -51,5 +51,11 @@ open class AppViewModel(private val repository: AppRepository) : ViewModel() {
     fun getStudentById(studentId: String, refresh: Boolean): LiveData<Student> =
         repository.getStudentById(studentId, refresh)
 
+    fun addStudent(student: Student?) = repository.loginStudent(student)
+
+    fun addFacilitator(facilitator: Facilitator?) = repository.loginFacilitator(facilitator)
+
+    fun logout() = repository.logout()
+
     fun resetLocalCache() = repository.invalidateLocalCaches()
 }

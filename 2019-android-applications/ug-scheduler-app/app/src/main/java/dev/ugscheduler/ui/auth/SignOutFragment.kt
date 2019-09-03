@@ -15,11 +15,13 @@ import dev.ugscheduler.databinding.SignOutFragmentBinding
 import dev.ugscheduler.shared.datasource.local.StudentDao
 import dev.ugscheduler.shared.util.activityViewModelProvider
 import dev.ugscheduler.shared.util.prefs.UserSharedPreferences
+import dev.ugscheduler.shared.viewmodel.AppViewModel
+import dev.ugscheduler.shared.viewmodel.AppViewModelFactory
 import org.koin.android.ext.android.get
 
 class SignOutFragment : DialogFragment() {
     private lateinit var binding: SignOutFragmentBinding
-    private lateinit var viewModel: AuthViewModel
+    private lateinit var viewModel: AppViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,7 +33,7 @@ class SignOutFragment : DialogFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = activityViewModelProvider(AuthViewModelFactory())
+        viewModel = activityViewModelProvider(AppViewModelFactory())
 
         binding.viewModel = viewModel
         val dao: StudentDao = get()
@@ -41,8 +43,7 @@ class SignOutFragment : DialogFragment() {
             binding.apply {
                 this.student = student
                 this.signOut.setOnClickListener {
-                    auth.signOut()
-                    prefs.logout()
+                    viewModel.logout()
                     dismiss()
                 }
             }

@@ -14,26 +14,22 @@ import androidx.fragment.app.DialogFragment
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.tasks.Tasks
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.SetOptions
 import dev.ugscheduler.R
 import dev.ugscheduler.databinding.SignInFragmentBinding
+import dev.ugscheduler.shared.data.Facilitator
 import dev.ugscheduler.shared.data.Student
-import dev.ugscheduler.shared.datasource.local.StudentDao
-import dev.ugscheduler.shared.datasource.remote.studentDocument
 import dev.ugscheduler.shared.util.activityViewModelProvider
 import dev.ugscheduler.shared.util.debugger
-import dev.ugscheduler.shared.util.prefs.UserSharedPreferences
+import dev.ugscheduler.shared.viewmodel.AppViewModel
+import dev.ugscheduler.shared.viewmodel.AppViewModelFactory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
 import org.koin.android.ext.android.get
 
 class SignInFragment : DialogFragment() {
@@ -50,7 +46,7 @@ class SignInFragment : DialogFragment() {
         )
     }
 
-    private lateinit var viewModel: AuthViewModel
+    private lateinit var viewModel: AppViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -73,7 +69,7 @@ class SignInFragment : DialogFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = activityViewModelProvider(AuthViewModelFactory())
+        viewModel = activityViewModelProvider(AppViewModelFactory())
         binding.signIn.setOnClickListener {
             with(googleClient) {
                 startActivityForResult(signInIntent, RC_AUTH)
@@ -128,26 +124,9 @@ class SignInFragment : DialogFragment() {
                             .addOnCompleteListener(requireActivity()) { task ->
                                 if (task.isSuccessful) {
                                     val firebaseUser = task.result?.user
-                                    val student = firebaseUser?.toUser()
-                                    val prefs: UserSharedPreferences = get()
-                                    val db: FirebaseFirestore = get()
-                                    prefs.login(student?.id)
-                                    debugger(student)
-                                    ioScope.launch {
-                                        val dao: StudentDao = get()
-                                        if (student != null) {
-                                            dao.insert(student)
-                                            Tasks.await(
-                                                db.studentDocument(student.id).set(
-                                                    student,
-                                                    SetOptions.merge()
-                                                )
-                                            )
-                                        }
-                                        uiScope.launch {
-                                            dismiss()
-                                        }
-                                    }
+                                    val student = firebaseUser?.toStudent()
+                                    viewModel.addStudent(student)
+                                    dismiss()
                                 } else {
                                     snackbar.setText("Login failed. ${task.exception?.localizedMessage}")
                                         .addCallback(object :
@@ -179,7 +158,7 @@ class SignInFragment : DialogFragment() {
 
 }
 
-fun FirebaseUser.toUser() = Student(
+fun FirebaseUser.toStudent() = Student(
     uid,
     System.currentTimeMillis(),
     email!!,
@@ -192,4 +171,14 @@ fun FirebaseUser.toUser() = Student(
     null,
     null,
     null
+)
+
+fun FirebaseUser.toFacilitator() = Facilitator(
+    uid,
+    System.currentTimeMillis(),
+    photoUrl.toString(),
+    email!!,
+    displayName,
+    2.50,
+    phoneNumber
 )

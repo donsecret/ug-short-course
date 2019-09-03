@@ -22,7 +22,7 @@ import kotlinx.coroutines.launch
  */
 class RemoteDataSource constructor(
     private val firestore: FirebaseFirestore,
-    private val auth: FirebaseAuth  // Will be used in future updates
+    val auth: FirebaseAuth
 ) : DataSource {
     private val ioScope = CoroutineScope(Dispatchers.IO)
 
@@ -123,6 +123,25 @@ class RemoteDataSource constructor(
             courses.addAll(results)
         }
         return courses
+    }
+
+    fun addStudent(student: Student?) {
+        if (student == null) return
+        ioScope.launch {
+            Tasks.await(firestore.studentDocument(student.id).set(student, SetOptions.merge()))
+        }
+    }
+
+    fun addFacilitator(facilitator: Facilitator?) {
+        if (facilitator == null) return
+        ioScope.launch {
+            Tasks.await(
+                firestore.facilitatorDocument(facilitator.id).set(
+                    facilitator,
+                    SetOptions.merge()
+                )
+            )
+        }
     }
 
 }
