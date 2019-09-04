@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.core.view.updatePaddingRelative
 import androidx.lifecycle.ViewModelProvider
@@ -41,7 +42,8 @@ class MapFragment : MainNavigationFragment(), OnMapReadyCallback {
                 setMapStyle(
                     MapStyleOptions.loadRawResourceStyle(
                         requireContext(),
-                        R.raw.map_style_day
+                        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES)
+                            R.raw.map_style_night else R.raw.map_style_day
                     )
                 )
             }
