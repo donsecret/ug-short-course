@@ -7,23 +7,28 @@ package io.codelabs.githubrepo.ui
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.core.net.toUri
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.OAuthProvider
 import io.codelabs.githubrepo.R
 import io.codelabs.githubrepo.databinding.ActivityMainBinding
+import io.codelabs.githubrepo.shared.BuildConfig
 import io.codelabs.githubrepo.shared.core.base.BaseActivity
 import io.codelabs.githubrepo.shared.core.prefs.AppSharedPreferences
+import io.codelabs.githubrepo.shared.repository.AuthRepository
 import io.codelabs.githubrepo.shared.util.debugger
 import io.codelabs.githubrepo.shared.util.intentTo
+import io.codelabs.githubrepo.shared.util.toast
+import kotlinx.coroutines.launch
+import org.koin.android.ext.android.get
 import org.koin.android.ext.android.inject
+import java.util.*
 
 class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
     private val prefs by inject<AppSharedPreferences>()
-    private val auth by inject<FirebaseAuth>()
+    private val redirectUrl = "gitrepo://callback"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,46 +49,30 @@ class MainActivity : BaseActivity() {
         onNewIntent(intent)
     }
 
-    fun login(view: View) = setupGitHubAuthFlow()
-
-    // Creates the Sign-In flow for GitHub
-    private fun setupGitHubAuthFlow() {
-        val provider = OAuthProvider.newBuilder("github.com")
-
-        // Start login with OAuth
-        with(auth.pendingAuthResult) {
-            // There is a sign-in here
-            this?.addOnSuccessListener(this@MainActivity) { task ->
-                // User is signed in.
-                // IdP data available in
-                // authResult.getAdditionalUserInfo().getProfile().
-                // The OAuth access token can also be retrieved:
-                // authResult.getCredential().getAccessToken().
-                val profile = task?.additionalUserInfo?.profile
-                debugger("Profile after login: $profile")
-            }?.addOnFailureListener(this@MainActivity) { exception ->
-                debugger(exception.localizedMessage)
-                // Handle failure
-            }
-                ?: // Start sign-in flow
-                auth.startActivityForSignInWithProvider(this@MainActivity, provider.build())
-                    .addOnSuccessListener(this@MainActivity) { task ->
-                        // User is signed in.
-                        // IdP data available in
-                        // authResult.getAdditionalUserInfo().getProfile().
-                        // The OAuth access token can also be retrieved:
-                        // authResult.getCredential().getAccessToken().
-                        val profile = task?.additionalUserInfo?.profile
-                        debugger("Profile after login: $profile")
-                    }.addOnFailureListener(this@MainActivity) { exception ->
-                        debugger(exception.localizedMessage)
-                        // Handle failure
-                    }
-        }
+    fun login(view: View) {
+        val authUrl =
+            "https://github.com/login/oauth/authorize?client_id=${BuildConfig.API_KEY}&scope=repo,user&redirect_uri=$redirectUrl&allow_signup=true"
+        startActivity(Intent(Intent.ACTION_VIEW, authUrl.toUri()))
     }
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
-        debugger(intent?.data)
+        if (intent != null && intent.data != null && intent.data.toString().startsWith(redirectUrl)) {
+            val code = intent.data?.getQueryParameter("code")
+            debugger(code)
+            val authRepo: AuthRepository = get()
+            ioScope.launch {
+                val accessToken = authRepo.getAccessTokenAsync(code.toString()).await()
+
+                // Get access token
+                debugger(accessToken)
+
+                uiScope.launch {
+                    // Sign in user
+                    prefs.login(UUID.randomUUID().toString(), accessToken.token)
+                    toast("Logged in successfully")
+                }
+            }
+        } else debugger("No intent data received")
     }
 }

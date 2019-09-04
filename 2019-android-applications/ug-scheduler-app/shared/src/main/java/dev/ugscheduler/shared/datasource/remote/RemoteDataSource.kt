@@ -42,7 +42,7 @@ class RemoteDataSource constructor(
         ioScope.launch {
             val student = Tasks.await(firestore.studentDocument(studentId).get())
                 .toObject(Student::class.java)
-            if (student != null) liveData.value = student
+            if (student != null) liveData.postValue(student)
         }
         return liveData
     }
@@ -62,7 +62,7 @@ class RemoteDataSource constructor(
         ioScope.launch {
             val facilitator = Tasks.await(firestore.facilitatorDocument(id).get())
                 .toObject(Facilitator::class.java)
-            if (facilitator != null) liveData.value = facilitator
+            if (facilitator != null) liveData.postValue(facilitator)
         }
         return liveData
     }
@@ -83,7 +83,7 @@ class RemoteDataSource constructor(
         ioScope.launch {
             val student =
                 Tasks.await(firestore.studentDocument(id).get()).toObject(Student::class.java)
-            if (student != null) liveData.value = student
+            if (student != null) liveData.postValue(student)
         }
         return liveData
     }
@@ -94,7 +94,7 @@ class RemoteDataSource constructor(
             val fac =
                 Tasks.await(firestore.facilitatorDocument(id).get())
                     .toObject(Facilitator::class.java)
-            if (fac != null) liveData.value = fac
+            if (fac != null) liveData.postValue(fac)
         }
         return liveData
     }

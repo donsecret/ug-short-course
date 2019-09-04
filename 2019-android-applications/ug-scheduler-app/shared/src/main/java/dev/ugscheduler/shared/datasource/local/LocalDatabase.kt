@@ -18,6 +18,7 @@ import dev.ugscheduler.shared.data.Facilitator
 import dev.ugscheduler.shared.data.Feedback
 import dev.ugscheduler.shared.data.Student
 import dev.ugscheduler.shared.util.Constants
+import dev.ugscheduler.shared.util.debugger
 import dev.ugscheduler.shared.worker.CourseWorker
 
 
@@ -47,6 +48,7 @@ abstract class LocalDatabase : RoomDatabase() {
                 .addCallback(object : Callback() {
                     override fun onCreate(db: SupportSQLiteDatabase) {
                         super.onCreate(db)
+                        debugger("Creating new database")
 
                         // Set constraints to start job only when there is internet connection
                         val constraints = Constraints.Builder()

@@ -33,14 +33,16 @@ class LocalDataSource constructor(
     override fun getFacilitatorById(id: String): LiveData<Facilitator> =
         facilitatorDao.getFacilitatorById(id)
 
-    override fun enrolStudent(enrolment: Enrolment) = TODO("Not supported yet")
+    // todo: enable offline enrolment
+    override fun enrolStudent(enrolment: Enrolment) {}
 
     override fun getCurrentStudent(id: String): LiveData<Student> = studentDao.getStudent(id)
 
     override fun getCurrentFacilitator(id: String): LiveData<Facilitator> =
         facilitatorDao.getFacilitatorById(id)
 
-    override fun getMyCourses(studentId: String): MutableList<Course> = TODO("not supported yet")
+    // todo: get my courses
+    override fun getMyCourses(studentId: String): MutableList<Course> = mutableListOf()
 
     override fun getCoursesForFacilitator(facilitatorId: String): MutableList<Course> =
         courseDao.getCoursesForFacilitator(facilitatorId)
@@ -70,7 +72,7 @@ class LocalDataSource constructor(
     }
 
     fun addMyCourses(courses: MutableList<Course>) {
-        TODO("Add my courses")
+        // todo: Add my courses
     }
 
     // Clear local database

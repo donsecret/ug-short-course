@@ -26,5 +26,5 @@ class GitHubRepository(private val gitHubService: GitHubService, private val dao
             } else dao.getAllRepos()
         }
 
-    override suspend fun requestUserIdentity(uid: String) = TODO("Create user identity datasource")
+    override suspend fun requestUserIdentity() = gitHubService.getUserAsync().await()
 }

@@ -8,7 +8,10 @@ import android.content.Context
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import io.codelabs.githubrepo.shared.BuildConfig
 import io.codelabs.githubrepo.shared.BuildConfig.DEBUG
+import io.codelabs.githubrepo.shared.core.prefs.AppSharedPreferences
+import io.codelabs.githubrepo.shared.data.Owner
 import io.codelabs.githubrepo.shared.data.Repo
+import io.codelabs.githubrepo.shared.repository.AuthRepository
 import io.codelabs.githubrepo.shared.util.Constants
 import io.codelabs.githubrepo.shared.util.debugger
 import kotlinx.coroutines.Deferred
@@ -26,6 +29,9 @@ interface GitHubService {
     companion object {
         const val BASE_URL = BuildConfig.API_BASE_URL
     }
+
+    @GET("/user")
+    fun getUserAsync(): Deferred<Owner>
 
     // Get all repositories
     @GET("/repositories")
@@ -74,11 +80,35 @@ object RepoAPI {
             }
 
         // Create client
-        return OkHttpClient.Builder().addInterceptor(interceptor)
+        return OkHttpClient.Builder()
+            .addInterceptor { chain ->
+                val original = chain.request()
+                val request = original.newBuilder()
+                    .header("Authorization", "Bearer ${AppSharedPreferences.get(context).token!!}")
+                    .method(original.method, original.body)
+                    .build()
+                chain.proceed(request)
+            }
+            .addInterceptor(interceptor)
             .connectTimeout(120L, TimeUnit.SECONDS)
             .callTimeout(30L, TimeUnit.SECONDS)
             .cache(cache).build()
     }
 
+    fun createAuthService(context: Context): AuthRepository {
+        // Get client
+        val client: OkHttpClient = createClient(context)
+
+        // Create retrofit
+        val retrofit = Retrofit.Builder()
+            .baseUrl(AuthRepository.AUTH_URL)
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(CoroutineCallAdapterFactory())
+            .build()
+
+        /// Create service with params above
+        return retrofit.create(AuthRepository::class.java)
+    }
 
 }

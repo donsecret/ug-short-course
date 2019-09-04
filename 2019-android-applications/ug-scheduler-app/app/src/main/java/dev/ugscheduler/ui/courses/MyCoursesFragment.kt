@@ -10,11 +10,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import dev.ugscheduler.databinding.FragmentMyCoursesBinding
+import dev.ugscheduler.shared.util.activityViewModelProvider
+import dev.ugscheduler.shared.util.debugger
+import dev.ugscheduler.shared.viewmodel.AppViewModel
+import dev.ugscheduler.shared.viewmodel.AppViewModelFactory
 import dev.ugscheduler.util.MainNavigationFragment
+import org.koin.android.ext.android.get
 
 
 class MyCoursesFragment : MainNavigationFragment() {
     private lateinit var binding: FragmentMyCoursesBinding
+    private val viewModel: AppViewModel by lazy {
+        activityViewModelProvider<AppViewModel>(
+            AppViewModelFactory(get())
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,5 +35,11 @@ class MyCoursesFragment : MainNavigationFragment() {
         return binding.root
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        val myCourses = viewModel.getMyCourses(false)
+        debugger("My courses: $myCourses")
+        // todo: add to recyclerview
 
+    }
 }

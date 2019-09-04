@@ -17,8 +17,10 @@ import dev.ugscheduler.databinding.FragmentHomeBinding
 import dev.ugscheduler.shared.data.Course
 import dev.ugscheduler.shared.util.activityViewModelProvider
 import dev.ugscheduler.shared.util.doOnApplyWindowInsets
+import dev.ugscheduler.shared.util.prefs.UserSharedPreferences
 import dev.ugscheduler.shared.viewmodel.AppViewModel
 import dev.ugscheduler.shared.viewmodel.AppViewModelFactory
+import dev.ugscheduler.ui.auth.AuthViewModel
 import dev.ugscheduler.ui.auth.AuthViewModelFactory
 import dev.ugscheduler.ui.home.recyclerview.CourseAdapter
 import dev.ugscheduler.ui.home.recyclerview.ItemClickListener
@@ -28,7 +30,11 @@ import org.koin.android.ext.android.get
 
 class HomeFragment : MainNavigationFragment() {
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var viewModel: AppViewModel
+    private val viewModel: AppViewModel by lazy {
+        activityViewModelProvider<AppViewModel>(
+            AppViewModelFactory(get())
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,11 +50,10 @@ class HomeFragment : MainNavigationFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = activityViewModelProvider(AppViewModelFactory(get()))
 
         binding.toolbar.setupProfileMenuItem(
-            activityViewModelProvider(AuthViewModelFactory()),
-            childFragmentManager, get(),
+            activityViewModelProvider<AuthViewModel>(AuthViewModelFactory()),
+            childFragmentManager, get<UserSharedPreferences>(),
             viewLifecycleOwner
         )
 

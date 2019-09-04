@@ -26,29 +26,29 @@ class AppSharedPreferences private constructor(context: Context) {
     // Live state listener
     private val _liveLoginStatus = MutableLiveData<Boolean>()
     val liveLoginStatus: LiveData<Boolean> = _liveLoginStatus
-    val isLoggedIn: Boolean = _liveLoginStatus.value ?: false
+    val isLoggedIn: Boolean get() = _liveLoginStatus.value ?: false
 
     // Variable to store user id
     private var uid: String? = null
         get() = prefs.getString("key_uid", null)
         set(value) {
+            field = value
             prefs.edit {
                 putString("key_uid", value)
                 apply()
             }
-            field = value
             _liveLoginStatus.value = !value.isNullOrEmpty()
         }
 
     // variable for user's login token
-    private var token: String? = null
+    var token: String? = null
         get() = prefs.getString("key_token", null)
         set(value) {
+            field = value
             prefs.edit {
                 putString("key_token", value)
                 apply()
             }
-            field = value
         }
 
     init {

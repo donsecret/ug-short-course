@@ -13,6 +13,8 @@ import dev.ugscheduler.databinding.SettingsFragmentBinding
 import dev.ugscheduler.shared.datasource.local.StudentDao
 import dev.ugscheduler.shared.util.activityViewModelProvider
 import dev.ugscheduler.shared.util.prefs.UserSharedPreferences
+import dev.ugscheduler.shared.viewmodel.AppViewModel
+import dev.ugscheduler.shared.viewmodel.AppViewModelFactory
 import dev.ugscheduler.util.MainNavigationFragment
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -33,19 +35,20 @@ class SettingsFragment : MainNavigationFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = activityViewModelProvider(SettingsViewModelFactory())
+        val appVM: AppViewModel = activityViewModelProvider(AppViewModelFactory(get()))
 
         binding.swipeRefresh.setOnRefreshListener {
-            // todo: remove this simulated loading action
-            uiScope.launch {
-                delay(3000)
+            val currentStudent = appVM.getCurrentStudent(true)
+            currentStudent.removeObservers(viewLifecycleOwner)
+            currentStudent.observe(viewLifecycleOwner, Observer { student ->
+                binding.student = student
+                binding.viewModel = viewModel
                 binding.swipeRefresh.isRefreshing = false
-            }
+            })
         }
 
         // Get current user's information
-        val dao: StudentDao = get()
-        val prefs: UserSharedPreferences = get()
-        dao.getStudent(prefs.uid).observe(viewLifecycleOwner, Observer { student ->
+        appVM.getCurrentStudent(false).observe(viewLifecycleOwner, Observer { student ->
             binding.student = student
             binding.viewModel = viewModel
         })

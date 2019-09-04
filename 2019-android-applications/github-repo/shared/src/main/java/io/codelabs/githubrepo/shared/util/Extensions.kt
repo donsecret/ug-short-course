@@ -4,9 +4,10 @@
 
 package io.codelabs.githubrepo.shared.util
 
+import android.content.Context
 import android.content.Intent
+import android.widget.Toast
 import io.codelabs.githubrepo.shared.core.base.BaseActivity
-import timber.log.Timber
 
 // For debugging
 fun Any.debugger(msg: Any?) =
@@ -18,3 +19,5 @@ fun BaseActivity.intentTo(target: Class<out BaseActivity>, finished: Boolean = f
     startActivity(Intent(this, target))
     if (finished) finishAfterTransition()
 }
+
+fun Context.toast(msg: Any?) = Toast.makeText(this, msg.toString(), Toast.LENGTH_LONG).show()

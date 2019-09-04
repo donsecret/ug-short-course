@@ -23,14 +23,23 @@ import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.tasks.Tasks
 import dev.ugscheduler.R
 import dev.ugscheduler.databinding.MapFragmentBinding
+import dev.ugscheduler.shared.util.activityViewModelProvider
 import dev.ugscheduler.shared.util.debugger
 import dev.ugscheduler.shared.util.doOnApplyWindowInsets
 import dev.ugscheduler.shared.util.toLatLng
+import dev.ugscheduler.shared.viewmodel.AppViewModel
+import dev.ugscheduler.shared.viewmodel.AppViewModelFactory
 import dev.ugscheduler.util.MainNavigationFragment
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.get
 
 class MapFragment : MainNavigationFragment(), OnMapReadyCallback {
     private lateinit var map: GoogleMap
+    private val viewModel: AppViewModel by lazy {
+        activityViewModelProvider<AppViewModel>(
+            AppViewModelFactory(get())
+        )
+    }
 
     override fun onMapReady(googleMap: GoogleMap?) {
         if (googleMap != null) {
@@ -65,7 +74,6 @@ class MapFragment : MainNavigationFragment(), OnMapReadyCallback {
     }
 
     private fun updateUserLocationWithData() {
-        debugger("Updating user's current location information")
         ioScope.launch {
             // Get user's last location asynchronously
             val location =
@@ -88,7 +96,7 @@ class MapFragment : MainNavigationFragment(), OnMapReadyCallback {
     }
 
     private lateinit var binding: MapFragmentBinding
-    private lateinit var viewModel: MapViewModel
+    private lateinit var mapViewModel: MapViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -100,7 +108,7 @@ class MapFragment : MainNavigationFragment(), OnMapReadyCallback {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MapViewModel::class.java)
+        mapViewModel = activityViewModelProvider(ViewModelProvider.NewInstanceFactory())
 
         val mapFragment =
             childFragmentManager.findFragmentById(R.id.google_map) as? SupportMapFragment

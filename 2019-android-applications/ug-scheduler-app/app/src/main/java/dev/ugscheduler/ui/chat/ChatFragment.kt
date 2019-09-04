@@ -18,6 +18,7 @@ class ChatFragment : MainNavigationFragment() {
 
     private lateinit var viewModel: ChatViewModel
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

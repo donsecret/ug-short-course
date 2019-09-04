@@ -4,6 +4,7 @@
 
 package io.codelabs.githubrepo.shared.datasource
 
+import io.codelabs.githubrepo.shared.data.Owner
 import io.codelabs.githubrepo.shared.data.Repo
 
 interface DataSource {
@@ -12,5 +13,5 @@ interface DataSource {
     suspend fun getAllRepos(refresh: Boolean): MutableList<Repo>
 
     // todo: This is an optional call
-    suspend fun requestUserIdentity(uid: String) {}
+    suspend fun requestUserIdentity(): Owner
 }
