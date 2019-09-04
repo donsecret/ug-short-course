@@ -15,6 +15,7 @@ import androidx.core.view.MenuItemCompat
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
@@ -33,6 +34,11 @@ fun Toolbar.setupProfileMenuItem(
     lifecycleOwner: LifecycleOwner
 ) {
     inflateMenu(R.menu.profile)
+    val searchItem = menu.findItem(R.id.navigation_search) ?: return
+    searchItem.setOnMenuItemClickListener {
+        findNavController().navigate(R.id.navigation_search)
+        true
+    }
     val profileItem = menu.findItem(R.id.action_profile) ?: return
     profileItem.setOnMenuItemClickListener {
         viewModel.onProfileClicked(fm, prefs.isLoggedIn)
