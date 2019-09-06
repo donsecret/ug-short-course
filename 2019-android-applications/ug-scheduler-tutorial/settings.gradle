@@ -1,2 +1,2 @@
-include ':app'
+include ':student', ':facilitator', ':shared'
 rootProject.name='CS Short Course'

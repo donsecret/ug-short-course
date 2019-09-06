@@ -1,4 +1,4 @@
-package dev.csshortcourse
+package dev.csshortcourse.facilitator
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
