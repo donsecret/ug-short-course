@@ -1,17 +1,28 @@
 package dev.csshortcourse.student
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
+import dev.csshortcourse.shared.BaseActivity
+import dev.csshortcourse.shared.currentContext
 import dev.csshortcourse.shared.debugger
+import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        debugger(currentContext)
 
-        debugger("Hello world")
-        debugger("Anything")
-        debugger(null)
+        skip_button.setOnClickListener {
+            // Create intent
+            val intent = Intent(this@MainActivity, HomeActivity::class.java)
+
+            // Start activity using intent
+            startActivity(intent)
+
+            // Finish this activity
+            finish()
+        }
     }
 }
