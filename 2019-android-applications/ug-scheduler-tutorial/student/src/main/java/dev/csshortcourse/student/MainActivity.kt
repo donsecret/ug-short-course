@@ -14,6 +14,7 @@ class MainActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
         debugger(currentContext)
 
+        // Add click action for the skip button
         skip_button.setOnClickListener {
             // Create intent
             val intent = Intent(this@MainActivity, HomeActivity::class.java)
