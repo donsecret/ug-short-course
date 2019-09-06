@@ -42,11 +42,7 @@ class CourseWorker(context: Context, params: WorkerParameters) : CoroutineWorker
                 Tasks.await(
                     firestore.collection(Constants.COURSES).document(course.id).set(
                         course,
-                        SetOptions.mergeFields(
-                            mutableListOf(
-                                "id", "name", "icon"
-                            )
-                        )
+                        SetOptions.merge()
                     )
                 )
             }
