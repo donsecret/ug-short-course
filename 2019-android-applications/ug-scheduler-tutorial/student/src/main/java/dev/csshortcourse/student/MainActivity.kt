@@ -12,6 +12,8 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        //
         debugger(currentContext)
 
         // Add click action for the skip button

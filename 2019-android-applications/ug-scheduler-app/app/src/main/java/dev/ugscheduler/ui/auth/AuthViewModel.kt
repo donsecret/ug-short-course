@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import dev.ugscheduler.shared.data.Student
 import dev.ugscheduler.shared.util.debugger
 
-class AuthViewModelFactory() : ViewModelProvider.NewInstanceFactory() {
+class AuthViewModelFactory : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {

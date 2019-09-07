@@ -40,7 +40,7 @@ class AboutFragment : MainNavigationFragment() {
         with(binding.libsList) {
             this.adapter = adapter
             this.setHasFixedSize(false)
-            this.itemAnimator = DefaultItemAnimator() as RecyclerView.ItemAnimator?
+            this.itemAnimator = DefaultItemAnimator()
         }
 
         // Padding at the bottom of the list

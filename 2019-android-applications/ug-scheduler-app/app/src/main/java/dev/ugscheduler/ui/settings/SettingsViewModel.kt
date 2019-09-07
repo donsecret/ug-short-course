@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
 // todo: setup repositories
-class SettingsViewModelFactory(/*private val localRepository: LocalRepository, private val remoteRepository: RemoteRepository*/) :
+class SettingsViewModelFactory :
     ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
@@ -17,9 +17,5 @@ class SettingsViewModelFactory(/*private val localRepository: LocalRepository, p
     }
 }
 
-class SettingsViewModel(/*private val localRepository: LocalRepository, private val remoteRepository: RemoteRepository*/) :
-    ViewModel() {
-
-
-
-}
+class SettingsViewModel :
+    ViewModel()

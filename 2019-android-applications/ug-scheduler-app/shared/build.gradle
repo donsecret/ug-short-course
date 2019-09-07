@@ -29,6 +29,7 @@ android {
             }
         }
 
+        buildConfigField("com.google.android.gms.maps.model.LatLng", "DEPARTMENT_LOCATION", "new com.google.android.gms.maps.model.LatLng(${department_location})")
 //        resValue "string", "google_maps_key", "\"${google_maps_key}\""
     }
 

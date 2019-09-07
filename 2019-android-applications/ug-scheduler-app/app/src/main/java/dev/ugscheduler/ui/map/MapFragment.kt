@@ -10,27 +10,30 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresPermission
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
-import androidx.core.view.updatePaddingRelative
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.tasks.Tasks
+import com.google.maps.android.PolyUtil
 import dev.ugscheduler.R
 import dev.ugscheduler.databinding.MapFragmentBinding
+import dev.ugscheduler.shared.BuildConfig
 import dev.ugscheduler.shared.util.activityViewModelProvider
 import dev.ugscheduler.shared.util.debugger
-import dev.ugscheduler.shared.util.doOnApplyWindowInsets
 import dev.ugscheduler.shared.util.toLatLng
 import dev.ugscheduler.shared.viewmodel.AppViewModel
 import dev.ugscheduler.shared.viewmodel.AppViewModelFactory
 import dev.ugscheduler.util.MainNavigationFragment
 import kotlinx.coroutines.launch
+import dev.ugscheduler.shared.util.*
+import androidx.core.view.*
+import com.google.android.gms.maps.model.*
 import org.koin.android.ext.android.get
 
 class MapFragment : MainNavigationFragment(), OnMapReadyCallback {
@@ -73,6 +76,8 @@ class MapFragment : MainNavigationFragment(), OnMapReadyCallback {
         }
     }
 
+    // Requires permission to functions properly
+    @RequiresPermission(Manifest.permission.ACCESS_FINE_LOCATION)
     private fun updateUserLocationWithData() {
         ioScope.launch {
             // Get user's last location asynchronously
@@ -84,11 +89,24 @@ class MapFragment : MainNavigationFragment(), OnMapReadyCallback {
                 uiScope.launch {
                     // Animate camera target to user's location
                     map.animateCamera(
-                        CameraUpdateFactory.newLatLngZoom(location.toLatLng(), 16f),
+                        CameraUpdateFactory.newLatLngZoom(location.toLatLng(), 13f),
                         550,
                         null
                     )
 
+                    // Add additional props to Google Map
+                    with(map) {
+                        // todo: update department's location
+                        val department = BuildConfig.DEPARTMENT_LOCATION
+                        isMyLocationEnabled = true
+
+                        // Encode path to the department from user's location
+                        val encodedPath = PolyUtil.encode(mutableListOf(location.toLatLng(), department))
+                        addPolyline(PolylineOptions()
+                            .addAll(PolyUtil.decode(encodedPath))
+                            .startCap(ButtCap())
+                            .endCap(RoundCap()))
+                    }
                     // todo: show button to help them navigate to department for lectures
                 }
             } else debugger("Your last location could not be determined")

@@ -87,6 +87,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/google_sans_medium"
                     android:gravity="center"
+                    android:visibility="gone"
                     android:padding="@dimen/margin_normal"
                     android:text="This application would not have been possible without these libraries" />
 
@@ -96,6 +97,7 @@
                     android:layout_height="match_parent"
                     app:layoutManager="LinearLayoutManager"
                     tools:itemCount="3"
+                    android:visibility="gone"
                     tools:listitem="@layout/item_lib" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
