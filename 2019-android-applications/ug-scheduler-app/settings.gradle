@@ -4,3 +4,4 @@
 
 include ':app', ':shared', ':date-formatter'
 rootProject.name='UGScheduler'
+include ':facilitator'

@@ -22,12 +22,12 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {
-        applicationId "dev.ugscheduler"
+        applicationId "dev.ugscheduler.facilitator"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode gitVersion.version
         versionName gitVersionName
-        archivesBaseName = "ug-scheduler"
+        archivesBaseName = "ug-scheduler-facilitator"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         resConfigs "en"
         ndk {
@@ -90,23 +90,12 @@ android {
     productFlavors {
         beta {
             dimension = 'prod'
-            applicationId = 'dev.ugscheduler'
+            applicationId = 'dev.ugscheduler.facilitator'
             versionCode = gitVersion.version
-            versionName = gitVersionName
+            versionName  = gitVersionName
             targetSdkVersion 29
             minSdkVersion 21
             proguardFiles 'proguard-rules.pro'
-        }
-        alpha {
-            dimension = 'prod'
-            applicationId = 'dev.ugscheduler'
-            applicationIdSuffix = '.alpha'
-            versionCode = gitVersion.version
-            versionName = gitVersionName
-            targetSdkVersion 29
-            minSdkVersion 21
-            proguardFiles 'proguard-rules.pro'
-            manifestPlaceholders = [:]
         }
     }
 }
