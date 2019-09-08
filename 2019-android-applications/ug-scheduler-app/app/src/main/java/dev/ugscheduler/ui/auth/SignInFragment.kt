@@ -14,6 +14,7 @@ import androidx.fragment.app.DialogFragment
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.Tasks
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
@@ -27,9 +28,7 @@ import dev.ugscheduler.shared.util.activityViewModelProvider
 import dev.ugscheduler.shared.util.debugger
 import dev.ugscheduler.shared.viewmodel.AppViewModel
 import dev.ugscheduler.shared.viewmodel.AppViewModelFactory
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
+import kotlinx.coroutines.*
 import org.koin.android.ext.android.get
 
 class SignInFragment : DialogFragment() {
@@ -147,7 +146,33 @@ class SignInFragment : DialogFragment() {
 
                 else -> {
                     debugger("Login was cancelled")
+                    performTestLogin()
                 }
+            }
+        }
+    }
+
+    private fun performTestLogin() {
+        val auth: FirebaseAuth = get()
+        ioScope.launch {
+            try {
+                val student = Tasks.await(auth.signInAnonymously()).user?.toStudent()
+                debugger("Logged in as: $student")
+
+                uiScope.launch {
+                    if (student != null) {
+                        viewModel.addStudent(student)
+                        dismiss()
+                    } else {
+                        debugger("Student is not logged in")
+                        snackbar.setText("Login failed")
+                        delay(1850)
+                        dismiss()
+                    }
+                }
+            } catch (e: Exception) {
+                debugger(e.localizedMessage)
+                dismiss()
             }
         }
     }
