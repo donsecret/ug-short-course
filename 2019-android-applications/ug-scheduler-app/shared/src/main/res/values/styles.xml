@@ -36,6 +36,11 @@
         <item name="fontFamily">@font/google_sans</item>
     </style>
 
+    <style name="TextAppearance.IOSched.Body1" parent="@style/TextAppearance.MaterialComponents.Body1">
+        <item name="android:fontFamily">@font/google_sans</item>
+        <item name="fontFamily">@font/google_sans</item>
+    </style>
+
     <!-- For smaller titles, e.g. Schedule day decorations -->
     <style name="TextAppearance.IOSched.H2" parent="@style/TextAppearance.IOSched.H1">
         <item name="android:textSize">@dimen/text_size_h2</item>
