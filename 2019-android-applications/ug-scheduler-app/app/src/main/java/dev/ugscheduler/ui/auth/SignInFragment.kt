@@ -146,7 +146,7 @@ class SignInFragment : DialogFragment() {
 
                 else -> {
                     debugger("Login was cancelled")
-                    performTestLogin()
+                    // performTestLogin()
                 }
             }
         }

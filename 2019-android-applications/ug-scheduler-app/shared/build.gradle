@@ -145,6 +145,9 @@ dependencies {
     // File Utils from Commons-IO
     api 'commons-io:commons-io:2.6'
 
+    // Attribouter: For About page
+    api 'me.jfenn:Attribouter:0.1.5'
+
     // Unit Testing
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
