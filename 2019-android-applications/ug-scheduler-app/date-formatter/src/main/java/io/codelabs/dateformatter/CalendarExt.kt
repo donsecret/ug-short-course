@@ -16,6 +16,4 @@ fun Calendar.isSameWeek(other: Calendar): Boolean {
         Calendar.WEEK_OF_YEAR)
 }
 
-fun Calendar.isSameYear(other: Calendar): Boolean {
-    return get(Calendar.YEAR) == other.get(Calendar.YEAR)
-}
+fun Calendar.isSameYear(other: Calendar): Boolean = get(Calendar.YEAR) == other.get(Calendar.YEAR)

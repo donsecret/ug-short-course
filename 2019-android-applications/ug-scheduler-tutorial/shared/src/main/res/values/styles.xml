@@ -14,5 +14,7 @@
         <item name="textAppearanceHeadline5">@style/AppTheme.H5</item>
         <item name="textAppearanceHeadline6">@style/AppTheme.H6</item>
         <item name="materialButtonStyle">@style/AppTheme.Button</item>
+
+        <item name="toolbarStyle">@style/AppTheme.Toolbar</item>
     </style>
 </resources>

@@ -5,4 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 /**
  * A base class for all activities
  */
-open class BaseActivity : AppCompatActivity()
+open class BaseActivity : AppCompatActivity() {
+
+    init {
+        debugger(currentContext)
+    }
+
+}

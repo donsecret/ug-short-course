@@ -36,7 +36,7 @@ class AboutFragment : MainNavigationFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        Attribouter.from(requireContext()).withFile(R.xml.about).show()
+        // Attribouter.from(requireContext()).withFile(R.xml.about).show()
 
         val adapter = AboutLibsAdapter()
         val libs = LibraryDeserializer.deserialize(requireContext())
