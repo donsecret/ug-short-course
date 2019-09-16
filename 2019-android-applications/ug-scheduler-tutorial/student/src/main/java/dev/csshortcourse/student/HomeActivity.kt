@@ -14,12 +14,6 @@ import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-
-    // todo: Items to do
-    // 1. Configure the drawer layout to have the Hamburger Icon
-    // 2. Allow back button to close drawer if it is opened
-    // 3. Setup our fragments
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
