@@ -74,9 +74,9 @@ android {
         disable 'MissingDefaultResource', "InvalidPackage", "MissingTranslation"
     }
 
-    dataBinding {
-        enabled = true
-    }
+    // Binding (Data / View)
+    dataBinding.enabled = true
+    viewBinding.enabled = true
 
     sourceSets {
         androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
@@ -115,8 +115,8 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':shared')
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.0.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0'
 }
 
 kapt {
