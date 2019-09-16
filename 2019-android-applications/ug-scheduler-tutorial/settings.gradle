@@ -1,2 +1,2 @@
 include ':student', ':facilitator', ':shared'
-rootProject.name='CS Short Course'
+rootProject.name = 'CS Short Course'
