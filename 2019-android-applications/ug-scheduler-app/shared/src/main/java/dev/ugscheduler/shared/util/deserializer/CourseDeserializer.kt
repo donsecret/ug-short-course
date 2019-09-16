@@ -15,8 +15,11 @@ import java.util.*
 
 fun Any.getCourses(context: Context): MutableList<Course> {
     val courses = ArrayList<Course>(0)
+
     val gson = GsonBuilder().setPrettyPrinting().create()
+
     val type = object : TypeToken<List<Course>>() {}.type
+
     try {
         val courseList = gson.fromJson<List<Course>>(
             InputStreamReader(context.assets.open("courses.json")),
@@ -26,5 +29,6 @@ fun Any.getCourses(context: Context): MutableList<Course> {
     } catch (e: IOException) {
         debugger(e.localizedMessage)
     }
+
     return courses
 }
