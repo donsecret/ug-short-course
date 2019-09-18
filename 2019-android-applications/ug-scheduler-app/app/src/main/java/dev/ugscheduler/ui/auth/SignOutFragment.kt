@@ -37,13 +37,12 @@ class SignOutFragment : DialogFragment() {
 
         binding.viewModel = viewModel
         val dao: StudentDao = get()
-        val auth: FirebaseAuth = get()
         val prefs: UserSharedPreferences = get()
         dao.getStudent(prefs.uid).observe(viewLifecycleOwner, Observer { student ->
             binding.apply {
                 this.student = student
                 this.signOut.setOnClickListener {
-                    viewModel?.logout()
+                    viewModel.logout()
                     dismiss()
                 }
             }
