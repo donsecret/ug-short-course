@@ -14,6 +14,9 @@ class CourseDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_course_details)
 
+        // Add action to toolbar navigation icon
+        toolbar.setNavigationOnClickListener { onBackPressed() }
+
         // Get the course from our intent
         if (intent.hasExtra(EXTRA_COURSE)) {
             bindCourse(intent.getParcelableExtra<Course>(EXTRA_COURSE))
