@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryDark">@color/color_primary_dark</item>
+        <item name="colorSecondary">@color/color_secondary</item>
+
+        <!-- Typography -->
+        <item name="textAppearanceHeadline1">@style/AppTheme.H1</item>
+        <item name="textAppearanceHeadline2">@style/AppTheme.H2</item>
+        <item name="textAppearanceHeadline3">@style/AppTheme.H3</item>
+        <item name="textAppearanceHeadline4">@style/AppTheme.H4</item>
+        <item name="textAppearanceHeadline5">@style/AppTheme.H5</item>
+        <item name="textAppearanceHeadline6">@style/AppTheme.H6</item>
+        <item name="materialButtonStyle">@style/AppTheme.Button</item>
+
+        <item name="toolbarStyle">@style/AppTheme.Toolbar</item>
+    </style>
+</resources>
