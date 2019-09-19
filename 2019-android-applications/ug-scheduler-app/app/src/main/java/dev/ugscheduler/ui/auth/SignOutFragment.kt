@@ -42,7 +42,7 @@ class SignOutFragment : DialogFragment() {
             binding.apply {
                 this.student = student
                 this.signOut.setOnClickListener {
-                    viewModel.logout()
+                    viewModel?.logout()
                     dismiss()
                 }
             }
