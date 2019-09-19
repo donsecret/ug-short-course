@@ -2,6 +2,7 @@ package dev.csshortcourse.shared
 
 import android.content.Context
 import android.content.Intent
+import android.view.LayoutInflater
 import android.widget.Toast
 
 // This is a simple function to log messages to the console
@@ -25,3 +26,7 @@ fun BaseActivity.intentTo(target: Class<out BaseActivity>, isFinished: Boolean =
 
 // Shows a simple toast message to the screen
 fun Context.toast(msg: Any?) = Toast.makeText(this, msg.toString(), Toast.LENGTH_SHORT).show()
+
+// Layout inflater
+val Context.layoutInflater: LayoutInflater get() = LayoutInflater.from(this)
+

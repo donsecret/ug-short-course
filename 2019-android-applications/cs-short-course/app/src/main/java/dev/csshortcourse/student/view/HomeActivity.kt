@@ -1,4 +1,4 @@
-package dev.csshortcourse.student
+package dev.csshortcourse.student.view
 
 import android.os.Bundle
 import android.view.Menu
@@ -10,6 +10,10 @@ import com.google.android.material.navigation.NavigationView
 import dev.csshortcourse.shared.BaseActivity
 import dev.csshortcourse.shared.debugger
 import dev.csshortcourse.shared.toast
+import dev.csshortcourse.student.R
+import dev.csshortcourse.student.view.fragment.AboutFragment
+import dev.csshortcourse.student.view.fragment.HomeFragment
+import dev.csshortcourse.student.view.fragment.MapFragment
 import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
