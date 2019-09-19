@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import dev.csshortcourse.shared.mock.MockDataSource
 import dev.csshortcourse.student.R
 import dev.csshortcourse.student.util.recyclerview.adapter.CourseAdapter
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -30,7 +31,10 @@ class HomeFragment : Fragment() {
         // Get the recyclerview from the layout
         courses_list.apply {
             // Attach adapter
-            adapter = CourseAdapter(this@HomeFragment.requireContext())
+            adapter = CourseAdapter(this@HomeFragment.requireActivity()).apply {
+                // Submit a list of courses to the adapter
+                submitList(MockDataSource.getCourses())
+            }
 
             // Set layout manager
             layoutManager = LinearLayoutManager(this@HomeFragment.requireContext())

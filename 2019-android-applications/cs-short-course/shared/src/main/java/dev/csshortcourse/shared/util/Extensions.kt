@@ -1,9 +1,10 @@
-package dev.csshortcourse.shared
+package dev.csshortcourse.shared.util
 
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.widget.Toast
+import dev.csshortcourse.shared.view.BaseActivity
 
 // This is a simple function to log messages to the console
 fun debugger(msg: Any?) = println("Debugger => $msg")

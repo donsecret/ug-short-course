@@ -7,9 +7,9 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
-import dev.csshortcourse.shared.BaseActivity
-import dev.csshortcourse.shared.debugger
-import dev.csshortcourse.shared.toast
+import dev.csshortcourse.shared.view.BaseActivity
+import dev.csshortcourse.shared.util.debugger
+import dev.csshortcourse.shared.util.toast
 import dev.csshortcourse.student.R
 import dev.csshortcourse.student.view.fragment.AboutFragment
 import dev.csshortcourse.student.view.fragment.HomeFragment

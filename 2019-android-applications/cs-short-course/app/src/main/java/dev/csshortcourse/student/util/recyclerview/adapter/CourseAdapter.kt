@@ -1,21 +1,25 @@
 package dev.csshortcourse.student.util.recyclerview.adapter
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import dev.csshortcourse.shared.Course
-import dev.csshortcourse.shared.layoutInflater
-import dev.csshortcourse.shared.load
+import dev.csshortcourse.shared.model.Course
+import dev.csshortcourse.shared.util.layoutInflater
+import dev.csshortcourse.shared.util.load
 import dev.csshortcourse.student.R
 import dev.csshortcourse.student.util.recyclerview.viewholder.CourseViewHolder
+import dev.csshortcourse.student.view.CourseDetailsActivity
 import kotlinx.android.synthetic.main.item_course.view.*
 
 /**
  * Adapter for our [RecyclerView]
  */
-class CourseAdapter constructor(private val context: Context) :
+class CourseAdapter constructor(private val context: Activity) :
     ListAdapter<Course, CourseViewHolder>(
         DIFF_UTIL
     ) {
@@ -37,10 +41,16 @@ class CourseAdapter constructor(private val context: Context) :
         holder.v.course_icon.load(course.icon)
 
         holder.v.setOnClickListener {
-            // todo: navigate to the details page for this course using intents
+            // Create intent
+            val courseIntent = Intent(context, CourseDetailsActivity::class.java)
+
+            // Send course to details page
+            courseIntent.putExtras(bundleOf(Pair(CourseDetailsActivity.EXTRA_COURSE, course)))
+
+            // Start activity
+            context.startActivity(courseIntent)
         }
     }
-
 
     companion object {
         private val DIFF_UTIL: DiffUtil.ItemCallback<Course> =

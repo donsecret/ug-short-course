@@ -1,8 +1,8 @@
 package dev.csshortcourse.student.view
 
 import android.os.Bundle
-import dev.csshortcourse.shared.BaseActivity
-import dev.csshortcourse.shared.intentTo
+import dev.csshortcourse.shared.view.BaseActivity
+import dev.csshortcourse.shared.util.intentTo
 import dev.csshortcourse.student.R
 import kotlinx.android.synthetic.main.activity_main.*
 

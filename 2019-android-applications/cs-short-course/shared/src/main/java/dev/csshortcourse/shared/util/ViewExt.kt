@@ -1,4 +1,4 @@
-package dev.csshortcourse.shared
+package dev.csshortcourse.shared.util
 
 import android.widget.ImageView
 

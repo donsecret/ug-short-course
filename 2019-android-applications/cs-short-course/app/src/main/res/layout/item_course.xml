@@ -37,6 +37,7 @@
         android:layout_marginEnd="@dimen/spacing_large"
         android:ellipsize="end"
         android:maxLines="4"
+        android:textAppearance="?textAppearanceBody2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/course_icon"
         app:layout_constraintTop_toBottomOf="@id/course_name"
