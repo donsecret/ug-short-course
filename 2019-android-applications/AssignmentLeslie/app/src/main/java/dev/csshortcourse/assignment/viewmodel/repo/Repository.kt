@@ -14,8 +14,7 @@ interface BaseRepository {
     fun getCurrentUser(): LiveData<User>
 }
 
-class Repository(private val datasource: FirebaseDataSource) :
-    BaseRepository {
+class Repository(private val datasource: FirebaseDataSource) : BaseRepository {
 
     override fun createAccount(username: String, email: String, password: String) {
         // todo: create account with data source
