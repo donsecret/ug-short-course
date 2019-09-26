@@ -1,7 +1,8 @@
-package dev.csshortcourse.assignment
+package dev.csshortcourse.assignment.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import dev.csshortcourse.assignment.R
 
 class HomeActivity : AppCompatActivity() {
 
