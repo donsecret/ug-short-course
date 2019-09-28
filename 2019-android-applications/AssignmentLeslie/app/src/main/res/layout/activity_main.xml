@@ -8,13 +8,6 @@
     android:padding="16dp"
     tools:context=".view.MainActivity">
 
-    <ImageView
-        android:id="@+id/page_logo"
-        android:layout_width="match_parent"
-        android:src="@drawable/adorable_animal_blur_406014"
-        android:scaleType="centerCrop"
-        android:layout_height="250dp" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

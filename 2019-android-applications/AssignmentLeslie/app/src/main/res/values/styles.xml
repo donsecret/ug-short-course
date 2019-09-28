@@ -10,5 +10,6 @@
         </item>
         <item name="android:statusBarColor">@color/background_color</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">@bool/is_night_theme</item>
+        <item name="shapeAppearanceSmallComponent">@style/AppTheme.SmallComponent</item>
     </style>
 </resources>
