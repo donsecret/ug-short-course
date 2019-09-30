@@ -13,6 +13,7 @@ import com.google.firebase.firestore.SetOptions
 import dev.ugscheduler.shared.data.*
 import dev.ugscheduler.shared.datasource.DataSource
 import dev.ugscheduler.shared.util.Constants
+import dev.ugscheduler.shared.util.debugger
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -28,21 +29,29 @@ class RemoteDataSource constructor(
 
     override fun sendFeedback(feedback: Feedback) {
         ioScope.launch {
-            Tasks.await(
-                firestore.feedbackDocument(feedback.id).set(
-                    feedback,
-                    SetOptions.merge()
+            try {
+                Tasks.await(
+                    firestore.feedbackDocument(feedback.id).set(
+                        feedback,
+                        SetOptions.merge()
+                    )
                 )
-            )
+            } catch (e: Exception) {
+                debugger(e.localizedMessage)
+            }
         }
     }
 
     override fun getStudentById(studentId: String): LiveData<Student> {
         val liveData = MutableLiveData<Student>()
         ioScope.launch {
-            val student = Tasks.await(firestore.studentDocument(studentId).get())
-                .toObject(Student::class.java)
-            if (student != null) liveData.postValue(student)
+            try {
+                val student = Tasks.await(firestore.studentDocument(studentId).get())
+                    .toObject(Student::class.java)
+                if (student != null) liveData.postValue(student)
+            } catch (e: Exception) {
+                debugger(e.localizedMessage)
+            }
         }
         return liveData
     }
@@ -50,9 +59,13 @@ class RemoteDataSource constructor(
     override fun getFacilitators(): MutableList<Facilitator> {
         val facilitators = mutableListOf<Facilitator>()
         ioScope.launch {
-            val result = Tasks.await(firestore.collection(Constants.FACILITATORS).get())
-                .toObjects(Facilitator::class.java)
-            facilitators.addAll(result)
+            try {
+                val result = Tasks.await(firestore.collection(Constants.FACILITATORS).get())
+                    .toObjects(Facilitator::class.java)
+                facilitators.addAll(result)
+            } catch (e: Exception) {
+                debugger(e.localizedMessage)
+            }
         }
         return facilitators
     }
@@ -60,30 +73,42 @@ class RemoteDataSource constructor(
     override fun getFacilitatorById(id: String): LiveData<Facilitator> {
         val liveData = MutableLiveData<Facilitator>()
         ioScope.launch {
-            val facilitator = Tasks.await(firestore.facilitatorDocument(id).get())
-                .toObject(Facilitator::class.java)
-            if (facilitator != null) liveData.postValue(facilitator)
+            try {
+                val facilitator = Tasks.await(firestore.facilitatorDocument(id).get())
+                    .toObject(Facilitator::class.java)
+                if (facilitator != null) liveData.postValue(facilitator)
+            } catch (e: Exception) {
+                debugger(e.localizedMessage)
+            }
         }
         return liveData
     }
 
     override fun enrolStudent(enrolment: Enrolment) {
         ioScope.launch {
-            Tasks.await(
-                firestore.collection(Constants.ENROLMENTS).document().set(
-                    enrolment,
-                    SetOptions.merge()
+            try {
+                Tasks.await(
+                    firestore.collection(Constants.ENROLMENTS).document().set(
+                        enrolment,
+                        SetOptions.merge()
+                    )
                 )
-            )
+            } catch (e: Exception) {
+                debugger(e.localizedMessage)
+            }
         }
     }
 
     override fun getCurrentStudent(id: String): LiveData<Student> {
         val liveData = MutableLiveData<Student>()
         ioScope.launch {
-            val student =
-                Tasks.await(firestore.studentDocument(id).get()).toObject(Student::class.java)
-            if (student != null) liveData.postValue(student)
+            try {
+                val student =
+                    Tasks.await(firestore.studentDocument(id).get()).toObject(Student::class.java)
+                if (student != null) liveData.postValue(student)
+            } catch (e: Exception) {
+                debugger(e.localizedMessage)
+            }
         }
         return liveData
     }
@@ -91,10 +116,14 @@ class RemoteDataSource constructor(
     override fun getCurrentFacilitator(id: String): LiveData<Facilitator> {
         val liveData = MutableLiveData<Facilitator>()
         ioScope.launch {
-            val fac =
-                Tasks.await(firestore.facilitatorDocument(id).get())
-                    .toObject(Facilitator::class.java)
-            if (fac != null) liveData.postValue(fac)
+            try {
+                val fac =
+                    Tasks.await(firestore.facilitatorDocument(id).get())
+                        .toObject(Facilitator::class.java)
+                if (fac != null) liveData.postValue(fac)
+            } catch (e: Exception) {
+                debugger(e.localizedMessage)
+            }
         }
         return liveData
     }
@@ -102,10 +131,14 @@ class RemoteDataSource constructor(
     override fun getMyCourses(studentId: String): MutableList<Course> {
         val courses = mutableListOf<Course>()
         ioScope.launch {
-            val results =
-                Tasks.await(firestore.studentDocument(studentId).collection(Constants.COURSES).get())
-                    .toObjects(Course::class.java)
-            courses.addAll(results)
+            try {
+                val results =
+                    Tasks.await(firestore.studentDocument(studentId).collection(Constants.COURSES).get())
+                        .toObjects(Course::class.java)
+                courses.addAll(results)
+            } catch (e: Exception) {
+                debugger(e.localizedMessage)
+            }
         }
         return courses
     }
@@ -113,14 +146,18 @@ class RemoteDataSource constructor(
     override fun getCoursesForFacilitator(facilitatorId: String): MutableList<Course> {
         val courses = mutableListOf<Course>()
         ioScope.launch {
-            val results =
-                Tasks.await(
-                    firestore.collection(Constants.COURSES)
-                        .whereEqualTo("facilitator", facilitatorId)
-                        .get()
-                )
-                    .toObjects(Course::class.java)
-            courses.addAll(results)
+            try {
+                val results =
+                    Tasks.await(
+                        firestore.collection(Constants.COURSES)
+                            .whereEqualTo("facilitator", facilitatorId)
+                            .get()
+                    )
+                        .toObjects(Course::class.java)
+                courses.addAll(results)
+            } catch (e: Exception) {
+                debugger(e.localizedMessage)
+            }
         }
         return courses
     }
@@ -128,19 +165,27 @@ class RemoteDataSource constructor(
     fun addStudent(student: Student?) {
         if (student == null) return
         ioScope.launch {
-            Tasks.await(firestore.studentDocument(student.id).set(student, SetOptions.merge()))
+            try {
+                Tasks.await(firestore.studentDocument(student.id).set(student, SetOptions.merge()))
+            } catch (e: Exception) {
+                debugger(e.localizedMessage)
+            }
         }
     }
 
     fun addFacilitator(facilitator: Facilitator?) {
         if (facilitator == null) return
         ioScope.launch {
-            Tasks.await(
-                firestore.facilitatorDocument(facilitator.id).set(
-                    facilitator,
-                    SetOptions.merge()
+            try {
+                Tasks.await(
+                    firestore.facilitatorDocument(facilitator.id).set(
+                        facilitator,
+                        SetOptions.merge()
+                    )
                 )
-            )
+            } catch (e: Exception) {
+                debugger(e.localizedMessage)
+            }
         }
     }
 

@@ -58,6 +58,7 @@ class SettingsFragment : MainNavigationFragment() {
             binding.viewModel = viewModel
         })
 
+        // Get theme preferences instance from DI
         val prefs by inject<AppPreferences>()
         binding.root.findViewById<PreferenceView>(R.id.prefs_theme).apply {
             setOnClickListener {
@@ -65,7 +66,10 @@ class SettingsFragment : MainNavigationFragment() {
                     arrayOf<CharSequence>("Light", "Dark", "Set by Battery Saver", "System Default")
                 MaterialAlertDialogBuilder(this@SettingsFragment.requireContext()).apply {
                     setTitle("Select theme")
-                    setSingleChoiceItems(options, if (prefs.currentMode == -1) 3 else prefs.currentMode.minus(1)) { dialog, which ->
+                    setSingleChoiceItems(
+                        options,
+                        if (prefs.currentMode == -1) 3 else prefs.currentMode.minus(1)
+                    ) { dialog, which ->
                         dialog.dismiss()
                         uiScope.launch {
                             delay(550)
