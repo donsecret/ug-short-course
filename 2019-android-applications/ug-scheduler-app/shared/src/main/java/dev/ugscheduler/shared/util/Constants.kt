@@ -7,6 +7,7 @@ package dev.ugscheduler.shared.util
 object Constants {
     const val BUCKET_NAME = "scheduler_bucket"
     const val USER_SHARED_PREFS = "user_prefs"
+    const val APP_PREFS = "app_prefs"
     const val LOCAL_DB_NAME = "app_local_database"
     const val DB_VERSION = 1
 
