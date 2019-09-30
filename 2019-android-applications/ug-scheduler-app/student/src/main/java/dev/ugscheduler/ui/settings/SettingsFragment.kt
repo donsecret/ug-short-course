@@ -10,12 +10,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.Observer
+import androidx.transition.TransitionManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dev.ugscheduler.R
 import dev.ugscheduler.databinding.SettingsFragmentBinding
 import dev.ugscheduler.shared.prefs.AppPreferences
 import dev.ugscheduler.shared.util.activityViewModelProvider
-import dev.ugscheduler.shared.util.debugger
 import dev.ugscheduler.shared.viewmodel.AppViewModel
 import dev.ugscheduler.shared.viewmodel.AppViewModelFactory
 import dev.ugscheduler.shared.widgets.PreferenceView
@@ -72,7 +72,9 @@ class SettingsFragment : MainNavigationFragment() {
                     ) { dialog, which ->
                         dialog.dismiss()
                         uiScope.launch {
+                            // Add short delay
                             delay(550)
+                            TransitionManager.beginDelayedTransition(binding.container)
                             when (which) {
                                 0 -> prefs.setDarkMode(AppCompatDelegate.MODE_NIGHT_NO)
                                 1 -> prefs.setDarkMode(AppCompatDelegate.MODE_NIGHT_YES)
@@ -85,8 +87,6 @@ class SettingsFragment : MainNavigationFragment() {
                         dialog.cancel()
                     }
                     show()
-
-                    debugger(prefs.currentMode)
                 }
             }
         }

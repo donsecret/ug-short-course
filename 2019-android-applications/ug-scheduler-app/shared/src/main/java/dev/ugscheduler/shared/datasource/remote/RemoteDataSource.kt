@@ -105,6 +105,7 @@ class RemoteDataSource constructor(
             try {
                 val student =
                     Tasks.await(firestore.studentDocument(id).get()).toObject(Student::class.java)
+                debugger(student)
                 if (student != null) liveData.postValue(student)
             } catch (e: Exception) {
                 debugger(e.localizedMessage)
@@ -166,7 +167,17 @@ class RemoteDataSource constructor(
         if (student == null) return
         ioScope.launch {
             try {
-                Tasks.await(firestore.studentDocument(student.id).set(student, SetOptions.merge()))
+                firestore.runTransaction { t ->
+                    val oldStudent =
+                        t.get(firestore.studentDocument(student.id))
+                    if (!oldStudent.exists()) {
+                        t.set(firestore.studentDocument(student.id), student, SetOptions.merge())
+                    } else {
+                        val data = oldStudent.toObject(Student::class.java)
+                        debugger("Student from database: $data")
+                    }
+                    null
+                }
             } catch (e: Exception) {
                 debugger(e.localizedMessage)
             }
