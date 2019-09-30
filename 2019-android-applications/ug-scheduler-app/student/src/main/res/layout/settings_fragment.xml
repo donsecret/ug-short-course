@@ -94,27 +94,6 @@
                     android:layout_marginBottom="@dimen/margin_normal"
                     android:background="?android:attr/listDivider" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start"
-                    android:layout_marginStart="@dimen/margin_normal"
-                    android:layout_marginTop="@dimen/margin_normal"
-                    android:fontFamily="@font/google_sans_medium"
-                    android:text="General"
-                    android:textStyle="bold" />
-
-                <dev.ugscheduler.shared.widgets.PreferenceView
-                    android:id="@+id/prefs_theme"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_normal"
-                    android:layout_marginBottom="@dimen/spacing_normal"
-                    app:hideWidget="true"
-                    app:icon="@drawable/twotone_brightness_6_24px"
-                    app:summary="Save power &amp; reduce eye strain"
-                    app:title="Dark Mode" />
-
                 <androidx.core.widget.NestedScrollView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
@@ -124,6 +103,27 @@
                         android:layout_height="match_parent"
                         android:layout_marginBottom="@dimen/speaker_large_headshot_size"
                         android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:layout_marginStart="@dimen/margin_normal"
+                            android:layout_marginTop="@dimen/margin_normal"
+                            android:fontFamily="@font/google_sans_medium"
+                            android:text="General"
+                            android:textStyle="bold" />
+
+                        <dev.ugscheduler.shared.widgets.PreferenceView
+                            android:id="@+id/prefs_theme"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/spacing_normal"
+                            android:layout_marginBottom="@dimen/spacing_normal"
+                            app:hideWidget="true"
+                            app:icon="@drawable/twotone_brightness_6_24px"
+                            app:summary="Save power &amp; reduce eye strain"
+                            app:title="Dark Mode" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -179,7 +179,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/spacing_micro"
-                            app:icon="@drawable/twotone_business_center_24px"
+                            app:icon="@drawable/twotone_account_circle_24px"
                             app:summary="@{student.position, default=`Not available`}"
                             app:title="Position" />
 
