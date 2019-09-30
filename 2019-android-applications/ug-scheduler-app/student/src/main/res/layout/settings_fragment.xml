@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2019.. Designed & developed by Quabynah Codelabs(c). For the love of Android development.
   -->
 
@@ -96,6 +95,27 @@
                     android:layout_marginBottom="@dimen/margin_normal"
                     android:background="?android:attr/listDivider" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginStart="@dimen/margin_normal"
+                    android:layout_marginTop="@dimen/margin_normal"
+                    android:fontFamily="@font/google_sans_medium"
+                    android:text="General"
+                    android:textStyle="bold" />
+
+                <dev.ugscheduler.shared.widgets.PreferenceView
+                    android:id="@+id/prefs_theme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_normal"
+                    android:layout_marginBottom="@dimen/spacing_normal"
+                    app:hideWidget="true"
+                    app:icon="@drawable/twotone_brightness_6_24px"
+                    app:summary="Save power &amp; reduce eye strain"
+                    app:title="Dark Mode" />
+
                 <androidx.core.widget.NestedScrollView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
@@ -113,157 +133,64 @@
                             android:layout_marginStart="@dimen/margin_normal"
                             android:layout_marginTop="@dimen/margin_normal"
                             android:fontFamily="@font/google_sans_medium"
-                            android:text="Phone Number"
+                            android:text="Personal Information"
                             android:textStyle="bold" />
 
-                        <com.google.android.material.button.MaterialButton
-                            style="@style/Widget.MaterialComponents.Button.TextButton"
-                            android:layout_width="wrap_content"
+                        <dev.ugscheduler.shared.widgets.PreferenceView
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/spacing_micro"
-                            android:alpha="?alphaMedium"
-                            android:clickable="false"
-                            android:gravity="center"
-                            android:text="@{student.phone, default=`Not available`}"
-                            android:textColor="?colorPrimary"
-                            tools:text="@tools:sample/lorem" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="start"
-                            android:layout_marginStart="@dimen/margin_normal"
-                            android:layout_marginTop="@dimen/margin_normal"
-                            android:fontFamily="@font/google_sans_medium"
-                            android:text="Residence"
-                            android:textStyle="bold" />
-
-                        <com.google.android.material.button.MaterialButton
-                            style="@style/Widget.MaterialComponents.Button.TextButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/margin_normal"
                             android:layout_marginTop="@dimen/spacing_micro"
-                            android:alpha="?alphaMedium"
-                            android:clickable="false"
-                            android:gravity="center"
-                            android:text="@{student.residence, default=`Not available`}"
-                            android:textColor="?colorPrimary"
-                            tools:text="@tools:sample/lorem" />
+                            app:icon="@drawable/twotone_phone_24px"
+                            app:summary="@{student.phone, default=`Not available`}"
+                            app:title="Phone Number" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <dev.ugscheduler.shared.widgets.PreferenceView
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="start"
-                            android:layout_marginStart="@dimen/margin_normal"
-                            android:layout_marginTop="@dimen/margin_normal"
-                            android:fontFamily="@font/google_sans_medium"
-                            android:text="Address"
-                            android:textStyle="bold" />
-
-                        <com.google.android.material.button.MaterialButton
-                            style="@style/Widget.MaterialComponents.Button.TextButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/margin_normal"
                             android:layout_marginTop="@dimen/spacing_micro"
-                            android:alpha="?alphaMedium"
-                            android:clickable="false"
-                            android:gravity="center"
-                            android:text="@{student.address, default=`Not available`}"
-                            android:textColor="?colorPrimary"
-                            tools:text="@tools:sample/lorem" />
+                            app:icon="@drawable/twotone_home_24px"
+                            app:summary="@{student.residence, default=`Not available`}"
+                            app:title="Residence" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <dev.ugscheduler.shared.widgets.PreferenceView
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="start"
-                            android:layout_marginStart="@dimen/margin_normal"
-                            android:layout_marginTop="@dimen/margin_normal"
-                            android:fontFamily="@font/google_sans_medium"
-                            android:text="Date of Birth"
-                            android:textStyle="bold" />
-
-                        <com.google.android.material.button.MaterialButton
-                            style="@style/Widget.MaterialComponents.Button.TextButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/margin_normal"
                             android:layout_marginTop="@dimen/spacing_micro"
-                            android:alpha="?alphaMedium"
-                            android:clickable="false"
-                            android:gravity="center"
-                            android:text="@{student.dob, default=`Not available`}"
-                            android:textColor="?colorPrimary"
-                            tools:text="@tools:sample/lorem" />
+                            app:icon="@drawable/twotone_map_24px"
+                            app:summary="@{student.address, default=`Not available`}"
+                            app:title="Address" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <dev.ugscheduler.shared.widgets.PreferenceView
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="start"
-                            android:layout_marginStart="@dimen/margin_normal"
-                            android:layout_marginTop="@dimen/margin_normal"
-                            android:fontFamily="@font/google_sans_medium"
-                            android:text="Organisation"
-                            android:textStyle="bold" />
-
-                        <com.google.android.material.button.MaterialButton
-                            style="@style/Widget.MaterialComponents.Button.TextButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/margin_normal"
                             android:layout_marginTop="@dimen/spacing_micro"
-                            android:alpha="?alphaMedium"
-                            android:clickable="false"
-                            android:gravity="center"
-                            android:text="@{student.organisation, default=`Not available`}"
-                            android:textColor="?colorPrimary"
-                            tools:text="@tools:sample/lorem" />
+                            app:icon="@drawable/twotone_event_24px"
+                            app:summary="@{student.dob, default=`Not available`}"
+                            app:title="Date of Birth" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <dev.ugscheduler.shared.widgets.PreferenceView
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="start"
-                            android:layout_marginStart="@dimen/margin_normal"
-                            android:layout_marginTop="@dimen/margin_normal"
-                            android:fontFamily="@font/google_sans_medium"
-                            android:text="Position"
-                            android:textStyle="bold" />
-
-                        <com.google.android.material.button.MaterialButton
-                            style="@style/Widget.MaterialComponents.Button.TextButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/margin_normal"
                             android:layout_marginTop="@dimen/spacing_micro"
-                            android:alpha="?alphaMedium"
-                            android:clickable="false"
-                            android:text="@{student.position, default=`Not available`}"
-                            android:textColor="?colorPrimary"
-                            tools:text="@tools:sample/lorem" />
+                            app:icon="@drawable/twotone_business_center_24px"
+                            app:summary="@{student.organisation, default=`Not available`}"
+                            app:title="Organisation" />
 
-
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <dev.ugscheduler.shared.widgets.PreferenceView
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="start"
-                            android:layout_marginStart="@dimen/margin_normal"
-                            android:layout_marginTop="@dimen/margin_normal"
-                            android:fontFamily="@font/google_sans_medium"
-                            android:text="Educational Background"
-                            android:textStyle="bold" />
-
-                        <com.google.android.material.button.MaterialButton
-                            style="@style/Widget.MaterialComponents.Button.TextButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/margin_normal"
                             android:layout_marginTop="@dimen/spacing_micro"
-                            android:alpha="?alphaMedium"
-                            android:clickable="false"
-                            android:text="@{student.eduBackground, default=`Not available`}"
-                            android:textColor="?colorPrimary"
-                            tools:text="@tools:sample/lorem" />
+                            app:icon="@drawable/twotone_business_center_24px"
+                            app:summary="@{student.position, default=`Not available`}"
+                            app:title="Position" />
+
+                        <dev.ugscheduler.shared.widgets.PreferenceView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/spacing_micro"
+                            app:icon="@drawable/twotone_business_24px"
+                            app:summary="@{student.eduBackground, default=`Not available`}"
+                            app:title="Educational Background" />
 
 
                     </androidx.appcompat.widget.LinearLayoutCompat>

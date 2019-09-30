@@ -7,15 +7,9 @@ package dev.ugscheduler
 import android.app.Application
 import android.os.StrictMode
 import android.os.StrictMode.ThreadPolicy.Builder
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LifecycleRegistry
-import androidx.lifecycle.Observer
 import dev.ugscheduler.BuildConfig.DEBUG
 import dev.ugscheduler.shared.di.loadAppModules
 import dev.ugscheduler.shared.prefs.AppPreferences
-import dev.ugscheduler.shared.util.debugger
 import org.koin.android.ext.android.inject
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -24,10 +18,7 @@ import timber.log.Timber
 /**
  * Application subclass
  */
-class App : Application(), LifecycleOwner {
-    override fun getLifecycle(): Lifecycle {
-        return LifecycleRegistry(this)
-    }
+class App : Application() {
 
     override fun onCreate() {
         if (DEBUG) enableStrictMode()
@@ -39,12 +30,9 @@ class App : Application(), LifecycleOwner {
             modules(loadAppModules())
         }
 
-        // Night mode activation
-        val prefs: AppPreferences by inject()
-        prefs.setDarkMode(AppCompatDelegate.getDefaultNightMode())
-        prefs.nightMode.observe(this, Observer {
-            debugger("Night mode: $it")
-        })
+        // Set default theme
+        val prefs by inject<AppPreferences>()
+        prefs.setDarkMode(prefs.currentMode)
     }
 
     private fun enableStrictMode() {

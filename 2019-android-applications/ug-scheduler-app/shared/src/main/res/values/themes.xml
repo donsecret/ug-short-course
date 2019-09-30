@@ -88,7 +88,7 @@
 
     <style name="AppTheme.PopupTheme" parent="ThemeOverlay.IOSched.Light" />
 
-    <style name="AlertDialog.Theme" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+    <style name="AlertDialog.Theme" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog.Centered">
         <item name="buttonBarStyle">@style/AlertDialog.ButtonBar</item>
         <item name="dialogCornerRadius">@dimen/dialog_corner_radius</item>
         <item name="dialogPreferredPadding">@dimen/dialogPreferredPadding</item>

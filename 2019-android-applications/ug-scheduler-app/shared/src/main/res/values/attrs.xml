@@ -115,4 +115,13 @@
         <attr name="margin" format="dimension" />
     </declare-styleable>
 
+    <declare-styleable name="PreferenceView">
+        <attr name="title" format="string" />
+        <attr name="summary" format="string" />
+        <attr name="key" format="string" />
+        <attr name="widget" format="reference" />
+        <attr name="hideWidget" format="boolean" />
+        <attr name="icon" format="reference" />
+    </declare-styleable>
+
 </resources>

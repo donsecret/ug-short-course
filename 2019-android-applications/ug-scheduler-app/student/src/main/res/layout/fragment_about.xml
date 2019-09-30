@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2019.. Designed & developed by Quabynah Codelabs(c). For the love of Android development.
   -->
 
@@ -8,7 +7,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="dev.ugscheduler.BuildConfig" />
+
+        <import type="dev.ugscheduler.shared.BuildConfig" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -51,7 +51,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/feed_session_dimension"
                     android:scaleType="centerInside"
-                    android:src="@drawable/simple_logo" />
+                    android:src="@drawable/ic_ravelry_brands" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -84,11 +84,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:alpha="?alphaMedium"
                     android:fontFamily="@font/google_sans_medium"
                     android:gravity="center"
-                    android:visibility="gone"
                     android:padding="@dimen/margin_normal"
-                    android:text="This application would not have been possible without these libraries" />
+                    android:text="This application would not have been possible without these libraries"
+                    android:textAppearance="?textAppearanceBody2" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/libs_list"
@@ -96,7 +97,6 @@
                     android:layout_height="match_parent"
                     app:layoutManager="LinearLayoutManager"
                     tools:itemCount="3"
-                    android:visibility="gone"
                     tools:listitem="@layout/item_lib" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>

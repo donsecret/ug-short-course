@@ -18,10 +18,19 @@ import dev.ugscheduler.shared.util.Constants
 class AppPreferences private constructor(context: Application) {
     private val prefs = context.getSharedPreferences(Constants.APP_PREFS, Context.MODE_PRIVATE)
     private val _nightMode = MutableLiveData<Boolean>()
-
+    var currentMode: Int = AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+        get() = prefs.getInt(NIGHT_MODE_ID_KEY, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+        private set(value) {
+            prefs.edit {
+                putInt(NIGHT_MODE_ID_KEY, value)
+                apply()
+            }
+            field = value
+        }
 
     companion object {
         private const val NIGHT_MODE_KEY = "night_mode_key"
+        private const val NIGHT_MODE_ID_KEY = "night_mode_id_key"
         @Volatile
         private var instance: AppPreferences? = null
 
@@ -34,7 +43,8 @@ class AppPreferences private constructor(context: Application) {
         _nightMode.value = prefs.getBoolean(NIGHT_MODE_KEY, false)
     }
 
-    fun setDarkMode(mode: Int = AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM) {
+    fun setDarkMode(mode: Int) {
+        currentMode = mode
         when (mode) {
             AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM,
             AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY,
@@ -66,10 +76,7 @@ class AppPreferences private constructor(context: Application) {
         }
 
         // Set dark theme
-        AppCompatDelegate.setDefaultNightMode(
-            if (_nightMode.value != null && _nightMode.value == true
-            ) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
-        )
+        AppCompatDelegate.setDefaultNightMode(mode)
     }
 
     val nightMode: LiveData<Boolean> = _nightMode

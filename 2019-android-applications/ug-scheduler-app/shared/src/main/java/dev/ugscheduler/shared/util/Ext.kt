@@ -40,8 +40,8 @@ import dev.ugscheduler.shared.R
 import timber.log.Timber
 
 fun Any.debugger(msg: Any?) {
-    Timber.d("${this::class.java.simpleName} ==> UGScheduler ==> ${msg.toString()}")
-    // println("${this::class.java.simpleName} ==> UGScheduler ==> ${msg.toString()}")
+//    Timber.d("${this::class.java.simpleName} ==> UGScheduler ==> ${msg.toString()}")
+     println("${this::class.java.simpleName} ==> UGScheduler ==> ${msg.toString()}")
 }
 
 fun BaseActivity.intentTo(
