@@ -39,12 +39,16 @@ class CourseWorker(context: Context, params: WorkerParameters) : CoroutineWorker
 
             // Forward all course details to remote data source
             for (course in courses) {
-                Tasks.await(
-                    firestore.collection(Constants.COURSES).document(course.id).set(
-                        course,
-                        SetOptions.merge()
+                try {
+                    Tasks.await(
+                        firestore.collection(Constants.COURSES).document(course.id).set(
+                            course,
+                            SetOptions.merge()
+                        )
                     )
-                )
+                } catch (e: Exception) {
+                    debugger("Adding courses exception: ${e.localizedMessage}")
+                }
             }
         }
         return Result.success()
