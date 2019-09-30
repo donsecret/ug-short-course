@@ -17,7 +17,6 @@ import dev.ugscheduler.databinding.FragmentAboutBinding
 import dev.ugscheduler.shared.util.debugger
 import dev.ugscheduler.shared.util.doOnApplyWindowInsets
 import dev.ugscheduler.util.MainNavigationFragment
-import me.jfenn.attribouter.Attribouter
 import java.util.*
 
 
@@ -35,8 +34,6 @@ class AboutFragment : MainNavigationFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-        // Attribouter.from(requireContext()).withFile(R.xml.about).show()
 
         val adapter = AboutLibsAdapter()
         val libs = LibraryDeserializer.deserialize(requireContext())

@@ -22,6 +22,7 @@ import com.bumptech.glide.request.target.Target
 import dev.ugscheduler.R
 import dev.ugscheduler.shared.data.Student
 import dev.ugscheduler.shared.data.isSignedIn
+import dev.ugscheduler.shared.util.debugger
 import dev.ugscheduler.shared.util.glide.asGlideTarget
 import dev.ugscheduler.shared.util.prefs.UserSharedPreferences
 import dev.ugscheduler.ui.auth.AuthViewModel
@@ -74,12 +75,14 @@ fun setProfileAvatar(
     val placeholderDrawable = AppCompatResources.getDrawable(context, placeholder)
     when (imageUri) {
         null -> {
+            context.debugger("Profile Uri is null")
             Glide.with(context)
                 .load(placeholderDrawable)
                 .apply(RequestOptions.circleCropTransform())
                 .into(target)
         }
         else -> {
+            context.debugger("Profile Uri is: $imageUri")
             Glide.with(context)
                 .load(imageUri)
                 .apply(RequestOptions.placeholderOf(placeholderDrawable).circleCrop())
