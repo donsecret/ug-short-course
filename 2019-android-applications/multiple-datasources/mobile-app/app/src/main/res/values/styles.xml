@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
@@ -10,6 +10,9 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorOnPrimary">@color/colorOnPrimary</item>
         <item name="colorOnBackground">@color/colorOnBackground</item>
+
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">@bool/is_night_mode</item>
 
         <item name="shapeAppearanceSmallComponent">@style/AppTheme.SmallComponents</item>
         <item name="shapeAppearanceMediumComponent">@style/AppTheme.MediumComponents</item>

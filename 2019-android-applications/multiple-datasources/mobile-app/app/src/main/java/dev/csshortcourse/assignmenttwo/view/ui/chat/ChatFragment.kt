@@ -4,23 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dev.csshortcourse.assignmenttwo.R
 import dev.csshortcourse.assignmenttwo.util.BaseFragment
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import dev.csshortcourse.assignmenttwo.util.debugger
 
 class ChatFragment : BaseFragment() {
 
-    private lateinit var homeViewModel: ChatViewModel
+    private lateinit var viewModel: ChatViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        homeViewModel =
+        viewModel =
             ViewModelProvider(this).get(ChatViewModel::class.java)
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
@@ -28,15 +27,11 @@ class ChatFragment : BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        /*uiScope.launch {
-            delay(850)
-            MaterialAlertDialogBuilder(requireContext()).apply {
-                setTitle(getString(R.string.app_name))
-                setMessage("We are happy to have you on board. Start a new conversation.")
-                setPositiveButton("Dismiss") { d, _ -> d.dismiss() }
-                show()
-            }
-        }*/
+        viewModel.users.observe(viewLifecycleOwner, Observer { users ->
+            debugger(users)
+
+            // todo: add to adapter
+        })
     }
 
 }
