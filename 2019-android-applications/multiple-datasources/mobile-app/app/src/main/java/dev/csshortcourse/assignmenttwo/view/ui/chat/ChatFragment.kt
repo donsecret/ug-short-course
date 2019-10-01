@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import dev.csshortcourse.assignmenttwo.R
 import dev.csshortcourse.assignmenttwo.datasource.local.LocalDataSource
+import dev.csshortcourse.assignmenttwo.datasource.remote.RemoteDataSource
 import dev.csshortcourse.assignmenttwo.util.BaseFragment
 import dev.csshortcourse.assignmenttwo.util.debugger
 import kotlinx.coroutines.launch
@@ -33,8 +34,9 @@ class ChatFragment : BaseFragment() {
         ioScope.launch {
             val user =
                 LocalDataSource(requireActivity().application).getUser(UUID.randomUUID().toString())
-
             debugger("User from local datasource: $user")
+
+            //RemoteDataSource(requireActivity().application).getAllUsers()
         }
 
         viewModel.users.observe(viewLifecycleOwner, Observer { users ->
