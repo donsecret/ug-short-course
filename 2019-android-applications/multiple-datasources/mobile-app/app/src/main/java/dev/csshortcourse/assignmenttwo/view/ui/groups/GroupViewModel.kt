@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 class GroupViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is dashboard Fragment"
+        value = "Groups Fragment"
     }
     val text: LiveData<String> = _text
 }
