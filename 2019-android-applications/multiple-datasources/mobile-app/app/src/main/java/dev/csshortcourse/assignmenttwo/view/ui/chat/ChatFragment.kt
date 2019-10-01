@@ -7,8 +7,11 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import dev.csshortcourse.assignmenttwo.R
+import dev.csshortcourse.assignmenttwo.datasource.local.LocalDataSource
 import dev.csshortcourse.assignmenttwo.util.BaseFragment
 import dev.csshortcourse.assignmenttwo.util.debugger
+import kotlinx.coroutines.launch
+import java.util.*
 
 class ChatFragment : BaseFragment() {
 
@@ -26,6 +29,13 @@ class ChatFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        ioScope.launch {
+            val user =
+                LocalDataSource(requireActivity().application).getUser(UUID.randomUUID().toString())
+
+            debugger("User from local datasource: $user")
+        }
 
         viewModel.users.observe(viewLifecycleOwner, Observer { users ->
             debugger(users)

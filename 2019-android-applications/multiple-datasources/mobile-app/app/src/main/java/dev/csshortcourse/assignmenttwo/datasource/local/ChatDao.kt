@@ -9,6 +9,6 @@ import dev.csshortcourse.assignmenttwo.model.Chat
  */
 @Dao
 interface ChatDao : BaseDao<Chat> {
-     @Query("select * from chats where sender = :sender order by timestamp desc")
-    fun getMyChats(sender: String): MutableList<Chat>
+    @Query("select * from chats where sender = :sender and recipient = :recipient order by timestamp desc")
+    fun getMyChats(sender: String?, recipient: String): MutableList<Chat>
 }

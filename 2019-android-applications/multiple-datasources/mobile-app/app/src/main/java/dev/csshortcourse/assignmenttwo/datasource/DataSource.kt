@@ -1,5 +1,6 @@
 package dev.csshortcourse.assignmenttwo.datasource
 
+import dev.csshortcourse.assignmenttwo.model.Chat
 import dev.csshortcourse.assignmenttwo.model.User
 
 /**
@@ -7,4 +8,6 @@ import dev.csshortcourse.assignmenttwo.model.User
  */
 interface DataSource {
     suspend fun getUser(id: String): User?
+    suspend fun getAllUsers(): MutableList<User>
+    suspend fun getMyChats(recipient: String): MutableList<Chat>
 }

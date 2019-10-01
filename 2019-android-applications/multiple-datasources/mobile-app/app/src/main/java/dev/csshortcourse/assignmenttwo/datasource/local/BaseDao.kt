@@ -1,18 +1,22 @@
 package dev.csshortcourse.assignmenttwo.datasource.local
 
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.Update
+
 /**
  * Base Data Access Object
  */
 interface BaseDao<O> {
-    //    @Insert
+    @Insert
     fun insert(item: O)
 
-    //    @Update
+    @Update
     fun update(item: O)
 
-    //    @Insert
+    @Insert
     fun insertAll(item: MutableList<O>)
 
-    //    @Delete
+    @Delete
     fun remove(item: O)
 }

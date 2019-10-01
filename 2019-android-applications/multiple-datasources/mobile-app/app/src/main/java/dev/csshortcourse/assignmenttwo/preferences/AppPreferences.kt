@@ -58,6 +58,8 @@ class AppPreferences private constructor(context: Context) {
      */
     val liveLoginState: LiveData<Boolean> get() = _liveLoginState
 
+    val userId: String? get() = prefs.getString(USER_ID, null)
+
     init {
         // Set default value when class is created for the first time
         // Will be tre if value is not null & not empty as well
