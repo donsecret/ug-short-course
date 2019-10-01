@@ -15,6 +15,10 @@
         <variable
             name="facilitator"
             type="dev.ugscheduler.shared.data.Facilitator" />
+
+        <variable
+            name="prefs"
+            type="dev.ugscheduler.shared.util.prefs.UserSharedPreferences" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -183,7 +187,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="@dimen/margin_large"
-                        android:enabled="@{false, default=`false`}"
+                        android:enabled="@{prefs.isLoggedIn, default=`false`}"
                         android:text="Enrol course" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>

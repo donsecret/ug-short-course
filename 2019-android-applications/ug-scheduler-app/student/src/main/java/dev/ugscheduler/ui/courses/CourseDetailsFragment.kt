@@ -46,12 +46,22 @@ class CourseDetailsFragment : MainNavigationFragment() {
         // Get course from bundle data
         val course = arguments?.get("extra_course") as? Course
         binding.course = course
+        binding.prefs = prefs
 
         if (course != null && course.facilitator.isNotEmpty()) {
-            val liveFacilitator = viewModel.getFacilitatorById(course.facilitator, true)
-            // todo: Get facilitator information
+            val liveFacilitator = viewModel.getFacilitatorById(course.facilitator, false)
             liveFacilitator.observe(viewLifecycleOwner, Observer { facilitator ->
                 debugger("Course facilitator: $facilitator")
+                if (facilitator == null) {
+                    liveFacilitator.removeObservers(viewLifecycleOwner)
+                    binding.swipeRefresh.isRefreshing = true
+                    viewModel.getFacilitatorById(course.facilitator, true)
+                        .observe(viewLifecycleOwner, Observer {
+                            binding.facilitator = it
+                            binding.swipeRefresh.isRefreshing = false
+                        })
+                    return@Observer
+                }
                 binding.facilitator = facilitator
             })
 
@@ -65,11 +75,12 @@ class CourseDetailsFragment : MainNavigationFragment() {
             binding.swipeRefresh.setOnRefreshListener {
                 // Remove old observer and add new one
                 liveFacilitator.removeObservers(viewLifecycleOwner)
-                liveFacilitator.observe(viewLifecycleOwner, Observer { facilitator ->
-                    debugger("Course facilitator refreshed: $facilitator")
-                    binding.facilitator = facilitator
-                    binding.swipeRefresh.isRefreshing = false
-                })
+                viewModel.getFacilitatorById(course.facilitator, true)
+                    .observe(viewLifecycleOwner, Observer { facilitator ->
+                        debugger("Course facilitator refreshed: $facilitator")
+                        binding.facilitator = facilitator
+                        binding.swipeRefresh.isRefreshing = false
+                    })
             }
         }
     }

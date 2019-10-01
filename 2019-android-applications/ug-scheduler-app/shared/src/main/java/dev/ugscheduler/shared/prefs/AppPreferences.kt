@@ -79,6 +79,6 @@ class AppPreferences private constructor(context: Application) {
         AppCompatDelegate.setDefaultNightMode(mode)
     }
 
-    val nightMode: LiveData<Boolean> = _nightMode
+    val nightMode: LiveData<Boolean> get() = _nightMode
 
 }
