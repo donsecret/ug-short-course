@@ -5,8 +5,24 @@ const morgan = require("morgan");
 app.use(morgan("dev"));
 
 // Login route
-app.post("/auth", (req, res) => {
-    
+app.post("/auth", (req, res) => {});
+
+// Get user by id
+app.post("/users/me", (req, res) => {
+  // Get the user's id form the request
+  console.log(req.body);
+  
+  if (req.body) {
+    var id = req.body;
+
+    return res.status(201).json({
+      message: `Your id is: ${id}`
+    });
+  } else {
+    return res.status(404).send({
+      message: "Your request is invalid"
+    });
+  }
 });
 
 // Chats route

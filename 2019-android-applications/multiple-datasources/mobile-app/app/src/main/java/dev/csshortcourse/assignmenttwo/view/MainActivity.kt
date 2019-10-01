@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 
 /**
  * This assignment is mainly focused on working with multiple data sources in an application
- * This is a simple chat application that works with multiple data source( local and remote)
+ * This is a simple chat application (local and remote)
  *
  * Remote data source: NodeJS
  * Local data source: Room

@@ -29,12 +29,10 @@ interface Repository {
  * [Repository] for the [AppViewModel]
  */
 class AppRepository private constructor(app: Application) : Repository {
-    // Preferences
-    private val prefs: AppPreferences by lazy { AppPreferences.get(app) }
     // Local data source
-    private val localDataSource: LocalDataSource by lazy { LocalDataSource(prefs) }
+    private val localDataSource: LocalDataSource by lazy { LocalDataSource(app) }
     // Remote data source
-    private val remoteDataSource: RemoteDataSource by lazy { RemoteDataSource(prefs) }
+    private val remoteDataSource: RemoteDataSource by lazy { RemoteDataSource(app) }
 
     override fun getCurrentUser(refresh: Boolean): User {
         TODO()
