@@ -6,9 +6,7 @@ app.use(morgan("dev"));
 
 // Login route
 app.post("/auth", (req, res) => {
-    return res.status(200).send({
-        message: "Hello world"
-    });
+    
 });
 
 // Chats route

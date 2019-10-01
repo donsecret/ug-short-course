@@ -7,37 +7,20 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="dev.csshortcourse.assignmenttwo.view.ui.home.HomeFragment"
+        android:name="dev.csshortcourse.assignmenttwo.view.ui.chat.ChatFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home">
-
-        <action
-            android:id="@+id/action_HomeFragment_to_HomeSecondFragment"
-            app:destination="@id/navigation_home_second" />
-    </fragment>
-    <fragment
-        android:id="@+id/navigation_home_second"
-        android:name="dev.csshortcourse.assignmenttwo.view.ui.home.HomeSecondFragment"
-        android:label="@string/home_second"
-        tools:layout="@layout/fragment_home_second">
-        <action
-            android:id="@+id/action_HomeSecondFragment_to_HomeFragment"
-            app:destination="@id/navigation_home" />
-
-        <argument
-            android:name="myArg"
-            app:argType="string" />
     </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="dev.csshortcourse.assignmenttwo.view.ui.dashboard.DashboardFragment"
+        android:name="dev.csshortcourse.assignmenttwo.view.ui.groups.GroupFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="dev.csshortcourse.assignmenttwo.view.ui.notifications.NotificationsFragment"
+        android:name="dev.csshortcourse.assignmenttwo.view.ui.status.StatusFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
 </navigation>
