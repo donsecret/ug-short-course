@@ -5,12 +5,38 @@
     android:layout_height="match_parent"
     tools:context=".view.ui.chat.ChatFragment">
 
-    <include
+    <ProgressBar
         android:id="@+id/loading"
-        layout="@layout/loading" />
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminateTint="#eeeeee" />
 
-    <include android:id="@+id/empty_list"
-        layout="@layout/empty_list"/>
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/empty_list"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/no_items_found_204" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/margin_normal"
+            android:text="There seems to be a problem with the connection to our servers"
+            android:textAppearance="?textAppearanceBody1" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chats_list"

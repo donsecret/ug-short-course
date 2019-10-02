@@ -6,44 +6,48 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import dev.csshortcourse.assignmenttwo.R
-import dev.csshortcourse.assignmenttwo.datasource.local.LocalDataSource
-import dev.csshortcourse.assignmenttwo.datasource.remote.RemoteDataSource
-import dev.csshortcourse.assignmenttwo.util.BaseFragment
-import dev.csshortcourse.assignmenttwo.util.debugger
-import kotlinx.coroutines.launch
-import java.util.*
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
+import dev.csshortcourse.assignmenttwo.databinding.FragmentHomeBinding
+import dev.csshortcourse.assignmenttwo.util.*
+import dev.csshortcourse.assignmenttwo.view.adapter.UserAdapter
 
 class ChatFragment : BaseFragment() {
 
     private lateinit var viewModel: ChatViewModel
+    private lateinit var binding: FragmentHomeBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        binding =
+            FragmentHomeBinding.inflate(inflater)
         viewModel =
             ViewModelProvider(this).get(ChatViewModel::class.java)
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        ioScope.launch {
-            val user =
-                LocalDataSource(requireActivity().application).getUser(UUID.randomUUID().toString())
-            debugger("User from local datasource: $user")
-
-            //RemoteDataSource(requireActivity().application).getAllUsers()
+        val adapter = UserAdapter(requireActivity() as BaseActivity)
+        binding.chatsList.apply {
+            this.adapter = adapter
+            this.layoutManager = LinearLayoutManager(requireContext())
+            this.setHasFixedSize(false)
+            this.itemAnimator = DefaultItemAnimator()
         }
 
+        // Fetch data from view model
         viewModel.users.observe(viewLifecycleOwner, Observer { users ->
-            debugger(users)
-
-            // todo: add to adapter
+            binding.loading.gone()
+            debugger("Users returned: $users")
+            if (users.isEmpty()) {
+                binding.emptyList.visible()
+            } else
+                adapter.submitList(users)
         })
     }
-
 }

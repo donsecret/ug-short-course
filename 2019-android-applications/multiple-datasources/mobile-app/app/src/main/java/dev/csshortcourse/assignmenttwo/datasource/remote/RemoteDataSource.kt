@@ -5,6 +5,7 @@ import dev.csshortcourse.assignmenttwo.datasource.DataSource
 import dev.csshortcourse.assignmenttwo.model.Chat
 import dev.csshortcourse.assignmenttwo.model.User
 import dev.csshortcourse.assignmenttwo.preferences.AppPreferences
+import dev.csshortcourse.assignmenttwo.util.debugger
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -17,19 +18,34 @@ class RemoteDataSource constructor(app: Application) : DataSource {
 
     override suspend fun getUser(id: String): User? {
         return withContext(Dispatchers.IO) {
-            apiService.getUser(id)
+            try {
+                apiService.getUser(id)
+            } catch (e: Exception) {
+                debugger(e.localizedMessage)
+                null
+            }
         }
     }
 
     override suspend fun getAllUsers(): MutableList<User> {
         return withContext(Dispatchers.IO) {
-            apiService.getAllUsers()
+            try {
+                apiService.getAllUsers()
+            } catch (e: Exception) {
+                debugger(e.localizedMessage)
+                mutableListOf<User>()
+            }
         }
     }
 
     override suspend fun getMyChats(recipient: String): MutableList<Chat> {
         return withContext(Dispatchers.IO) {
-            apiService.getMyChats(ChatRequest(prefs.userId, recipient))
+            try {
+                apiService.getMyChats(ChatRequest(prefs.userId, recipient))
+            } catch (e: Exception) {
+                debugger(e.localizedMessage)
+                mutableListOf<Chat>()
+            }
         }
     }
 }

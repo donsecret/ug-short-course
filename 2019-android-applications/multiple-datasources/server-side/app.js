@@ -7,13 +7,15 @@ app.use(morgan("dev"));
 // Login route
 app.post("/auth", (req, res) => {});
 
-app.get("/users", (req, res) => {});
+app.get("/users", (req, res) => {
+  return res.status(200).json([]);
+});
 
 // Get user by id
 app.post("/users/me", (req, res) => {
   // Get the user's id form the request
   console.log(req.body);
-  
+
   if (req.body) {
     var id = req.body;
 

@@ -11,6 +11,10 @@ fun View.visible() {
     visibility = View.VISIBLE
 }
 
+fun View.gone() {
+    visibility = View.GONE
+}
+
 fun BaseActivity.moveTo(
     target: Class<out BaseActivity>,
     finish: Boolean = false,

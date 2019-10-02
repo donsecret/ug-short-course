@@ -17,5 +17,6 @@
     <dimen name="dialog_corner_radius">8dp</dimen>
     <dimen name="dialogPreferredPadding">24dp</dimen>
     <dimen name="dialogPreferredPaddingLarge">36dp</dimen>
-    <dimen name="fab_margin">16dp</dimen> <!-- dialogPreferredPadding + 12dp -->
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="avatar_size">56dp</dimen> <!-- dialogPreferredPadding + 12dp -->
 </resources>
