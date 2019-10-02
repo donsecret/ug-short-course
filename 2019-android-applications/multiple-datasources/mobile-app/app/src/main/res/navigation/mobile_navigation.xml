@@ -3,24 +3,48 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@id/navigation_chats">
 
     <fragment
-        android:id="@+id/navigation_home"
+        android:id="@id/navigation_chats"
         android:name="dev.csshortcourse.assignmenttwo.view.ui.chat.ChatFragment"
-        android:label="@string/title_home"
+        android:label="@string/title_chats"
         tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/chats_to_users"
+            app:destination="@id/navigation_users" />
+        <action
+            android:id="@+id/chats_to_conversation"
+            app:destination="@id/navigation_conversation">
+
+            <argument
+                android:name="extra_user"
+                android:defaultValue="@null"
+                app:argType="dev.csshortcourse.assignmenttwo.model.User"
+                app:nullable="true" />
+        </action>
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_dashboard"
+        android:id="@id/navigation_groups"
         android:name="dev.csshortcourse.assignmenttwo.view.ui.groups.GroupFragment"
-        android:label="@string/title_dashboard"
+        android:label="@string/title_groups"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
+        android:id="@id/navigation_status"
         android:name="dev.csshortcourse.assignmenttwo.view.ui.status.StatusFragment"
-        android:label="@string/title_notifications"
+        android:label="@string/title_status"
         tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@id/navigation_users"
+        android:name="dev.csshortcourse.assignmenttwo.view.ui.user.UserFragment"
+        android:label="@string/title_users"
+        tools:layout="@layout/fragment_user" />
+    <fragment
+        android:id="@id/navigation_conversation"
+        android:name="dev.csshortcourse.assignmenttwo.view.ui.conversation.ConversationFragment"
+        android:label="@string/title_conversation"
+        tools:layout="@layout/conversation_fragment" />
 </navigation>

@@ -15,6 +15,7 @@ class HomeActivity : BaseActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Setup NavController
         val navController = findNavController(R.id.nav_host_fragment)
         binding.navView.setupWithNavController(navController)
     }

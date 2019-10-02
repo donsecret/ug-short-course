@@ -22,9 +22,10 @@
         android:layout_marginStart="@dimen/margin_normal"
         android:ellipsize="end"
         android:maxLines="1"
-        android:textAppearance="?textAppearanceHeadline6"
+        android:textAppearance="?textAppearanceBody1"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@id/user_avatar"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@id/user_avatar"
         tools:text="@tools:sample/lorem" />
 
     <TextView

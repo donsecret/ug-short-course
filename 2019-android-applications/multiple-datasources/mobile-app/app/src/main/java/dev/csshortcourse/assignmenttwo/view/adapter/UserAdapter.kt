@@ -11,6 +11,10 @@ import dev.csshortcourse.assignmenttwo.databinding.ItemUserBinding
 import dev.csshortcourse.assignmenttwo.model.User
 import dev.csshortcourse.assignmenttwo.util.BaseActivity
 
+interface UserClickListener {
+    fun onClick(user: User)
+}
+
 class UserViewHolder(private val binding: ItemUserBinding) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(user: User) {
@@ -22,7 +26,8 @@ class UserViewHolder(private val binding: ItemUserBinding) : RecyclerView.ViewHo
     }
 }
 
-class UserAdapter(private val ctx: BaseActivity) : ListAdapter<User, UserViewHolder>(DIFF_UTIL) {
+class UserAdapter(private val ctx: BaseActivity, private val listener: UserClickListener) :
+    ListAdapter<User, UserViewHolder>(DIFF_UTIL) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         val binding =
             ItemUserBinding.bind(ctx.layoutInflater.inflate(R.layout.item_user, parent, false))
@@ -32,8 +37,10 @@ class UserAdapter(private val ctx: BaseActivity) : ListAdapter<User, UserViewHol
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         val user = getItem(position)
         holder.bind(user)
+        holder.itemView.setOnClickListener {
+            listener.onClick(user)
+        }
     }
-
 
     companion object {
         private val DIFF_UTIL: DiffUtil.ItemCallback<User> =

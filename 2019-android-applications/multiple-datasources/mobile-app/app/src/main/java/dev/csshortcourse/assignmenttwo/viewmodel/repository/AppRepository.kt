@@ -18,8 +18,8 @@ typealias Callback<O> = (WorkState, O?) -> Unit
  * Same as [DataSource] interface calls
  */
 interface Repository {
-    fun getCurrentUser(refresh: Boolean): User
-    fun getMyChats(refresh: Boolean): MutableList<Chat>
+    suspend fun getCurrentUser(refresh: Boolean): User
+    suspend fun getMyChats(refresh: Boolean): MutableList<Chat>
     suspend fun getUsers(refresh: Boolean): MutableList<User>
     fun login(callback: Callback<User>)
     fun logout(callback: Callback<Void>)
@@ -38,11 +38,11 @@ class AppRepository private constructor(app: Application) : Repository {
         return if (refresh) remoteDataSource.getAllUsers() else localDataSource.getAllUsers()
     }
 
-    override fun getCurrentUser(refresh: Boolean): User {
+    override suspend fun getCurrentUser(refresh: Boolean): User {
         TODO()
     }
 
-    override fun getMyChats(refresh: Boolean): MutableList<Chat> {
+    override suspend fun getMyChats(refresh: Boolean): MutableList<Chat> {
         TODO()
     }
 

@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
@@ -12,7 +12,10 @@
         <item name="colorOnBackground">@color/colorOnBackground</item>
 
         <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowLightStatusBar" tools:targetApi="m">@bool/is_night_mode</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <!-- Optional, but recommended for full edge-to-edge rendering -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <!--        <item name="android:windowLightStatusBar" tools:targetApi="m">@bool/is_night_mode</item>-->
 
         <item name="shapeAppearanceSmallComponent">@style/AppTheme.SmallComponents</item>
         <item name="shapeAppearanceMediumComponent">@style/AppTheme.MediumComponents</item>

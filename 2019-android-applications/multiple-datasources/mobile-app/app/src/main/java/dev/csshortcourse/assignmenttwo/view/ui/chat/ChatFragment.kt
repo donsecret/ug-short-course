@@ -6,12 +6,23 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
+import dev.csshortcourse.assignmenttwo.R
 import dev.csshortcourse.assignmenttwo.databinding.FragmentHomeBinding
-import dev.csshortcourse.assignmenttwo.util.*
+import dev.csshortcourse.assignmenttwo.model.User
+import dev.csshortcourse.assignmenttwo.util.BaseActivity
+import dev.csshortcourse.assignmenttwo.util.BaseFragment
+import dev.csshortcourse.assignmenttwo.util.gone
+import dev.csshortcourse.assignmenttwo.util.visible
 import dev.csshortcourse.assignmenttwo.view.adapter.UserAdapter
+import dev.csshortcourse.assignmenttwo.view.adapter.UserClickListener
 
+/**
+ * Chat fragment
+ * Shows user's current chats
+ */
 class ChatFragment : BaseFragment() {
 
     private lateinit var viewModel: ChatViewModel
@@ -32,7 +43,18 @@ class ChatFragment : BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val adapter = UserAdapter(requireActivity() as BaseActivity)
+        // Setup adapter for the recyclerview
+        val adapter = UserAdapter(requireActivity() as BaseActivity, object : UserClickListener {
+            override fun onClick(user: User) {
+                // Pass data to the conversation fragment
+                val action = ChatFragmentDirections.chatsToConversation().apply {
+                    extraUser = user
+                }
+                findNavController().navigate(action)
+            }
+        })
+
+        // setup recyclerview
         binding.chatsList.apply {
             this.adapter = adapter
             this.layoutManager = LinearLayoutManager(requireContext())
@@ -40,10 +62,14 @@ class ChatFragment : BaseFragment() {
             this.itemAnimator = DefaultItemAnimator()
         }
 
+        binding.addUser.setOnClickListener {
+            // Navigate to the get all users fragment
+            findNavController().navigate(R.id.navigation_users)
+        }
+
         // Fetch data from view model
         viewModel.users.observe(viewLifecycleOwner, Observer { users ->
             binding.loading.gone()
-            debugger("Users returned: $users")
             if (users.isEmpty()) {
                 binding.emptyList.visible()
             } else

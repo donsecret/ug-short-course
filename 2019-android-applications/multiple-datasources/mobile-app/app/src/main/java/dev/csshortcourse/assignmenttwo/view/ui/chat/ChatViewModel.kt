@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 class ChatViewModel(val app: Application) : AppViewModel(app) {
 
     private val _users = MutableLiveData<MutableList<User>>().apply {
-        /*val user1 = User("Samuel Antwi")
+        val user1 = User("Samuel Antwi")
         val user2 = User("Isaac Lemar")
         val user3 = User("Eunice Agyei")
         val user4 = User("Leslie Tetteh")
@@ -22,11 +22,12 @@ class ChatViewModel(val app: Application) : AppViewModel(app) {
         userList.add(user4)
 
         // Pass to live data
-        this.value = userList*/
+        this.value = userList
 
-        viewModelScope.launch {
-            this@apply.value = repo.getUsers(isConnected())
-        }
+        // todo: uncomment this
+        /*viewModelScope.launch {
+            this@apply.value = repo.getUsers(isConnected)
+        }*/
     }
 
     // Live user's list to observe

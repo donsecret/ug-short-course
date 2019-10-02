@@ -6,4 +6,5 @@
 
     <color name="colorOnPrimary">#ffffff</color>
     <color name="colorOnBackground">#000000</color>
+    <color name="white">#FFFFFF</color>
 </resources>

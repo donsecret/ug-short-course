@@ -22,7 +22,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <include android:id="@+id/empty_list"
-        layout="@layout/empty_list"/>
-
 </androidx.appcompat.widget.LinearLayoutCompat>
