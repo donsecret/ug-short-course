@@ -6,21 +6,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import dev.csshortcourse.assignmenttwo.model.Chat
 import dev.csshortcourse.assignmenttwo.model.User
-import dev.csshortcourse.assignmenttwo.util.debugger
 import dev.csshortcourse.assignmenttwo.viewmodel.AppViewModel
 import kotlinx.coroutines.launch
 import java.util.*
 
 class ConversationViewModel(app: Application) : AppViewModel(app) {
 
-    fun getConversation(recipient: String): LiveData<MutableList<Chat>> {
-        val conversation = MutableLiveData<MutableList<Chat>>()
-        viewModelScope.launch {
-            debugger("getting from live source? : $isConnected")
-            conversation.postValue(repo.getMyChats(isConnected, recipient))
-        }
-        return conversation
-    }
+    suspend fun getMyChats(recipient: String): LiveData<MutableList<Chat>> =
+        repo.getMyChats(isConnected, recipient)
 
     fun addMessage(sender: String, recipient: String, message: String) {
         val chat = Chat(UUID.randomUUID().toString(), sender, recipient, message)

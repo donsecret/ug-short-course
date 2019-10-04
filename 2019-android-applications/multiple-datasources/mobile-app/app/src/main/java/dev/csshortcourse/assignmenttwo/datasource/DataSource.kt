@@ -1,5 +1,6 @@
 package dev.csshortcourse.assignmenttwo.datasource
 
+import androidx.lifecycle.LiveData
 import dev.csshortcourse.assignmenttwo.model.Chat
 import dev.csshortcourse.assignmenttwo.model.User
 
@@ -9,6 +10,6 @@ import dev.csshortcourse.assignmenttwo.model.User
 interface DataSource {
     suspend fun getUser(id: String): User?
     suspend fun getAllUsers(): MutableList<User>
-    suspend fun getMyChats(recipient: String): MutableList<Chat>
+    suspend fun getMyChats(recipient: String): LiveData<MutableList<Chat>>
     suspend fun addMessage(chat: Chat)
 }

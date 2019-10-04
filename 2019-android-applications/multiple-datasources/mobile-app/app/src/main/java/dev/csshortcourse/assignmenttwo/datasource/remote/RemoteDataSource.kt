@@ -1,6 +1,8 @@
 package dev.csshortcourse.assignmenttwo.datasource.remote
 
 import android.app.Application
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import dev.csshortcourse.assignmenttwo.datasource.DataSource
 import dev.csshortcourse.assignmenttwo.model.Chat
 import dev.csshortcourse.assignmenttwo.model.User
@@ -38,14 +40,16 @@ class RemoteDataSource constructor(app: Application) : DataSource {
         }
     }
 
-    override suspend fun getMyChats(recipient: String): MutableList<Chat> {
+    override suspend fun getMyChats(recipient: String): LiveData<MutableList<Chat>> {
         return withContext(Dispatchers.IO) {
+            val liveChats = MutableLiveData<MutableList<Chat>>()
             try {
-                apiService.getMyChats(ChatRequest(prefs.userId, recipient))
+                liveChats.postValue(apiService.getMyChats(ChatRequest(prefs.userId, recipient)))
             } catch (e: Exception) {
                 debugger(e.localizedMessage)
                 mutableListOf<Chat>()
             }
+            return@withContext liveChats
         }
     }
 

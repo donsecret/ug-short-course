@@ -1,6 +1,7 @@
 package dev.csshortcourse.assignmenttwo.datasource.local
 
 import android.app.Application
+import androidx.lifecycle.LiveData
 import dev.csshortcourse.assignmenttwo.datasource.DataSource
 import dev.csshortcourse.assignmenttwo.model.Chat
 import dev.csshortcourse.assignmenttwo.model.User
@@ -29,7 +30,7 @@ class LocalDataSource constructor(app: Application) : DataSource {
         }
     }
 
-    override suspend fun getMyChats(recipient: String): MutableList<Chat> {
+    override suspend fun getMyChats(recipient: String): LiveData<MutableList<Chat>> {
         return withContext(Dispatchers.IO) {
             chatDao.getMyChats(prefs.userId, recipient)
         }

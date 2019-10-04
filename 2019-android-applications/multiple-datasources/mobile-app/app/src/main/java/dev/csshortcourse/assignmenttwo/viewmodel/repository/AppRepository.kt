@@ -1,6 +1,7 @@
 package dev.csshortcourse.assignmenttwo.viewmodel.repository
 
 import android.app.Application
+import androidx.lifecycle.LiveData
 import dev.csshortcourse.assignmenttwo.datasource.DataSource
 import dev.csshortcourse.assignmenttwo.datasource.local.LocalDataSource
 import dev.csshortcourse.assignmenttwo.datasource.remote.RemoteDataSource
@@ -20,7 +21,7 @@ typealias Callback<O> = (WorkState, O?) -> Unit
  */
 interface Repository {
     suspend fun getCurrentUser(refresh: Boolean): User?
-    suspend fun getMyChats(refresh: Boolean, recipient: String): MutableList<Chat>
+    suspend fun getMyChats(refresh: Boolean, recipient: String): LiveData<MutableList<Chat>>
     suspend fun getUsers(refresh: Boolean): MutableList<User>
     suspend fun getUser(refresh: Boolean, id: String): User?
     suspend fun addMessage(chat: Chat)
@@ -54,8 +55,18 @@ class AppRepository private constructor(app: Application) : Repository {
         }
     }
 
-    override suspend fun getMyChats(refresh: Boolean, recipient: String): MutableList<Chat> {
-        return if (refresh) remoteDataSource.getMyChats(recipient) else localDataSource.getMyChats(
+    override suspend fun getMyChats(
+        refresh: Boolean,
+        recipient: String
+    ): LiveData<MutableList<Chat>> {
+        return if (refresh) localDataSource.getMyChats(recipient).apply {
+            remoteDataSource.getMyChats(recipient).apply {
+                localDataSource.chatDao.insertAll(
+                    this.value ?: mutableListOf()
+                )
+            }
+        }
+        else localDataSource.getMyChats(
             recipient
         )
     }

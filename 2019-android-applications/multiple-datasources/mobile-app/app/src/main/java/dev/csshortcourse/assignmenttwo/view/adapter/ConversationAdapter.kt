@@ -42,14 +42,14 @@ class ConversationAdapter(
                 holder.v.sender_name.text = currentUser.name
                 holder.v.sender_message.text = chat.message
                 holder.v.sender_timestamp.text =
-                    DateFormatter(ctx).getMessageTimestamp(chat.timestamp)
+                    DateFormatter(ctx).getDetailedTimestamp(chat.timestamp)
             }
 
             RECIPIENT -> {
                 holder.v.recipient_name.text = currentUser.name
                 holder.v.recipient_message.text = chat.message
                 holder.v.recipient_timestamp.text =
-                    DateFormatter(ctx).getMessageTimestamp(chat.timestamp)
+                    DateFormatter(ctx).getDetailedTimestamp(chat.timestamp)
             }
         }
 

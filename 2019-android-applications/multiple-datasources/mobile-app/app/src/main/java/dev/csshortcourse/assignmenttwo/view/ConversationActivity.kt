@@ -16,6 +16,7 @@ import dev.csshortcourse.assignmenttwo.util.BaseActivity
 import dev.csshortcourse.assignmenttwo.util.debugger
 import dev.csshortcourse.assignmenttwo.view.adapter.ChatClickListener
 import dev.csshortcourse.assignmenttwo.view.adapter.ConversationAdapter
+import kotlinx.coroutines.launch
 
 class ConversationActivity : BaseActivity() {
     private lateinit var binding: ActivityConversationBinding
@@ -55,8 +56,8 @@ class ConversationActivity : BaseActivity() {
                                 MaterialAlertDialogBuilder(this@ConversationActivity).apply {
                                     setTitle("Conversation details")
                                     setMessage("${chat.message}\n\nSent by: ${chatUser.name}")
-                                    setPositiveButton("Dismiss"){d ,_ -> d.dismiss()}
-                                    setNegativeButton("Delete"){ d,_ ->
+                                    setPositiveButton("Dismiss") { d, _ -> d.dismiss() }
+                                    setNegativeButton("Delete") { d, _ ->
                                         d.dismiss()
                                         viewModel.deleteMessage(chat)
                                     }
@@ -81,18 +82,18 @@ class ConversationActivity : BaseActivity() {
             FakeAPI.loadFakeResponse(currentUser.id, user.id).forEach { chat ->
                 viewModel.addMessage(chat.sender, chat.recipient, chat.message)
             }
-            viewModel.getConversation(user.id)
-                .observe(this, androidx.lifecycle.Observer { messages ->
-                    debugger("Showing ${messages.size} messages")
-                    adapter.submitList(messages) {
-                        // Scroll to last item in the list if it is not empty
-                        if (adapter.itemCount != 0) binding.conversationList.smoothScrollToPosition(
-                            adapter.itemCount.minus(
-                                1
-                            )
-                        )
-                    }
-                })
+
+            uiScope.launch {
+                viewModel.getMyChats(user.id)
+                    .observe(this@ConversationActivity, androidx.lifecycle.Observer { messages ->
+                        debugger("Showing ${messages.size} messages")
+                        adapter.submitList(messages) {
+                            // Scroll to last item in the list if it is not empty
+                            if (adapter.itemCount != 0)
+                                binding.conversationList.smoothScrollToPosition(adapter.itemCount.minus(1))
+                        }
+                    })
+            }
         })
     }
 

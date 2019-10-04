@@ -34,7 +34,6 @@ class MySharedPrefs constructor(context: Context) {
         return prefs.getString(KEY_ITEM, null)
     }
 
-
     /**
      * Clear all values stored
      */
@@ -60,5 +59,4 @@ class MySharedPrefs constructor(context: Context) {
     companion object {
         private const val KEY_ITEM = "item_key"
     }
-
 }

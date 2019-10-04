@@ -4,6 +4,8 @@ import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
+import android.net.NetworkCapabilities
+import android.net.NetworkRequest
 import androidx.lifecycle.AndroidViewModel
 import dev.csshortcourse.assignmenttwo.util.debugger
 import dev.csshortcourse.assignmenttwo.viewmodel.repository.AppRepository
@@ -42,7 +44,12 @@ open class AppViewModel(app: Application) : AndroidViewModel(app) {
         monitoring = true
         debugger("Registering network listener")
         try {
-            connectivityManager.unregisterNetworkCallback(callback)
+            connectivityManager.registerNetworkCallback(
+                NetworkRequest.Builder()
+                    .addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+                    .build()
+                , callback
+            )
         } catch (e: Exception) {
             debugger("Cannot register network listener")
         }

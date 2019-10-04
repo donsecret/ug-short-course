@@ -42,21 +42,18 @@ app.post("/auth", (req, res) => {
 
 // Get all users
 app.get("/users", (req, res) => {
-  connection.connect(err => {
-    if (err) {
-      return console.log(err.message);
-    } else {
-      console.log("Connected to pied_piper successfully");
+  connection.connect();
+  var users = connection.query(
+    "select * from users order by id desc",
+    [],
+    (err, rows, fields) => {
+      if (err) {
+        return [];
+      } else {
+        return rows;
+      }
     }
-  });
-  var users = connection.query("SELECT * from users", (err, rows, fields) => {
-    if (err) {
-      return [];
-    } else {
-      return rows;
-    }
-  });
-  // console.log(users);
+  );
   connection.end();
   return res.status(200).send(Flatted.stringify(users));
 });
@@ -79,7 +76,7 @@ app.post("/users/:id", (req, res) => {
         return res.status(200).send(rows[0]);
       }
     );
-    connection.end();
+    // connection.end();
   } else {
     return res.status(404).send({
       message: "Your request is invalid"
@@ -105,7 +102,7 @@ app.post("/users/new/multi", (req, res) => {
         });
       });
     });
-    connection.end();
+    // connection.end();
   }
 });
 
@@ -135,7 +132,7 @@ app.post("/chats/new", (req, res) => {
         });
       }
     );
-    connection.end();
+    // connection.end();
   }
 });
 
@@ -155,7 +152,7 @@ app.post("/chats", (req, res) => {
         return res.status(200).send(rows);
       }
     );
-    connection.end();
+    // connection.end();
   } else return res.send([]);
 });
 
@@ -175,7 +172,7 @@ app.delete("/chats/:id", (req, res) => {
       return res.send({ message: "Chat delete successfully" });
     }
   );
-  connection.end();
+  // connection.end();
 });
 
 // Export module
