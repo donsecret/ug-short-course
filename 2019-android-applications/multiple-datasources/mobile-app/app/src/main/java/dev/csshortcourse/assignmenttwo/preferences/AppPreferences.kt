@@ -62,7 +62,7 @@ class AppPreferences private constructor(context: Context) {
 
     init {
         // Set default value when class is created for the first time
-        // Will be tre if value is not null & not empty as well
+        // Will be the if value is not null & not empty as well
         _liveLoginState.postValue(!prefs.getString(USER_ID, null).isNullOrEmpty())
     }
 }
