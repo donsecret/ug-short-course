@@ -6,6 +6,7 @@ import dev.csshortcourse.assignmenttwo.datasource.local.LocalDataSource
 import dev.csshortcourse.assignmenttwo.datasource.remote.RemoteDataSource
 import dev.csshortcourse.assignmenttwo.model.Chat
 import dev.csshortcourse.assignmenttwo.model.User
+import dev.csshortcourse.assignmenttwo.preferences.AppPreferences
 import dev.csshortcourse.assignmenttwo.util.WorkState
 import dev.csshortcourse.assignmenttwo.viewmodel.AppViewModel
 
@@ -18,8 +19,8 @@ typealias Callback<O> = (WorkState, O?) -> Unit
  * Same as [DataSource] interface calls
  */
 interface Repository {
-    suspend fun getCurrentUser(refresh: Boolean): User
-    suspend fun getMyChats(refresh: Boolean): MutableList<Chat>
+    suspend fun getCurrentUser(refresh: Boolean): User?
+    suspend fun getMyChats(refresh: Boolean, recipient: String): MutableList<Chat>
     suspend fun getUsers(refresh: Boolean): MutableList<User>
     suspend fun getUser(refresh: Boolean, id: String): User?
     suspend fun addMessage(chat: Chat)
@@ -32,6 +33,7 @@ interface Repository {
  * [Repository] for the [AppViewModel]
  */
 class AppRepository private constructor(app: Application) : Repository {
+    private val prefs: AppPreferences by lazy { AppPreferences.get(app) }
     // Local data source
     private val localDataSource: LocalDataSource by lazy { LocalDataSource(app) }
     // Remote data source
@@ -41,12 +43,20 @@ class AppRepository private constructor(app: Application) : Repository {
         return if (refresh) remoteDataSource.getAllUsers() else localDataSource.getAllUsers()
     }
 
-    override suspend fun getCurrentUser(refresh: Boolean): User {
-        TODO()
+    override suspend fun getCurrentUser(refresh: Boolean): User? {
+        return when {
+            prefs.userId.isNullOrEmpty() -> null
+            refresh -> remoteDataSource.getUser(
+                prefs.userId!!
+            ).apply { if (this != null) localDataSource.userDao.insert(this) }
+            else -> localDataSource.getUser(prefs.userId!!)
+        }
     }
 
-    override suspend fun getMyChats(refresh: Boolean): MutableList<Chat> {
-        TODO()
+    override suspend fun getMyChats(refresh: Boolean, recipient: String): MutableList<Chat> {
+        return if (refresh) remoteDataSource.getMyChats(recipient) else localDataSource.getMyChats(
+            recipient
+        )
     }
 
     override fun login(callback: Callback<User>) {

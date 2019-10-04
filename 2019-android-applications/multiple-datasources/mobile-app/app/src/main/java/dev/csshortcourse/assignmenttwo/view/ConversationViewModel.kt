@@ -12,10 +12,10 @@ import java.util.*
 
 class ConversationViewModel(app: Application) : AppViewModel(app) {
 
-    fun getConversation(): LiveData<MutableList<Chat>> {
+    fun getConversation(recipient: String): LiveData<MutableList<Chat>> {
         val conversation = MutableLiveData<MutableList<Chat>>()
         viewModelScope.launch {
-            conversation.postValue(repo.getMyChats(isConnected))
+            conversation.postValue(repo.getMyChats(isConnected, recipient))
         }
         return conversation
     }
@@ -31,6 +31,14 @@ class ConversationViewModel(app: Application) : AppViewModel(app) {
         val liveUser = MutableLiveData<User>()
         viewModelScope.launch {
             liveUser.postValue(repo.getUser(isConnected, id))
+        }
+        return liveUser
+    }
+
+    fun getCurrentUser(): LiveData<User> {
+        val liveUser = MutableLiveData<User>()
+        viewModelScope.launch {
+            liveUser.postValue(repo.getCurrentUser(isConnected))
         }
         return liveUser
     }

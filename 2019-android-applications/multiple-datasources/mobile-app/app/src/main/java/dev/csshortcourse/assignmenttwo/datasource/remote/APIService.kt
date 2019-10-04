@@ -2,24 +2,26 @@ package dev.csshortcourse.assignmenttwo.datasource.remote
 
 import dev.csshortcourse.assignmenttwo.model.Chat
 import dev.csshortcourse.assignmenttwo.model.User
+import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface APIService {
-    @POST("/users/me")
-    suspend fun getUser(id: String): User?
+    @POST("/users/{id}")
+    suspend fun getUser(@Path("id") id: String): User?
 
     @GET("/users")
     suspend fun getAllUsers(): MutableList<User>
 
     @POST("/chats")
-    suspend fun getMyChats(chatRequest: ChatRequest): MutableList<Chat>
+    suspend fun getMyChats(@Body chatRequest: ChatRequest): MutableList<Chat>
 
     @POST("/chats/new")
-    suspend fun addMessage(chat: Chat): Void
+    suspend fun addMessage(@Body chat: Chat): Void
 
     @POST("/users/new/multi")
-    suspend fun addUsers(users: MutableList<User>): Void
+    suspend fun addUsers(@Body users: MutableList<User>): Void
 }
 
 /**

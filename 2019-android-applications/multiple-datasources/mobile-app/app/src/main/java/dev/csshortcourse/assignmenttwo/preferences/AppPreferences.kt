@@ -25,7 +25,7 @@ class AppPreferences private constructor(context: Context) {
             putString(USER_ID, uid)
             apply()
         }
-        _liveLoginState.value = !uid.isNullOrEmpty()
+        _liveLoginState.postValue(!uid.isNullOrEmpty())
     }
 
     /**
@@ -37,7 +37,7 @@ class AppPreferences private constructor(context: Context) {
             clear()
             apply()
         }
-        _liveLoginState.value = false
+        _liveLoginState.postValue(false)
     }
 
     companion object {
@@ -63,6 +63,6 @@ class AppPreferences private constructor(context: Context) {
     init {
         // Set default value when class is created for the first time
         // Will be tre if value is not null & not empty as well
-        _liveLoginState.value = !prefs.getString(USER_ID, null).isNullOrEmpty()
+        _liveLoginState.postValue(!prefs.getString(USER_ID, null).isNullOrEmpty())
     }
 }

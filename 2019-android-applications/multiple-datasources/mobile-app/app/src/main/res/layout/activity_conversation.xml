@@ -55,6 +55,7 @@
                 android:layout_height="?actionBarSize"
                 android:layout_weight="1"
                 android:autoLink="all"
+                android:id="@+id/message"
                 android:background="@color/white"
                 android:fontFamily="@font/google_sans"
                 android:hint="Enter your message here..."
@@ -62,6 +63,7 @@
                 android:inputType="textCapSentences|textAutoCorrect|textAutoComplete|textMultiLine" />
 
             <ImageButton
+                android:onClick="sendMessage"
                 android:id="@+id/send_message"
                 android:layout_width="@dimen/avatar_size"
                 android:layout_height="@dimen/avatar_size"
