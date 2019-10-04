@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -12,10 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dev.csshortcourse.assignmenttwo.R
 import dev.csshortcourse.assignmenttwo.databinding.FragmentHomeBinding
 import dev.csshortcourse.assignmenttwo.model.User
-import dev.csshortcourse.assignmenttwo.util.BaseActivity
-import dev.csshortcourse.assignmenttwo.util.BaseFragment
-import dev.csshortcourse.assignmenttwo.util.gone
-import dev.csshortcourse.assignmenttwo.util.visible
+import dev.csshortcourse.assignmenttwo.util.*
+import dev.csshortcourse.assignmenttwo.view.ConversationActivity
 import dev.csshortcourse.assignmenttwo.view.adapter.UserAdapter
 import dev.csshortcourse.assignmenttwo.view.adapter.UserClickListener
 
@@ -47,10 +46,11 @@ class ChatFragment : BaseFragment() {
         val adapter = UserAdapter(requireActivity() as BaseActivity, object : UserClickListener {
             override fun onClick(user: User) {
                 // Pass data to the conversation fragment
-                val action = ChatFragmentDirections.chatsToConversation().apply {
-                    extraUser = user
-                }
-                findNavController().navigate(action)
+                (requireActivity() as BaseActivity).moveTo(
+                    ConversationActivity::class.java,
+                    false,
+                    bundleOf(Pair(ConversationActivity.USER, user))
+                )
             }
         })
 

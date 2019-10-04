@@ -5,9 +5,23 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:focusableInTouchMode="true"
-    android:background="#99eeeeee"
-    tools:context=".view.ui.conversation.ConversationFragment">
+    android:paddingTop="?actionBarSize"
+    tools:context=".view.ConversationActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:liftOnScroll="true">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:navigationIcon="@drawable/ic_back"
+            app:title="@string/title_conversation" />
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/content"
@@ -27,9 +41,9 @@
             android:id="@+id/message_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/white"
             android:minHeight="?actionBarSize"
             android:orientation="horizontal"
-            android:background="@color/white"
             android:paddingStart="@dimen/margin_normal"
             android:paddingEnd="@dimen/margin_small"
             app:layout_constraintBottom_toBottomOf="parent">
@@ -50,15 +64,14 @@
                 android:layout_width="@dimen/avatar_size"
                 android:layout_height="@dimen/avatar_size"
                 android:layout_gravity="center_vertical"
+                android:background="?selectableItemBackground"
+                android:scaleType="centerInside"
                 android:src="@drawable/ic_send"
                 android:tint="?colorPrimary"
-                android:scaleType="centerInside"
-                android:background="?selectableItemBackground"
                 app:fabSize="mini" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

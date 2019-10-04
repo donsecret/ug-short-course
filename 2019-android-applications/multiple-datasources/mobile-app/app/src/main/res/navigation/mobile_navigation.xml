@@ -13,16 +13,6 @@
         <action
             android:id="@+id/chats_to_users"
             app:destination="@id/navigation_users" />
-        <action
-            android:id="@+id/chats_to_conversation"
-            app:destination="@id/navigation_conversation">
-
-            <argument
-                android:name="extra_user"
-                android:defaultValue="@null"
-                app:argType="dev.csshortcourse.assignmenttwo.model.User"
-                app:nullable="true" />
-        </action>
     </fragment>
 
     <fragment
@@ -42,9 +32,4 @@
         android:name="dev.csshortcourse.assignmenttwo.view.ui.user.UserFragment"
         android:label="@string/title_users"
         tools:layout="@layout/fragment_user" />
-    <fragment
-        android:id="@id/navigation_conversation"
-        android:name="dev.csshortcourse.assignmenttwo.view.ui.conversation.ConversationFragment"
-        android:label="@string/title_conversation"
-        tools:layout="@layout/conversation_fragment" />
 </navigation>
