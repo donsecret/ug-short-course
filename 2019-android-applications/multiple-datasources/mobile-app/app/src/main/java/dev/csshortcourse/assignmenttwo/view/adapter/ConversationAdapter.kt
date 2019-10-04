@@ -9,6 +9,7 @@ import dev.csshortcourse.assignmenttwo.R
 import dev.csshortcourse.assignmenttwo.model.Chat
 import dev.csshortcourse.assignmenttwo.model.User
 import dev.csshortcourse.assignmenttwo.util.BaseActivity
+import io.codelabs.dateformatter.DateFormatter
 import kotlinx.android.synthetic.main.item_recipient.view.*
 import kotlinx.android.synthetic.main.item_sender.view.*
 
@@ -40,23 +41,24 @@ class ConversationAdapter(
             SENDER -> {
                 holder.v.sender_name.text = currentUser.name
                 holder.v.sender_message.text = chat.message
-                holder.v.sender_timestamp.text = chat.timestamp.toString()
+                holder.v.sender_timestamp.text =
+                    DateFormatter(ctx).getMessageTimestamp(chat.timestamp)
             }
 
             RECIPIENT -> {
                 holder.v.recipient_name.text = currentUser.name
                 holder.v.recipient_message.text = chat.message
-                holder.v.recipient_timestamp.text = chat.timestamp.toString()
+                holder.v.recipient_timestamp.text =
+                    DateFormatter(ctx).getMessageTimestamp(chat.timestamp)
             }
         }
 
         holder.v.setOnClickListener { listener.onClick(chat) }
     }
 
-
     companion object {
-        private val SENDER = R.layout.item_sender
-        private val RECIPIENT = R.layout.item_recipient
+        private const val SENDER = R.layout.item_sender
+        private const val RECIPIENT = R.layout.item_recipient
 
         private val DIFF_UTIL: DiffUtil.ItemCallback<Chat> =
             object : DiffUtil.ItemCallback<Chat>() {

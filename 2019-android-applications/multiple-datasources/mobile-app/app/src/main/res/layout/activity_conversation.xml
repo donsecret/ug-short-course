@@ -5,7 +5,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="?actionBarSize"
+    android:fitsSystemWindows="true"
     tools:context=".view.ConversationActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -35,7 +35,9 @@
             android:layout_height="0dp"
             android:scrollbarStyle="outsideOverlay"
             app:layout_constraintBottom_toTopOf="@id/message_container"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:itemCount="3"
+            tools:listitem="@layout/item_sender" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/message_container"

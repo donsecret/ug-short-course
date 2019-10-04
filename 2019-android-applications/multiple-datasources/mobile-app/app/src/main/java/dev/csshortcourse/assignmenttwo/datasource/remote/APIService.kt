@@ -14,6 +14,12 @@ interface APIService {
 
     @POST("/chats")
     suspend fun getMyChats(chatRequest: ChatRequest): MutableList<Chat>
+
+    @POST("/chats/new")
+    suspend fun addMessage(chat: Chat): Void
+
+    @POST("/users/new/multi")
+    suspend fun addUsers(users: MutableList<User>): Void
 }
 
 /**

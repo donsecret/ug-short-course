@@ -23,6 +23,10 @@ class ChatViewModel(val app: Application) : AppViewModel(app) {
 
         // Pass to live data
         this.value = userList
+        
+        viewModelScope.launch {
+            repo.addUsers(userList)
+        }
 
         // todo: uncomment this
         /*viewModelScope.launch {

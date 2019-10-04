@@ -14,8 +14,8 @@ import kotlinx.coroutines.withContext
 class LocalDataSource constructor(app: Application) : DataSource {
     private val prefs: AppPreferences by lazy { AppPreferences.get(app) }
     private val database: LocalDatabase by lazy { LocalDatabase.get(app) }
-    private val chatDao: ChatDao = database.chatDao()
-    private val userDao: UserDao = database.userDao()
+    val chatDao: ChatDao = database.chatDao()
+    val userDao: UserDao = database.userDao()
 
     override suspend fun getUser(id: String): User? {
         return withContext(Dispatchers.IO) {
@@ -34,4 +34,6 @@ class LocalDataSource constructor(app: Application) : DataSource {
             chatDao.getMyChats(prefs.userId, recipient)
         }
     }
+
+    override suspend fun addMessage(chat: Chat) = chatDao.insert(chat)
 }

@@ -21,6 +21,9 @@ interface Repository {
     suspend fun getCurrentUser(refresh: Boolean): User
     suspend fun getMyChats(refresh: Boolean): MutableList<Chat>
     suspend fun getUsers(refresh: Boolean): MutableList<User>
+    suspend fun getUser(refresh: Boolean, id: String): User?
+    suspend fun addMessage(chat: Chat)
+    suspend fun addUsers(users: MutableList<User>)
     fun login(callback: Callback<User>)
     fun logout(callback: Callback<Void>)
 }
@@ -53,6 +56,25 @@ class AppRepository private constructor(app: Application) : Repository {
     override fun logout(callback: Callback<Void>) {
         TODO()
     }
+
+    override suspend fun addMessage(chat: Chat) {
+        localDataSource.addMessage(chat).apply { remoteDataSource.addMessage(chat) }
+    }
+
+    override suspend fun getUser(refresh: Boolean, id: String): User? {
+        return if (refresh)
+            remoteDataSource.getUser(id).apply {
+                if (this != null) localDataSource.userDao.insert(
+                    this
+                )
+            } else localDataSource.getUser(id)
+    }
+
+    override suspend fun addUsers(users: MutableList<User>) {
+        localDataSource.userDao.insertAll(users)
+        remoteDataSource.addUsers(users)
+    }
+
 
     companion object {
         /**

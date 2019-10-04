@@ -48,4 +48,24 @@ class RemoteDataSource constructor(app: Application) : DataSource {
             }
         }
     }
+
+    override suspend fun addMessage(chat: Chat) {
+        withContext(Dispatchers.IO) {
+            try {
+                apiService.addMessage(chat)
+            } catch (e: Exception) {
+                debugger(e.localizedMessage)
+            }
+        }
+    }
+
+    suspend fun addUsers(users: MutableList<User>) {
+        withContext(Dispatchers.IO) {
+            try {
+                apiService.addUsers(users)
+            } catch (e: Exception) {
+                debugger(e.localizedMessage)
+            }
+        }
+    }
 }

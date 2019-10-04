@@ -23,6 +23,7 @@
         android:layout_marginTop="@dimen/spacing_micro"
         android:background="@drawable/sender"
         android:padding="@dimen/margin_normal"
+        android:textColor="@color/black"
         android:textAlignment="viewEnd"
         android:textAppearance="?textAppearanceBody1"
         app:layout_constraintEnd_toEndOf="parent"

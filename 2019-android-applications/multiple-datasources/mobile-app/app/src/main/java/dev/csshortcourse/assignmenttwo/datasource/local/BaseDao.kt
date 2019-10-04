@@ -9,14 +9,14 @@ import androidx.room.Update
  */
 interface BaseDao<O> {
     @Insert
-    fun insert(item: O)
+    suspend fun insert(item: O)
 
     @Update
-    fun update(item: O)
+    suspend fun update(item: O)
 
     @Insert
-    fun insertAll(item: MutableList<O>)
+    suspend fun insertAll(item: MutableList<O>)
 
     @Delete
-    fun remove(item: O)
+    suspend fun remove(item: O)
 }

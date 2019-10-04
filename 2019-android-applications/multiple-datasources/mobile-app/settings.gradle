@@ -1,2 +1,2 @@
 rootProject.name='Assignment Two'
-include ':app'
+include ':app', ':date-formatter'
