@@ -9,7 +9,7 @@ object FakeAPI {
         return mutableListOf<Chat>().apply {
             for (i in 0 until 5) {
                 val chat =
-                    Chat(UUID.randomUUID().toString(), sender, recipient, "Some cool response")
+                    Chat(UUID.randomUUID().toString(), recipient, sender, "Some cool response")
                 this@apply.add(chat)
             }
         }

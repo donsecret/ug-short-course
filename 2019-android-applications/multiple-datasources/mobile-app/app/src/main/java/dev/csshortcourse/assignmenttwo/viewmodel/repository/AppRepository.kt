@@ -25,6 +25,7 @@ interface Repository {
     suspend fun getUser(refresh: Boolean, id: String): User?
     suspend fun addMessage(chat: Chat)
     suspend fun addUsers(users: MutableList<User>)
+    suspend fun deleteMessage(chat: Chat)
     fun login(callback: Callback<User>)
     fun logout(callback: Callback<Void>)
 }
@@ -85,6 +86,10 @@ class AppRepository private constructor(app: Application) : Repository {
         remoteDataSource.addUsers(users)
     }
 
+    override suspend fun deleteMessage(chat: Chat) {
+        localDataSource.chatDao.remove(chat)
+        remoteDataSource.deleteMessage(chat.id)
+    }
 
     companion object {
         /**

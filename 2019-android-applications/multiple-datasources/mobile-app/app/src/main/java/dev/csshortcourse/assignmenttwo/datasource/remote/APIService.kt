@@ -2,10 +2,7 @@ package dev.csshortcourse.assignmenttwo.datasource.remote
 
 import dev.csshortcourse.assignmenttwo.model.Chat
 import dev.csshortcourse.assignmenttwo.model.User
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface APIService {
     @POST("/users/{id}")
@@ -22,6 +19,9 @@ interface APIService {
 
     @POST("/users/new/multi")
     suspend fun addUsers(@Body users: MutableList<User>): Void
+
+    @DELETE("/chats/{id}")
+    suspend fun deleteMessage(@Path("id") id: String): Void
 }
 
 /**

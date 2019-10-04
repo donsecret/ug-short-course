@@ -44,4 +44,6 @@ class ConversationViewModel(app: Application) : AppViewModel(app) {
         }
         return liveUser
     }
+
+    fun deleteMessage(chat: Chat) = viewModelScope.launch { repo.deleteMessage(chat) }
 }

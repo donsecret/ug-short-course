@@ -68,4 +68,14 @@ class RemoteDataSource constructor(app: Application) : DataSource {
             }
         }
     }
+
+    suspend fun deleteMessage(chatId: String) {
+        withContext(Dispatchers.IO) {
+            try {
+                apiService.deleteMessage(chatId)
+            } catch (e: Exception) {
+                debugger(e.localizedMessage)
+            }
+        }
+    }
 }

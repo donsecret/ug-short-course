@@ -55,6 +55,11 @@ class ConversationActivity : BaseActivity() {
                                 MaterialAlertDialogBuilder(this@ConversationActivity).apply {
                                     setTitle("Conversation details")
                                     setMessage("${chat.message}\n\nSent by: ${chatUser.name}")
+                                    setPositiveButton("Dismiss"){d ,_ -> d.dismiss()}
+                                    setNegativeButton("Delete"){ d,_ ->
+                                        d.dismiss()
+                                        viewModel.deleteMessage(chat)
+                                    }
                                     show()
                                 }
                             })

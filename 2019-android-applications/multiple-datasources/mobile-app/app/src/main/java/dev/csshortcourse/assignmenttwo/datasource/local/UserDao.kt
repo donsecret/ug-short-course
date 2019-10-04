@@ -10,8 +10,8 @@ import dev.csshortcourse.assignmenttwo.model.User
 @Dao
 interface UserDao : BaseDao<User> {
      @Query("select * from users where id = :id")
-    fun getUser(id: String): User?
+    suspend fun getUser(id: String): User?
 
      @Query("select * from users order by timestamp desc")
-    fun getAllUsers(): MutableList<User>
+    suspend fun getAllUsers(): MutableList<User>
 }

@@ -159,5 +159,24 @@ app.post("/chats", (req, res) => {
   } else return res.send([]);
 });
 
+app.delete("/chats/:id", (req, res) => {
+  var id = req.params.id;
+
+  connection.connect();
+  connection.query(
+    "delete from chat where id = ?",
+    [id],
+    (err, rows, fields) => {
+      if (err) {
+        return res.status(400).send({
+          message: `Unable to delete your chat with id: ${id}`
+        });
+      }
+      return res.send({ message: "Chat delete successfully" });
+    }
+  );
+  connection.end();
+});
+
 // Export module
 module.exports = app;
