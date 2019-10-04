@@ -9,15 +9,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dev.csshortcourse.assignmenttwo.R
 import dev.csshortcourse.assignmenttwo.databinding.ActivityConversationBinding
+import dev.csshortcourse.assignmenttwo.datasource.FakeAPI
 import dev.csshortcourse.assignmenttwo.model.Chat
 import dev.csshortcourse.assignmenttwo.model.User
 import dev.csshortcourse.assignmenttwo.util.BaseActivity
+import dev.csshortcourse.assignmenttwo.util.debugger
 import dev.csshortcourse.assignmenttwo.view.adapter.ChatClickListener
 import dev.csshortcourse.assignmenttwo.view.adapter.ConversationAdapter
 
 class ConversationActivity : BaseActivity() {
     private lateinit var binding: ActivityConversationBinding
-    private var user: User? = null
+    private lateinit var user: User
     private lateinit var adapter: ConversationAdapter
     private lateinit var currentUser: User
     private val oldList by lazy { mutableListOf<Chat>() }
@@ -29,14 +31,19 @@ class ConversationActivity : BaseActivity() {
         setContentView(binding.root)
 
         // Get user from the intent data
-        user = intent.getParcelableExtra<User>(USER)
+        with(intent.getParcelableExtra<User>(USER)) {
+            if (this == null) {
+                finishAfterTransition()
+                return@with
+            }
+            user = this
+        }
         binding.toolbar.setNavigationOnClickListener { onBackPressed() }
-        binding.toolbar.title = user?.name ?: getString(R.string.title_conversation)
+        binding.toolbar.title = user.name ?: getString(R.string.title_conversation)
 
         // Get current user instance
         viewModel.getCurrentUser().observe(this, androidx.lifecycle.Observer {
             currentUser = it
-
             adapter = ConversationAdapter(
                 this,
                 currentUser,
@@ -66,31 +73,35 @@ class ConversationActivity : BaseActivity() {
             }
 
             // Observe conversation
-            if (user != null) {
-                viewModel.getConversation(user!!.id)
-                    .observe(this, androidx.lifecycle.Observer { messages ->
-                        adapter.submitList(messages) {
-                            // Scroll to last item in the list if it is not empty
-                            if (adapter.itemCount != 0) binding.conversationList.smoothScrollToPosition(
-                                adapter.itemCount.minus(
-                                    1
-                                )
+            FakeAPI.loadFakeResponse(currentUser.id, user.id).forEach { chat ->
+                viewModel.addMessage(chat.sender, chat.recipient, chat.message)
+            }
+            viewModel.getConversation(user.id)
+                .observe(this, androidx.lifecycle.Observer { messages ->
+                    debugger("Showing ${messages.size} messages")
+                    adapter.submitList(messages) {
+                        // Scroll to last item in the list if it is not empty
+                        if (adapter.itemCount != 0) binding.conversationList.smoothScrollToPosition(
+                            adapter.itemCount.minus(
+                                1
                             )
-                        }
-                    })
-            } else onBackPressed()
+                        )
+                    }
+                })
         })
     }
 
     fun sendMessage(v: View) {
-        if (user != null){
-            val message = binding.message.text.toString()
-            if (message.isEmpty()){
-                Toast.makeText(applicationContext, "Please enter a message first", Toast.LENGTH_SHORT).show()
-            } else {
-                binding.message.text?.clear()
-                viewModel.addMessage(currentUser.id, user!!.id, message)
-            }
+        val message = binding.message.text.toString()
+        if (message.isEmpty()) {
+            Toast.makeText(
+                applicationContext,
+                "Please enter a message first",
+                Toast.LENGTH_SHORT
+            ).show()
+        } else {
+            binding.message.text?.clear()
+            viewModel.addMessage(currentUser.id, user.id, message)
         }
     }
 
