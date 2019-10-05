@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:indeterminateTint="#eeeeee"
-        android:visibility="gone" />
+        android:visibility="visible" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/empty_list"

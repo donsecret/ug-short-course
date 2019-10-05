@@ -9,6 +9,7 @@ import dev.csshortcourse.assignmenttwo.model.Chat
 import dev.csshortcourse.assignmenttwo.model.User
 import dev.csshortcourse.assignmenttwo.preferences.AppPreferences
 import dev.csshortcourse.assignmenttwo.util.WorkState
+import dev.csshortcourse.assignmenttwo.util.debugger
 import dev.csshortcourse.assignmenttwo.viewmodel.AppViewModel
 
 // Callback alias
@@ -42,7 +43,12 @@ class AppRepository private constructor(app: Application) : Repository {
     private val remoteDataSource: RemoteDataSource by lazy { RemoteDataSource(app) }
 
     override suspend fun getUsers(refresh: Boolean): MutableList<User> {
-        return if (refresh) remoteDataSource.getAllUsers() else localDataSource.getAllUsers()
+        return if (refresh) localDataSource.getAllUsers().also {
+            remoteDataSource.getAllUsers().apply {
+                debugger("Users' list: ${this.size}")
+                localDataSource.userDao.insertAll(this)
+            }
+        } else localDataSource.getAllUsers()
     }
 
     override suspend fun getCurrentUser(refresh: Boolean): User? {
@@ -51,6 +57,7 @@ class AppRepository private constructor(app: Application) : Repository {
             refresh -> remoteDataSource.getUser(
                 prefs.userId!!
             ).apply { if (this != null) localDataSource.userDao.insert(this) }
+                ?: localDataSource.getUser(prefs.userId!!)
             else -> localDataSource.getUser(prefs.userId!!)
         }
     }
@@ -60,11 +67,11 @@ class AppRepository private constructor(app: Application) : Repository {
         recipient: String
     ): LiveData<MutableList<Chat>> {
         return if (refresh) localDataSource.getMyChats(recipient).apply {
-            remoteDataSource.getMyChats(recipient).apply {
+            /*remoteDataSource.getMyChats(recipient).apply {
                 localDataSource.chatDao.insertAll(
                     this.value ?: mutableListOf()
                 )
-            }
+            }*/
         }
         else localDataSource.getMyChats(
             recipient

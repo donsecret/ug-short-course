@@ -5,11 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import dev.csshortcourse.assignmenttwo.R
 import dev.csshortcourse.assignmenttwo.databinding.FragmentHomeBinding
 import dev.csshortcourse.assignmenttwo.model.User
@@ -24,7 +25,7 @@ import dev.csshortcourse.assignmenttwo.view.adapter.UserClickListener
  */
 class ChatFragment : BaseFragment() {
 
-    private lateinit var viewModel: ChatViewModel
+    private val viewModel: ChatViewModel by viewModels()
     private lateinit var binding: FragmentHomeBinding
 
     override fun onCreateView(
@@ -34,8 +35,6 @@ class ChatFragment : BaseFragment() {
     ): View? {
         binding =
             FragmentHomeBinding.inflate(inflater)
-        viewModel =
-            ViewModelProvider(this).get(ChatViewModel::class.java)
         return binding.root
     }
 
@@ -67,8 +66,13 @@ class ChatFragment : BaseFragment() {
             findNavController().navigate(R.id.navigation_users)
         }
 
+        // Simple snackbar to simulate load process
+        val snackbar = Snackbar.make(binding.root, "Refreshing your chats", Snackbar.LENGTH_INDEFINITE)
+        snackbar.show()
+
         // Fetch data from view model
         viewModel.users.observe(viewLifecycleOwner, Observer { users ->
+            snackbar.dismiss()
             binding.loading.gone()
             if (users.isEmpty()) {
                 binding.emptyList.visible()
