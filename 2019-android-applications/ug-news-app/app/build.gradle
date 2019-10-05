@@ -25,6 +25,8 @@ android {
                         "room.expandProjection": "true"]
             }
         }
+        buildConfigField("String", "API_KEY", "\"${apiKey}\"")
+        buildConfigField("String", "NEWS_URL", "\"${news_url}\"")
     }
     buildTypes {
         release {
