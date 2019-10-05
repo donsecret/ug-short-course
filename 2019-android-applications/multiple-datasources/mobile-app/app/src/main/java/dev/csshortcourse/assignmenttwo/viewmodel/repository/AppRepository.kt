@@ -9,6 +9,7 @@ import dev.csshortcourse.assignmenttwo.model.Chat
 import dev.csshortcourse.assignmenttwo.model.User
 import dev.csshortcourse.assignmenttwo.preferences.AppPreferences
 import dev.csshortcourse.assignmenttwo.util.WorkState
+import dev.csshortcourse.assignmenttwo.util.debugger
 import dev.csshortcourse.assignmenttwo.viewmodel.AppViewModel
 
 // Callback alias
@@ -27,8 +28,8 @@ interface Repository {
     suspend fun addMessage(chat: Chat)
     suspend fun addUsers(users: MutableList<User>)
     suspend fun deleteMessage(chat: Chat)
-    fun login(callback: Callback<User>)
-    fun logout(callback: Callback<Void>)
+    suspend fun login(user: User, callback: Callback<User>)
+    suspend fun logout(callback: Callback<Void>)
 }
 
 /**
@@ -41,36 +42,53 @@ class AppRepository private constructor(app: Application) : Repository {
     // Remote data source
     private val remoteDataSource: RemoteDataSource by lazy { RemoteDataSource(app) }
 
-    // todo: fix this
     override suspend fun getUsers(refresh: Boolean): MutableList<User> {
-        return if (refresh) localDataSource.getAllUsers().filter { !prefs.userId.isNullOrEmpty() && it.id != prefs.userId }.toMutableList()
+        return if (refresh) remoteDataSource.getAllUsers().filter { !prefs.userId.isNullOrEmpty() && it.id != prefs.userId }.toMutableList()
         else localDataSource.getAllUsers().filter { !prefs.userId.isNullOrEmpty() && it.id != prefs.userId }.toMutableList()
     }
 
-    // todo: fix this
     override suspend fun getCurrentUser(refresh: Boolean): User? {
         return when {
             prefs.userId.isNullOrEmpty() -> null
-            refresh -> localDataSource.getUser(prefs.userId!!)
+            refresh -> remoteDataSource.getUser(prefs.userId!!)
             else -> localDataSource.getUser(prefs.userId!!)
         }
     }
 
-    // todo: fix this
     override suspend fun getMyChats(
         refresh: Boolean,
         recipient: String
     ): LiveData<MutableList<Chat>> {
-        return if (refresh) localDataSource.getMyChats(recipient)
+        return if (refresh) remoteDataSource.getMyChats(recipient)
         else localDataSource.getMyChats(recipient)
     }
 
-    override fun login(callback: Callback<User>) {
-        TODO()
+    override suspend fun login(user: User, callback: Callback<User>) {
+        callback(WorkState.STARTED, null)
+        debugger("Sending user to server: $user")
+        remoteDataSource.login(user, callback).apply {
+            debugger("User from server: $this")
+            // Store user's id locally using shared preferences
+            prefs.login(this?.id)
+
+            // Save user details into the database
+            try {
+                localDataSource.userDao.insert(this)
+            } catch (e: Exception) {
+                debugger(e.localizedMessage)
+            }
+        }
     }
 
-    override fun logout(callback: Callback<Void>) {
-        TODO()
+    override suspend fun logout(callback: Callback<Void>) {
+        callback(WorkState.STARTED, null)
+        if (!prefs.userId.isNullOrEmpty()) {
+            localDataSource.userDao.remove(localDataSource.getUser(prefs.userId!!))
+            prefs.logout()
+            callback(WorkState.COMPLETED, null)
+        } else {
+            callback(WorkState.COMPLETED, null)
+        }
     }
 
     override suspend fun addMessage(chat: Chat) {

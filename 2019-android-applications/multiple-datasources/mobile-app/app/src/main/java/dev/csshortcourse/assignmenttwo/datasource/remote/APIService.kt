@@ -11,17 +11,37 @@ interface APIService {
     @GET("/users")
     suspend fun getAllUsers(): MutableList<User>
 
-    @POST("/chats")
-    suspend fun getMyChats(@Body chatRequest: ChatRequest): MutableList<Chat>
+    @GET("/chats")
+    suspend fun getMyChats(@Query("sender") sender: String?, @Query("recipient") recipient: String): MutableList<Chat>
 
-    @POST("/chats/new")
-    suspend fun addMessage(@Body chat: Chat): Void
+//    @POST("/chats/new")
+//    suspend fun addMessage(@Body chat: Chat): Void
+
+    @GET("/chats/new")
+    suspend fun addMessage(
+        @Query("id") id: String,
+        @Query("sender") sender: String,
+        @Query("recipient") recipient: String,
+        @Query("message") message: String,
+        @Query("timestamp") timestamp: Long = System.currentTimeMillis()
+    ): Void
+
 
     @POST("/users/new/multi")
     suspend fun addUsers(@Body users: MutableList<User>): Void
 
     @DELETE("/chats/{id}")
     suspend fun deleteMessage(@Path("id") id: String): Void
+
+//    @POST("/auth")
+//    suspend fun login(@Body user: User): User?
+
+    @GET("/auth")
+    suspend fun login(
+        @Query("id") id: String,
+        @Query("name") name: String,
+        @Query("avatar") avatar: String? = null
+    ): User?
 }
 
 /**

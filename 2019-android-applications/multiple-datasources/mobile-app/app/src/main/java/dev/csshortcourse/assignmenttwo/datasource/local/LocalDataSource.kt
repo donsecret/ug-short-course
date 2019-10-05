@@ -6,6 +6,7 @@ import dev.csshortcourse.assignmenttwo.datasource.DataSource
 import dev.csshortcourse.assignmenttwo.model.Chat
 import dev.csshortcourse.assignmenttwo.model.User
 import dev.csshortcourse.assignmenttwo.preferences.AppPreferences
+import dev.csshortcourse.assignmenttwo.viewmodel.repository.Callback
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -13,6 +14,12 @@ import kotlinx.coroutines.withContext
  * Local data source
  */
 class LocalDataSource constructor(app: Application) : DataSource {
+    override suspend fun login(user: User, callback: Callback<User>): User? {
+        // Do nothing here
+        // Login wil be handled by the remote data source
+        return null
+    }
+
     private val prefs: AppPreferences by lazy { AppPreferences.get(app) }
     private val database: LocalDatabase by lazy { LocalDatabase.get(app) }
     val chatDao: ChatDao = database.chatDao()

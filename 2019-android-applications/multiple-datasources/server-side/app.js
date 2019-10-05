@@ -9,9 +9,9 @@ app.use(morgan("dev"));
 // MySQL Connection
 var connection = mysql.createConnection({
   host: "localhost",
-  user: "root",
+  password: "",
   database: "pied_piper",
-  connectionLimit: 20
+  user: "root"
 });
 
 // Connect to database
@@ -23,45 +23,94 @@ connection.connect(err => {
   }
 });
 
+app.get("/auth", (req, res) => {
+  console.log(req.query);
+
+  var id = req.query.id;
+  var name = req.query.name;
+  var avatar = req.query.avatar || "";
+  var timestamp = new Date().getTime();
+
+  connection.query(
+    "select * from users where name = ?",
+    [name],
+    (err, results, fields) => {
+      if (err) {
+        return res.status(404).send(null);
+      } else {
+        if (results[0] == null) {
+          connection.query(
+            "insert into users values(?,?,?,?)",
+            [id, name, avatar, timestamp],
+            (err, results, fields) => {
+              if (err) {
+                return res.status(201).send(null);
+              } else {
+                return res.status(201).send({
+                  id,
+                  name,
+                  avatar,
+                  timestamp
+                });
+              }
+            }
+          );
+        } else {
+          return res.status(201).send(results[0]);
+        }
+      }
+    }
+  );
+});
+
 // Login route
 app.post("/auth", (req, res) => {
-  if (req.body) {
-    // var phone = req.body.phone;
-    var id = req.body.id;
-    var name = req.body.name;
-    var avatar = req.body.avatar;
+  // if (req.body) {
+  // var phone = req.body.phone;
+  var id = req.body.id;
+  var name = req.body.name;
+  var avatar = req.body.avatar;
 
-    res.status(201).send({
-      id,
-      name,
-      avatar
-    });
-  } else {
-    res.status(401).send(null);
-  }
+  connection.query(
+    "insert into users values(?,?,?,?)",
+    [id, name, avtar, new Date().getTime()],
+    (err, results, fields) => {
+      if (err) {
+        return;
+      } else {
+        return res.status(201).send({
+          id,
+          name,
+          avatar,
+          timestamp: new Date().getTime()
+        });
+      }
+    }
+  );
+  // } else {
+  // res.status(401).send(null);
+  // }
 });
 
 // Get all users
 app.get("/users", (req, res) => {
-  var users = connection.query(
+  connection.query(
     "select * from users order by id desc",
     [],
-    (err, rows, fields) => {
+    (err, results, fields) => {
       if (err) {
         return [];
       } else {
-        return rows;
+        return res.status(200).send(results);
       }
     }
   );
-  return res.status(200).send(Flatted.stringify(users));
 });
 
 // Get user by id
 app.post("/users/:id", (req, res) => {
   // Get the user's id form the request
   var id = req.params.id;
-  console.log(id);
 
   if (id) {
     connection.query(
@@ -74,7 +123,6 @@ app.post("/users/:id", (req, res) => {
         return res.status(200).send(rows[0]);
       }
     );
-    // connection.end();
   } else {
     return res.status(404).send({
       message: "Your request is invalid"
@@ -103,9 +151,9 @@ app.post("/users/new/multi", (req, res) => {
 });
 
 // Add chat
-app.post("/chats/new", (req, res) => {
-  if (req.body) {
-    var chat = req.body;
+app.get("/chats/new", (req, res) => {
+  if (req.query) {
+    var chat = req.query;
     var query = "insert into chat values(?,?,?,?,?)";
     connection.query(
       query,
@@ -127,13 +175,51 @@ app.post("/chats/new", (req, res) => {
         });
       }
     );
+  } else {
+    return res.status(404).send({
+      message: "Chat could not be added"
+    });
   }
 });
 
 // Add chat
-app.post("/chats", (req, res) => {
-  if (req.body) {
-    var chat = req.body;
+app.get("/chats/new", (req, res) => {
+  console.log(req.query);
+  
+  if (req.query) {
+    var chat = req.query;
+    var query = "insert into chat values(?,?,?,?,?)";
+    connection.query(
+      query,
+      [
+        chat.id,
+        chat.sender,
+        chat.recipient,
+        chat.message,
+        new Date().getTime()
+      ],
+      (err, rows, fields) => {
+        if (err) {
+          return res.status(400).send({
+            message: err.message
+          });
+        }
+        return res.status(200).send({
+          message: "Fields inserted successfully"
+        });
+      }
+    );
+  } else {
+    return res.status(404).send({
+      message: "Chat could not be added"
+    });
+  }
+});
+
+// Add chat
+app.get("/chats", (req, res) => {
+  if (req.query) {
+    var chat = req.query;
     var query = "select * from chat where sender = ? and recipient = ?";
     connection.query(
       query,

@@ -7,7 +7,9 @@ import dev.csshortcourse.assignmenttwo.datasource.DataSource
 import dev.csshortcourse.assignmenttwo.model.Chat
 import dev.csshortcourse.assignmenttwo.model.User
 import dev.csshortcourse.assignmenttwo.preferences.AppPreferences
+import dev.csshortcourse.assignmenttwo.util.WorkState
 import dev.csshortcourse.assignmenttwo.util.debugger
+import dev.csshortcourse.assignmenttwo.viewmodel.repository.Callback
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -29,6 +31,23 @@ class RemoteDataSource constructor(app: Application) : DataSource {
         }
     }
 
+    override suspend fun login(user: User, callback: Callback<User>): User? {
+        callback(WorkState.STARTED, null)
+        return withContext(Dispatchers.IO) {
+            try {
+                val newUser = apiService.login(user.id, user.name, user.avatar)
+                if (newUser == null) {
+                    callback(WorkState.ERROR, null)
+                } else callback(WorkState.COMPLETED, newUser)
+                newUser
+            } catch (e: Exception) {
+                callback(WorkState.ERROR, null)
+                debugger(e.localizedMessage)
+                null
+            }
+        }
+    }
+
     override suspend fun getAllUsers(): MutableList<User> {
         return withContext(Dispatchers.IO) {
             try {
@@ -44,7 +63,7 @@ class RemoteDataSource constructor(app: Application) : DataSource {
         return withContext(Dispatchers.IO) {
             val liveChats = MutableLiveData<MutableList<Chat>>()
             try {
-                liveChats.postValue(apiService.getMyChats(ChatRequest(prefs.userId, recipient)))
+                liveChats.postValue(apiService.getMyChats(prefs.userId, recipient))
             } catch (e: Exception) {
                 debugger(e.localizedMessage)
                 mutableListOf<Chat>()
@@ -56,7 +75,9 @@ class RemoteDataSource constructor(app: Application) : DataSource {
     override suspend fun addMessage(chat: Chat) {
         withContext(Dispatchers.IO) {
             try {
-                apiService.addMessage(chat)
+                apiService.addMessage(chat.id, chat.sender, chat.recipient, chat.message)
+                getMyChats(chat.recipient)
+                null
             } catch (e: Exception) {
                 debugger(e.localizedMessage)
             }

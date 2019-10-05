@@ -20,7 +20,13 @@ class UserViewModel(app: Application) : AppViewModel(app) {
 
     fun login(user: User, callback: Callback<User>) {
         viewModelScope.launch {
-            repo.login(callback)
+            repo.login(user, callback)
+        }
+    }
+
+    fun logout(callback: Callback<Void>) {
+        viewModelScope.launch {
+            repo.logout(callback)
         }
     }
 
