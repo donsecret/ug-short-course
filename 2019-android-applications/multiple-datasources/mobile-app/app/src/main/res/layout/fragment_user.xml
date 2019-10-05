@@ -7,24 +7,16 @@
     android:layout_height="match_parent"
     tools:context=".view.ui.user.UserFragment">
 
-    <!--<com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:title="@string/title_users" />
-
-    </com.google.android.material.appbar.AppBarLayout>-->
-
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/users_list"
+            android:scrollbarStyle="outsideOverlay"/>
 
         <ProgressBar
             android:id="@+id/loading"

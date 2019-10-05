@@ -4,30 +4,55 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
 import dev.csshortcourse.assignmenttwo.databinding.FragmentUserBinding
+import dev.csshortcourse.assignmenttwo.model.User
+import dev.csshortcourse.assignmenttwo.util.BaseActivity
 import dev.csshortcourse.assignmenttwo.util.BaseFragment
+import dev.csshortcourse.assignmenttwo.util.gone
+import dev.csshortcourse.assignmenttwo.util.visible
+import dev.csshortcourse.assignmenttwo.view.adapter.UserAdapter
+import dev.csshortcourse.assignmenttwo.view.adapter.UserClickListener
 
 
 class UserFragment : BaseFragment() {
 
     private lateinit var binding: FragmentUserBinding
-    private lateinit var viewModel: UserViewModel
+    private val viewModel: UserViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentUserBinding.inflate(inflater)
-        viewModel = ViewModelProvider(this).get(UserViewModel::class.java)
         return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        // Setup navigation with the toolbar
-        //binding.toolbar.setupWithNavController(findNavController())
+        // Adapter
+        val userAdapter =
+            UserAdapter(requireActivity() as BaseActivity, object : UserClickListener {
+                override fun onClick(user: User) {
+                    // todo: click user
+                }
+            })
+
+        binding.loading.visible()
+        viewModel.users.observe(viewLifecycleOwner, Observer { users ->
+            binding.usersList.apply {
+                this.adapter = userAdapter
+                this.layoutManager = LinearLayoutManager(requireContext())
+                this.itemAnimator = DefaultItemAnimator()
+                this.setHasFixedSize(false)
+            }
+            binding.loading.gone()
+            userAdapter.submitList(users)
+        })
     }
 
 }

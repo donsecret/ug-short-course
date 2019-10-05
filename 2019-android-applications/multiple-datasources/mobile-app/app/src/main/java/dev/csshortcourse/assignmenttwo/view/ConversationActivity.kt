@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dev.csshortcourse.assignmenttwo.R
 import dev.csshortcourse.assignmenttwo.databinding.ActivityConversationBinding
-import dev.csshortcourse.assignmenttwo.datasource.FakeAPI
 import dev.csshortcourse.assignmenttwo.model.Chat
 import dev.csshortcourse.assignmenttwo.model.User
 import dev.csshortcourse.assignmenttwo.util.BaseActivity
@@ -55,7 +54,7 @@ class ConversationActivity : BaseActivity() {
                             androidx.lifecycle.Observer { chatUser ->
                                 MaterialAlertDialogBuilder(this@ConversationActivity).apply {
                                     setTitle("Conversation details")
-                                    setMessage("${chat.message}\n\nSent by: ${chatUser.name}")
+                                    setMessage("${chat.message}\n\nSent by: ${chatUser?.name}")
                                     setPositiveButton("Dismiss") { d, _ -> d.dismiss() }
                                     setNegativeButton("Delete") { d, _ ->
                                         d.dismiss()
@@ -79,10 +78,6 @@ class ConversationActivity : BaseActivity() {
             }
 
             // Observe conversation
-            FakeAPI.loadFakeResponse(currentUser.id, user.id).forEach { chat ->
-                viewModel.addMessage(chat.sender, chat.recipient, chat.message)
-            }
-
             uiScope.launch {
                 viewModel.getMyChats(user.id)
                     .observe(this@ConversationActivity, androidx.lifecycle.Observer { messages ->
@@ -90,7 +85,11 @@ class ConversationActivity : BaseActivity() {
                         adapter.submitList(messages) {
                             // Scroll to last item in the list if it is not empty
                             if (adapter.itemCount != 0)
-                                binding.conversationList.smoothScrollToPosition(adapter.itemCount.minus(1))
+                                binding.conversationList.smoothScrollToPosition(
+                                    adapter.itemCount.minus(
+                                        1
+                                    )
+                                )
                         }
                     })
             }
@@ -107,7 +106,7 @@ class ConversationActivity : BaseActivity() {
             ).show()
         } else {
             binding.message.text?.clear()
-            viewModel.addMessage(currentUser.id, user.id, message)
+            viewModel.addMessage(currentUser.id, user.id, message.trim())
         }
     }
 

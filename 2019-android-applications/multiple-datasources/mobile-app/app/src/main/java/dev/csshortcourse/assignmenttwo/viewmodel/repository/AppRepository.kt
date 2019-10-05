@@ -9,7 +9,6 @@ import dev.csshortcourse.assignmenttwo.model.Chat
 import dev.csshortcourse.assignmenttwo.model.User
 import dev.csshortcourse.assignmenttwo.preferences.AppPreferences
 import dev.csshortcourse.assignmenttwo.util.WorkState
-import dev.csshortcourse.assignmenttwo.util.debugger
 import dev.csshortcourse.assignmenttwo.viewmodel.AppViewModel
 
 // Callback alias
@@ -42,40 +41,28 @@ class AppRepository private constructor(app: Application) : Repository {
     // Remote data source
     private val remoteDataSource: RemoteDataSource by lazy { RemoteDataSource(app) }
 
+    // todo: fix this
     override suspend fun getUsers(refresh: Boolean): MutableList<User> {
-        return if (refresh) localDataSource.getAllUsers().also {
-            remoteDataSource.getAllUsers().apply {
-                debugger("Users' list: ${this.size}")
-                localDataSource.userDao.insertAll(this)
-            }
-        } else localDataSource.getAllUsers()
+        return if (refresh) localDataSource.getAllUsers().filter { !prefs.userId.isNullOrEmpty() && it.id != prefs.userId }.toMutableList()
+        else localDataSource.getAllUsers().filter { !prefs.userId.isNullOrEmpty() && it.id != prefs.userId }.toMutableList()
     }
 
+    // todo: fix this
     override suspend fun getCurrentUser(refresh: Boolean): User? {
         return when {
             prefs.userId.isNullOrEmpty() -> null
-            refresh -> remoteDataSource.getUser(
-                prefs.userId!!
-            ).apply { if (this != null) localDataSource.userDao.insert(this) }
-                ?: localDataSource.getUser(prefs.userId!!)
+            refresh -> localDataSource.getUser(prefs.userId!!)
             else -> localDataSource.getUser(prefs.userId!!)
         }
     }
 
+    // todo: fix this
     override suspend fun getMyChats(
         refresh: Boolean,
         recipient: String
     ): LiveData<MutableList<Chat>> {
-        return if (refresh) localDataSource.getMyChats(recipient).apply {
-            /*remoteDataSource.getMyChats(recipient).apply {
-                localDataSource.chatDao.insertAll(
-                    this.value ?: mutableListOf()
-                )
-            }*/
-        }
-        else localDataSource.getMyChats(
-            recipient
-        )
+        return if (refresh) localDataSource.getMyChats(recipient)
+        else localDataSource.getMyChats(recipient)
     }
 
     override fun login(callback: Callback<User>) {
@@ -90,13 +77,10 @@ class AppRepository private constructor(app: Application) : Repository {
         localDataSource.addMessage(chat).apply { remoteDataSource.addMessage(chat) }
     }
 
+    // todo: fix this
     override suspend fun getUser(refresh: Boolean, id: String): User? {
-        return if (refresh)
-            remoteDataSource.getUser(id).apply {
-                if (this != null) localDataSource.userDao.insert(
-                    this
-                )
-            } else localDataSource.getUser(id)
+        return if (refresh) localDataSource.getUser(id)
+        else localDataSource.getUser(id)
     }
 
     override suspend fun addUsers(users: MutableList<User>) {
