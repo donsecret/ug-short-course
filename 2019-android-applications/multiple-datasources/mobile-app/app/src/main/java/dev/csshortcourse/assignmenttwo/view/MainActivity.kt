@@ -1,6 +1,7 @@
 package dev.csshortcourse.assignmenttwo.view
 
 import android.os.Bundle
+import androidx.lifecycle.Observer
 import androidx.transition.TransitionManager
 import dev.csshortcourse.assignmenttwo.databinding.ActivityMainBinding
 import dev.csshortcourse.assignmenttwo.util.BaseActivity
@@ -27,7 +28,12 @@ class MainActivity : BaseActivity() {
         uiScope.launch {
             delay(1250)
             TransitionManager.beginDelayedTransition(binding.container/*, Slide(Gravity.END)*/)
-            moveTo(HomeActivity::class.java, true)
+            prefs.liveLoginState.observe(this@MainActivity, Observer {
+                if (it)
+                    moveTo(HomeActivity::class.java, true)
+                else
+                    moveTo(AuthActivity::class.java, true)
+            })
         }
     }
 }
