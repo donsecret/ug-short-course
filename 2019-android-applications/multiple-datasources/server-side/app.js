@@ -10,17 +10,18 @@ app.use(morgan("dev"));
 var connection = mysql.createConnection({
   host: "localhost",
   user: "root",
-  database: "pied_piper"
+  database: "pied_piper",
+  connectionLimit: 20
 });
 
 // Connect to database
-// connection.connect(err => {
-//   if (err) {
-//     return console.log(err.message);
-//   } else {
-//     console.log("Connected to database successfully");
-//   }
-// });
+connection.connect(err => {
+  if (err) {
+    return console.log(err.message);
+  } else {
+    console.log("Connected to the pied piper database successfully");
+  }
+});
 
 // Login route
 app.post("/auth", (req, res) => {
@@ -42,7 +43,6 @@ app.post("/auth", (req, res) => {
 
 // Get all users
 app.get("/users", (req, res) => {
-  connection.connect();
   var users = connection.query(
     "select * from users order by id desc",
     [],
@@ -54,7 +54,6 @@ app.get("/users", (req, res) => {
       }
     }
   );
-  connection.end();
   return res.status(200).send(Flatted.stringify(users));
 });
 
@@ -65,7 +64,6 @@ app.post("/users/:id", (req, res) => {
   console.log(id);
 
   if (id) {
-    connection.connect();
     connection.query(
       "select * from users where id = ? limit 1",
       [id],
@@ -87,7 +85,6 @@ app.post("/users/:id", (req, res) => {
 // Add multiple users
 app.post("/users/new/multi", (req, res) => {
   if (req.body) {
-    connection.connect();
     var query = "insert into user values(?,?,?,?)";
     req.body.forEach(user => {
       var params = [user.id, user.name, user.avatar, new Date().getTime()];
@@ -102,7 +99,6 @@ app.post("/users/new/multi", (req, res) => {
         });
       });
     });
-    // connection.end();
   }
 });
 
@@ -110,7 +106,6 @@ app.post("/users/new/multi", (req, res) => {
 app.post("/chats/new", (req, res) => {
   if (req.body) {
     var chat = req.body;
-    connection.connect();
     var query = "insert into chat values(?,?,?,?,?)";
     connection.query(
       query,
@@ -132,7 +127,6 @@ app.post("/chats/new", (req, res) => {
         });
       }
     );
-    // connection.end();
   }
 });
 
@@ -140,7 +134,6 @@ app.post("/chats/new", (req, res) => {
 app.post("/chats", (req, res) => {
   if (req.body) {
     var chat = req.body;
-    connection.connect();
     var query = "select * from chat where sender = ? and recipient = ?";
     connection.query(
       query,
@@ -152,14 +145,12 @@ app.post("/chats", (req, res) => {
         return res.status(200).send(rows);
       }
     );
-    // connection.end();
   } else return res.send([]);
 });
 
 app.delete("/chats/:id", (req, res) => {
   var id = req.params.id;
 
-  connection.connect();
   connection.query(
     "delete from chat where id = ?",
     [id],
@@ -172,7 +163,6 @@ app.delete("/chats/:id", (req, res) => {
       return res.send({ message: "Chat delete successfully" });
     }
   );
-  // connection.end();
 });
 
 // Export module
