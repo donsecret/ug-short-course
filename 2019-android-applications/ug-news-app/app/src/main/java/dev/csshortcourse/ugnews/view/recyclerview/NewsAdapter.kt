@@ -13,7 +13,6 @@ import dev.csshortcourse.ugnews.util.layoutInflater
 import dev.csshortcourse.ugnews.util.load
 
 class NewsViewHolder(private val binding: ItemNewsBinding) : RecyclerView.ViewHolder(binding.root) {
-
     fun bind(news: NewsArticle) {
         if (news.image.isNullOrEmpty()) binding.newsImage.gone()
         if (news.author.isNullOrEmpty()) binding.newsAuthor.gone()
