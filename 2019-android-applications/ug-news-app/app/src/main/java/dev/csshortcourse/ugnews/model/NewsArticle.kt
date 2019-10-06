@@ -28,7 +28,7 @@ data class ApiResponse(
 data class NewsArticle(
     @SerializedName("author")
     @Expose
-    val author: String,
+    val author: String?,
     @SerializedName("title")
     @Expose
     val title: String,
@@ -40,7 +40,7 @@ data class NewsArticle(
     val url: String,
     @SerializedName("urlToImage")
     @Expose
-    val image: String,
+    val image: String?,
     @SerializedName("content")
     @Expose
     val content: String

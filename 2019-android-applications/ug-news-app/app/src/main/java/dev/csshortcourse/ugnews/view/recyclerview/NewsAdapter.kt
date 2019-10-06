@@ -1,27 +1,29 @@
 package dev.csshortcourse.ugnews.view.recyclerview
 
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import coil.api.load
 import dev.csshortcourse.ugnews.databinding.ItemNewsBinding
 import dev.csshortcourse.ugnews.model.NewsArticle
 import dev.csshortcourse.ugnews.util.browse
-import dev.csshortcourse.ugnews.util.debugger
+import dev.csshortcourse.ugnews.util.gone
 import dev.csshortcourse.ugnews.util.layoutInflater
+import dev.csshortcourse.ugnews.util.load
 
 class NewsViewHolder(private val binding: ItemNewsBinding) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(news: NewsArticle) {
-        binding.newsAuthor.text = news.author
+        if (news.image.isNullOrEmpty()) binding.newsImage.gone()
+        if (news.author.isNullOrEmpty()) binding.newsAuthor.gone()
         binding.newsDesc.text = news.desc
+        binding.newsAuthor.text = news.author
         binding.newsImage.load(news.image)
         binding.newsTitle.text = news.title
-        debugger("News Image: ${news.image}")
 
         binding.root.setOnClickListener {
-            binding.root.context.browse(news.url)
+            it.context.browse(news.url)
         }
     }
 }
