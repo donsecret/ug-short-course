@@ -19,6 +19,8 @@ class UserViewHolder(private val binding: ItemUserBinding) : RecyclerView.ViewHo
 
     fun bind(user: User) {
         binding.userAvatar.load(user.avatar) {
+            placeholder(R.drawable.ic_avatar)
+            error(R.drawable.ic_avatar)
             transformations(CircleCropTransformation())
         }
         binding.userEmail.text = user.id
