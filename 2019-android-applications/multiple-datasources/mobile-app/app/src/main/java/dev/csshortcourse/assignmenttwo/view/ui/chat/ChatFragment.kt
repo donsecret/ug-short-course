@@ -64,10 +64,14 @@ class ChatFragment : BaseFragment() {
         binding.addUser.setOnClickListener {
             // Navigate to the get all users fragment
             findNavController().navigate(R.id.navigation_users)
+            /*CoroutineScope(IO).launch {
+                LocalDatabase.get(requireContext()).clearAllTables()
+            }*/
         }
 
         // Simple snackbar to simulate load process
-        val snackbar = Snackbar.make(binding.root, "Refreshing your chats", Snackbar.LENGTH_INDEFINITE)
+        val snackbar =
+            Snackbar.make(binding.root, "Refreshing your chats", Snackbar.LENGTH_INDEFINITE)
         snackbar.show()
 
         // Fetch data from view model

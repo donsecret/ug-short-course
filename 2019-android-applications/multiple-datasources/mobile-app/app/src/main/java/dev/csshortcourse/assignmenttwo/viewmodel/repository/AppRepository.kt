@@ -36,6 +36,7 @@ interface Repository {
  * [Repository] for the [AppViewModel]
  */
 class AppRepository private constructor(app: Application) : Repository {
+    // Shared preferences
     private val prefs: AppPreferences by lazy { AppPreferences.get(app) }
     // Local data source
     private val localDataSource: LocalDataSource by lazy { LocalDataSource(app) }
@@ -43,8 +44,14 @@ class AppRepository private constructor(app: Application) : Repository {
     private val remoteDataSource: RemoteDataSource by lazy { RemoteDataSource(app) }
 
     override suspend fun getUsers(refresh: Boolean): MutableList<User> {
-        return if (refresh) remoteDataSource.getAllUsers().filter { !prefs.userId.isNullOrEmpty() && it.id != prefs.userId }.toMutableList()
-        else localDataSource.getAllUsers().filter { !prefs.userId.isNullOrEmpty() && it.id != prefs.userId }.toMutableList()
+        return if (refresh) {
+            val allUsers = remoteDataSource.getAllUsers()
+            if (allUsers.isEmpty()) {
+                localDataSource.getAllUsers()
+                    .filter { !prefs.userId.isNullOrEmpty() && it.id != prefs.userId }
+                    .toMutableList()
+            } else allUsers.filter { !prefs.userId.isNullOrEmpty() && it.id != prefs.userId }.toMutableList()
+        } else localDataSource.getAllUsers().filter { !prefs.userId.isNullOrEmpty() && it.id != prefs.userId }.toMutableList()
     }
 
     override suspend fun getCurrentUser(refresh: Boolean): User? {

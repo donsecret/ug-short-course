@@ -24,14 +24,17 @@ open class AppViewModel(app: Application) : AndroidViewModel(app) {
     var isConnected: Boolean = false
     private var monitoring: Boolean = false
 
+    // Callback for network connection request
     private val callback: ConnectivityManager.NetworkCallback =
         object : ConnectivityManager.NetworkCallback() {
             override fun onAvailable(network: Network) {
                 isConnected = true
+                debugger("Internet connection is currently available")
             }
 
-            override fun onUnavailable() {
+            override fun onLost(network: Network) {
                 isConnected = false
+                debugger("There's no internet connection")
             }
         }
 
