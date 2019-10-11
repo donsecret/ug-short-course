@@ -8,23 +8,20 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import dev.ugscheduler.BR
-import dev.ugscheduler.R
+import dev.ugscheduler.databinding.ItemCourseBinding
 import dev.ugscheduler.shared.data.Course
 import io.codelabs.dateformatter.DateFormatter
 
 class CourseViewHolder(
-    private val binding: ViewDataBinding
+    private val binding: ItemCourseBinding
 ) :
     RecyclerView.ViewHolder(binding.root) {
 
     fun bind(course: Course) {
-        binding.setVariable(BR.course, course)
+        //binding.course = course
     }
 }
 
@@ -40,12 +37,7 @@ class CourseAdapter(private val listener: ItemClickListener) :
     ListAdapter<Course, CourseViewHolder>(CourseDiff) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CourseViewHolder {
         return CourseViewHolder(
-            DataBindingUtil.inflate(
-                LayoutInflater.from(parent.context),
-                R.layout.item_course,
-                parent,
-                false
-            )
+            ItemCourseBinding.inflate(LayoutInflater.from(parent.context))
         )
     }
 

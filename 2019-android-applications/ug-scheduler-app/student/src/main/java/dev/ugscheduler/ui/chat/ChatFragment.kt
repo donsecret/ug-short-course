@@ -4,18 +4,16 @@
 
 package dev.ugscheduler.ui.chat
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
-import dev.ugscheduler.R
+import androidx.lifecycle.ViewModelProvider
+import dev.ugscheduler.databinding.ChatFragmentBinding
 import dev.ugscheduler.util.MainNavigationFragment
 
 class ChatFragment : MainNavigationFragment() {
-
+    private lateinit var binding: ChatFragmentBinding
     private lateinit var viewModel: ChatViewModel
 
 
@@ -23,12 +21,13 @@ class ChatFragment : MainNavigationFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.chat_fragment, container, false)
+        binding = ChatFragmentBinding.inflate(inflater)
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(ChatViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(ChatViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

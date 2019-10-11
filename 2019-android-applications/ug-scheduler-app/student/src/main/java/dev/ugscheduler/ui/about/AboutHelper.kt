@@ -7,15 +7,12 @@ package dev.ugscheduler.ui.about
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
-import dev.ugscheduler.BR
-import dev.ugscheduler.R
+import dev.ugscheduler.databinding.ItemLibBinding
 import dev.ugscheduler.shared.util.debugger
 import java.io.IOException
 import java.io.InputStreamReader
@@ -53,18 +50,13 @@ class AboutLibsAdapter : ListAdapter<Library, AboutLibsAdapter.LibraryViewHolder
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LibraryViewHolder {
         return LibraryViewHolder(
-            DataBindingUtil.inflate(
-                LayoutInflater.from(parent.context),
-                R.layout.item_lib,
-                parent,
-                false
-            )
+            ItemLibBinding.inflate(LayoutInflater.from(parent.context))
         )
     }
 
-    class LibraryViewHolder(val binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root) {
+    class LibraryViewHolder(val binding: ItemLibBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(lib: Library) {
-            binding.setVariable(BR.lib, lib)
+            //binding.lib = lib
         }
     }
 

@@ -28,7 +28,7 @@ class AboutFragment : MainNavigationFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentAboutBinding.inflate(inflater, container, false)
+        binding = FragmentAboutBinding.inflate(inflater)
         return binding.root
     }
 
@@ -38,7 +38,7 @@ class AboutFragment : MainNavigationFragment() {
         val adapter = AboutLibsAdapter()
         val libs = LibraryDeserializer.deserialize(requireContext())
         adapter.submitList(libs)
-        with(binding.libsList) {
+        /*with(binding.libsList) {
             this.adapter = adapter
             this.setHasFixedSize(false)
             this.itemAnimator = DefaultItemAnimator()
@@ -47,7 +47,7 @@ class AboutFragment : MainNavigationFragment() {
         // Padding at the bottom of the list
         binding.libsList.doOnApplyWindowInsets { v, insets, padding ->
             v.updatePaddingRelative(bottom = padding.bottom + insets.systemWindowInsetBottom)
-        }
+        }*/
     }
 
 

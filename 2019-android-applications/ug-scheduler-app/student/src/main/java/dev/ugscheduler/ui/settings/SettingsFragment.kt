@@ -33,7 +33,7 @@ class SettingsFragment : MainNavigationFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = SettingsFragmentBinding.inflate(inflater, container, false)
+        binding = SettingsFragmentBinding.inflate(inflater)
         return binding.root
     }
 
@@ -42,7 +42,7 @@ class SettingsFragment : MainNavigationFragment() {
         viewModel = activityViewModelProvider(SettingsViewModelFactory())
         val appVM: AppViewModel = activityViewModelProvider(AppViewModelFactory(get()))
 
-        binding.swipeRefresh.setOnRefreshListener {
+        /*binding.swipeRefresh.setOnRefreshListener {
             val currentStudent = appVM.getCurrentStudent(true)
             currentStudent.removeObservers(viewLifecycleOwner)
             currentStudent.observe(viewLifecycleOwner, Observer { student ->
@@ -56,7 +56,7 @@ class SettingsFragment : MainNavigationFragment() {
         appVM.getCurrentStudent(false).observe(viewLifecycleOwner, Observer { student ->
             binding.student = student
             binding.viewModel = viewModel
-        })
+        })*/
 
         // Get theme preferences instance from DI
         val prefs by inject<AppPreferences>()
@@ -74,7 +74,7 @@ class SettingsFragment : MainNavigationFragment() {
                         uiScope.launch {
                             // Add short delay
                             delay(550)
-                            TransitionManager.beginDelayedTransition(binding.container)
+                            //TransitionManager.beginDelayedTransition(binding.container)
                             when (which) {
                                 0 -> prefs.setDarkMode(AppCompatDelegate.MODE_NIGHT_NO)
                                 1 -> prefs.setDarkMode(AppCompatDelegate.MODE_NIGHT_YES)

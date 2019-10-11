@@ -8,7 +8,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="lib"
             type="dev.ugscheduler.ui.about.Library" />
