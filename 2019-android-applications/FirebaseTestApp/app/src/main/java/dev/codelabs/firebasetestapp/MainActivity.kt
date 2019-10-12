@@ -1,9 +1,9 @@
 package dev.codelabs.firebasetestapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
@@ -13,7 +13,6 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import kotlinx.android.synthetic.main.activity_main.*
-import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private val auth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
@@ -23,12 +22,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        // Firebase application initialization
-        FirebaseApp.initializeApp(this).apply {
-            debugger("Firebase initialized as : ${this?.name}")
-        }
-
 
         // Login to an existing account
         login_button.setOnClickListener {
@@ -54,7 +47,6 @@ class MainActivity : AppCompatActivity() {
                 }
         }
 
-
         // Create a new account for the user
         create_account_button.setOnClickListener {
             val emailField = email.text.toString()
@@ -79,10 +71,10 @@ class MainActivity : AppCompatActivity() {
                 }
         }
 
-        sign_out_button.apply {
+        get_started_button.apply {
             setOnClickListener {
-                auth.signOut()
-                updateUI(null)
+                startActivity(Intent(this@MainActivity, OtherActivity::class.java))
+                finishAfterTransition()
             }
         }
     }
@@ -98,7 +90,7 @@ class MainActivity : AppCompatActivity() {
 
         // Toggle button state
         with(user != null) {
-            sign_out_button.isEnabled = this
+            get_started_button.isEnabled = this
             login_button.isEnabled = !this
             create_account_button.isEnabled = !this
 
@@ -181,13 +173,3 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
-fun debugger(msg: Any?) = println("FirebaseTestApp =>  ${msg.toString()}")
-
-private const val USER_REF = "users"
-
-// App user's data model
-data class AppUser(
-    val id: String,
-    val email: String?,
-    val timestamp: Date = Date(System.currentTimeMillis())
-)
