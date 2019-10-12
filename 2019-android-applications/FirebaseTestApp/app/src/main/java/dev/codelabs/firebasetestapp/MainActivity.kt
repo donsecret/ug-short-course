@@ -2,8 +2,12 @@ package dev.codelabs.firebasetestapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.view.Gravity
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.transition.Slide
+import androidx.transition.TransitionManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
@@ -73,7 +77,7 @@ class MainActivity : AppCompatActivity() {
 
         get_started_button.apply {
             setOnClickListener {
-                startActivity(Intent(this@MainActivity, OtherActivity::class.java))
+                startActivity(Intent(this@MainActivity, WelcomeActivity/*OtherActivity*/::class.java))
                 finishAfterTransition()
             }
         }
@@ -89,17 +93,20 @@ class MainActivity : AppCompatActivity() {
         debugger("User is: $user")
 
         // Toggle button state
-        with(user != null) {
-            get_started_button.isEnabled = this
-            login_button.isEnabled = !this
-            create_account_button.isEnabled = !this
+        Handler().postDelayed({
+            TransitionManager.beginDelayedTransition(container)
+            with(user != null) {
+                get_started_button.isEnabled = this
+                login_button.isEnabled = !this
+                create_account_button.isEnabled = !this
 
-            if (user != null) {
-                // Store info in database
-                storeInDatabase(user, true)
-                storeInDatabase(user, false)
+                if (user != null) {
+                    // Store info in database
+                    storeInDatabase(user, true)
+                    storeInDatabase(user, false)
+                }
             }
-        }
+        }, 1200)
     }
 
     private fun storeInDatabase(user: FirebaseUser, isFirestore: Boolean) {
