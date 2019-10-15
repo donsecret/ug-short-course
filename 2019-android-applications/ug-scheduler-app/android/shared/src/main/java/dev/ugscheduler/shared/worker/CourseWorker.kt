@@ -34,12 +34,14 @@ class CourseWorker(context: Context, params: WorkerParameters) : CoroutineWorker
 
         // Needed to be called on the background thread
         withContext(Dispatchers.IO) {
+            debugger("Inserting all courses into database")
             // Store locally
             dao.insertAll(courses)
 
             // Forward all course details to remote data source
             for (course in courses) {
                 try {
+                    debugger("Uploading courses to remote datasource")
                     Tasks.await(
                         firestore.collection(Constants.COURSES).document(course.id).set(
                             course,
