@@ -16,9 +16,11 @@ import timber.log.Timber
 class App : Application() {
 
     override fun onCreate() {
-        if (BuildConfig.DEBUG) enableStrictMode()
+        if (BuildConfig.DEBUG) {
+            enableStrictMode()
+            Timber.plant(Timber.DebugTree())
+        }
         super.onCreate()
-        if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())
 
         startKoin {
             androidContext(this@App)
