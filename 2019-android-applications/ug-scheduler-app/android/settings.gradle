@@ -3,4 +3,4 @@
  */
 
 rootProject.name='CSCD Short Course'
-include ':app'
+include ':student', ':date-formatter', ':shared', ':facilitator'

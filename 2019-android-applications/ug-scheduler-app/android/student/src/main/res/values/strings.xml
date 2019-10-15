@@ -1,0 +1,10 @@
+<!--
+  ~ Copyright (c) 2019.. Designed & developed by Quabynah Codelabs(c). For the love of Android development.
+  -->
+
+<resources>
+    <string name="default_app_name">Computer Science Short Course</string>
+    <string name="get_started">Get started</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>
