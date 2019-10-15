@@ -12,6 +12,7 @@ import dev.ugscheduler.R
 import dev.ugscheduler.databinding.FragmentHomeBinding
 import dev.ugscheduler.shared.data.Course
 import dev.ugscheduler.shared.util.activityViewModelProvider
+import dev.ugscheduler.shared.util.debugger
 import dev.ugscheduler.shared.util.doOnApplyWindowInsets
 import dev.ugscheduler.shared.util.prefs.UserSharedPreferences
 import dev.ugscheduler.shared.viewmodel.AppViewModel

@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/google_sans_medium"
             android:padding="@dimen/feed_card_corner_radius"
-            android:text="@string/default_app_name"
+            android:text="@string/long_default_app_name"
             android:textAppearance="?textAppearanceHeadline5"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"

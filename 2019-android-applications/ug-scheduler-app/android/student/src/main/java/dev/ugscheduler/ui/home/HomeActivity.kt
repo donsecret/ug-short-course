@@ -5,18 +5,18 @@ import android.view.View
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.core.view.updatePadding
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.Observer
 import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import dev.ugscheduler.R
 import dev.ugscheduler.databinding.ActivityHomeBinding
 import dev.ugscheduler.databinding.NavigationHeaderBinding
-import dev.ugscheduler.shared.util.BaseActivity
-import dev.ugscheduler.shared.util.HeightTopWindowInsetsListener
-import dev.ugscheduler.shared.util.NoopWindowInsetsListener
+import dev.ugscheduler.shared.util.*
 import dev.ugscheduler.shared.util.prefs.UserSharedPreferences
-import dev.ugscheduler.shared.util.shouldCloseDrawerFromBackPress
 import dev.ugscheduler.shared.widgets.NavigationBarContentFrameLayout
 import dev.ugscheduler.util.MainNavigationFragment
 import dev.ugscheduler.util.NavigationHost
@@ -85,6 +85,43 @@ class HomeActivity : BaseActivity(), NavigationHost {
 
         navHeaderBinding = NavigationHeaderBinding.inflate(layoutInflater).apply {
             //lifecycleOwner = this@HomeActivity
+        }
+
+        navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment?
+        navController = findNavController(R.id.nav_host_fragment)
+
+        navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment?
+
+        navController = findNavController(R.id.nav_host_fragment)
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            currentNavId = destination.id
+            val isTopLevelDestination = TOP_LEVEL_DESTINATIONS.contains(destination.id)
+            val lockMode = if (isTopLevelDestination) {
+                DrawerLayout.LOCK_MODE_UNLOCKED
+            } else {
+                DrawerLayout.LOCK_MODE_LOCKED_CLOSED
+            }
+            binding.drawer.setDrawerLockMode(lockMode)
+        }
+
+        binding.navigation.apply {
+            // Update the Navigation header view to pad itself down
+            navHeaderBinding.root.doOnApplyWindowInsets { v, insets, padding ->
+                v.updatePadding(top = padding.top + insets.systemWindowInsetTop)
+            }
+            addHeaderView(navHeaderBinding.root)
+            itemBackground = navigationItemBackground(context)
+
+            prefs.liveLoginState.observe(this@HomeActivity, Observer { state ->
+                menu.findItem(R.id.navigation_chat).isVisible = state
+                menu.findItem(R.id.navigation_my_courses).isVisible = state
+                menu.findItem(R.id.navigation_settings).isVisible = state
+                menu.findItem(R.id.navigation_sessions).isVisible = state
+            })
+
+            setupWithNavController(navController)
         }
 
         if (savedInstanceState == null) {

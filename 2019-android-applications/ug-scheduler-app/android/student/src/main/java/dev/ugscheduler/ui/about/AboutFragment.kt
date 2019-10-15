@@ -33,12 +33,13 @@ class AboutFragment : Fragment() {
 
         val adapter = AboutLibsAdapter()
         val libs = LibraryDeserializer.deserialize(requireContext())
-        adapter.submitList(libs)
         with(binding.libsList) {
             this.adapter = adapter
             this.setHasFixedSize(false)
             this.itemAnimator = DefaultItemAnimator()
         }
+        adapter.submitList(libs)
+
         // Padding at the bottom of the list
         binding.libsList.doOnApplyWindowInsets { v, insets, padding ->
             v.updatePaddingRelative(bottom = padding.bottom + insets.systemWindowInsetBottom)
