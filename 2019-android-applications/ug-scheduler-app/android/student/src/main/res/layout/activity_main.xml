@@ -10,7 +10,7 @@
     android:gravity="center"
     android:orientation="vertical"
     android:weightSum="5"
-    tools:context="dev.ugscheduler.MainActivity">
+    tools:context="dev.ugscheduler.ui.MainActivity">
 
     <ImageView
         android:layout_width="match_parent"

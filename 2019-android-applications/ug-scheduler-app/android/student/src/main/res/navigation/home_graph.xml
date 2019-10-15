@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/home_graph.xml"
+    app:startDestination="@id/navigation_home">
+
+    <fragment
+        android:id="@id/navigation_home"
+        android:name="dev.ugscheduler.ui.home.HomeFragment"
+        android:label="@string/title_home" />
+    <fragment
+        android:id="@id/navigation_about"
+        android:name="dev.ugscheduler.ui.about.AboutFragment"
+        android:label="@string/title_about" />
+    <fragment
+        android:id="@id/navigation_login"
+        android:name="dev.ugscheduler.ui.auth.SignInFragment"
+        android:label="@string/sign_in" />
+    <fragment
+        android:id="@id/navigation_logout"
+        android:name="dev.ugscheduler.ui.auth.SignOutFragment"
+        android:label="@string/sign_out" />
+</navigation>
