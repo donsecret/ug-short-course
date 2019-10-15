@@ -40,7 +40,7 @@ class HomeFragment : MainNavigationFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentHomeBinding.inflate(inflater, container, false)
+        binding = FragmentHomeBinding.inflate(inflater)
         // Pad the bottom of the RecyclerView so that the content scrolls up above the nav bar
         binding.recyclerView.doOnApplyWindowInsets { v, insets, padding ->
             v.updatePaddingRelative(bottom = padding.bottom + insets.systemWindowInsetBottom)

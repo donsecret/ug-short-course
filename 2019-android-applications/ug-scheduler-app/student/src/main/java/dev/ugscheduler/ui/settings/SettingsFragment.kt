@@ -42,7 +42,7 @@ class SettingsFragment : MainNavigationFragment() {
         viewModel = activityViewModelProvider(SettingsViewModelFactory())
         val appVM: AppViewModel = activityViewModelProvider(AppViewModelFactory(get()))
 
-        /*binding.swipeRefresh.setOnRefreshListener {
+        binding.swipeRefresh.setOnRefreshListener {
             val currentStudent = appVM.getCurrentStudent(true)
             currentStudent.removeObservers(viewLifecycleOwner)
             currentStudent.observe(viewLifecycleOwner, Observer { student ->
@@ -56,7 +56,7 @@ class SettingsFragment : MainNavigationFragment() {
         appVM.getCurrentStudent(false).observe(viewLifecycleOwner, Observer { student ->
             binding.student = student
             binding.viewModel = viewModel
-        })*/
+        })
 
         // Get theme preferences instance from DI
         val prefs by inject<AppPreferences>()
