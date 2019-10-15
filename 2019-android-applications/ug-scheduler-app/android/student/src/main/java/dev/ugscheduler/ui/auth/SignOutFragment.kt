@@ -57,6 +57,8 @@ class SignOutFragment : DialogFragment() {
             viewModel.logout()
             dismiss()
         }
+        binding.email.text = student?.email
+        binding.username.text = student?.fullName
     }
 
     override fun onResume() {

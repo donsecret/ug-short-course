@@ -39,7 +39,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:lines="1"
-            android:text="@{student.fullName}"
             android:textAppearance="@style/TextAppearance.IOSched.AccountDialog.Username"
             tools:text="User Name" />
 
@@ -48,7 +47,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:lines="1"
-            android:text="@{student.email}"
             tools:text="user@email.com" />
     </LinearLayout>
 
