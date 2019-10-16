@@ -13,10 +13,30 @@
         android:name="dev.ugscheduler.ui.about.AboutFragment"
         android:label="@string/title_about" />
     <fragment
+        android:id="@id/navigation_chat"
+        android:name="dev.ugscheduler.ui.chat.ChatFragment"
+        android:label="@string/title_chat" />
+    <fragment
+        android:id="@id/navigation_my_courses"
+        android:name="dev.ugscheduler.ui.course.MyCoursesFragment"
+        android:label="@string/title_my_courses" />
+    <fragment
+        android:id="@id/navigation_map"
+        android:name="dev.ugscheduler.ui.map.MapFragment"
+        android:label="@string/title_map" />
+    <fragment
+        android:id="@id/navigation_search"
+        android:name="dev.ugscheduler.ui.search.SearchFragment"
+        android:label="@string/title_search" />
+    <fragment
+        android:id="@id/navigation_enrol"
+        android:name="dev.ugscheduler.ui.enrol.EnrolFragment"
+        android:label="@string/title_enrol" />
+    <dialog
         android:id="@id/navigation_login"
         android:name="dev.ugscheduler.ui.auth.SignInFragment"
         android:label="@string/sign_in" />
-    <fragment
+    <dialog
         android:id="@id/navigation_logout"
         android:name="dev.ugscheduler.ui.auth.SignOutFragment"
         android:label="@string/sign_out" />

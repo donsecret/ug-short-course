@@ -27,7 +27,9 @@ class CourseViewHolder(
             course.icon,
             binding.root.resources.getDrawable(R.drawable.ic_default_avatar_2, null)
         )
-
+        binding.courseName.text = course.name
+        binding.courseDuration.text =
+            DateFormatter(binding.root.context).getTimestamp(System.currentTimeMillis())
     }
 }
 

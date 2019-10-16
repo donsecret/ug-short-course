@@ -8,18 +8,11 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.sqlite.db.SupportSQLiteDatabase
-import androidx.work.Constraints
-import androidx.work.NetworkType
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkManager
 import dev.ugscheduler.shared.data.Course
 import dev.ugscheduler.shared.data.Facilitator
 import dev.ugscheduler.shared.data.Feedback
 import dev.ugscheduler.shared.data.Student
 import dev.ugscheduler.shared.util.Constants
-import dev.ugscheduler.shared.util.debugger
-import dev.ugscheduler.shared.worker.CourseWorker
 
 
 @Database(
@@ -45,7 +38,7 @@ abstract class LocalDatabase : RoomDatabase() {
                 Constants.LOCAL_DB_NAME
             )
                 .fallbackToDestructiveMigration()
-                .addCallback(object : Callback() {
+                /*.addCallback(object : Callback() {
                     override fun onCreate(db: SupportSQLiteDatabase) {
                         super.onCreate(db)
                         debugger("Creating new database")
@@ -64,7 +57,7 @@ abstract class LocalDatabase : RoomDatabase() {
                             )
                         }
                     }
-                })
+                })*/
                 .build().also { instance = it }
         }
     }

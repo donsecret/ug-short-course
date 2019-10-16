@@ -8,9 +8,12 @@ import androidx.core.view.updatePaddingRelative
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
 import dev.ugscheduler.BuildConfig
 import dev.ugscheduler.databinding.AboutFragmentBinding
+import dev.ugscheduler.shared.util.debugger
 import dev.ugscheduler.shared.util.doOnApplyWindowInsets
+import dev.ugscheduler.shared.util.setupWithAdapter
 
 class AboutFragment : Fragment() {
 
@@ -33,12 +36,9 @@ class AboutFragment : Fragment() {
 
         val adapter = AboutLibsAdapter()
         val libs = LibraryDeserializer.deserialize(requireContext())
-        with(binding.libsList) {
-            this.adapter = adapter
-            this.setHasFixedSize(false)
-            this.itemAnimator = DefaultItemAnimator()
-        }
         adapter.submitList(libs)
+        debugger(adapter.itemCount)
+        binding.libsList.setupWithAdapter(adapter)
 
         // Padding at the bottom of the list
         binding.libsList.doOnApplyWindowInsets { v, insets, padding ->

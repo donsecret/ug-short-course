@@ -1,4 +1,4 @@
-package dev.ugscheduler.ui.home
+package dev.ugscheduler.ui
 
 import android.os.Bundle
 import android.view.View

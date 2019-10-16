@@ -41,7 +41,6 @@ object LibraryDeserializer {
         } catch (ex: IOException) {
             debugger(ex.localizedMessage)
         }
-        debugger(libs)
         return libs
     }
 }

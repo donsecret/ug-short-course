@@ -13,8 +13,10 @@ import dev.ugscheduler.databinding.FragmentHomeBinding
 import dev.ugscheduler.shared.data.Course
 import dev.ugscheduler.shared.util.activityViewModelProvider
 import dev.ugscheduler.shared.util.debugger
+import dev.ugscheduler.shared.util.deserializer.getCourses
 import dev.ugscheduler.shared.util.doOnApplyWindowInsets
 import dev.ugscheduler.shared.util.prefs.UserSharedPreferences
+import dev.ugscheduler.shared.util.setupWithAdapter
 import dev.ugscheduler.shared.viewmodel.AppViewModel
 import dev.ugscheduler.shared.viewmodel.AppViewModelFactory
 import dev.ugscheduler.ui.auth.AuthViewModel
@@ -48,6 +50,7 @@ class HomeFragment : MainNavigationFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        // Setup toolbar
         binding.toolbar.setupProfileMenuItem(
             activityViewModelProvider<AuthViewModel>(AuthViewModelFactory()),
             childFragmentManager, get<UserSharedPreferences>(),
@@ -64,19 +67,16 @@ class HomeFragment : MainNavigationFragment() {
                 )
             }
         })
+        // Get courses and add to adapter
+        binding.recyclerView.setupWithAdapter(adapter)
+        adapter.submitList(viewModel.getAllCourses(requireContext(), false))
+        debugger(adapter.itemCount)
 
+        // Swipe to refresh feature
         binding.swipeRefresh.setOnRefreshListener {
             adapter.submitList(viewModel.getAllCourses(requireContext(), true))
             binding.swipeRefresh.isRefreshing = false
         }
 
-        binding.recyclerView.apply {
-            setHasFixedSize(false)
-            this.adapter = adapter
-            this.itemAnimator = DefaultItemAnimator()
-
-            // Get courses and add to adapter
-            adapter.submitList(viewModel.getAllCourses(requireContext(), false))
-        }
     }
 }

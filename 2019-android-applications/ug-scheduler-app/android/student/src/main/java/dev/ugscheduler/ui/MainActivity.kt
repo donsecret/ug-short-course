@@ -9,7 +9,6 @@ import android.view.View
 import dev.ugscheduler.databinding.ActivityMainBinding
 import dev.ugscheduler.shared.util.BaseActivity
 import dev.ugscheduler.shared.util.intentTo
-import dev.ugscheduler.ui.home.HomeActivity
 
 class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding

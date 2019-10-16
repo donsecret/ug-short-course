@@ -34,14 +34,23 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.firestore.GeoPoint
 import dev.ugscheduler.shared.R
-import timber.log.Timber
 
 fun Any.debugger(msg: Any?) {
 //    Timber.d("${this::class.java.simpleName} ==> UGScheduler ==> ${msg.toString()}")
-     println("${this::class.java.simpleName} ==> UGScheduler ==> ${msg.toString()}")
+    println("${this::class.java.simpleName} ==> UGScheduler ==> ${msg.toString()}")
+}
+
+fun RecyclerView.setupWithAdapter(adapter: RecyclerView.Adapter<out RecyclerView.ViewHolder>) {
+    setHasFixedSize(false)
+    this.adapter = adapter
+    this.itemAnimator = DefaultItemAnimator()
+    this.layoutManager = LinearLayoutManager(this.context)
 }
 
 fun BaseActivity.intentTo(
