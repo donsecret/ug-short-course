@@ -13,13 +13,9 @@ import dev.ugscheduler.R
 import dev.ugscheduler.databinding.FragmentHomeBinding
 import dev.ugscheduler.shared.data.Course
 import dev.ugscheduler.shared.util.activityViewModelProvider
-import dev.ugscheduler.shared.util.debugger
-import dev.ugscheduler.shared.util.deserializer.getCourses
 import dev.ugscheduler.shared.util.doOnApplyWindowInsets
-import dev.ugscheduler.shared.util.prefs.UserSharedPreferences
 import dev.ugscheduler.shared.viewmodel.AppViewModel
 import dev.ugscheduler.shared.viewmodel.AppViewModelFactory
-import dev.ugscheduler.ui.auth.AuthViewModel
 import dev.ugscheduler.ui.auth.AuthViewModelFactory
 import dev.ugscheduler.ui.home.recyclerview.CourseAdapter
 import dev.ugscheduler.ui.home.recyclerview.ItemClickListener
@@ -75,9 +71,7 @@ class HomeFragment : MainNavigationFragment() {
             this.setHasFixedSize(false)
             this.adapter = adapter
         }
-
-        adapter.submitList(/*viewModel.getAllCourses(requireContext(), false)*/getCourses(requireContext()))
-        debugger(adapter.itemCount)
+        adapter.submitList(viewModel.getAllCourses(requireContext(), false))
 
         // Swipe to refresh feature
         binding.swipeRefresh.setOnRefreshListener {

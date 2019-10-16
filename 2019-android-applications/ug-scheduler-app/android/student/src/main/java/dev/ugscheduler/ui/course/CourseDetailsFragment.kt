@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import dev.ugscheduler.databinding.FragmentCourseDetailsBinding
+import dev.ugscheduler.shared.data.Course
+import dev.ugscheduler.shared.util.debugger
 import dev.ugscheduler.util.MainNavigationFragment
 
 class CourseDetailsFragment : MainNavigationFragment() {
@@ -16,5 +18,11 @@ class CourseDetailsFragment : MainNavigationFragment() {
     ): View? {
         binding = FragmentCourseDetailsBinding.inflate(inflater)
         return binding.root
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        val currentCourse = arguments?.get("extra_course") as? Course
+        debugger(currentCourse)
     }
 }

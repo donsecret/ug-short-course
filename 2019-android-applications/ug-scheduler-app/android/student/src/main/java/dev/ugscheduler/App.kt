@@ -6,11 +6,8 @@ package dev.ugscheduler
 
 import android.app.Application
 import android.os.StrictMode
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkManager
 import dev.ugscheduler.shared.di.loadAppModules
 import dev.ugscheduler.shared.prefs.AppPreferences
-import dev.ugscheduler.shared.worker.CourseWorker
 import org.koin.android.ext.android.inject
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -50,8 +47,8 @@ class App : Application() {
     }
 
     private fun startWorkers() {
-        with(WorkManager.getInstance(applicationContext)) {
+        /*with(WorkManager.getInstance(applicationContext)) {
             enqueue(OneTimeWorkRequestBuilder<CourseWorker>().build())
-        }
+        }*/
     }
 }
