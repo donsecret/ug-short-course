@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
@@ -18,9 +17,9 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
-            app:navigationContentDescription="@string/title_home"
+            app:navigationContentDescription="@string/title_course_details"
             app:navigationIcon="@drawable/ic_menu"
-            app:title="@string/title_home" />
+            app:title="@string/title_course_details" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -30,13 +29,7 @@
         android:layout_height="match_parent"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clipToPadding="false"
-            android:paddingTop="@dimen/spacing_normal"
-            android:paddingBottom="@dimen/spacing_normal" />
+        <!--todo: add content-->
 
     </dev.ugscheduler.shared.widgets.CustomSwipeRefreshLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

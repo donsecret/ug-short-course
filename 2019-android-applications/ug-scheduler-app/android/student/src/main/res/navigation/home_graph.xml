@@ -21,6 +21,10 @@
         android:name="dev.ugscheduler.ui.course.MyCoursesFragment"
         android:label="@string/title_my_courses" />
     <fragment
+        android:id="@id/navigation_course_details"
+        android:name="dev.ugscheduler.ui.course.CourseDetailsFragment"
+        android:label="@string/title_course_details" />
+    <fragment
         android:id="@id/navigation_map"
         android:name="dev.ugscheduler.ui.map.MapFragment"
         android:label="@string/title_map" />

@@ -5,17 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.updatePaddingRelative
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.DefaultItemAnimator
-import androidx.recyclerview.widget.LinearLayoutManager
 import dev.ugscheduler.BuildConfig
 import dev.ugscheduler.databinding.AboutFragmentBinding
 import dev.ugscheduler.shared.util.debugger
 import dev.ugscheduler.shared.util.doOnApplyWindowInsets
 import dev.ugscheduler.shared.util.setupWithAdapter
+import dev.ugscheduler.util.MainNavigationFragment
 
-class AboutFragment : Fragment() {
+class AboutFragment : MainNavigationFragment() {
 
     private lateinit var binding: AboutFragmentBinding
     private lateinit var viewModel: AboutViewModel
