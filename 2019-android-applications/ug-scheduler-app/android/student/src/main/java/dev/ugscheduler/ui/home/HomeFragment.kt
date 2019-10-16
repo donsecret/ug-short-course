@@ -8,6 +8,7 @@ import androidx.core.os.bundleOf
 import androidx.core.view.updatePaddingRelative
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
 import dev.ugscheduler.R
 import dev.ugscheduler.databinding.FragmentHomeBinding
 import dev.ugscheduler.shared.data.Course
@@ -16,7 +17,6 @@ import dev.ugscheduler.shared.util.debugger
 import dev.ugscheduler.shared.util.deserializer.getCourses
 import dev.ugscheduler.shared.util.doOnApplyWindowInsets
 import dev.ugscheduler.shared.util.prefs.UserSharedPreferences
-import dev.ugscheduler.shared.util.setupWithAdapter
 import dev.ugscheduler.shared.viewmodel.AppViewModel
 import dev.ugscheduler.shared.viewmodel.AppViewModelFactory
 import dev.ugscheduler.ui.auth.AuthViewModel
@@ -52,8 +52,8 @@ class HomeFragment : MainNavigationFragment() {
 
         // Setup toolbar
         binding.toolbar.setupProfileMenuItem(
-            activityViewModelProvider<AuthViewModel>(AuthViewModelFactory()),
-            childFragmentManager, get<UserSharedPreferences>(),
+            activityViewModelProvider(AuthViewModelFactory()),
+            childFragmentManager, get(),
             viewLifecycleOwner
         )
 
@@ -67,9 +67,16 @@ class HomeFragment : MainNavigationFragment() {
                 )
             }
         })
+
         // Get courses and add to adapter
-        binding.recyclerView.setupWithAdapter(adapter)
-        adapter.submitList(viewModel.getAllCourses(requireContext(), false))
+        binding.recyclerView.apply {
+            this.layoutManager = LinearLayoutManager(requireContext())
+            this.itemAnimator = DefaultItemAnimator()
+            this.setHasFixedSize(false)
+            this.adapter = adapter
+        }
+
+        adapter.submitList(/*viewModel.getAllCourses(requireContext(), false)*/getCourses(requireContext()))
         debugger(adapter.itemCount)
 
         // Swipe to refresh feature

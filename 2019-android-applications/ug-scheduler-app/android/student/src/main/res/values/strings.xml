@@ -8,5 +8,8 @@
     <string name="get_started">Get started</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="developer_watermark">Designed and Developed by <b>Quabynah Codelabs LLC</b></string>
+    <string name="welcome_long_text">Discover the possibilities of exploring new areas in Computer Science</string>
+    <string name="enrol_now">Enrol Now</string>
+    <string name="enrol_long_text">Join one of the numerous courses available and get a life-long experience in your area of interest</string>
 
 </resources>

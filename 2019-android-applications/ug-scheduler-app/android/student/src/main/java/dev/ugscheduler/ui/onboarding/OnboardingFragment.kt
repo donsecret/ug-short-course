@@ -11,8 +11,6 @@ import androidx.viewpager.widget.PagerAdapter
 import dev.ugscheduler.R
 import dev.ugscheduler.databinding.OnboardingFragmentBinding
 import dev.ugscheduler.shared.util.BaseActivity
-import dev.ugscheduler.shared.util.intentTo
-import dev.ugscheduler.ui.HomeActivity
 
 class OnboardingFragment : Fragment() {
     private lateinit var binding: OnboardingFragmentBinding
@@ -38,6 +36,10 @@ class OnboardingFragment : Fragment() {
         binding.getStarted.setOnClickListener {
             viewModel.performOnboardingCompletion(requireActivity() as BaseActivity)
         }
+
+        // Move to home page
+//        if (!viewModel.showOnboarding(requireActivity() as BaseActivity))
+//            (requireActivity() as BaseActivity).intentTo(HomeActivity::class.java, true)
     }
 
     inner class OnboardingPagerAdapter(private val host: Activity) : PagerAdapter() {
@@ -58,19 +60,15 @@ class OnboardingFragment : Fragment() {
         private fun getPage(position: Int, container: ViewGroup): View {
             return when (position) {
                 0 -> {
-                    val pageOne = LayoutInflater.from(container.context)
-                        .inflate(R.layout.page_one, container, false)
+                    val pageOne = host.layoutInflater.inflate(R.layout.page_one, container, false)
                     pageOne
                 }
 
                 else -> {
-                    val pageTwo = LayoutInflater.from(container.context)
-                        .inflate(R.layout.page_two, container, false)
+                    val pageTwo = host.layoutInflater.inflate(R.layout.page_two, container, false)
                     pageTwo
                 }
             }
         }
-
-
     }
 }

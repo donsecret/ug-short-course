@@ -33,14 +33,6 @@ class CourseViewHolder(
     }
 }
 
-object CourseDiff : DiffUtil.ItemCallback<Course>() {
-    override fun areContentsTheSame(oldItem: Course, newItem: Course): Boolean = oldItem == newItem
-
-    override fun areItemsTheSame(oldItem: Course, newItem: Course): Boolean {
-        return oldItem.name == newItem.name && oldItem.id == newItem.id
-    }
-}
-
 class CourseAdapter(private val listener: ItemClickListener) :
     ListAdapter<Course, CourseViewHolder>(CourseDiff) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CourseViewHolder {
@@ -53,6 +45,17 @@ class CourseAdapter(private val listener: ItemClickListener) :
         holder.bind(getItem(position))
         holder.itemView.setOnClickListener {
             listener.onClick(getItem(position))
+        }
+    }
+
+    companion object {
+        val CourseDiff: DiffUtil.ItemCallback<Course> = object : DiffUtil.ItemCallback<Course>() {
+            override fun areContentsTheSame(oldItem: Course, newItem: Course): Boolean =
+                oldItem == newItem
+
+            override fun areItemsTheSame(oldItem: Course, newItem: Course): Boolean {
+                return oldItem.name == newItem.name && oldItem.id == newItem.id
+            }
         }
     }
 }

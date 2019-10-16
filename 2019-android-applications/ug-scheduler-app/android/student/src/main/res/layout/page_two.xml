@@ -19,8 +19,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/margin_normal"
-        android:text="Page Two"
+        android:text="@string/enrol_now"
         android:textAlignment="center"
+        android:fontFamily="@font/google_sans_medium"
         android:textAppearance="?textAppearanceHeadline6" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin_small"
+        android:text="@string/enrol_long_text"
+        android:textAlignment="center"
+        android:textAppearance="?textAppearanceBody1" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>
