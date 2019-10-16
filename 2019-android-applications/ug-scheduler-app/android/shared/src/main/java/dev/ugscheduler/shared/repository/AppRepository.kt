@@ -6,6 +6,7 @@ package dev.ugscheduler.shared.repository
 
 import android.content.Context
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import dev.ugscheduler.shared.data.*
 import dev.ugscheduler.shared.datasource.local.LocalDataSource
 import dev.ugscheduler.shared.datasource.remote.RemoteDataSource
@@ -55,12 +56,20 @@ class AppRepository constructor(
     }
 
     override fun getFacilitatorById(id: String, refresh: Boolean): LiveData<Facilitator> {
-        return if (refresh) remoteDataSource.getFacilitatorById(id).apply {
-            localDataSource.addFacilitator(
-                this.value
-            )
+        val liveFacilitator = MutableLiveData<Facilitator>()
+        if (refresh) {
+            remoteDataSource.getFacilitatorById(id).observeForever {
+                if (it != null) {
+                    liveFacilitator.postValue(it)
+                    localDataSource.addFacilitator(it)
+                }
+            }
+        } else {
+            localDataSource.getFacilitatorById(id).observeForever {
+                liveFacilitator.postValue(it)
+            }
         }
-        else localDataSource.getFacilitatorById(id)
+        return liveFacilitator
     }
 
     override fun enrolStudent(enrolment: Enrolment) =

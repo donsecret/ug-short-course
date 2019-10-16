@@ -39,11 +39,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.firestore.GeoPoint
+import dev.ugscheduler.shared.BuildConfig.DEBUG
 import dev.ugscheduler.shared.R
 
 fun Any.debugger(msg: Any?) {
-//    Timber.d("${this::class.java.simpleName} ==> UGScheduler ==> ${msg.toString()}")
-    println("${this::class.java.simpleName} ==> UGScheduler ==> ${msg.toString()}")
+    if (DEBUG) {
+        //    Timber.d("${this::class.java.simpleName} ==> UGScheduler ==> ${msg.toString()}")
+        println("${this::class.java.simpleName} ==> UGScheduler ==> ${msg.toString()}")
+    }
 }
 
 fun RecyclerView.setupWithAdapter(adapter: RecyclerView.Adapter<out RecyclerView.ViewHolder>) {

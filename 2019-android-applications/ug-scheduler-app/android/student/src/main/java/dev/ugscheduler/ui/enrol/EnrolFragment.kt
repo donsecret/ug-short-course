@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import dev.ugscheduler.databinding.FragmentEnrolBinding
+import dev.ugscheduler.shared.data.Course
+import dev.ugscheduler.shared.util.debugger
 import dev.ugscheduler.util.MainNavigationFragment
 
 class EnrolFragment : MainNavigationFragment() {
@@ -23,6 +25,8 @@ class EnrolFragment : MainNavigationFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(EnrolViewModel::class.java)
+
+        debugger(arguments?.get("extra_course") as? Course)
     }
 
 }
