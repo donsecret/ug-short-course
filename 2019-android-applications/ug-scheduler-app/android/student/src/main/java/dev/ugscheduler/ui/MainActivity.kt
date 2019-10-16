@@ -5,10 +5,11 @@
 package dev.ugscheduler.ui
 
 import android.os.Bundle
-import android.view.View
 import dev.ugscheduler.databinding.ActivityMainBinding
 import dev.ugscheduler.shared.util.BaseActivity
 import dev.ugscheduler.shared.util.intentTo
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -17,7 +18,11 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        uiScope.launch {
+            delay(2500)
+            intentTo(WelcomeActivity::class.java, true)
+        }
     }
 
-    fun getStarted(view: View) = intentTo(HomeActivity::class.java, true)
 }

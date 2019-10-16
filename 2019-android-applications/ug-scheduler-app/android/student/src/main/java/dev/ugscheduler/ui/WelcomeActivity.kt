@@ -2,12 +2,22 @@ package dev.ugscheduler.ui
 
 import android.os.Bundle
 import dev.ugscheduler.R
+import dev.ugscheduler.databinding.ActivityWelcomeBinding
 import dev.ugscheduler.shared.util.BaseActivity
+import dev.ugscheduler.ui.onboarding.OnboardingFragment
 
 class WelcomeActivity : BaseActivity() {
-
+    private lateinit var binding: ActivityWelcomeBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_welcome)
+        binding = ActivityWelcomeBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        // Replace container with onboarding fragment
+        supportFragmentManager.beginTransaction().replace(
+            R.id.frame_container,
+            OnboardingFragment(),
+            OnboardingFragment::class.java.simpleName
+        ).commit()
     }
 }

@@ -7,5 +7,6 @@
     <string name="long_default_app_name">Computer Science Short Courses</string>
     <string name="get_started">Get started</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="developer_watermark">Designed and Developed by <b>Quabynah Codelabs LLC</b></string>
 
 </resources>
