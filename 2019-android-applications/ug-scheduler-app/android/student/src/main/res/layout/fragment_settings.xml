@@ -1,14 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?><!--
-  ~ Copyright (c) 2019.. Designed & developed by Quabynah Codelabs(c). For the love of Android development.
-  -->
-
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true"
+    android:id="@+id/container"
+    tools:context=".ui.settings.SettingsFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
@@ -124,7 +122,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_micro"
                         app:icon="@drawable/twotone_phone_24px"
-                        app:summary="@{student.phone, default=`Not available`}"
+                        android:id="@+id/phone_prefs"
                         app:title="Phone Number" />
 
                     <dev.ugscheduler.shared.widgets.PreferenceView
@@ -132,47 +130,47 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_micro"
                         app:icon="@drawable/twotone_home_24px"
-                        app:summary="@{student.residence, default=`Not available`}"
+                        android:id="@+id/residence_prefs"
                         app:title="Residence" />
 
                     <dev.ugscheduler.shared.widgets.PreferenceView
+                        android:id="@+id/address_prefs"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_micro"
                         app:icon="@drawable/twotone_map_24px"
-                        app:summary="@{student.address, default=`Not available`}"
                         app:title="Address" />
 
                     <dev.ugscheduler.shared.widgets.PreferenceView
+                        android:id="@+id/dob_prefs"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_micro"
                         app:icon="@drawable/twotone_event_24px"
-                        app:summary="@{student.dob, default=`Not available`}"
                         app:title="Date of Birth" />
 
                     <dev.ugscheduler.shared.widgets.PreferenceView
+                        android:id="@+id/org_prefs"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_micro"
                         app:icon="@drawable/twotone_business_center_24px"
-                        app:summary="@{student.organisation, default=`Not available`}"
                         app:title="Organisation" />
 
                     <dev.ugscheduler.shared.widgets.PreferenceView
+                        android:id="@+id/pos_prefs"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_micro"
                         app:icon="@drawable/twotone_account_circle_24px"
-                        app:summary="@{student.position, default=`Not available`}"
                         app:title="Position" />
 
                     <dev.ugscheduler.shared.widgets.PreferenceView
+                        android:id="@+id/edu_prefs"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_micro"
                         app:icon="@drawable/twotone_business_24px"
-                        app:summary="@{student.eduBackground, default=`Not available`}"
                         app:title="Educational Background" />
 
 

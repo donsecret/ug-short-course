@@ -76,21 +76,35 @@ class AppRepository constructor(
         remoteDataSource.enrolStudent(enrolment).apply { localDataSource.enrolStudent(enrolment) }
 
     override fun getCurrentStudent(refresh: Boolean): LiveData<Student> {
-        return if (refresh) remoteDataSource.getCurrentStudent(prefs.uid).apply {
-            localDataSource.addStudent(
-                this.value
-            )
+        val liveStudent = MutableLiveData<Student>()
+        if (refresh) remoteDataSource.getCurrentStudent(prefs.uid).observeForever { student ->
+            if (student != null) {
+                localDataSource.addStudent(student)
+            }
+            liveStudent.postValue(student)
         }
-        else localDataSource.getCurrentStudent(prefs.uid)
+        else {
+            localDataSource.getCurrentStudent(prefs.uid).observeForever { student ->
+                liveStudent.postValue(student)
+            }
+        }
+        return liveStudent
     }
 
     override fun getCurrentFacilitator(refresh: Boolean): LiveData<Facilitator> {
-        return if (refresh) remoteDataSource.getCurrentFacilitator(prefs.uid).apply {
-            localDataSource.addFacilitator(
-                this.value
-            )
+        val liveData = MutableLiveData<Facilitator>()
+        if (refresh) remoteDataSource.getCurrentFacilitator(prefs.uid).observeForever { facilitator ->
+            if (facilitator != null) {
+                localDataSource.addFacilitator(facilitator)
+            }
+            liveData.postValue(facilitator)
         }
-        else localDataSource.getCurrentFacilitator(prefs.uid)
+        else {
+            localDataSource.getCurrentFacilitator(prefs.uid).observeForever { facilitator ->
+                liveData.postValue(facilitator)
+            }
+        }
+        return liveData
     }
 
     override fun getMyCourses(refresh: Boolean): MutableList<Course> {

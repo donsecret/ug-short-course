@@ -5,6 +5,7 @@
 package dev.ugscheduler.shared.util
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
@@ -20,6 +21,7 @@ import android.text.Layout.Alignment
 import android.text.style.StyleSpan
 import android.view.View
 import android.view.View.OnAttachStateChangeListener
+import android.widget.Toast
 import androidx.annotation.DimenRes
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.res.ResourcesCompat
@@ -36,13 +38,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.firestore.GeoPoint
 import dev.ugscheduler.shared.BuildConfig.DEBUG
 import dev.ugscheduler.shared.R
 
+// 1571347789755
 fun Any.debugger(msg: Any?) {
     if (DEBUG) {
         //    Timber.d("${this::class.java.simpleName} ==> UGScheduler ==> ${msg.toString()}")
@@ -50,11 +52,17 @@ fun Any.debugger(msg: Any?) {
     }
 }
 
+fun Fragment.toast(msg: Any?) =
+    Toast.makeText(requireContext(), msg.toString(), Toast.LENGTH_SHORT).show()
+
+fun Activity.toast(msg: Any?) =
+    Toast.makeText(this, msg.toString(), Toast.LENGTH_SHORT).show()
+
 fun RecyclerView.setupWithAdapter(adapter: RecyclerView.Adapter<out RecyclerView.ViewHolder>) {
     setHasFixedSize(false)
     this.adapter = adapter
     this.itemAnimator = DefaultItemAnimator()
-    this.layoutManager = GridLayoutManager(this.context,1)
+    this.layoutManager = GridLayoutManager(this.context, 1) as? RecyclerView.LayoutManager
 }
 
 fun BaseActivity.intentTo(

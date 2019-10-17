@@ -95,6 +95,7 @@
         <item name="materialAlertDialogTitleTextStyle">@style/AlertDialog.TitleText</item>
         <item name="materialAlertDialogTitlePanelStyle">@style/AlertDialog.TitlePanel</item>
         <item name="materialAlertDialogBodyTextStyle">@style/AlertDialog.BodyText</item>
+        <item name="materialAlertDialogTitleIconStyle">@style/AlertDialog.Icon</item>
     </style>
 
 </resources>

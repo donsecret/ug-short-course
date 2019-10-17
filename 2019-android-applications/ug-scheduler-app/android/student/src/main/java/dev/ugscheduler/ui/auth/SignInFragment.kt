@@ -15,10 +15,13 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import dev.ugscheduler.R
 import dev.ugscheduler.databinding.SignInFragmentBinding
 import dev.ugscheduler.shared.data.Facilitator
 import dev.ugscheduler.shared.data.Student
+import dev.ugscheduler.shared.datasource.remote.studentDocument
 import dev.ugscheduler.shared.util.activityViewModelProvider
 import dev.ugscheduler.shared.util.clipToCircle
 import dev.ugscheduler.shared.util.debugger
@@ -83,6 +86,7 @@ class SignInFragment : DialogFragment() {
                     try {
                         val account = GoogleSignIn.getSignedInAccountFromIntent(data)
                             .getResult(ApiException::class.java)
+                        // FirebaseAuth instance
                         val auth: FirebaseAuth = get()
 
                         // Login with credentials on Firebase
@@ -108,10 +112,30 @@ class SignInFragment : DialogFragment() {
                             }
                             .addOnCompleteListener(requireActivity()) { task ->
                                 if (task.isSuccessful) {
+                                    // Firebase User object
                                     val firebaseUser = task.result?.user
-                                    val student = firebaseUser?.toStudent()
-                                    viewModel.addStudent(student)
-                                    dismiss()
+
+                                    // Firestore instance
+                                    val db: FirebaseFirestore = get()
+
+                                    // Start transactions
+                                    db.runTransaction { transaction ->
+                                        val studentRef =
+                                            transaction.get(db.studentDocument(firebaseUser!!.uid))
+                                        if (studentRef.exists()) {
+                                            viewModel.addStudent(studentRef.toObject(Student::class.java))
+                                        } else {
+                                            val student = firebaseUser.toStudent()
+                                            transaction.set(
+                                                db.studentDocument(firebaseUser.uid),
+                                                student,
+                                                SetOptions.merge()
+                                            )
+                                            viewModel.addStudent(student)
+                                        }
+                                        dismiss()
+                                        null
+                                    }
                                 } else {
                                     snackbar.setText("Login failed. ${task.exception?.localizedMessage}")
                                         .addCallback(object :
@@ -132,7 +156,6 @@ class SignInFragment : DialogFragment() {
 
                 else -> {
                     debugger("Login was cancelled")
-                    // performTestLogin()
                 }
             }
         }
@@ -175,4 +198,19 @@ fun FirebaseUser.toFacilitator() = Facilitator(
     displayName,
     2.50,
     phoneNumber
+)
+
+fun Facilitator.toStudent() = Student(
+    id,
+    timestamp,
+    email,
+    phone,
+    avatar,
+    null,
+    fullName,
+    null,
+    null,
+    null,
+    null,
+    null
 )

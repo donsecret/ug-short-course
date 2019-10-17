@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/home_graph.xml"
-    app:startDestination="@id/navigation_home">
+    app:startDestination="@id/navigation_home"
+    tools:ignore="UnusedNavigation">
 
     <fragment
         android:id="@id/navigation_home"
@@ -49,7 +50,7 @@
         android:id="@id/navigation_settings"
         android:name="dev.ugscheduler.ui.settings.SettingsFragment"
         android:label="@string/title_settings"
-        tools:layout="@layout/settings_fragment" />
+        tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@id/navigation_sessions"
         android:name="dev.ugscheduler.ui.sessions.SessionsFragment"

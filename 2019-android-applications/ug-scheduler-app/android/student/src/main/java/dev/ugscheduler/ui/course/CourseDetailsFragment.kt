@@ -8,10 +8,12 @@ import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import coil.api.load
+import coil.request.CachePolicy
 import coil.transform.CircleCropTransformation
 import dev.ugscheduler.R
 import dev.ugscheduler.databinding.FragmentCourseDetailsBinding
 import dev.ugscheduler.shared.data.Course
+import dev.ugscheduler.shared.data.Student
 import dev.ugscheduler.shared.util.activityViewModelProvider
 import dev.ugscheduler.shared.util.debugger
 import dev.ugscheduler.shared.util.deserializer.getCourses
@@ -27,6 +29,7 @@ class CourseDetailsFragment : MainNavigationFragment() {
             AppViewModelFactory(get())
         )
     }
+    private var currentStudent: Student? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,12 +48,29 @@ class CourseDetailsFragment : MainNavigationFragment() {
     private fun bindUI(course: Course?) {
         binding.courseName.text = course?.name
         binding.courseDesc.text = course?.desc
-        val facilitator = course?.facilitator
-        getFacilitator(facilitator)
+        binding.courseSessions.text =
+            if (course?.session.isNullOrEmpty()) "Weekends & Evenings" else course?.session
+
+        // Get facilitator
+        getFacilitator(course?.facilitator, false)
+
+        // Get current student
+        viewModel.getCurrentStudent(false).observe(viewLifecycleOwner, Observer { student ->
+            if (student == null) {
+                viewModel.getCurrentStudent(false).removeObservers(viewLifecycleOwner)
+                viewModel.getCurrentStudent(true).observe(viewLifecycleOwner, Observer {
+                    currentStudent = it
+                })
+                return@Observer
+            }
+            currentStudent = student
+        })
+
         binding.enrolCourse.setOnClickListener {
             findNavController().navigate(
                 R.id.navigation_enrol, bundleOf(
-                    Pair("extra_course", course)
+                    Pair("extra_course", course),
+                    Pair("extra_student", currentStudent)
                 )
             )
         }
@@ -70,21 +90,22 @@ class CourseDetailsFragment : MainNavigationFragment() {
         }
     }
 
-    private fun getFacilitator(facilitator: String?, refresh: Boolean = true) {
-        debugger("Facilitator's id: $facilitator")
+    private fun getFacilitator(facilitator: String?, refresh: Boolean = false) {
         if (facilitator.isNullOrEmpty()) return
         viewModel.getFacilitatorById(facilitator, refresh)
             .observe(viewLifecycleOwner, Observer { person ->
                 if (person != null) {
-                    debugger(person)
                     binding.facilitatorImage.load(person.avatar) {
                         transformations(CircleCropTransformation())
-                        placeholder(R.drawable.ic_default_avatar_3)
+                        placeholder(R.drawable.ic_default_avatar)
+                        crossfade(true)
+                        diskCachePolicy(CachePolicy.ENABLED)
                     }
                     binding.facilitatorName.text = person.fullName
                     binding.courseFacilitatorDesc.text = person.email
                 } else {
                     binding.swipeRefresh.isRefreshing = true
+                    getFacilitator(facilitator, true)
                 }
             })
     }

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
+import coil.request.CachePolicy
 import coil.transform.CircleCropTransformation
 import dev.ugscheduler.R
 import dev.ugscheduler.databinding.ItemCourseBinding
@@ -25,11 +26,14 @@ class CourseViewHolder(
             transformations(CircleCropTransformation())
             placeholder(R.drawable.ic_default_avatar_2)
             error(R.drawable.ic_default_avatar_1)
+            crossfade(true)
+            diskCachePolicy(CachePolicy.ENABLED)
         }
 
         binding.courseName.text = course.name
         binding.courseDuration.text =
-            DateFormatter(binding.root.context).getTimestamp(System.currentTimeMillis())
+                /*DateFormatter(binding.root.context).getTimestamp(System.currentTimeMillis())*/
+            course.desc
     }
 }
 

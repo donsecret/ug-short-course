@@ -74,7 +74,7 @@
                     android:layout_marginStart="@dimen/margin_normal"
                     android:layout_marginTop="@dimen/margin_normal"
                     android:fontFamily="@font/google_sans_medium"
-                    android:text="Facilitator"
+                    android:text="@string/facilitator"
                     android:textStyle="bold" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -125,7 +125,6 @@
                         android:layout_height="wrap_content"
                         android:alpha="?alphaMedium"
                         android:paddingBottom="@dimen/agenda_block_padding_vertical"
-                        android:text="Bachelor of Arts in Computer Science (2018)"
                         android:textAlignment="viewStart"
                         android:textAppearance="?textAppearanceBody2"
                         app:layout_constraintEnd_toEndOf="@id/facilitator_name"
@@ -142,10 +141,11 @@
                     android:layout_marginStart="@dimen/margin_normal"
                     android:layout_marginTop="@dimen/margin_large"
                     android:fontFamily="@font/google_sans_medium"
-                    android:text="Sessions"
+                    android:text="@string/title_sessions"
                     android:textStyle="bold" />
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/course_sessions"
                     style="@style/Widget.MaterialComponents.Button.TextButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -154,7 +154,6 @@
                     android:alpha="?alphaMedium"
                     android:clickable="false"
                     android:gravity="center"
-                    android:text="Weekends &amp; Mornings"
                     tools:text="@tools:sample/lorem" />
 
                 <com.google.android.material.button.MaterialButton
@@ -163,7 +162,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="@dimen/margin_large"
-                    android:text="Enrol course" />
+                    android:text="@string/enrol_now" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
