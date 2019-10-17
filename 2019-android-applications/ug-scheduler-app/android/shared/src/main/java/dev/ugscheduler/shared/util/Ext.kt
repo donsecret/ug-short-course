@@ -35,6 +35,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.maps.model.LatLng
@@ -53,7 +54,7 @@ fun RecyclerView.setupWithAdapter(adapter: RecyclerView.Adapter<out RecyclerView
     setHasFixedSize(false)
     this.adapter = adapter
     this.itemAnimator = DefaultItemAnimator()
-    this.layoutManager = LinearLayoutManager(this.context)
+    this.layoutManager = GridLayoutManager(this.context,1)
 }
 
 fun BaseActivity.intentTo(

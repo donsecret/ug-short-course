@@ -13,7 +13,6 @@ import com.google.gson.reflect.TypeToken
 import dev.ugscheduler.R
 import dev.ugscheduler.databinding.ItemLibBinding
 import dev.ugscheduler.shared.util.debugger
-import dev.ugscheduler.shared.util.goneUnless
 import dev.ugscheduler.shared.util.websiteLink
 import java.io.IOException
 import java.io.InputStreamReader
@@ -65,7 +64,7 @@ class AboutLibsAdapter : ListAdapter<Library, AboutLibsAdapter.LibraryViewHolder
             binding.icon.load(lib.icon) {
                 if (lib.circleCrop) transformations(CircleCropTransformation())
                 placeholder(R.drawable.ic_default_avatar_3)
-                goneUnless(binding.icon, lib.icon.isNullOrEmpty())
+                error(R.drawable.ic_default_avatar_1)
             }
             websiteLink(binding.root, lib.url)
         }

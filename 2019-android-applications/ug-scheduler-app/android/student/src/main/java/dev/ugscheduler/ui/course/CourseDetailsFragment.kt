@@ -70,7 +70,7 @@ class CourseDetailsFragment : MainNavigationFragment() {
         }
     }
 
-    private fun getFacilitator(facilitator: String?, refresh: Boolean = false) {
+    private fun getFacilitator(facilitator: String?, refresh: Boolean = true) {
         debugger("Facilitator's id: $facilitator")
         if (facilitator.isNullOrEmpty()) return
         viewModel.getFacilitatorById(facilitator, refresh)

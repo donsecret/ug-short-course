@@ -7,11 +7,11 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.api.load
+import coil.transform.CircleCropTransformation
 import dev.ugscheduler.R
 import dev.ugscheduler.databinding.ItemCourseBinding
 import dev.ugscheduler.shared.data.Course
-import dev.ugscheduler.shared.util.clipToCircle
-import dev.ugscheduler.shared.util.imageUrl
 import io.codelabs.dateformatter.DateFormatter
 
 
@@ -21,16 +21,15 @@ class CourseViewHolder(
     RecyclerView.ViewHolder(binding.root) {
 
     fun bind(course: Course) {
-        clipToCircle(binding.icon, true)
-        imageUrl(
-            binding.icon,
-            course.icon,
-            binding.root.resources.getDrawable(R.drawable.ic_default_avatar_2, null)
-        )
+        binding.icon.load(course.icon) {
+            transformations(CircleCropTransformation())
+            placeholder(R.drawable.ic_default_avatar_2)
+            error(R.drawable.ic_default_avatar_1)
+        }
 
-        binding.courseName.text = /*course.name*/"Hello world"
+        binding.courseName.text = course.name
         binding.courseDuration.text =
-            /*DateFormatter(binding.root.context).getTimestamp(System.currentTimeMillis())*/"Some other content"
+            DateFormatter(binding.root.context).getTimestamp(System.currentTimeMillis())
     }
 }
 

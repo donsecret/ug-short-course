@@ -55,7 +55,6 @@
                 android:fontFamily="@font/google_sans_medium"
                 android:gravity="center"
                 android:padding="@dimen/spacing_micro"
-                android:text="@{student.fullName}"
                 android:textAppearance="?textAppearanceHeadline6"
                 tools:text="@tools:sample/lorem" />
 
@@ -67,7 +66,6 @@
                 android:alpha="?alphaMedium"
                 android:fontFamily="@font/google_sans"
                 android:gravity="center"
-                android:text="@{student.email}"
                 android:textAppearance="?textAppearanceSubtitle2"
                 tools:text="@tools:sample/lorem" />
 

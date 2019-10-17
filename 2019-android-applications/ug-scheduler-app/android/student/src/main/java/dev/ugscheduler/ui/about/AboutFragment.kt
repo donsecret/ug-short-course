@@ -35,7 +35,6 @@ class AboutFragment : MainNavigationFragment() {
         val adapter = AboutLibsAdapter()
         val libs = LibraryDeserializer.deserialize(requireContext())
         adapter.submitList(libs)
-        debugger(adapter.itemCount)
         binding.libsList.setupWithAdapter(adapter)
 
         // Padding at the bottom of the list
