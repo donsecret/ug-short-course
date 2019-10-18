@@ -5,25 +5,17 @@
 package dev.ugscheduler.shared.util.deserializer
 
 import android.content.Context
-import com.google.gson.GsonBuilder
+import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import dev.ugscheduler.shared.data.Course
-import dev.ugscheduler.shared.util.debugger
-import java.io.FileInputStream
-import java.io.FileReader
-import java.io.InputStream
 import java.io.InputStreamReader
 
-fun Any.getCourses(context: Context): MutableList<Course> {
-    try {
-        debugger(context.fromJson<Course>("courses.json"))
-    } catch (e: Exception) {
-        debugger(e.localizedMessage)
-    }
-    return mutableListOf()
-}
+fun getCourses(context: Context): MutableList<Course> =
+    context.fromJson("courses.json").toMutableList()
 
-fun <T> Context.fromJson(fileName: String): MutableList<T> {
-    return GsonBuilder().setPrettyPrinting().create()
-        .fromJson(InputStreamReader(assets.open(fileName)), object : TypeToken<MutableList<T>>() {}.type)
+fun Context.fromJson(fileName: String): List<Course> {
+    return Gson().fromJson<List<Course>>(
+        InputStreamReader(assets.open(fileName)),
+        object : TypeToken<List<Course>>() {}.type
+    )
 }

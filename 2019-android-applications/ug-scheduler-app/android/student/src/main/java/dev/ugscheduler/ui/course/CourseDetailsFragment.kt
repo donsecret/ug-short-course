@@ -77,7 +77,7 @@ class CourseDetailsFragment : MainNavigationFragment() {
 
         binding.swipeRefresh.setOnRefreshListener {
             // Fetch live data from the remote data source
-            val filter = viewModel.getCourses(requireContext()).filter { it.id == course?.id }
+            val filter = getCourses(requireContext()).filter { it.id == course?.id }
             if (filter.isNotEmpty() && filter.size == 1) {
                 binding.courseName.text = filter[0].name
                 binding.courseDesc.text = filter[0].desc

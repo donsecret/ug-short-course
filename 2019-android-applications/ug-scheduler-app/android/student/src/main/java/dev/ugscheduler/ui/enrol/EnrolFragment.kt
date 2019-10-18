@@ -9,9 +9,10 @@ import androidx.navigation.fragment.findNavController
 import dev.ugscheduler.BuildConfig.FLAVOR
 import dev.ugscheduler.databinding.FragmentEnrolBinding
 import dev.ugscheduler.shared.data.Course
+import dev.ugscheduler.shared.data.Enrolment
 import dev.ugscheduler.shared.data.Student
+import dev.ugscheduler.shared.data.sessionName
 import dev.ugscheduler.shared.util.debugger
-import dev.ugscheduler.shared.util.deserializer.getCourses
 import dev.ugscheduler.shared.util.toast
 import dev.ugscheduler.util.MainNavigationFragment
 
@@ -34,17 +35,14 @@ class EnrolFragment : MainNavigationFragment() {
         val course = arguments?.get("extra_course") as? Course
         val student = arguments?.get("extra_student") as? Student
         if (course != null && student != null) {
-            /*val enrolment =
-                Enrolment(student.id, course.id, Session.WEEKEND.sessionName())
-            debugger(enrolment)*/
-
+            val enrolment =
+                Enrolment(student.id, course.id, Enrolment.Session.WEEKEND.sessionName())
+            debugger(enrolment)
             debugger(FLAVOR)
         } else {
             toast("Cannot setup enrolment. An error occurred")
             findNavController().popBackStack()
         }
-
-        getCourses(requireContext())
     }
 
 }
