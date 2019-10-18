@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import dev.ugscheduler.BuildConfig
+import dev.ugscheduler.BuildConfig.FLAVOR
 import dev.ugscheduler.databinding.FragmentEnrolBinding
 import dev.ugscheduler.shared.data.Course
 import dev.ugscheduler.shared.data.Student
@@ -37,7 +37,7 @@ class EnrolFragment : MainNavigationFragment() {
                 Enrolment(student.id, course.id, Session.WEEKEND.sessionName())
             debugger(enrolment)*/
 
-            //debugger(FLAVOR)
+            debugger(FLAVOR)
         } else {
             toast("Cannot setup enrolment. An error occurred")
             findNavController().popBackStack()
