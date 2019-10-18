@@ -41,7 +41,7 @@
         android:alpha="?alphaMedium"
         android:paddingBottom="@dimen/agenda_block_padding_vertical"
         android:textAlignment="viewStart"
-        android:maxLines="3"
+        android:maxLines="2"
         android:ellipsize="end"
         android:textAppearance="?textAppearanceBody2"
         app:layout_constraintEnd_toEndOf="@id/course_name"

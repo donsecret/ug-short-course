@@ -9,10 +9,7 @@ import androidx.navigation.fragment.findNavController
 import dev.ugscheduler.BuildConfig
 import dev.ugscheduler.databinding.FragmentEnrolBinding
 import dev.ugscheduler.shared.data.Course
-import dev.ugscheduler.shared.data.Enrolment
-import dev.ugscheduler.shared.data.Enrolment.Session
 import dev.ugscheduler.shared.data.Student
-import dev.ugscheduler.shared.data.sessionName
 import dev.ugscheduler.shared.util.debugger
 import dev.ugscheduler.shared.util.toast
 import dev.ugscheduler.util.MainNavigationFragment
@@ -40,7 +37,7 @@ class EnrolFragment : MainNavigationFragment() {
                 Enrolment(student.id, course.id, Session.WEEKEND.sessionName())
             debugger(enrolment)*/
 
-            debugger(BuildConfig.FLAVOR)
+            //debugger(FLAVOR)
         } else {
             toast("Cannot setup enrolment. An error occurred")
             findNavController().popBackStack()
