@@ -11,6 +11,7 @@ import dev.ugscheduler.databinding.FragmentEnrolBinding
 import dev.ugscheduler.shared.data.Course
 import dev.ugscheduler.shared.data.Student
 import dev.ugscheduler.shared.util.debugger
+import dev.ugscheduler.shared.util.deserializer.getCourses
 import dev.ugscheduler.shared.util.toast
 import dev.ugscheduler.util.MainNavigationFragment
 
@@ -42,6 +43,8 @@ class EnrolFragment : MainNavigationFragment() {
             toast("Cannot setup enrolment. An error occurred")
             findNavController().popBackStack()
         }
+
+        getCourses(requireContext())
     }
 
 }

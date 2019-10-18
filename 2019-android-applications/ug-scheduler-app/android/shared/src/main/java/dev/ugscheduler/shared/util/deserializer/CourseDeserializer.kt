@@ -9,26 +9,21 @@ import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import dev.ugscheduler.shared.data.Course
 import dev.ugscheduler.shared.util.debugger
-import java.io.IOException
+import java.io.FileInputStream
+import java.io.FileReader
+import java.io.InputStream
 import java.io.InputStreamReader
-import java.util.*
 
 fun Any.getCourses(context: Context): MutableList<Course> {
-    val courses = ArrayList<Course>(0)
-
-    val gson = GsonBuilder().setPrettyPrinting().create()
-
-    val type = object : TypeToken<List<Course>>() {}.type
-
     try {
-        val courseList = gson.fromJson<List<Course>>(
-            InputStreamReader(context.assets.open("courses.json")),
-            type
-        )
-        courses.addAll(courseList)
-    } catch (e: IOException) {
+        debugger(context.fromJson<Course>("courses.json"))
+    } catch (e: Exception) {
         debugger(e.localizedMessage)
     }
+    return mutableListOf()
+}
 
-    return courses
+fun <T> Context.fromJson(fileName: String): MutableList<T> {
+    return GsonBuilder().setPrettyPrinting().create()
+        .fromJson(InputStreamReader(assets.open(fileName)), object : TypeToken<MutableList<T>>() {}.type)
 }
