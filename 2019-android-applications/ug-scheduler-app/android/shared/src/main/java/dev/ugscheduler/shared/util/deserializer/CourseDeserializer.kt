@@ -11,11 +11,11 @@ import dev.ugscheduler.shared.data.Course
 import java.io.InputStreamReader
 
 fun getCourses(context: Context): MutableList<Course> =
-    context.fromJson("courses.json").toMutableList()
+    context.fromJson("courses.json")
 
-fun Context.fromJson(fileName: String): List<Course> {
+fun Context.fromJson(fileName: String): MutableList<Course> {
     return Gson().fromJson<List<Course>>(
         InputStreamReader(assets.open(fileName)),
         object : TypeToken<List<Course>>() {}.type
-    )
+    ).toMutableList()
 }
