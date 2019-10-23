@@ -38,6 +38,7 @@
     <string name="title_info">Info</string>
     <string name="title_chat">Chats</string>
     <string name="title_sessions">Sessions</string>
+    <string name="title_preview">Preview Image</string>
     <string name="title_map">Map</string>
     <string name="no_network_connection">No internet connection.</string>
     <string name="no_network_description">To use CSSC, try:\\n\\n - Turning off airplane mode\\n\\n - Turning on mobile data or Wi-Fi\\n\\n - Checking the signal in your area</string>

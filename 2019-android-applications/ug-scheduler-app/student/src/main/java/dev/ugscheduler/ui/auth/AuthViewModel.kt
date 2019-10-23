@@ -1,30 +1,44 @@
 package dev.ugscheduler.ui.auth
 
-import android.net.Uri
 import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.*
 import dev.ugscheduler.shared.data.Student
+import dev.ugscheduler.shared.datasource.local.LocalDatabase
+import dev.ugscheduler.shared.repository.AppRepository
+import dev.ugscheduler.shared.util.BaseActivity
 import dev.ugscheduler.shared.util.debugger
+import dev.ugscheduler.shared.util.prefs.UserSharedPreferences
+import dev.ugscheduler.shared.viewmodel.AppViewModel
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
-class AuthViewModelFactory : ViewModelProvider.NewInstanceFactory() {
+class AuthViewModelFactory(private val repository: AppRepository) :
+    ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return AuthViewModel() as T
+        return AuthViewModel(repository) as T
     }
 
 }
 
-class AuthViewModel : ViewModel() {
-    private val _userImageUri = MutableLiveData<Uri?>()
-    val currentUserImageUri: LiveData<Uri?> = _userImageUri
-
+class AuthViewModel(repository: AppRepository) : AppViewModel(repository) {
     private val _userInfo = MutableLiveData<Student?>()
-    val currentUserInfo: LiveData<Student?> = _userInfo
+
+    init {
+        viewModelScope.launch {
+            withContext(Main) {
+                getCurrentStudent(false).observe(BaseActivity(), Observer { student ->
+                    debugger("Observing student data: $student")
+                    _userInfo.value = student
+                })
+            }
+        }
+    }
+
+    val currentUserInfo: LiveData<Student?> get() = _userInfo
 
     fun onProfileClicked(fm: FragmentManager, loggedIn: Boolean) =
         if (loggedIn) SignOutFragment().show(fm, null) else SignInFragment().show(fm, null)

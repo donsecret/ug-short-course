@@ -47,7 +47,7 @@ class HomeFragment : MainNavigationFragment() {
 
         // Setup toolbar
         binding.toolbar.setupProfileMenuItem(
-            activityViewModelProvider(AuthViewModelFactory()),
+            activityViewModelProvider(AuthViewModelFactory(get())),
             childFragmentManager, get(),
             viewLifecycleOwner
         )

@@ -78,13 +78,12 @@ class CourseDetailsFragment : MainNavigationFragment() {
         binding.swipeRefresh.setOnRefreshListener {
             // Fetch live data from the remote data source
             val filter = getCourses(requireContext()).filter { it.id == course?.id }
+            binding.swipeRefresh.isRefreshing = false
             if (filter.isNotEmpty() && filter.size == 1) {
                 binding.courseName.text = filter[0].name
                 binding.courseDesc.text = filter[0].desc
                 getFacilitator(filter[0].facilitator, true)
-                binding.swipeRefresh.isRefreshing = false
             } else {
-                binding.swipeRefresh.isRefreshing = false
                 debugger("Unable to fetch courses")
             }
         }
@@ -101,6 +100,12 @@ class CourseDetailsFragment : MainNavigationFragment() {
                         crossfade(true)
                         diskCachePolicy(CachePolicy.ENABLED)
                     }
+                    /*binding.facilitatorImage.setOnClickListener {
+                        findNavController().navigate(
+                            R.id.navigation_preview,
+                            bundleOf("extra_image" to person.avatar)
+                        )
+                    }*/
                     binding.facilitatorName.text = person.fullName
                     binding.courseFacilitatorDesc.text = person.email
                 } else {

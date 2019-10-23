@@ -8,6 +8,7 @@ import android.net.Uri
 import android.view.MenuItem
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.Toolbar
+import androidx.core.net.toUri
 import androidx.core.view.MenuItemCompat
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LifecycleOwner
@@ -42,14 +43,12 @@ fun Toolbar.setupProfileMenuItem(
         viewModel.onProfileClicked(fm, prefs.isLoggedIn)
         true
     }
-    viewModel.currentUserInfo.observe(lifecycleOwner, Observer {
-        setProfileContentDescription(profileItem, resources, it)
-    })
-
     val avatarSize = resources.getDimensionPixelSize(R.dimen.nav_account_image_size)
-    val target = profileItem.asGlideTarget(avatarSize)
-    viewModel.currentUserImageUri.observe(lifecycleOwner, Observer {
-        setProfileAvatar(context, target, it)
+    viewModel.currentUserInfo.observe(lifecycleOwner, Observer {
+        debugger("Current student for toolbar icon: $it")
+        setProfileContentDescription(profileItem, resources, it)
+        val target = profileItem.asGlideTarget(avatarSize)
+        setProfileAvatar(context, target, it?.avatar?.toUri())
     })
 }
 
@@ -66,7 +65,7 @@ fun setProfileAvatar(
     context: Context,
     target: Target<Drawable>,
     imageUri: Uri?,
-    placeholder: Int = R.drawable.ic_default_profile_avatar
+    placeholder: Int = R.drawable.ic_default_avatar_3
 ) {
     // Inflate the drawable for proper tinting
     val placeholderDrawable = AppCompatResources.getDrawable(context, placeholder)

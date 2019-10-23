@@ -26,7 +26,7 @@ class UserSharedPreferences private constructor(context: Context) {
     var isLoggedIn: Boolean = false
 
     val uid: String
-        get() = prefs.getString("user_id", "")!!
+        get() = prefs.getString("user_id", "") ?: ""
 
     fun login(uid: String?) {
         isLoggedIn = !uid.isNullOrEmpty()

@@ -20,6 +20,7 @@
     <item name="navigation_about" type="id" />
     <item name="navigation_chat" type="id" />
     <item name="navigation_search" type="id" />
+    <item name="navigation_preview" type="id" />
     <item name="navigation_logout" type="id" />
     <item name="navigation_login" type="id" />
 </resources>

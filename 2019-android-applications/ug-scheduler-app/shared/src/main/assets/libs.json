@@ -10,9 +10,9 @@
   {
     "id": "2528d64b-11bf-4bf6-9cf7-fe50dcc14ace",
     "name": "Firebase",
-    "desc": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
-    "url": "https://www.example.com",
-    "icon": null,
+    "desc": "Firebase gives you functionality like analytics, databases, messaging and crash reporting so you can move quickly and focus on your users.",
+    "url": "https://firebase.google.com/",
+    "icon": "https://firebase.google.com/images/brand-guidelines/logo-built_knockout.png",
     "circleCrop": false
   },
   {
@@ -21,7 +21,7 @@
     "desc":"Glide is a fast and efficient open source media management and image loading framework for Android that wraps media decoding, memory and disk caching, and resource pooling into a simple and easy to use interface.",
     "url":"https://github.com/bumptech/glide",
     "icon": "https://avatars1.githubusercontent.com/u/423539?s=200&v=4",
-    "circleCrop": false
+    "circleCrop": true
   },
   {
     "id": "57e868f4-e592-4206-8271-d21554f6cf99",
@@ -34,10 +34,10 @@
   {
     "id": "37838b21-fdf8-4182-a9f1-2bb9bba2d69b",
     "name": "Android Architecture Components",
-    "desc": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
-    "url": "https://www.example.com",
-    "icon": null,
-    "circleCrop": false
+    "desc": "Android architecture components are a collection of libraries that help you design robust, testable, and maintainable apps. Start with classes for managing your UI component lifecycle and handling data persistence.",
+    "url": "https://developer.android.com/topic/libraries/architecture/",
+    "icon": "https://avatars2.githubusercontent.com/u/1342004?s=200&v=4",
+    "circleCrop": true
   },
   {
     "id": "78571371-bcbc-47e3-a2ef-a21b68f3a53b",
@@ -48,19 +48,27 @@
     "circleCrop": true
   },
   {
-    "id": "8882938c-8a99-46ae-9dc4-b02ec212e8c9",
-    "name": "Google Play Services",
-    "desc": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
-    "url": "https://www.example.com",
-    "icon": null,
+    "id": "6ee9ec2b-9c57-48f0-9f9f-bbd685f9571a",
+    "name": "Kotlin Coroutines",
+    "desc": "Library support for Kotlin coroutines",
+    "url": "https://github.com/Kotlin/kotlinx.coroutines",
+    "icon": "https://avatars2.githubusercontent.com/u/1446536?s=200&v=4",
     "circleCrop": false
   },
   {
-    "id": "6ee9ec2b-9c57-48f0-9f9f-bbd685f9571a",
-    "name": "Kotlin Coroutines",
-    "desc": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
-    "url": "https://www.example.com",
-    "icon": null,
-    "circleCrop": false
+    "id": "c722fd51-0da7-4747-9461-e97faf1e5fec",
+    "name": "PhotoView",
+    "desc": "PhotoView aims to help produce an easily usable implementation of a zooming Android ImageView.",
+    "url": "https://github.com/chrisbanes/PhotoView",
+    "icon": "https://avatars0.githubusercontent.com/u/227486?s=460&v=4",
+    "circleCrop": true
+  },
+  {
+    "id": "9d691828-122d-4841-8af2-1392d59aaf90",
+    "name": "Coil",
+    "desc": "Image loading for Android backed by Kotlin Coroutines.",
+    "url": "https://github.com/coil-kt",
+    "icon": "https://avatars1.githubusercontent.com/u/52722434?s=200&v=4",
+    "circleCrop": true
   }
 ]

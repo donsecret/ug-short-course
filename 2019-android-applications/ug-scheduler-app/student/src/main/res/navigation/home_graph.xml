@@ -66,4 +66,9 @@
         android:name="dev.ugscheduler.ui.auth.SignOutFragment"
         android:label="@string/sign_out"
         tools:layout="@layout/sign_out_fragment" />
+    <dialog
+        android:id="@id/navigation_preview"
+        android:name="dev.ugscheduler.ui.media.ImagePreviewFragment"
+        android:label="@string/title_preview"
+        tools:layout="@layout/image_preview_fragment" />
 </navigation>

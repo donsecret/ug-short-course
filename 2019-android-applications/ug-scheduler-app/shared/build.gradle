@@ -150,6 +150,9 @@ dependencies {
     // Coil
     api "io.coil-kt:coil:0.7.0"
 
+    // PhotoView
+    api 'com.github.chrisbanes:PhotoView:2.3.0'
+
     // Unit Testing
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

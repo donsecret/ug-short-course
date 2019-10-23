@@ -45,11 +45,12 @@ import dev.ugscheduler.shared.BuildConfig.DEBUG
 import dev.ugscheduler.shared.R
 
 // 1571347789755
+// todo: show in debug mode only
 fun Any.debugger(msg: Any?) {
-    if (DEBUG) {
+//    if (DEBUG) {
         //    Timber.d("${this::class.java.simpleName} ==> UGScheduler ==> ${msg.toString()}")
         println("${this::class.java.simpleName} ==> UGScheduler ==> ${msg.toString()}")
-    }
+//    }
 }
 
 fun Fragment.toast(msg: Any?) =

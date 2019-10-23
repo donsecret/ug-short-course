@@ -166,18 +166,13 @@ class RemoteDataSource constructor(
 
     fun addStudent(student: Student?) {
         if (student == null) return
+        // Do nothing for now
         ioScope.launch {
             try {
-                firestore.runTransaction { t ->
-                    val oldStudent =
-                        t.get(firestore.studentDocument(student.id))
-                    if (oldStudent.exists()) {
-                        val data = oldStudent.toObject(Student::class.java)
-                        debugger("Student from database: $data")
-                    } else {
-                        t.set(firestore.studentDocument(student.id), student, SetOptions.merge())
-                    }
-                    null
+                val studentTask = Tasks.await(firestore.studentDocument(student.id).get())
+                if (!studentTask.exists()) {
+                    debugger("Saving new student to firestore...")
+                    Tasks.await(firestore.studentDocument(student.id).set(student, SetOptions.merge()))
                 }
             } catch (e: Exception) {
                 debugger(e.localizedMessage)

@@ -7,33 +7,41 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.Observer
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.Tasks
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.SetOptions
 import dev.ugscheduler.R
 import dev.ugscheduler.databinding.SignInFragmentBinding
 import dev.ugscheduler.shared.data.Facilitator
 import dev.ugscheduler.shared.data.Student
-import dev.ugscheduler.shared.datasource.remote.studentDocument
 import dev.ugscheduler.shared.util.activityViewModelProvider
 import dev.ugscheduler.shared.util.clipToCircle
 import dev.ugscheduler.shared.util.debugger
+import dev.ugscheduler.shared.util.prefs.UserSharedPreferences
 import dev.ugscheduler.shared.util.websiteLink
 import dev.ugscheduler.shared.viewmodel.AppViewModel
 import dev.ugscheduler.shared.viewmodel.AppViewModelFactory
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.get
 
 class SignInFragment : DialogFragment() {
 
     private lateinit var binding: SignInFragmentBinding
-    private lateinit var viewModel: AppViewModel
+    private val viewModel: AppViewModel by lazy {
+        activityViewModelProvider<AppViewModel>(
+            AppViewModelFactory(get())
+        )
+    }
 
     private val snackbar by lazy {
         Snackbar.make(
@@ -64,18 +72,24 @@ class SignInFragment : DialogFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = activityViewModelProvider(AppViewModelFactory(get()))
 
+        // Bind views
         clipToCircle(binding.userAvatar, true)
         websiteLink(binding.privacyPolicy, getString(R.string.privacy_policy_url))
         websiteLink(binding.termsOfService, getString(R.string.tos_url))
 
+        // Add click action for login button
         binding.signIn.setOnClickListener {
             with(googleClient) {
                 startActivityForResult(signInIntent, RC_AUTH)
             }
         }
 
+        // Observe live login state listener
+        val prefs = get<UserSharedPreferences>()
+        prefs.liveLoginState.observe(viewLifecycleOwner, Observer { state ->
+            if (state) dismiss()
+        })
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -91,53 +105,25 @@ class SignInFragment : DialogFragment() {
 
                         // Login with credentials on Firebase
                         snackbar.show()
-                        auth.signInWithCredential(
-                            GoogleAuthProvider.getCredential(
-                                account?.idToken,
-                                null
-                            )
-                        )
-                            .addOnFailureListener(requireActivity()) { ex ->
-                                debugger(ex.localizedMessage)
-                                snackbar.setText("Login failed. Please check your internet connection")
-                                    .addCallback(object :
-                                        BaseTransientBottomBar.BaseCallback<Snackbar?>() {
-                                        override fun onDismissed(
-                                            transientBottomBar: Snackbar?,
-                                            event: Int
-                                        ) {
-                                            dismiss()
-                                        }
-                                    }).show()
-                            }
-                            .addOnCompleteListener(requireActivity()) { task ->
-                                if (task.isSuccessful) {
-                                    // Firebase User object
-                                    val firebaseUser = task.result?.user
+                        val ioScope = CoroutineScope(IO)
+                        val uiScope = CoroutineScope(Main)
 
-                                    // Firestore instance
-                                    val db: FirebaseFirestore = get()
-
-                                    // Start transactions
-                                    db.runTransaction { transaction ->
-                                        val studentRef =
-                                            transaction.get(db.studentDocument(firebaseUser!!.uid))
-                                        if (studentRef.exists()) {
-                                            viewModel.addStudent(studentRef.toObject(Student::class.java))
-                                        } else {
-                                            val student = firebaseUser.toStudent()
-                                            transaction.set(
-                                                db.studentDocument(firebaseUser.uid),
-                                                student,
-                                                SetOptions.merge()
-                                            )
-                                            viewModel.addStudent(student)
-                                        }
-                                        dismiss()
+                        // Background
+                        ioScope.launch {
+                            // Sign in to Firebase with credentials
+                            val authTask = Tasks.await(
+                                auth.signInWithCredential(
+                                    GoogleAuthProvider.getCredential(
+                                        account?.idToken,
                                         null
-                                    }
-                                } else {
-                                    snackbar.setText("Login failed. ${task.exception?.localizedMessage}")
+                                    )
+                                )
+                            )
+
+                            CoroutineScope(Main).launch {
+                                // Verify the returned user information
+                                if (authTask.user == null) {
+                                    snackbar.setText("Login failed. Please check your internet connection")
                                         .addCallback(object :
                                             BaseTransientBottomBar.BaseCallback<Snackbar?>() {
                                             override fun onDismissed(
@@ -147,10 +133,33 @@ class SignInFragment : DialogFragment() {
                                                 dismiss()
                                             }
                                         }).show()
+                                } else {
+                                    // Firebase User object
+                                    val firebaseUser = authTask.user
+
+                                    // Save user
+                                    viewModel.addStudent(firebaseUser?.toStudent())
+
+                                    // Refresh data
+                                    viewModel.getCurrentStudent(true)
+                                        .observe(viewLifecycleOwner, Observer {
+                                            if (it != null) viewModel.addStudent(it)
+                                        })
                                 }
                             }
+                        }
                     } catch (ex: Exception) {
                         debugger(ex.localizedMessage)
+                        snackbar.setText("Login failed. Please check your internet connection")
+                            .addCallback(object :
+                                BaseTransientBottomBar.BaseCallback<Snackbar?>() {
+                                override fun onDismissed(
+                                    transientBottomBar: Snackbar?,
+                                    event: Int
+                                ) {
+                                    dismiss()
+                                }
+                            }).show()
                     }
                 }
 
