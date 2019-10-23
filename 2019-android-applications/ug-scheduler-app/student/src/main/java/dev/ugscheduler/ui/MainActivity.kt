@@ -5,21 +5,24 @@
 package dev.ugscheduler.ui
 
 import android.os.Bundle
-import android.view.View
-import dev.ugscheduler.R
+import dev.ugscheduler.databinding.ActivityMainBinding
 import dev.ugscheduler.shared.util.BaseActivity
 import dev.ugscheduler.shared.util.intentTo
-import dev.ugscheduler.ui.home.HomeActivity
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
-/**
- * Main entry point of application
- */
 class MainActivity : BaseActivity() {
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        uiScope.launch {
+            delay(850)
+            intentTo(WelcomeActivity::class.java, true)
+        }
     }
 
-    fun getStarted(view: View) = intentTo(HomeActivity::class.java, true)
 }

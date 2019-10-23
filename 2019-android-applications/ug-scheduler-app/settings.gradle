@@ -2,6 +2,5 @@
  * Copyright (c) 2019.. Designed & developed by Quabynah Codelabs(c). For the love of Android development.
  */
 
-include ':student', ':shared', ':date-formatter'
-rootProject.name='UGScheduler'
-include ':facilitator'
+rootProject.name='ug-scheduler-app'
+include ':student', ':date-formatter', ':shared', ':facilitator'

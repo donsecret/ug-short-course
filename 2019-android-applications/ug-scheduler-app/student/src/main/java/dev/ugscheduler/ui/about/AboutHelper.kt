@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2019.. Designed & developed by Quabynah Codelabs(c). For the love of Android development.
- */
-
 package dev.ugscheduler.ui.about
 
 import android.content.Context
@@ -10,12 +6,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.api.load
+import coil.transform.CircleCropTransformation
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
+import dev.ugscheduler.R
 import dev.ugscheduler.databinding.ItemLibBinding
 import dev.ugscheduler.shared.util.debugger
+import dev.ugscheduler.shared.util.websiteLink
 import java.io.IOException
 import java.io.InputStreamReader
+
 
 data class Library(
     val id: String,
@@ -43,6 +44,7 @@ object LibraryDeserializer {
     }
 }
 
+
 class AboutLibsAdapter : ListAdapter<Library, AboutLibsAdapter.LibraryViewHolder>(DIFF) {
     override fun onBindViewHolder(holder: LibraryViewHolder, position: Int) {
         holder.bind(getItem(position))
@@ -54,9 +56,17 @@ class AboutLibsAdapter : ListAdapter<Library, AboutLibsAdapter.LibraryViewHolder
         )
     }
 
-    class LibraryViewHolder(val binding: ItemLibBinding) : RecyclerView.ViewHolder(binding.root) {
+    class LibraryViewHolder(private val binding: ItemLibBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(lib: Library) {
-            //binding.lib = lib
+            binding.libName.text = lib.name
+            binding.libDesc.text = lib.desc
+            binding.icon.load(lib.icon) {
+                if (lib.circleCrop) transformations(CircleCropTransformation())
+                placeholder(R.drawable.ic_default_avatar_3)
+                error(R.drawable.ic_default_avatar_1)
+            }
+            websiteLink(binding.root, lib.url)
         }
     }
 

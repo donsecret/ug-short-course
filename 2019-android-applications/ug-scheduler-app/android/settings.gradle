@@ -1,6 +1,0 @@
-/*
- * Copyright (c) 2019.. Designed & developed by Quabynah Codelabs(c). For the love of Android development.
- */
-
-rootProject.name='CSCD Short Course'
-include ':student', ':date-formatter', ':shared', ':facilitator'

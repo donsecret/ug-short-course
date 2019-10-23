@@ -8,6 +8,7 @@ import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
+import dev.ugscheduler.shared.data.Enrolment.Session
 import kotlinx.android.parcel.Parcelize
 import java.util.*
 
@@ -19,19 +20,28 @@ data class Enrolment(
     val student: String,
     val course: String,
     val session: String = Session.EVENING.sessionName(),
-    var hasPaid: Boolean,
-    val timestamp: Long
+    var hasPaid: Boolean = false,
+    val timestamp: Long = System.currentTimeMillis()
 ) : Parcelable {
     @Ignore
-    constructor() : this("", "", "", "", false, System.currentTimeMillis())
+    constructor() : this(UUID.randomUUID().toString(), "", "")
+
+    @Ignore
+    constructor(student: String, course: String, session: String) : this(
+        UUID.randomUUID().toString(),
+        student,
+        course,
+        session
+    )
+
+    /**
+     * Sessions for course
+     */
+    enum class Session {
+        MORNING, EVENING, WEEKEND
+    }
 }
 
-/**
- * Sessions for course
- */
-enum class Session {
-    MORNING, EVENING, WEEKEND
-}
 
 fun Session.sessionName(): String = when {
     this == Session.MORNING -> "Morning"

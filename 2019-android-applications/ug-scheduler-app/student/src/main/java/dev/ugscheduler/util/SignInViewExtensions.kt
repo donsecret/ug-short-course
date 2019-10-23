@@ -1,8 +1,5 @@
-/*
- * Copyright (c) 2019.. Designed & developed by Quabynah Codelabs(c). For the love of Android development.
- */
-
 package dev.ugscheduler.util
+
 
 import android.content.Context
 import android.content.res.Resources

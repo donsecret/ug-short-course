@@ -1,10 +1,7 @@
-/*
- * Copyright (c) 2019.. Designed & developed by Quabynah Codelabs(c). For the love of Android development.
- */
-
 package dev.ugscheduler.ui.map
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -30,6 +27,8 @@ import dev.ugscheduler.shared.util.toLatLng
 import dev.ugscheduler.shared.viewmodel.AppViewModel
 import dev.ugscheduler.shared.viewmodel.AppViewModelFactory
 import dev.ugscheduler.util.MainNavigationFragment
+import dev.ugscheduler.shared.util.doOnApplyWindowInsets
+import androidx.core.view.updatePaddingRelative
 import kotlinx.coroutines.launch
 import dev.ugscheduler.shared.util.*
 import androidx.core.view.*
@@ -136,6 +135,7 @@ class MapFragment : MainNavigationFragment(), OnMapReadyCallback {
         }
     }
 
+    @SuppressLint("MissingPermission")
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,

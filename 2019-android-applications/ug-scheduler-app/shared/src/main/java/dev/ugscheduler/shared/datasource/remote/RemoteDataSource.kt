@@ -105,10 +105,10 @@ class RemoteDataSource constructor(
             try {
                 val student =
                     Tasks.await(firestore.studentDocument(id).get()).toObject(Student::class.java)
-                debugger(student)
-                if (student != null) liveData.postValue(student)
+                liveData.postValue(student)
             } catch (e: Exception) {
                 debugger(e.localizedMessage)
+                liveData.postValue(null)
             }
         }
         return liveData
@@ -121,8 +121,9 @@ class RemoteDataSource constructor(
                 val fac =
                     Tasks.await(firestore.facilitatorDocument(id).get())
                         .toObject(Facilitator::class.java)
-                if (fac != null) liveData.postValue(fac)
+                liveData.postValue(fac)
             } catch (e: Exception) {
+                liveData.postValue(null)
                 debugger(e.localizedMessage)
             }
         }
@@ -170,11 +171,11 @@ class RemoteDataSource constructor(
                 firestore.runTransaction { t ->
                     val oldStudent =
                         t.get(firestore.studentDocument(student.id))
-                    if (!oldStudent.exists()) {
-                        t.set(firestore.studentDocument(student.id), student, SetOptions.merge())
-                    } else {
+                    if (oldStudent.exists()) {
                         val data = oldStudent.toObject(Student::class.java)
                         debugger("Student from database: $data")
+                    } else {
+                        t.set(firestore.studentDocument(student.id), student, SetOptions.merge())
                     }
                     null
                 }

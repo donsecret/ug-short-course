@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2019.. Designed & developed by Quabynah Codelabs(c). For the love of Android development.
- */
-
 package dev.ugscheduler.ui.auth
 
 import android.net.Uri
@@ -12,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import dev.ugscheduler.shared.data.Student
 import dev.ugscheduler.shared.util.debugger
+
 
 class AuthViewModelFactory : ViewModelProvider.NewInstanceFactory() {
 
@@ -29,8 +26,6 @@ class AuthViewModel : ViewModel() {
     private val _userInfo = MutableLiveData<Student?>()
     val currentUserInfo: LiveData<Student?> = _userInfo
 
-    fun onProfileClicked(fm: FragmentManager, loggedIn: Boolean) {
-        debugger("Profile clicked")
+    fun onProfileClicked(fm: FragmentManager, loggedIn: Boolean) =
         if (loggedIn) SignOutFragment().show(fm, null) else SignInFragment().show(fm, null)
-    }
 }

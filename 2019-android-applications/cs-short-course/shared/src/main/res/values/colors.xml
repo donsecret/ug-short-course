@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <color name="color_primary">#212121</color>
-    <color name="color_secondary">#009688</color>
-    <color name="color_primary_dark">#212121</color>
-    <color name="avatar_placeholder">#eee</color>
-</resources>
