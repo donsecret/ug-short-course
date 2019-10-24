@@ -41,8 +41,11 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.firestore.GeoPoint
-import dev.ugscheduler.shared.BuildConfig.DEBUG
 import dev.ugscheduler.shared.R
+
+fun isAtLeast(version: Int): Boolean {
+    return Build.VERSION.SDK_INT >= version
+}
 
 // 1571347789755
 // todo: show in debug mode only

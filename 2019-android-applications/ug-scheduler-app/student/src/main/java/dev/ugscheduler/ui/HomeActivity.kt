@@ -1,7 +1,10 @@
 package dev.ugscheduler.ui
 
+import android.graphics.Insets
+import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.view.WindowInsets
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.core.view.updatePadding
@@ -68,12 +71,20 @@ class HomeActivity : BaseActivity(), NavigationHost {
                 left = insets.systemWindowInsetLeft,
                 right = insets.systemWindowInsetRight
             )
-            insets.replaceSystemWindowInsets(
+            if (isAtLeast(Build.VERSION_CODES.Q)) WindowInsets.Builder()
+                .setSystemWindowInsets(
+                    Insets.of(
+                        0,
+                        insets.systemWindowInsetTop,
+                        0,
+                        insets.systemWindowInsetBottom
+                    )
+                )
+                .build() else insets.replaceSystemWindowInsets(
                 0, insets.systemWindowInsetTop,
                 0, insets.systemWindowInsetBottom
             )
         }
-
 
         binding.content.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
                 View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
