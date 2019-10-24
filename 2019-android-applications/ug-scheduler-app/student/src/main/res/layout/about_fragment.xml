@@ -41,7 +41,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/feed_session_dimension"
                 android:scaleType="centerInside"
-                android:src="@drawable/ic_ravelry_brands" />
+                android:src="@drawable/preview_window_logo" />
 
             <TextView
                 android:layout_width="wrap_content"
