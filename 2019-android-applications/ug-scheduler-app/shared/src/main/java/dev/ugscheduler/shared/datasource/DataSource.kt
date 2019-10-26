@@ -14,6 +14,7 @@ import dev.ugscheduler.shared.util.deserializer.getCourses
  */
 interface DataSource {
     fun getAllCourses(context: Context): MutableList<Course> = getCourses(context)
+    suspend fun getCourseById(id:String?): Course?
     fun getFacilitators(): MutableList<Facilitator>
     fun getFacilitatorById(id: String): LiveData<Facilitator>
     fun enrolStudent(enrolment: Enrolment)

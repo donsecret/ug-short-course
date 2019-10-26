@@ -12,6 +12,7 @@ import com.google.firebase.storage.FirebaseStorage
 import dev.ugscheduler.shared.datasource.local.LocalDataSource
 import dev.ugscheduler.shared.datasource.local.LocalDatabase
 import dev.ugscheduler.shared.datasource.remote.RemoteDataSource
+import dev.ugscheduler.shared.notification.NotificationUtils
 import dev.ugscheduler.shared.prefs.AppPreferences
 import dev.ugscheduler.shared.repository.AppRepository
 import dev.ugscheduler.shared.util.Constants
@@ -21,7 +22,11 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
 // Load all modules declared below from here
-fun loadAppModules() = mutableListOf(firebaseModule, appPrefsModule, datasourceModule)
+fun loadAppModules() = mutableListOf(firebaseModule, appPrefsModule, datasourceModule, coreModule)
+
+private val coreModule = module {
+    single { NotificationUtils(androidContext()) }
+}
 
 private val firebaseModule = module {
     single { FirebaseApp.initializeApp(androidContext()) }

@@ -5,6 +5,7 @@
 package dev.ugscheduler.shared.data
 
 import androidx.annotation.NonNull
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
@@ -75,7 +76,8 @@ data class Student constructor(
 data class Facilitator constructor(
     @PrimaryKey
     override val id: String,
-    override val timestamp: Long,
+    @ColumnInfo(defaultValue = "CURRENT_TIMESTAMP")
+    override val timestamp: Long = System.currentTimeMillis(),
     var avatar: String?,
     var email: String,
     var fullName: String?,

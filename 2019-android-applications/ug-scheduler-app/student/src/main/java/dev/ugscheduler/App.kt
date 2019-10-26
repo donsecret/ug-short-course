@@ -7,13 +7,16 @@ package dev.ugscheduler
 import android.app.Application
 import android.os.StrictMode
 import dev.ugscheduler.shared.di.loadAppModules
+import dev.ugscheduler.shared.notification.NotificationUtils
 import dev.ugscheduler.shared.prefs.AppPreferences
+import org.koin.android.ext.android.get
 import org.koin.android.ext.android.inject
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import timber.log.Timber
 
 class App : Application() {
+    private val notificationUtils by lazy { get<NotificationUtils>() }
 
     override fun onCreate() {
         if (BuildConfig.DEBUG) {
@@ -33,6 +36,9 @@ class App : Application() {
 
         // Start all workers
         startWorkers()
+
+        // Register notification channels
+        notificationUtils.registerChannels()
     }
 
     private fun enableStrictMode() {
@@ -50,5 +56,10 @@ class App : Application() {
         /*with(WorkManager.getInstance(applicationContext)) {
             enqueue(OneTimeWorkRequestBuilder<CourseWorker>().build())
         }*/
+    }
+
+    override fun onTerminate() {
+        super.onTerminate()
+        notificationUtils.dismissAllNotifications()
     }
 }

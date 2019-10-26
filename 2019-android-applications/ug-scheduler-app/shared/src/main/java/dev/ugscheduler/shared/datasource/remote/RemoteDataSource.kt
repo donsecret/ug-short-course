@@ -16,7 +16,9 @@ import dev.ugscheduler.shared.util.Constants
 import dev.ugscheduler.shared.util.debugger
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * Remote data source
@@ -172,7 +174,12 @@ class RemoteDataSource constructor(
                 val studentTask = Tasks.await(firestore.studentDocument(student.id).get())
                 if (!studentTask.exists()) {
                     debugger("Saving new student to firestore...")
-                    Tasks.await(firestore.studentDocument(student.id).set(student, SetOptions.merge()))
+                    Tasks.await(
+                        firestore.studentDocument(student.id).set(
+                            student,
+                            SetOptions.merge()
+                        )
+                    )
                 }
             } catch (e: Exception) {
                 debugger(e.localizedMessage)
@@ -192,6 +199,18 @@ class RemoteDataSource constructor(
                 )
             } catch (e: Exception) {
                 debugger(e.localizedMessage)
+            }
+        }
+    }
+
+    override suspend fun getCourseById(id: String?): Course? {
+        if (id.isNullOrEmpty()) return null
+        return withContext(IO) {
+            try {
+                Tasks.await(firestore.courseDocument(id).get()).toObject(Course::class.java)
+            } catch (e: Exception) {
+                debugger(e.localizedMessage)
+                null
             }
         }
     }

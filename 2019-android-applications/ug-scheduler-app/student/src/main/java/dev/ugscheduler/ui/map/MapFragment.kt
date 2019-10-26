@@ -10,12 +10,17 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresPermission
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
+import androidx.core.view.updatePaddingRelative
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.ButtCap
+import com.google.android.gms.maps.model.MapStyleOptions
+import com.google.android.gms.maps.model.PolylineOptions
+import com.google.android.gms.maps.model.RoundCap
 import com.google.android.gms.tasks.Tasks
 import com.google.maps.android.PolyUtil
 import dev.ugscheduler.R
@@ -23,16 +28,12 @@ import dev.ugscheduler.databinding.MapFragmentBinding
 import dev.ugscheduler.shared.BuildConfig
 import dev.ugscheduler.shared.util.activityViewModelProvider
 import dev.ugscheduler.shared.util.debugger
+import dev.ugscheduler.shared.util.doOnApplyWindowInsets
 import dev.ugscheduler.shared.util.toLatLng
 import dev.ugscheduler.shared.viewmodel.AppViewModel
 import dev.ugscheduler.shared.viewmodel.AppViewModelFactory
 import dev.ugscheduler.util.MainNavigationFragment
-import dev.ugscheduler.shared.util.doOnApplyWindowInsets
-import androidx.core.view.updatePaddingRelative
 import kotlinx.coroutines.launch
-import dev.ugscheduler.shared.util.*
-import androidx.core.view.*
-import com.google.android.gms.maps.model.*
 import org.koin.android.ext.android.get
 
 class MapFragment : MainNavigationFragment(), OnMapReadyCallback {
@@ -100,11 +101,14 @@ class MapFragment : MainNavigationFragment(), OnMapReadyCallback {
                         isMyLocationEnabled = true
 
                         // Encode path to the department from user's location
-                        val encodedPath = PolyUtil.encode(mutableListOf(location.toLatLng(), department))
-                        addPolyline(PolylineOptions()
-                            .addAll(PolyUtil.decode(encodedPath))
-                            .startCap(ButtCap())
-                            .endCap(RoundCap()))
+                        val encodedPath =
+                            PolyUtil.encode(mutableListOf(location.toLatLng(), department))
+                        addPolyline(
+                            PolylineOptions()
+                                .addAll(PolyUtil.decode(encodedPath))
+                                .startCap(ButtCap())
+                                .endCap(RoundCap())
+                        )
                     }
                     // todo: show button to help them navigate to department for lectures
                 }

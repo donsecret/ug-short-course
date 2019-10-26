@@ -6,20 +6,24 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.core.view.updatePaddingRelative
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import dev.ugscheduler.R
 import dev.ugscheduler.databinding.FragmentHomeBinding
 import dev.ugscheduler.shared.data.Course
+import dev.ugscheduler.shared.notification.NotificationUtils
 import dev.ugscheduler.shared.util.activityViewModelProvider
 import dev.ugscheduler.shared.util.doOnApplyWindowInsets
 import dev.ugscheduler.shared.util.setupWithAdapter
 import dev.ugscheduler.shared.viewmodel.AppViewModel
 import dev.ugscheduler.shared.viewmodel.AppViewModelFactory
+import dev.ugscheduler.ui.HomeActivity
 import dev.ugscheduler.ui.auth.AuthViewModelFactory
 import dev.ugscheduler.ui.home.recyclerview.CourseAdapter
 import dev.ugscheduler.ui.home.recyclerview.ItemClickListener
 import dev.ugscheduler.util.MainNavigationFragment
 import dev.ugscheduler.util.setupProfileMenuItem
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.get
 
 class HomeFragment : MainNavigationFragment() {
@@ -71,6 +75,17 @@ class HomeFragment : MainNavigationFragment() {
         binding.swipeRefresh.setOnRefreshListener {
             adapter.submitList(viewModel.getAllCourses(requireContext(), true))
             binding.swipeRefresh.isRefreshing = false
+        }
+
+        // Test notification
+        lifecycleScope.launch {
+            get<NotificationUtils>().sendMessage(
+                "Lorem ipsum dolor...",
+                "24e00904-5e7f-4881-976e-e981b32a029d",
+                "24e00904-5e7f-4881-976e-e981b32a029d",
+                "24e00904-5e7f-4881-976e-e981b32a029d",
+                HomeActivity::class.java
+            )
         }
     }
 }

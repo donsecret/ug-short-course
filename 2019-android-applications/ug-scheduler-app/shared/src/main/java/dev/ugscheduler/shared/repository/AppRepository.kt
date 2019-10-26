@@ -14,6 +14,7 @@ import dev.ugscheduler.shared.util.prefs.UserSharedPreferences
 
 interface Repository {
     fun getAllCourses(context: Context, refresh: Boolean): MutableList<Course>
+    suspend fun getCourseById(id: String, refresh: Boolean): Course?
     fun getFacilitators(refresh: Boolean): MutableList<Facilitator>
     fun getFacilitatorById(id: String, refresh: Boolean): LiveData<Facilitator>
     fun enrolStudent(enrolment: Enrolment)
@@ -158,4 +159,14 @@ class AppRepository constructor(
     }
 
     override fun invalidateLocalCaches() = localDataSource.clearDatabase()
+
+    override suspend fun getCourseById(id: String, refresh: Boolean): Course? {
+        return if (refresh)
+            remoteDataSource.getCourseById(
+                id
+            ).apply { if (this != null) localDataSource.database.courseDao().insert(this) }
+        else localDataSource.getCourseById(
+            id
+        )
+    }
 }

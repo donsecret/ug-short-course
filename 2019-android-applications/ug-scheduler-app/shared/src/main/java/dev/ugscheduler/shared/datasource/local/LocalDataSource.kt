@@ -78,4 +78,5 @@ class LocalDataSource constructor(
     // Clear local database
     fun clearDatabase() = database.clearAllTables()
 
+    override suspend fun getCourseById(id: String?): Course? = courseDao.getCourseById(id)
 }

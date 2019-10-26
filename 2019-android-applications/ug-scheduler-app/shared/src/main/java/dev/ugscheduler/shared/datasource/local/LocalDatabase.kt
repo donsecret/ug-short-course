@@ -20,6 +20,7 @@ import dev.ugscheduler.shared.data.Student
 import dev.ugscheduler.shared.util.Constants
 import dev.ugscheduler.shared.util.debugger
 import dev.ugscheduler.shared.worker.CourseWorker
+import dev.ugscheduler.shared.worker.FacilitatorWorker
 
 
 @Database(
@@ -58,9 +59,14 @@ abstract class LocalDatabase : RoomDatabase() {
                         // Set a one-time request to download all courses and store them locally
                         with(WorkManager.getInstance(context)) {
                             enqueue(
-                                OneTimeWorkRequestBuilder<CourseWorker>().setConstraints(
-                                    constraints
-                                ).build()
+                                mutableListOf(
+                                    OneTimeWorkRequestBuilder<CourseWorker>().setConstraints(
+                                        constraints
+                                    ).build(),
+                                    OneTimeWorkRequestBuilder<FacilitatorWorker>().setConstraints(
+                                        constraints
+                                    ).build()
+                                )
                             )
                         }
                     }

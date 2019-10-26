@@ -13,6 +13,7 @@ import com.google.firebase.firestore.SetOptions
 import dev.ugscheduler.shared.data.Course
 import dev.ugscheduler.shared.datasource.local.CourseDao
 import dev.ugscheduler.shared.datasource.local.LocalDatabase
+import dev.ugscheduler.shared.datasource.remote.courseDocument
 import dev.ugscheduler.shared.util.Constants
 import dev.ugscheduler.shared.util.debugger
 import dev.ugscheduler.shared.util.deserializer.getCourses
@@ -41,7 +42,7 @@ class CourseWorker(context: Context, params: WorkerParameters) : CoroutineWorker
             for (course in courses) {
                 try {
                     Tasks.await(
-                        firestore.collection(Constants.COURSES).document(course.id).set(
+                        firestore.courseDocument(course.id).set(
                             course,
                             SetOptions.merge()
                         )

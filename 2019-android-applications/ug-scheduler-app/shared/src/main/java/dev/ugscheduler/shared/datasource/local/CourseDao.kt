@@ -11,6 +11,8 @@ import dev.ugscheduler.shared.data.Course
 
 @Dao
 interface CourseDao : BaseDao<Course> {
+    @Query("select * from courses where id = :id")
+    suspend fun getCourseById(id: String?): Course?
 
     @Query("select * from courses where id = :id")
     fun getCourseDetails(id: String): LiveData<Course>
