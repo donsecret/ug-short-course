@@ -145,22 +145,29 @@ class NotificationUtils(private val context: Context) {
                 .build()
 
         /**
+         * Get course from database
+         */
+        val course = withContext(IO) {
+            repository.getAllCourses(context, false).filter { it.id == courseId }[0]
+        }
+        debugger("Notification course => $course")
+
+        /**
+         * Get facilitator from database
+         */
+        val user = withContext(IO) {
+            repository.getFacilitators(false).filter { it.id == course.facilitator }[0]
+        }
+
+        /**
          * Setup Person
          */
         val person = Person.Builder()
             .setImportant(true)
             .setKey(uid)
-            .setName(uid)
+            .setName(user.fullName)
             .setUri(avatar)
             .build()
-
-        /**
-         * Get course from database
-         */
-        val course = withContext(IO) {
-            repository.getAllCourses(context,false).filter { it.id == courseId }[0]
-        }
-        debugger("Notification course => $course")
 
         /**
          * Use messaging style notification

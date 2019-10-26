@@ -13,6 +13,8 @@ import dev.ugscheduler.databinding.FragmentHomeBinding
 import dev.ugscheduler.shared.data.Course
 import dev.ugscheduler.shared.notification.NotificationUtils
 import dev.ugscheduler.shared.util.activityViewModelProvider
+import dev.ugscheduler.shared.util.debugger
+import dev.ugscheduler.shared.util.deserializer.getFacilitators
 import dev.ugscheduler.shared.util.doOnApplyWindowInsets
 import dev.ugscheduler.shared.util.setupWithAdapter
 import dev.ugscheduler.shared.viewmodel.AppViewModel
@@ -25,6 +27,7 @@ import dev.ugscheduler.util.MainNavigationFragment
 import dev.ugscheduler.util.setupProfileMenuItem
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.get
+import java.util.*
 
 class HomeFragment : MainNavigationFragment() {
     private lateinit var binding: FragmentHomeBinding
@@ -78,14 +81,17 @@ class HomeFragment : MainNavigationFragment() {
         }
 
         // Test notification
-        lifecycleScope.launch {
+        /*lifecycleScope.launch {
             get<NotificationUtils>().sendMessage(
                 "Lorem ipsum dolor...",
+                UUID.randomUUID().toString(),
                 "24e00904-5e7f-4881-976e-e981b32a029d",
-                "24e00904-5e7f-4881-976e-e981b32a029d",
-                "24e00904-5e7f-4881-976e-e981b32a029d",
+                "d5cc2f13-b4c4-48d5-900d-c307c45635bd",
                 HomeActivity::class.java
             )
+        }*/
+        lifecycleScope.launchWhenCreated {
+            debugger(getFacilitators(requireContext()))
         }
     }
 }

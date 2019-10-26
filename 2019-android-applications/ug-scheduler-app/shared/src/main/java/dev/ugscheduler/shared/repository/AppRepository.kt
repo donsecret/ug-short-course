@@ -16,7 +16,7 @@ interface Repository {
     fun getAllCourses(context: Context, refresh: Boolean): MutableList<Course>
     suspend fun getCourseById(id: String, refresh: Boolean): Course?
     fun getFacilitators(refresh: Boolean): MutableList<Facilitator>
-    fun getFacilitatorById(id: String, refresh: Boolean): LiveData<Facilitator>
+    fun getFacilitatorById(id: String, refresh: Boolean): LiveData<Facilitator?>
     fun enrolStudent(enrolment: Enrolment)
     fun getCurrentStudent(refresh: Boolean): LiveData<Student>
     fun getCurrentFacilitator(refresh: Boolean): LiveData<Facilitator>
@@ -56,7 +56,7 @@ class AppRepository constructor(
         else localDataSource.getFacilitators()
     }
 
-    override fun getFacilitatorById(id: String, refresh: Boolean): LiveData<Facilitator> {
+    override fun getFacilitatorById(id: String, refresh: Boolean): LiveData<Facilitator?> {
         val liveFacilitator = MutableLiveData<Facilitator>()
         if (refresh) {
             remoteDataSource.getFacilitatorById(id).observeForever {

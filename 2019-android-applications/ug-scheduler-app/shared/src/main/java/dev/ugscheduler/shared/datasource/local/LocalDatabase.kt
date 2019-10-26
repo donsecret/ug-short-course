@@ -22,7 +22,6 @@ import dev.ugscheduler.shared.util.debugger
 import dev.ugscheduler.shared.worker.CourseWorker
 import dev.ugscheduler.shared.worker.FacilitatorWorker
 
-
 @Database(
     entities = [Student::class, Facilitator::class, Course::class, Feedback::class],
     version = Constants.DB_VERSION,
@@ -60,10 +59,10 @@ abstract class LocalDatabase : RoomDatabase() {
                         with(WorkManager.getInstance(context)) {
                             enqueue(
                                 mutableListOf(
-                                    OneTimeWorkRequestBuilder<CourseWorker>().setConstraints(
+                                    OneTimeWorkRequestBuilder<FacilitatorWorker>().setConstraints(
                                         constraints
                                     ).build(),
-                                    OneTimeWorkRequestBuilder<FacilitatorWorker>().setConstraints(
+                                    OneTimeWorkRequestBuilder<CourseWorker>().setConstraints(
                                         constraints
                                     ).build()
                                 )

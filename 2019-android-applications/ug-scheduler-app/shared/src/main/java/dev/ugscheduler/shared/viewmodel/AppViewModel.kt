@@ -30,7 +30,7 @@ open class AppViewModel(private val repository: AppRepository) : ViewModel() {
     fun getFacilitators(refresh: Boolean): MutableList<Facilitator> =
         repository.getFacilitators(refresh)
 
-    fun getFacilitatorById(id: String, refresh: Boolean): LiveData<Facilitator> =
+    fun getFacilitatorById(id: String, refresh: Boolean): LiveData<Facilitator?> =
         repository.getFacilitatorById(id, refresh)
 
     fun enrolStudent(enrolment: Enrolment) = repository.enrolStudent(enrolment)
