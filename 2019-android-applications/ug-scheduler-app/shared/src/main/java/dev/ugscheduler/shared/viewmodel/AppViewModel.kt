@@ -27,7 +27,7 @@ open class AppViewModel(private val repository: AppRepository) : ViewModel() {
     fun getAllCourses(context: Context, refresh: Boolean): MutableList<Course> =
         repository.getAllCourses(context, refresh)
 
-    fun getFacilitators(refresh: Boolean): MutableList<Facilitator> =
+    suspend fun getFacilitators(refresh: Boolean): MutableList<Facilitator> =
         repository.getFacilitators(refresh)
 
     fun getFacilitatorById(id: String, refresh: Boolean): LiveData<Facilitator?> =

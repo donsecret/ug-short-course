@@ -7,9 +7,12 @@ package dev.ugscheduler.shared.datasource.local
 import androidx.lifecycle.LiveData
 import dev.ugscheduler.shared.data.*
 import dev.ugscheduler.shared.datasource.DataSource
+import dev.ugscheduler.shared.util.debugger
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * Local data source
@@ -28,7 +31,9 @@ class LocalDataSource constructor(
     override fun getStudentById(studentId: String): LiveData<Student> =
         studentDao.getStudent(studentId)
 
-    override fun getFacilitators(): MutableList<Facilitator> = facilitatorDao.getAllFacilitators()
+    override suspend fun getFacilitators(): MutableList<Facilitator> = withContext(IO){
+        facilitatorDao.getAllFacilitators()
+    }
 
     override fun getFacilitatorById(id: String): LiveData<Facilitator> =
         facilitatorDao.getFacilitatorById(id)
@@ -44,8 +49,13 @@ class LocalDataSource constructor(
     // todo: get my courses
     override fun getMyCourses(studentId: String): MutableList<Course> = mutableListOf()
 
-    override fun getCoursesForFacilitator(facilitatorId: String): MutableList<Course> =
-        courseDao.getCoursesForFacilitator(facilitatorId)
+    override fun getCoursesForFacilitator(facilitatorId: String): MutableList<Course> {
+        val courses = mutableListOf<Course>()
+        ioScope.launch {
+            courses.addAll(courseDao.getCoursesForFacilitator(facilitatorId))
+        }
+        return courses
+    }
 
     fun addFacilitators(facilitators: MutableList<Facilitator>) {
         ioScope.launch {

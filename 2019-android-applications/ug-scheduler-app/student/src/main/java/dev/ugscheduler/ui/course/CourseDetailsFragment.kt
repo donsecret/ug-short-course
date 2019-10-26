@@ -17,6 +17,8 @@ import dev.ugscheduler.shared.data.Student
 import dev.ugscheduler.shared.util.activityViewModelProvider
 import dev.ugscheduler.shared.util.debugger
 import dev.ugscheduler.shared.util.deserializer.getCourses
+import dev.ugscheduler.shared.util.prefs.UserSharedPreferences
+import dev.ugscheduler.shared.util.toast
 import dev.ugscheduler.shared.viewmodel.AppViewModel
 import dev.ugscheduler.shared.viewmodel.AppViewModelFactory
 import dev.ugscheduler.util.MainNavigationFragment
@@ -55,16 +57,18 @@ class CourseDetailsFragment : MainNavigationFragment() {
         getFacilitator(course?.facilitator, false)
 
         // Get current student
-        viewModel.getCurrentStudent(false).observe(viewLifecycleOwner, Observer { student ->
-            if (student == null) {
-                viewModel.getCurrentStudent(false).removeObservers(viewLifecycleOwner)
-                viewModel.getCurrentStudent(true).observe(viewLifecycleOwner, Observer {
-                    currentStudent = it
-                })
-                return@Observer
-            }
-            currentStudent = student
-        })
+        if (get<UserSharedPreferences>().isLoggedIn) {
+            viewModel.getCurrentStudent(false).observe(viewLifecycleOwner, Observer { student ->
+                if (student == null) {
+                    viewModel.getCurrentStudent(false).removeObservers(viewLifecycleOwner)
+                    viewModel.getCurrentStudent(true).observe(viewLifecycleOwner, Observer {
+                        currentStudent = it
+                    })
+                    return@Observer
+                }
+                currentStudent = student
+            })
+        }
 
         binding.enrolCourse.setOnClickListener {
             findNavController().navigate(
@@ -90,7 +94,11 @@ class CourseDetailsFragment : MainNavigationFragment() {
     }
 
     private fun getFacilitator(facilitator: String?, refresh: Boolean = false) {
-        if (facilitator.isNullOrEmpty()) return
+        if (facilitator.isNullOrEmpty()) {
+            findNavController().popBackStack()
+            toast("There's no facilitator for this course")
+            return
+        }
         viewModel.getFacilitatorById(facilitator, refresh)
             .observe(viewLifecycleOwner, Observer { person ->
                 if (person != null) {

@@ -150,7 +150,6 @@ class NotificationUtils(private val context: Context) {
         val course = withContext(IO) {
             repository.getAllCourses(context, false).filter { it.id == courseId }[0]
         }
-        debugger("Notification course => $course")
 
         /**
          * Get facilitator from database

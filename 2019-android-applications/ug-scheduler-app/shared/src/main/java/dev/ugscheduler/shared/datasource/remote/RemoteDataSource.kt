@@ -58,7 +58,7 @@ class RemoteDataSource constructor(
         return liveData
     }
 
-    override fun getFacilitators(): MutableList<Facilitator> {
+    override suspend fun getFacilitators(): MutableList<Facilitator> {
         val facilitators = mutableListOf<Facilitator>()
         ioScope.launch {
             try {

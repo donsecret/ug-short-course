@@ -15,7 +15,7 @@ import dev.ugscheduler.shared.util.prefs.UserSharedPreferences
 interface Repository {
     fun getAllCourses(context: Context, refresh: Boolean): MutableList<Course>
     suspend fun getCourseById(id: String, refresh: Boolean): Course?
-    fun getFacilitators(refresh: Boolean): MutableList<Facilitator>
+    suspend fun getFacilitators(refresh: Boolean): MutableList<Facilitator>
     fun getFacilitatorById(id: String, refresh: Boolean): LiveData<Facilitator?>
     fun enrolStudent(enrolment: Enrolment)
     fun getCurrentStudent(refresh: Boolean): LiveData<Student>
@@ -47,7 +47,7 @@ class AppRepository constructor(
         else localDataSource.getAllCourses(context)
     }
 
-    override fun getFacilitators(refresh: Boolean): MutableList<Facilitator> {
+    override suspend fun getFacilitators(refresh: Boolean): MutableList<Facilitator> {
         return if (refresh) remoteDataSource.getFacilitators().apply {
             localDataSource.addFacilitators(
                 this

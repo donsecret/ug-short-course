@@ -32,7 +32,7 @@ class FacilitatorWorker(context: Context, params: WorkerParameters) :
 
         // Get all facilitators and deserialize
         val facilitators = getFacilitators(applicationContext)
-        debugger(facilitators)
+        debugger("All facilitators => $facilitators")
 
         // Needed to be called on the background thread
         withContext(IO) {

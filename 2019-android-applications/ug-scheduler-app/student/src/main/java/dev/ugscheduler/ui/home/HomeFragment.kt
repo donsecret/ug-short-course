@@ -6,28 +6,21 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.core.view.updatePaddingRelative
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import dev.ugscheduler.R
 import dev.ugscheduler.databinding.FragmentHomeBinding
 import dev.ugscheduler.shared.data.Course
-import dev.ugscheduler.shared.notification.NotificationUtils
 import dev.ugscheduler.shared.util.activityViewModelProvider
-import dev.ugscheduler.shared.util.debugger
-import dev.ugscheduler.shared.util.deserializer.getFacilitators
 import dev.ugscheduler.shared.util.doOnApplyWindowInsets
 import dev.ugscheduler.shared.util.setupWithAdapter
 import dev.ugscheduler.shared.viewmodel.AppViewModel
 import dev.ugscheduler.shared.viewmodel.AppViewModelFactory
-import dev.ugscheduler.ui.HomeActivity
 import dev.ugscheduler.ui.auth.AuthViewModelFactory
 import dev.ugscheduler.ui.home.recyclerview.CourseAdapter
 import dev.ugscheduler.ui.home.recyclerview.ItemClickListener
 import dev.ugscheduler.util.MainNavigationFragment
 import dev.ugscheduler.util.setupProfileMenuItem
-import kotlinx.coroutines.launch
 import org.koin.android.ext.android.get
-import java.util.*
 
 class HomeFragment : MainNavigationFragment() {
     private lateinit var binding: FragmentHomeBinding
@@ -78,20 +71,6 @@ class HomeFragment : MainNavigationFragment() {
         binding.swipeRefresh.setOnRefreshListener {
             adapter.submitList(viewModel.getAllCourses(requireContext(), true))
             binding.swipeRefresh.isRefreshing = false
-        }
-
-        // Test notification
-        /*lifecycleScope.launch {
-            get<NotificationUtils>().sendMessage(
-                "Lorem ipsum dolor...",
-                UUID.randomUUID().toString(),
-                "24e00904-5e7f-4881-976e-e981b32a029d",
-                "d5cc2f13-b4c4-48d5-900d-c307c45635bd",
-                HomeActivity::class.java
-            )
-        }*/
-        lifecycleScope.launchWhenCreated {
-            debugger(getFacilitators(requireContext()))
         }
     }
 }

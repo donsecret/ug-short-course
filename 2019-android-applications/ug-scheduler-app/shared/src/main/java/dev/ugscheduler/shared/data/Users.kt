@@ -76,7 +76,6 @@ data class Student constructor(
 data class Facilitator constructor(
     @PrimaryKey
     override val id: String,
-    @ColumnInfo(defaultValue = "CURRENT_TIMESTAMP")
     override val timestamp: Long = System.currentTimeMillis(),
     var avatar: String?,
     var email: String,
