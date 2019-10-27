@@ -62,7 +62,7 @@ class RemoteDataSource constructor(
         val facilitators = mutableListOf<Facilitator>()
         ioScope.launch {
             try {
-                val result = Tasks.await(firestore.collection(Constants.FACILITATORS).get())
+                val result = Tasks.await(firestore.facilitators.get())
                     .toObjects(Facilitator::class.java)
                 facilitators.addAll(result)
             } catch (e: Exception) {
@@ -90,7 +90,7 @@ class RemoteDataSource constructor(
         ioScope.launch {
             try {
                 Tasks.await(
-                    firestore.collection(Constants.ENROLMENTS).document().set(
+                    firestore.enrolment.document().set(
                         enrolment,
                         SetOptions.merge()
                     )
@@ -153,7 +153,7 @@ class RemoteDataSource constructor(
             try {
                 val results =
                     Tasks.await(
-                        firestore.collection(Constants.COURSES)
+                        firestore.courses
                             .whereEqualTo("facilitator", facilitatorId)
                             .get()
                     )

@@ -1,5 +1,7 @@
 package dev.ugscheduler.ui.settings
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,9 +12,11 @@ import coil.api.load
 import coil.request.CachePolicy
 import coil.transform.CircleCropTransformation
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 import dev.ugscheduler.R
 import dev.ugscheduler.databinding.FragmentSettingsBinding
 import dev.ugscheduler.shared.data.Student
+import dev.ugscheduler.shared.databinding.EditContentBinding
 import dev.ugscheduler.shared.prefs.AppPreferences
 import dev.ugscheduler.shared.util.activityViewModelProvider
 import dev.ugscheduler.shared.util.debugger
@@ -129,7 +133,7 @@ class SettingsFragment : MainNavigationFragment() {
             load(student.avatar) {
                 transformations(CircleCropTransformation())
                 placeholder(R.drawable.ic_default_avatar_1)
-                error(R.drawable.ic_default_avatar)
+                error(R.drawable.ic_default_avatar_3)
                 crossfade(true)
                 lifecycle(viewLifecycleOwner)
                 diskCachePolicy(CachePolicy.ENABLED)
@@ -149,91 +153,210 @@ class SettingsFragment : MainNavigationFragment() {
             position = "C.E.O."
             dob = "August 23, 1993"
         }*/
+        // Get binding
+        val edtContentBinding = EditContentBinding.inflate(layoutInflater)
+
+        // Check editable type
         when (type) {
             EditType.ADDRESS -> {
                 MaterialAlertDialogBuilder(requireContext()).apply {
-                    setTitle("Oops...")
-                    setMessage("This feature is currently under active development and will be available in the next release of this application. Thank you")
-                    setPositiveButton("Dismiss") { dialog, _ -> dialog.dismiss() }
+                    setIcon(R.drawable.twotone_map_24px)
+                    setTitle("Address")
+                    setView(edtContentBinding.root)
+                    setPositiveButton("Save") { dialog, _ ->
+                        dialog.dismiss()
+                        val content = edtContentBinding.editContent.text.toString()
+                        if (content.isNotEmpty()) viewModel.addStudent(student.copy(position = content))
+                    }
+                    setNegativeButton("Cancel") { dialog, _ -> dialog.dismiss() }
                     show()
                 }
             }
 
             EditType.DOB -> {
                 MaterialAlertDialogBuilder(requireContext()).apply {
-                    setTitle("Oops...")
-                    setMessage("This feature is currently under active development and will be available in the next release of this application. Thank you")
-                    setPositiveButton("Dismiss") { dialog, _ -> dialog.dismiss() }
+                    setIcon(R.drawable.twotone_event_24px)
+                    setTitle("Date of Birth")
+                    setView(edtContentBinding.root)
+                    setPositiveButton("Save") { dialog, _ ->
+                        dialog.dismiss()
+                        val content = edtContentBinding.editContent.text.toString()
+                        if (content.isNotEmpty()) viewModel.addStudent(student.copy(position = content))
+                    }
+                    setNegativeButton("Cancel") { dialog, _ -> dialog.dismiss() }
                     show()
                 }
             }
 
             EditType.EDU -> {
                 MaterialAlertDialogBuilder(requireContext()).apply {
-                    setTitle("Oops...")
-                    setMessage("This feature is currently under active development and will be available in the next release of this application. Thank you")
-                    setPositiveButton("Dismiss") { dialog, _ -> dialog.dismiss() }
+                    setIcon(R.drawable.twotone_group_24px)
+                    setTitle("Education")
+                    setView(edtContentBinding.root)
+                    setPositiveButton("Save") { dialog, _ ->
+                        dialog.dismiss()
+                        val content = edtContentBinding.editContent.text.toString()
+                        if (content.isNotEmpty()) viewModel.addStudent(student.copy(position = content))
+                    }
+                    setNegativeButton("Cancel") { dialog, _ -> dialog.dismiss() }
                     show()
                 }
             }
 
             EditType.ORG -> {
                 MaterialAlertDialogBuilder(requireContext()).apply {
-                    setTitle("Oops...")
-                    setMessage("This feature is currently under active development and will be available in the next release of this application. Thank you")
-                    setPositiveButton("Dismiss") { dialog, _ -> dialog.dismiss() }
+                    setIcon(R.drawable.twotone_business_24px)
+                    setTitle("Organisation")
+                    setView(edtContentBinding.root)
+                    setPositiveButton("Save") { dialog, _ ->
+                        dialog.dismiss()
+                        val content = edtContentBinding.editContent.text.toString()
+                        if (content.isNotEmpty()) viewModel.addStudent(student.copy(position = content))
+                    }
+                    setNegativeButton("Cancel") { dialog, _ -> dialog.dismiss() }
                     show()
                 }
             }
 
             EditType.PHONE -> {
                 MaterialAlertDialogBuilder(requireContext()).apply {
-                    setTitle("Oops...")
-                    setMessage("This feature is currently under active development and will be available in the next release of this application. Thank you")
-                    setPositiveButton("Dismiss") { dialog, _ -> dialog.dismiss() }
+                    setIcon(R.drawable.twotone_phone_24px)
+                    setTitle("Phone Number")
+                    setView(edtContentBinding.root)
+                    setPositiveButton("Save") { dialog, _ ->
+                        dialog.dismiss()
+                        val content = edtContentBinding.editContent.text.toString()
+                        if (content.isNotEmpty()) viewModel.addStudent(student.copy(residence = content))
+                    }
+                    setNegativeButton("Cancel") { dialog, _ -> dialog.dismiss() }
                     show()
                 }
             }
 
             EditType.POS -> {
                 MaterialAlertDialogBuilder(requireContext()).apply {
-                    setTitle("Oops...")
-                    setMessage("This feature is currently under active development and will be available in the next release of this application. Thank you")
-                    setPositiveButton("Dismiss") { dialog, _ -> dialog.dismiss() }
+                    setIcon(R.drawable.twotone_account_circle_24px)
+                    setTitle("Position")
+                    setView(edtContentBinding.root)
+                    setPositiveButton("Save") { dialog, _ ->
+                        dialog.dismiss()
+                        val content = edtContentBinding.editContent.text.toString()
+                        if (content.isNotEmpty()) viewModel.addStudent(student.copy(position = content))
+                    }
+                    setNegativeButton("Cancel") { dialog, _ -> dialog.dismiss() }
                     show()
                 }
             }
 
             EditType.RESIDENCE -> {
                 MaterialAlertDialogBuilder(requireContext()).apply {
-                    setTitle("Oops...")
-                    setMessage("This feature is currently under active development and will be available in the next release of this application. Thank you")
-                    setPositiveButton("Dismiss") { dialog, _ -> dialog.dismiss() }
+                    setIcon(R.drawable.twotone_home_24px)
+                    setTitle("Residence")
+                    setView(edtContentBinding.root)
+                    setPositiveButton("Save") { dialog, _ ->
+                        dialog.dismiss()
+                        val content = edtContentBinding.editContent.text.toString()
+                        if (content.isNotEmpty()) viewModel.addStudent(student.copy(residence = content))
+                    }
+                    setNegativeButton("Cancel") { dialog, _ -> dialog.dismiss() }
                     show()
                 }
             }
 
             EditType.USERNAME -> {
                 MaterialAlertDialogBuilder(requireContext()).apply {
-                    setTitle("Oops...")
-                    setMessage("This feature is currently under active development and will be available in the next release of this application. Thank you")
-                    setPositiveButton("Dismiss") { dialog, _ -> dialog.dismiss() }
+                    setIcon(R.drawable.twotone_account_circle_24px)
+                    setTitle("Full Name")
+                    setView(edtContentBinding.root)
+                    setPositiveButton("Save") { dialog, _ ->
+                        dialog.dismiss()
+                        val content = edtContentBinding.editContent.text.toString()
+                        if (content.isNotEmpty()) viewModel.addStudent(student.copy(fullName = content))
+                    }
+                    setNegativeButton("Cancel") { dialog, _ -> dialog.dismiss() }
                     show()
                 }
             }
 
             EditType.AVATAR -> {
                 MaterialAlertDialogBuilder(requireContext()).apply {
-                    setTitle("Oops...")
-                    setMessage("This feature is currently under active development and will be available in the next release of this application. Thank you")
+                    setIcon(R.drawable.twotone_add_a_photo_24px)
+                    setTitle("Select image source")
+                    setItems(arrayOf("Gallery", "Remove photo")) { dialog, which ->
+                        dialog.dismiss()
+                        when (which) {
+                            0 -> {
+                                with(Intent(Intent.ACTION_GET_CONTENT)) {
+                                    setType("image/*")
+                                    putExtra(
+                                        Intent.EXTRA_MIME_TYPES,
+                                        arrayOf("image/jpeg", "image/png", "image/jpg")
+                                    )
+                                    startActivityForResult(this, RC_GALLERY)
+                                }
+                            }
+
+                            1 -> {
+                                MaterialAlertDialogBuilder(requireContext()).apply {
+                                    setIcon(R.drawable.twotone_delete_24px)
+                                    setTitle("Confirm action")
+                                    setMessage("Do you wish to remove your current profile picture?")
+                                    setPositiveButton("Delete") { dialog, _ ->
+                                        dialog.dismiss()
+                                        viewModel.addStudent(student.copy(avatar = null))
+                                    }
+                                    setNegativeButton("Cancel") { dialog, _ -> dialog.dismiss() }
+                                    show()
+                                }
+                            }
+                        }
+                    }
                     setPositiveButton("Dismiss") { dialog, _ -> dialog.dismiss() }
                     show()
                 }
             }
         }
+    }
 
-        // Store student information
-        viewModel.addStudent(student)
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == RC_GALLERY) {
+            when (resultCode) {
+                Activity.RESULT_OK -> {
+                    // Extract image from source
+                    val imageUri = data?.data
+                    debugger(imageUri)
+
+                    // Get current student
+                    Snackbar.make(
+                        binding.container,
+                        "Uploading new profile picture...",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                    viewModel.getCurrentStudent(false)
+                        .observe(viewLifecycleOwner, Observer { student ->
+                            // Remove old observers
+                            viewModel.getCurrentStudent(false).removeObservers(viewLifecycleOwner)
+
+                            // Update avatar
+                            viewModel.addStudent(student.copy(avatar = imageUri.toString()))
+
+                            // Upload image to server and get new url for avatar
+                            uiScope.launch {
+                                viewModel.uploadImage(student.id, imageUri)
+                                    .observe(viewLifecycleOwner, Observer { uri ->
+                                        debugger("New url => $uri")
+                                        viewModel.addStudent(student.copy(avatar = uri))
+                                    })
+                            }
+                        })
+                }
+            }
+        }
+    }
+
+    companion object {
+        private const val RC_GALLERY = 9
     }
 
     // Enumeration for the various editable contents

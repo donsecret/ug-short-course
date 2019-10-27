@@ -25,6 +25,7 @@ class App : Application() {
         }
         super.onCreate()
 
+        // Register dependencies
         startKoin {
             androidContext(this@App)
             modules(loadAppModules())

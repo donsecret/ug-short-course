@@ -104,7 +104,7 @@ class CourseDetailsFragment : MainNavigationFragment() {
                 if (person != null) {
                     binding.facilitatorImage.load(person.avatar) {
                         transformations(CircleCropTransformation())
-                        placeholder(R.drawable.ic_default_avatar)
+                        placeholder(R.drawable.ic_default_avatar_2)
                         crossfade(true)
                         diskCachePolicy(CachePolicy.ENABLED)
                     }

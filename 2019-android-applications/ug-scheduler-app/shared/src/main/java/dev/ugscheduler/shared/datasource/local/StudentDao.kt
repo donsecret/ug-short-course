@@ -17,4 +17,10 @@ interface StudentDao : BaseDao<Student> {
      */
     @Query("select * from students where id = :id")
     fun getStudent(id: String): LiveData<Student>
+
+    /**
+     * Get a single student
+     */
+    @Query("select * from students where id = :id")
+    fun getStudentById(id: String): Student
 }

@@ -5,6 +5,7 @@
 package dev.ugscheduler.shared.viewmodel
 
 import android.content.Context
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -58,4 +59,7 @@ open class AppViewModel(private val repository: AppRepository) : ViewModel() {
     fun logout() = repository.logout()
 
     fun resetLocalCache() = repository.invalidateLocalCaches()
+
+    suspend fun uploadImage(id: String?, uri: Uri?): LiveData<String?> =
+        repository.uploadImage(id, uri)
 }

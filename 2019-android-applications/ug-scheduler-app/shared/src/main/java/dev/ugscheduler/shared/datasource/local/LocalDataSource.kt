@@ -7,9 +7,7 @@ package dev.ugscheduler.shared.datasource.local
 import androidx.lifecycle.LiveData
 import dev.ugscheduler.shared.data.*
 import dev.ugscheduler.shared.datasource.DataSource
-import dev.ugscheduler.shared.util.debugger
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -18,20 +16,20 @@ import kotlinx.coroutines.withContext
  * Local data source
  */
 class LocalDataSource constructor(
-    val database: LocalDatabase,
-    private val courseDao: CourseDao,
-    private val studentDao: StudentDao,
-    private val feedbackDao: FeedbackDao,
-    private val facilitatorDao: FacilitatorDao
+    val database: LocalDatabase
 ) : DataSource {
-    private val ioScope = CoroutineScope(Dispatchers.IO)
+    private val courseDao: CourseDao by lazy { database.courseDao() }
+    private val studentDao: StudentDao by lazy { database.studentDao() }
+    private val feedbackDao: FeedbackDao by lazy { database.feedbackDao() }
+    private val facilitatorDao: FacilitatorDao by lazy { database.facilitatorDao() }
+    private val ioScope = CoroutineScope(IO)
 
     override fun sendFeedback(feedback: Feedback) = feedbackDao.insert(feedback)
 
     override fun getStudentById(studentId: String): LiveData<Student> =
         studentDao.getStudent(studentId)
 
-    override suspend fun getFacilitators(): MutableList<Facilitator> = withContext(IO){
+    override suspend fun getFacilitators(): MutableList<Facilitator> = withContext(IO) {
         facilitatorDao.getAllFacilitators()
     }
 

@@ -5,12 +5,19 @@
 package dev.ugscheduler.shared.repository
 
 import android.content.Context
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.work.*
+import com.google.android.gms.tasks.Tasks
+import com.google.firebase.storage.StorageReference
 import dev.ugscheduler.shared.data.*
 import dev.ugscheduler.shared.datasource.local.LocalDataSource
 import dev.ugscheduler.shared.datasource.remote.RemoteDataSource
 import dev.ugscheduler.shared.util.prefs.UserSharedPreferences
+import dev.ugscheduler.shared.worker.UploadImageWorker
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.withContext
 
 interface Repository {
     fun getAllCourses(context: Context, refresh: Boolean): MutableList<Course>
@@ -28,6 +35,7 @@ interface Repository {
     fun loginFacilitator(facilitator: Facilitator?)
     fun logout()
     fun invalidateLocalCaches()
+    suspend fun uploadImage(id: String?, uri: Uri?): LiveData<String?>
 }
 
 /**
@@ -36,8 +44,11 @@ interface Repository {
 class AppRepository constructor(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource,
-    private val prefs: UserSharedPreferences
+    private val prefs: UserSharedPreferences,
+    private val bucket: StorageReference,
+    private val workManager: WorkManager
 ) : Repository {
+
     override fun getAllCourses(context: Context, refresh: Boolean): MutableList<Course> {
         return if (refresh) remoteDataSource.getAllCourses(context).apply {
             localDataSource.addCourses(
@@ -78,18 +89,16 @@ class AppRepository constructor(
 
     override fun getCurrentStudent(refresh: Boolean): LiveData<Student> {
         val liveStudent = MutableLiveData<Student>()
-        if (refresh) remoteDataSource.getCurrentStudent(prefs.uid).observeForever { student ->
-            if (student != null) {
-                localDataSource.addStudent(student)
-            }
-            liveStudent.postValue(student)
-        }
-        else {
-            localDataSource.getCurrentStudent(prefs.uid).observeForever { student ->
+        return if (refresh) {
+            remoteDataSource.getCurrentStudent(prefs.uid).observeForever { student ->
+                if (student != null) {
+                    localDataSource.addStudent(student)
+                }
                 liveStudent.postValue(student)
             }
-        }
-        return liveStudent
+            liveStudent
+        } else
+            localDataSource.getCurrentStudent(prefs.uid)
     }
 
     override fun getCurrentFacilitator(refresh: Boolean): LiveData<Facilitator> {
@@ -168,5 +177,35 @@ class AppRepository constructor(
         else localDataSource.getCourseById(
             id
         )
+    }
+
+    override suspend fun uploadImage(id: String?, uri: Uri?): LiveData<String?> {
+        val liveUri = MutableLiveData<String?>()
+        withContext(IO) {
+            if (uri != null) {
+                try {
+                    val downloadUri =
+                        Tasks.await(Tasks.await(bucket.putFile(uri)).storage.downloadUrl).toString()
+                    liveUri.postValue(downloadUri)
+                } catch (_: Exception) {
+                    val constraints = Constraints.Builder()
+                        .setRequiredNetworkType(NetworkType.CONNECTED)
+                        .build()
+                    with(workManager) {
+                        enqueue(
+                            OneTimeWorkRequestBuilder<UploadImageWorker>().setConstraints(
+                                constraints
+                            ).setInputData(
+                                workDataOf(
+                                    "uri" to uri.toString(),
+                                    "id" to id.toString()
+                                )
+                            ).build()
+                        )
+                    }
+                }
+            }
+        }
+        return liveUri
     }
 }

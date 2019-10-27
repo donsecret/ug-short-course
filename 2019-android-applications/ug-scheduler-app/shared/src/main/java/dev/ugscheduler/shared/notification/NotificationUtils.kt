@@ -11,14 +11,17 @@ import android.provider.Settings
 import androidx.core.app.*
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
+import androidx.work.WorkManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import dev.ugscheduler.shared.R
 import dev.ugscheduler.shared.datasource.local.LocalDataSource
 import dev.ugscheduler.shared.datasource.local.LocalDatabase
 import dev.ugscheduler.shared.datasource.remote.RemoteDataSource
 import dev.ugscheduler.shared.repository.AppRepository
 import dev.ugscheduler.shared.util.BaseActivity
+import dev.ugscheduler.shared.util.Constants
 import dev.ugscheduler.shared.util.debugger
 import dev.ugscheduler.shared.util.prefs.UserSharedPreferences
 import kotlinx.coroutines.Dispatchers.IO
@@ -36,14 +39,10 @@ class NotificationUtils(private val context: Context) {
     private val repository by lazy {
         AppRepository(
             RemoteDataSource(FirebaseFirestore.getInstance(), FirebaseAuth.getInstance()),
-            LocalDataSource(
-                db,
-                db.courseDao(),
-                db.studentDao(),
-                db.feedbackDao(),
-                db.facilitatorDao()
-            ),
-            UserSharedPreferences.getInstance(context)
+            LocalDataSource(db),
+            UserSharedPreferences.getInstance(context),
+            FirebaseStorage.getInstance().reference.child(Constants.BUCKET_NAME),
+            WorkManager.getInstance(context)
         )
     }
 

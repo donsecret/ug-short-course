@@ -4,6 +4,7 @@
 
 package dev.ugscheduler.shared.di
 
+import androidx.work.WorkManager
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -26,6 +27,7 @@ fun loadAppModules() = mutableListOf(firebaseModule, appPrefsModule, datasourceM
 
 private val coreModule = module {
     single { NotificationUtils(androidContext()) }
+    single { WorkManager.getInstance(androidContext()) }
 }
 
 private val firebaseModule = module {
@@ -48,7 +50,7 @@ private val appPrefsModule = module {
 
 private val datasourceModule = module {
     factory { RemoteDataSource(get(), get()) }
-    factory { LocalDataSource(get(), get(), get(), get(), get()) }
-    single { AppRepository(get(), get(), get()) }
+    factory { LocalDataSource(get()) }
+    single { AppRepository(get(), get(), get(), get(), get()) }
 }
 

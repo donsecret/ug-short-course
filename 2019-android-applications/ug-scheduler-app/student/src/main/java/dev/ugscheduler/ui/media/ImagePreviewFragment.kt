@@ -8,8 +8,9 @@ import androidx.fragment.app.DialogFragment
 import coil.api.load
 import coil.request.CachePolicy
 import dev.ugscheduler.databinding.ImagePreviewFragmentBinding
+import dev.ugscheduler.util.MainNavigationFragment
 
-class ImagePreviewFragment : DialogFragment() {
+class ImagePreviewFragment : MainNavigationFragment() {
     private lateinit var binding: ImagePreviewFragmentBinding
 
     override fun onCreateView(
@@ -33,13 +34,5 @@ class ImagePreviewFragment : DialogFragment() {
                 crossfade(true)
             }
         }
-    }
-
-    override fun onResume() {
-        dialog?.window?.setLayout(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
-        )
-        super.onResume()
     }
 }

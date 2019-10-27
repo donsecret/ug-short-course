@@ -154,6 +154,10 @@
 
     <style name="Widget.IOSched" parent="@android:style/Widget.Material" />
 
+    <style name="AppTheme.InputType" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="fontFamily">@font/google_sans</item>
+    </style>
+
     <style name="Widget.IOSched.AppBar" parent="@style/Widget.Design.AppBarLayout">
         <item name="android:background">?attr/colorSurface</item>
         <item name="android:elevation">8dp</item>

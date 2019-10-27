@@ -68,15 +68,5 @@ open class MainNavigationFragment : Fragment(), NavigationDestination {
         mainToolbar.apply {
             host.registerToolbarWithNavigation(this)
         }
-
-        /*try {
-            mainToolbar.setupProfileMenuItem(
-                activityViewModelProvider(AuthViewModelFactory()),
-                childFragmentManager, get(),
-                viewLifecycleOwner
-            )
-        } catch (e: Exception) {
-            debugger("Toolbar missing:  ${e.cause}")
-        }*/
     }
 }
