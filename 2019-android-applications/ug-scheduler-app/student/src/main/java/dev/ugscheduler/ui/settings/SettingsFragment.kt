@@ -1,16 +1,23 @@
 package dev.ugscheduler.ui.settings
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.location.Geocoder
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import coil.api.load
 import coil.request.CachePolicy
 import coil.transform.CircleCropTransformation
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.tasks.Tasks
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import dev.ugscheduler.R
@@ -28,6 +35,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.get
 import org.koin.android.ext.android.inject
+import java.util.*
 
 class SettingsFragment : MainNavigationFragment() {
 
@@ -92,6 +100,39 @@ class SettingsFragment : MainNavigationFragment() {
                 show()
             }
         }
+
+        // Get user location live updates
+        if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            // Extract user's address
+            extractUsersLocation()
+        } else {
+            requestPermissions(
+                arrayOf(
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                ), RC_LOC_PERM
+            )
+        }
+    }
+
+    /// Get's the user's current location address
+    private fun extractUsersLocation() {
+        val geocoder = Geocoder(context, Locale.getDefault())
+        ioScope.launch {
+            val location =
+                Tasks.await(LocationServices.getFusedLocationProviderClient(requireActivity()).lastLocation)
+            if (location != null) {
+                val address = geocoder.getFromLocation(location.latitude, location.longitude, 1)[0]
+                uiScope.launch {
+                    binding.residencePrefs.summary = address.adminArea
+                    binding.addressPrefs.summary = address.getAddressLine(0)
+                }
+            }
+        }
     }
 
     private fun bindStudent(student: Student) {
@@ -144,15 +185,6 @@ class SettingsFragment : MainNavigationFragment() {
     }
 
     private fun editContent(type: EditType, student: Student) {
-        // todo: allow content editing
-        /*student.apply {
-            residence = "Dansoman"
-            address = "2nd Danso close"
-            eduBackground = "Tertiary (University of Ghana, Legon)"
-            organisation = "Quabynah Codelabs LLC"
-            position = "C.E.O."
-            dob = "August 23, 1993"
-        }*/
         // Get binding
         val edtContentBinding = EditContentBinding.inflate(layoutInflater)
 
@@ -355,8 +387,20 @@ class SettingsFragment : MainNavigationFragment() {
         }
     }
 
+    @SuppressLint("MissingPermission")
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == RC_LOC_PERM && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+            extractUsersLocation()
+    }
+
     companion object {
         private const val RC_GALLERY = 9
+        private const val RC_LOC_PERM = 12
     }
 
     // Enumeration for the various editable contents

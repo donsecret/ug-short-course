@@ -48,6 +48,8 @@
         <!-- Text appearances -->
         <item name="textAppearanceBody1">@style/TextAppearance.IOSched.Body1</item>
         <item name="textAppearanceBody2">@style/TextAppearance.IOSched.Body2</item>
+        <item name="textAppearanceHeadline6">@style/TextAppearance.IOSched.H6</item>
+        <item name="textAppearanceHeadline5">@style/TextAppearance.IOSched.H5</item>
         <item name="textAppearanceButton">@style/TextAppearance.IOSched.Button</item>
         <item name="textAppearanceListItem">@style/TextAppearance.IOSched.ListPrimary</item>
         <item name="textInputStyle">@style/AppTheme.InputType</item>

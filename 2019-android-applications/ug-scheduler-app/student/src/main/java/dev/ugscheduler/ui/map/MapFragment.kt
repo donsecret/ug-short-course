@@ -26,6 +26,7 @@ import com.google.maps.android.PolyUtil
 import dev.ugscheduler.R
 import dev.ugscheduler.databinding.MapFragmentBinding
 import dev.ugscheduler.shared.BuildConfig
+import dev.ugscheduler.shared.prefs.AppPreferences
 import dev.ugscheduler.shared.util.activityViewModelProvider
 import dev.ugscheduler.shared.util.debugger
 import dev.ugscheduler.shared.util.doOnApplyWindowInsets
@@ -49,12 +50,13 @@ class MapFragment : MainNavigationFragment(), OnMapReadyCallback {
             // Initialize map
             map = googleMap
 
+            val prefs = get<AppPreferences>()
             // Apply settings to map
             map.apply {
                 setMapStyle(
                     MapStyleOptions.loadRawResourceStyle(
                         requireContext(),
-                        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES)
+                        if (prefs.currentMode == AppCompatDelegate.MODE_NIGHT_YES)
                             R.raw.map_style_night else R.raw.map_style_day
                     )
                 )

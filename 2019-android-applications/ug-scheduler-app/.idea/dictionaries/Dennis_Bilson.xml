@@ -3,6 +3,7 @@
     <words>
       <w>datasource</w>
       <w>firestore</w>
+      <w>geocoder</w>
       <w>koin</w>
       <w>onboarding</w>
     </words>
