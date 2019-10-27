@@ -23,9 +23,9 @@
         android:layout_width="@dimen/agenda_icon_width"
         android:layout_height="wrap_content"
         android:contentDescription="@null"
+        android:src="@drawable/ic_default_avatar_1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/lib_name"
-        android:src="@drawable/ic_default_avatar_1" />
+        app:layout_constraintTop_toTopOf="@id/lib_name" />
 
     <TextView
         android:id="@+id/lib_name"
@@ -42,19 +42,36 @@
         tools:text="@tools:sample/lorem" />
 
     <TextView
+        android:id="@+id/lib_url"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:alpha="?alphaDisabled"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:layout_marginTop="@dimen/spacing_micro"
+        android:layout_marginBottom="@dimen/spacing_micro"
+        android:textAlignment="viewStart"
+        android:textAppearance="?textAppearanceBody2"
+        app:layout_constraintEnd_toEndOf="@id/lib_name"
+        app:layout_constraintStart_toStartOf="@id/lib_name"
+        app:layout_constraintTop_toBottomOf="@id/lib_name"
+        tools:text="@tools:sample/lorem/random" />
+
+    <TextView
         android:id="@+id/lib_desc"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:alpha="?alphaMedium"
         android:ellipsize="end"
         android:maxLines="3"
+        android:layout_marginTop="@dimen/spacing_micro"
         android:paddingBottom="@dimen/agenda_block_padding_vertical"
         android:textAlignment="viewStart"
         android:textAppearance="?textAppearanceBody2"
         app:layout_constraintEnd_toEndOf="@id/lib_name"
         app:layout_constraintStart_toStartOf="@id/lib_name"
-        app:layout_constraintTop_toBottomOf="@id/lib_name"
-        tools:maxLines="5"
+        app:layout_constraintTop_toBottomOf="@id/lib_url"
+        tools:maxLines="4"
         tools:text="@tools:sample/lorem/random" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

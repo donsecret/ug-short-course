@@ -60,6 +60,7 @@ class AboutLibsAdapter : ListAdapter<Library, AboutLibsAdapter.LibraryViewHolder
         RecyclerView.ViewHolder(binding.root) {
         fun bind(lib: Library) {
             binding.libName.text = lib.name
+            binding.libUrl.text = lib.url
             binding.libDesc.text = lib.desc
             binding.icon.load(lib.icon) {
                 if (lib.circleCrop) transformations(CircleCropTransformation())

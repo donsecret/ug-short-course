@@ -2,7 +2,7 @@
   {
     "id": "dd0fd3df-6f60-465c-acc1-f59939c12d14",
     "name": "Koin DSL",
-    "desc": "Koin - a pragmatic lightweight dependency injection framework for Kotlin [https://insert-koin.io/]",
+    "desc": "Koin - a pragmatic lightweight dependency injection framework for Kotlin",
     "url": "https://github.com/InsertKoinIO/koin",
     "icon": "https://avatars1.githubusercontent.com/u/38280958?s=200&v=4",
     "circleCrop": true
@@ -26,7 +26,7 @@
   {
     "id": "57e868f4-e592-4206-8271-d21554f6cf99",
     "name": "Timber",
-    "desc": "A logger with a small, extensible API which provides utility on top of Android's normal Log class. http://jakewharton.github.io/timber/",
+    "desc": "A logger with a small, extensible API which provides utility on top of Android's normal Log class.",
     "url": "https://github.com/JakeWharton/timber",
     "icon": "https://avatars1.githubusercontent.com/u/66577?s=460&v=4",
     "circleCrop": true
