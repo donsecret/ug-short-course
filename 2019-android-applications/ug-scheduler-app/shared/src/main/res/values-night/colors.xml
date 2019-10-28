@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2019.. Designed & developed by Quabynah Codelabs(c). For the love of Android development.
   -->
 
@@ -19,4 +18,6 @@
     <color name="color_on_surface">#ffffff</color>
     <color name="color_on_error">#212121</color>
     <color name="color_scrim">#00cfcfcf</color>
+
+    <color name="content_placeholder">#FF9F9D9D</color>
 </resources>

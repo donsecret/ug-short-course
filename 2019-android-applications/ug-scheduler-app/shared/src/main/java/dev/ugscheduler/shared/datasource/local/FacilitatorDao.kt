@@ -15,5 +15,8 @@ interface FacilitatorDao : BaseDao<Facilitator> {
     fun getAllFacilitators(): MutableList<Facilitator>
 
     @Query("select * from facilitators where id = :id")
-    fun getFacilitatorById(id: String): LiveData<Facilitator>
+    fun getFacilitatorById(id: String): LiveData<Facilitator?>
+
+    @Query("select * from facilitators where id = :id")
+    fun getFacilitatorByIdAsync(id: String): Facilitator?
 }

@@ -76,4 +76,9 @@
         android:name="dev.ugscheduler.ui.news.NewsFragment"
         android:label="@string/title_news"
         tools:layout="@layout/news_fragment" />
+    <dialog
+        android:id="@id/navigation_facilitator"
+        android:name="dev.ugscheduler.ui.profile.ProfileFragment"
+        android:label="@string/title_facilitator"
+        tools:layout="@layout/fragment_profile" />
 </navigation>

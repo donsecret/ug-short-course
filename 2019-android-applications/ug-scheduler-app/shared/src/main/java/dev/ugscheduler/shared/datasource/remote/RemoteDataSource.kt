@@ -72,7 +72,7 @@ class RemoteDataSource constructor(
         return facilitators
     }
 
-    override fun getFacilitatorById(id: String): LiveData<Facilitator> {
+    override fun getFacilitatorById(id: String): LiveData<Facilitator?> {
         val liveData = MutableLiveData<Facilitator>()
         ioScope.launch {
             try {
@@ -116,7 +116,7 @@ class RemoteDataSource constructor(
         return liveData
     }
 
-    override fun getCurrentFacilitator(id: String): LiveData<Facilitator> {
+    override fun getCurrentFacilitator(id: String): LiveData<Facilitator?> {
         val liveData = MutableLiveData<Facilitator>()
         ioScope.launch {
             try {

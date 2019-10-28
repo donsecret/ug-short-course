@@ -4,9 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.DialogFragment
+import androidx.navigation.fragment.findNavController
 import coil.api.load
 import coil.request.CachePolicy
+import dev.ugscheduler.R
 import dev.ugscheduler.databinding.ImagePreviewFragmentBinding
 import dev.ugscheduler.util.MainNavigationFragment
 
@@ -32,7 +33,9 @@ class ImagePreviewFragment : MainNavigationFragment() {
             binding.preview.load(imageUri) {
                 diskCachePolicy(CachePolicy.ENABLED)
                 crossfade(true)
+                placeholder(R.color.content_placeholder)
+                error(R.color.content_placeholder)
             }
-        }
+        } else findNavController().popBackStack()
     }
 }

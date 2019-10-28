@@ -11,7 +11,6 @@ import com.google.android.gms.tasks.Tasks
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import dev.ugscheduler.shared.data.Facilitator
-import dev.ugscheduler.shared.datasource.local.FacilitatorDao
 import dev.ugscheduler.shared.datasource.local.LocalDatabase
 import dev.ugscheduler.shared.datasource.remote.facilitatorDocument
 import dev.ugscheduler.shared.util.debugger
@@ -32,7 +31,6 @@ class FacilitatorWorker(context: Context, params: WorkerParameters) :
 
         // Get all facilitators and deserialize
         val facilitators = getFacilitators(applicationContext)
-        debugger("All facilitators => $facilitators")
 
         // Needed to be called on the background thread
         withContext(IO) {

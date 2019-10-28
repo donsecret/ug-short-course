@@ -35,6 +35,7 @@
     <color name="color_on_surface">#000000</color>
     <color name="color_on_error">#ffffff</color>
     <color name="color_scrim">#99cfcfcf</color>
+    <color name="content_placeholder">#009F9D9D</color>
 
     <!--    <color name="color_primary_dark">@color/warm_blue</color>-->
     <!--    <color name="color_on_secondary">@color/cornflower_blue</color>-->

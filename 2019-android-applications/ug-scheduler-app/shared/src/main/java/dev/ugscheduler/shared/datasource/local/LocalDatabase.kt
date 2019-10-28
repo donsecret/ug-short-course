@@ -9,8 +9,6 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
-import androidx.work.Constraints
-import androidx.work.NetworkType
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import dev.ugscheduler.shared.data.*
@@ -49,24 +47,13 @@ abstract class LocalDatabase : RoomDatabase() {
                         super.onCreate(db)
                         debugger("Creating new database")
 
-                        // Set constraints to start job only when there is internet connection
-                        val constraints = Constraints.Builder()
-                            .setRequiredNetworkType(NetworkType.CONNECTED)
-                            .build()
-
                         // Set a one-time request to download all courses and store them locally
                         with(WorkManager.getInstance(context)) {
                             enqueue(
                                 mutableListOf(
-                                    OneTimeWorkRequestBuilder<FacilitatorWorker>().setConstraints(
-                                        constraints
-                                    ).build(),
-                                    OneTimeWorkRequestBuilder<CourseWorker>().setConstraints(
-                                        constraints
-                                    ).build(),
-                                    OneTimeWorkRequestBuilder<NewsWorker>().setConstraints(
-                                        constraints
-                                    ).build()
+                                    OneTimeWorkRequestBuilder<FacilitatorWorker>().build(),
+                                    OneTimeWorkRequestBuilder<CourseWorker>().build(),
+                                    OneTimeWorkRequestBuilder<NewsWorker>().build()
                                 )
                             )
                         }

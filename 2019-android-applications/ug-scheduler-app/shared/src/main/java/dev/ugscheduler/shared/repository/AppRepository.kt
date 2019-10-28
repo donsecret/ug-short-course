@@ -70,19 +70,16 @@ class AppRepository constructor(
 
     override fun getFacilitatorById(id: String, refresh: Boolean): LiveData<Facilitator?> {
         val liveFacilitator = MutableLiveData<Facilitator>()
-        if (refresh) {
+        return if (refresh) {
             remoteDataSource.getFacilitatorById(id).observeForever {
                 if (it != null) {
                     liveFacilitator.postValue(it)
                     localDataSource.addFacilitator(it)
                 }
             }
-        } else {
-            localDataSource.getFacilitatorById(id).observeForever {
-                liveFacilitator.postValue(it)
-            }
-        }
-        return liveFacilitator
+            liveFacilitator
+        } else
+            localDataSource.getFacilitatorById(id)
     }
 
     override fun enrolStudent(enrolment: Enrolment) =

@@ -5,10 +5,10 @@
 package dev.ugscheduler.shared.data
 
 import androidx.annotation.NonNull
-import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
+import dev.ugscheduler.shared.util.Constants
 import kotlinx.android.parcel.Parcelize
 import java.util.*
 
@@ -16,7 +16,7 @@ import java.util.*
  * For [Anonymous] users
  */
 @Parcelize
-@Entity(tableName = "anonymous_users")
+@Entity(tableName = Constants.ANONYMOUS)
 data class Anonymous constructor(
     @PrimaryKey
     override val id: String,
@@ -30,7 +30,7 @@ data class Anonymous constructor(
 /**
  * [Student]s
  */
-@Entity(tableName = "students")
+@Entity(tableName = Constants.STUDENTS)
 @Parcelize
 data class Student constructor(
     @PrimaryKey
@@ -71,7 +71,7 @@ data class Student constructor(
 /**
  * [Facilitator]s
  */
-@Entity(tableName = "facilitators")
+@Entity(tableName = Constants.FACILITATORS)
 @Parcelize
 data class Facilitator constructor(
     @PrimaryKey

@@ -25,6 +25,7 @@ class NewsWorker(context: Context, params: WorkerParameters) : CoroutineWorker(c
     private val localDataSource by lazy { LocalDataSource(LocalDatabase.get(context)) }
 
     override suspend fun doWork(): Result {
+        debugger("Adding news articles")
         return try {
             withContext(IO) {
                 // Get news articles

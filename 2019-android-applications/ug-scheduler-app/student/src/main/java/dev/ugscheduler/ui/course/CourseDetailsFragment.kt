@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import coil.api.load
 import coil.request.CachePolicy
 import coil.transform.CircleCropTransformation
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dev.ugscheduler.R
 import dev.ugscheduler.databinding.FragmentCourseDetailsBinding
 import dev.ugscheduler.shared.data.Course
@@ -48,13 +49,14 @@ class CourseDetailsFragment : MainNavigationFragment() {
     }
 
     private fun bindUI(course: Course?) {
+        debugger("Course details => $course")
         binding.courseName.text = course?.name
         binding.courseDesc.text = course?.desc
         binding.courseSessions.text =
             if (course?.session.isNullOrEmpty()) "Weekends & Evenings" else course?.session
 
         // Get facilitator
-        getFacilitator(course?.facilitator, false)
+        getFacilitator(course?.facilitator)
 
         // Get current student
         if (get<UserSharedPreferences>().isLoggedIn) {
@@ -102,18 +104,29 @@ class CourseDetailsFragment : MainNavigationFragment() {
         viewModel.getFacilitatorById(facilitator, refresh)
             .observe(viewLifecycleOwner, Observer { person ->
                 if (person != null) {
+                    binding.facilitatorContainer.setOnClickListener {
+                        MaterialAlertDialogBuilder(requireContext()).apply {
+                            findNavController().navigate(
+                                R.id.navigation_facilitator,
+                                bundleOf("extra_facilitator" to person)
+                            )
+                        }
+                    }
                     binding.facilitatorImage.load(person.avatar) {
                         transformations(CircleCropTransformation())
                         placeholder(R.drawable.ic_default_avatar_2)
+                        error(R.drawable.ic_default_avatar_3)
                         crossfade(true)
                         diskCachePolicy(CachePolicy.ENABLED)
                     }
-                    /*binding.facilitatorImage.setOnClickListener {
-                        findNavController().navigate(
-                            R.id.navigation_preview,
-                            bundleOf("extra_image" to person.avatar)
-                        )
-                    }*/
+                    if (!person.avatar.isNullOrEmpty()) {
+                        binding.facilitatorImage.setOnClickListener {
+                            findNavController().navigate(
+                                R.id.navigation_preview,
+                                bundleOf("extra_image" to person.avatar)
+                            )
+                        }
+                    }
                     binding.facilitatorName.text = person.fullName
                     binding.courseFacilitatorDesc.text = person.email
                 } else {

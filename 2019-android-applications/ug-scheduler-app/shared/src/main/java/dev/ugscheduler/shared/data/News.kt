@@ -3,13 +3,14 @@ package dev.ugscheduler.shared.data
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import dev.ugscheduler.shared.util.Constants
 import kotlinx.android.parcel.Parcelize
 
 /**
  * News data model
  */
 @Parcelize
-@Entity(tableName = "news")
+@Entity(tableName = Constants.NEWS)
 data class News(
     @PrimaryKey
     val id: String,

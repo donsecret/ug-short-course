@@ -16,10 +16,10 @@ interface DataSource {
     fun getAllCourses(context: Context): MutableList<Course> = getCourses(context)
     suspend fun getCourseById(id:String?): Course?
     suspend fun getFacilitators(): MutableList<Facilitator>
-    fun getFacilitatorById(id: String): LiveData<Facilitator>
+    fun getFacilitatorById(id: String): LiveData<Facilitator?>
     fun enrolStudent(enrolment: Enrolment)
     fun getCurrentStudent(id: String): LiveData<Student>
-    fun getCurrentFacilitator(id: String): LiveData<Facilitator>
+    fun getCurrentFacilitator(id: String): LiveData<Facilitator?>
     fun getMyCourses(studentId: String): MutableList<Course>
     fun getCoursesForFacilitator(facilitatorId: String): MutableList<Course>
     fun sendFeedback(feedback: Feedback)

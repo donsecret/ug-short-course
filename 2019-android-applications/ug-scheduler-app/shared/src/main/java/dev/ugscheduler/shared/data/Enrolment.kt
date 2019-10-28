@@ -9,11 +9,12 @@ import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import dev.ugscheduler.shared.data.Enrolment.Session
+import dev.ugscheduler.shared.util.Constants
 import kotlinx.android.parcel.Parcelize
 import java.util.*
 
 @Parcelize
-@Entity(tableName = "enrolments")
+@Entity(tableName = Constants.ENROLMENTS)
 data class Enrolment(
     @PrimaryKey
     val id: String = UUID.randomUUID().toString(),

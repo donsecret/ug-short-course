@@ -34,7 +34,7 @@ class LocalDataSource constructor(
         facilitatorDao.getAllFacilitators()
     }
 
-    override fun getFacilitatorById(id: String): LiveData<Facilitator> =
+    override fun getFacilitatorById(id: String): LiveData<Facilitator?> =
         facilitatorDao.getFacilitatorById(id)
 
     // todo: enable offline enrolment
@@ -42,7 +42,7 @@ class LocalDataSource constructor(
 
     override fun getCurrentStudent(id: String): LiveData<Student> = studentDao.getStudent(id)
 
-    override fun getCurrentFacilitator(id: String): LiveData<Facilitator> =
+    override fun getCurrentFacilitator(id: String): LiveData<Facilitator?> =
         facilitatorDao.getFacilitatorById(id)
 
     // todo: get my courses
