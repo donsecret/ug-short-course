@@ -15,6 +15,7 @@ val FirebaseFirestore.facilitators: CollectionReference get() = collection(Const
 val FirebaseFirestore.courses: CollectionReference get() = collection(Constants.COURSES)
 val FirebaseFirestore.feedback: CollectionReference get() = collection(Constants.FEEDBACK)
 val FirebaseFirestore.enrolment: CollectionReference get() = collection(Constants.ENROLMENTS)
+val FirebaseFirestore.news: CollectionReference get() = collection(Constants.NEWS)
 
 fun FirebaseFirestore.studentDocument(id: String): DocumentReference =
     collection(Constants.STUDENTS).document(id)
@@ -30,3 +31,6 @@ fun FirebaseFirestore.courseDocument(id: String): DocumentReference =
 
 fun FirebaseFirestore.feedbackDocument(id: String): DocumentReference =
     collection(Constants.FEEDBACK).document(id)
+
+fun FirebaseFirestore.newsDocument(id: String): DocumentReference =
+    collection(Constants.NEWS).document(id)

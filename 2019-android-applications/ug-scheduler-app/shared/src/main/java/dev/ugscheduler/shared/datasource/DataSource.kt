@@ -24,4 +24,6 @@ interface DataSource {
     fun getCoursesForFacilitator(facilitatorId: String): MutableList<Course>
     fun sendFeedback(feedback: Feedback)
     fun getStudentById(studentId: String): LiveData<Student>
+
+    suspend fun getNewsArticles(): MutableList<News>
 }

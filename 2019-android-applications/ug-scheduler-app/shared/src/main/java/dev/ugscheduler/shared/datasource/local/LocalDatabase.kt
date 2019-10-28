@@ -13,17 +13,15 @@ import androidx.work.Constraints
 import androidx.work.NetworkType
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
-import dev.ugscheduler.shared.data.Course
-import dev.ugscheduler.shared.data.Facilitator
-import dev.ugscheduler.shared.data.Feedback
-import dev.ugscheduler.shared.data.Student
+import dev.ugscheduler.shared.data.*
 import dev.ugscheduler.shared.util.Constants
 import dev.ugscheduler.shared.util.debugger
 import dev.ugscheduler.shared.worker.CourseWorker
 import dev.ugscheduler.shared.worker.FacilitatorWorker
+import dev.ugscheduler.shared.worker.NewsWorker
 
 @Database(
-    entities = [Student::class, Facilitator::class, Course::class, Feedback::class],
+    entities = [Student::class, Facilitator::class, Course::class, Feedback::class, News::class],
     version = Constants.DB_VERSION,
     exportSchema = true
 )
@@ -33,6 +31,7 @@ abstract class LocalDatabase : RoomDatabase() {
     abstract fun courseDao(): CourseDao
     abstract fun feedbackDao(): FeedbackDao
     abstract fun facilitatorDao(): FacilitatorDao
+    abstract fun newsDao(): NewsDao
 
     companion object {
         @Volatile
@@ -63,6 +62,9 @@ abstract class LocalDatabase : RoomDatabase() {
                                         constraints
                                     ).build(),
                                     OneTimeWorkRequestBuilder<CourseWorker>().setConstraints(
+                                        constraints
+                                    ).build(),
+                                    OneTimeWorkRequestBuilder<NewsWorker>().setConstraints(
                                         constraints
                                     ).build()
                                 )

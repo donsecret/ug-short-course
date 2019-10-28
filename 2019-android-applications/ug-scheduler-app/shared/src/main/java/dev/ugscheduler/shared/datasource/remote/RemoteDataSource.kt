@@ -215,4 +215,14 @@ class RemoteDataSource constructor(
         }
     }
 
+    override suspend fun getNewsArticles(): MutableList<News> {
+        return withContext(IO) {
+            try {
+                Tasks.await(firestore.news.get()).toObjects(News::class.java).toMutableList()
+            } catch (ex: Exception) {
+                debugger(ex.localizedMessage)
+                emptyList<News>().toMutableList()
+            }
+        }
+    }
 }

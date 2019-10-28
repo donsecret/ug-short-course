@@ -22,6 +22,7 @@ class LocalDataSource constructor(
     private val studentDao: StudentDao by lazy { database.studentDao() }
     private val feedbackDao: FeedbackDao by lazy { database.feedbackDao() }
     private val facilitatorDao: FacilitatorDao by lazy { database.facilitatorDao() }
+    private val newsDao: NewsDao by lazy { database.newsDao() }
     private val ioScope = CoroutineScope(IO)
 
     override fun sendFeedback(feedback: Feedback) = feedbackDao.insert(feedback)
@@ -87,4 +88,6 @@ class LocalDataSource constructor(
     fun clearDatabase() = database.clearAllTables()
 
     override suspend fun getCourseById(id: String?): Course? = courseDao.getCourseById(id)
+
+    override suspend fun getNewsArticles(): MutableList<News> = newsDao.getNewsArticlesAsync()
 }

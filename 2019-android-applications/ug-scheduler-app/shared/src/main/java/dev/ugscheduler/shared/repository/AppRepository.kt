@@ -36,6 +36,7 @@ interface Repository {
     fun logout()
     fun invalidateLocalCaches()
     suspend fun uploadImage(id: String?, uri: Uri?): LiveData<String?>
+    suspend fun getNewsUpdates(refresh: Boolean): MutableList<News>
 }
 
 /**
@@ -207,5 +208,10 @@ class AppRepository constructor(
             }
         }
         return liveUri
+    }
+
+    override suspend fun getNewsUpdates(refresh: Boolean): MutableList<News> = withContext(IO){
+        if (refresh) remoteDataSource.getNewsArticles().apply { localDataSource.database.newsDao().insertAll(this) }
+        else localDataSource.getNewsArticles()
     }
 }
