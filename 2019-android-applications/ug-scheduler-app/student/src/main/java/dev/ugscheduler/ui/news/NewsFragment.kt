@@ -4,17 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import dev.ugscheduler.R
 import dev.ugscheduler.shared.util.activityViewModelProvider
+import dev.ugscheduler.shared.util.debugger
 import dev.ugscheduler.shared.viewmodel.AppViewModel
 import dev.ugscheduler.shared.viewmodel.AppViewModelFactory
+import dev.ugscheduler.util.MainNavigationFragment
 import org.koin.android.ext.android.get
 
-class NewsFragment : Fragment() {
+class NewsFragment : MainNavigationFragment() {
     //    private lateinit var binding: FragmentNews
-    private val viewModel by lazy { activityViewModelProvider<NewsViewModel>(ViewModelProvider.NewInstanceFactory()) }
+    private val viewModel by lazy { activityViewModelProvider<NewsViewModel>(NewsViewModelFactory(get())) }
     private val appViewModel by lazy {
         activityViewModelProvider<AppViewModel>(
             AppViewModelFactory(
@@ -34,8 +36,10 @@ class NewsFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         // Get news from source
-
-        // Display News in a recyclerview
+        viewModel.news.observe(viewLifecycleOwner, Observer { news ->
+            // todo: Display News in a recyclerview
+            debugger(news)
+        })
 
 
     }

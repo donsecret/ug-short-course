@@ -71,4 +71,9 @@
         android:name="dev.ugscheduler.ui.media.ImagePreviewFragment"
         android:label="@string/title_preview"
         tools:layout="@layout/image_preview_fragment" />
+    <fragment
+        android:id="@id/navigation_news"
+        android:name="dev.ugscheduler.ui.news.NewsFragment"
+        android:label="@string/title_news"
+        tools:layout="@layout/news_fragment" />
 </navigation>

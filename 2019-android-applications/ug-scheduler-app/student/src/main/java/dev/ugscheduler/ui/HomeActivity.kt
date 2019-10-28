@@ -48,6 +48,7 @@ class HomeActivity : BaseActivity(), NavigationHost {
             R.id.navigation_map,
             R.id.navigation_info,
             R.id.navigation_sessions,
+            R.id.navigation_news,
             R.id.navigation_about,
             R.id.navigation_chat,
             R.id.navigation_settings

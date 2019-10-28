@@ -46,6 +46,7 @@ private val appPrefsModule = module {
     single { get<LocalDatabase>().courseDao() }
     single { get<LocalDatabase>().feedbackDao() }
     single { get<LocalDatabase>().facilitatorDao() }
+    single { get<LocalDatabase>().newsDao() }
 }
 
 private val datasourceModule = module {
