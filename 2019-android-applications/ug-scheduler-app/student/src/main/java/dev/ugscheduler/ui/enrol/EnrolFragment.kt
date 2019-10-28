@@ -5,17 +5,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import dev.ugscheduler.databinding.FragmentEnrolBinding
 import dev.ugscheduler.shared.data.Course
 import dev.ugscheduler.shared.data.Student
 import dev.ugscheduler.shared.util.activityViewModelProvider
+import dev.ugscheduler.shared.util.debugger
 import dev.ugscheduler.shared.util.toast
 import dev.ugscheduler.shared.viewmodel.AppViewModel
 import dev.ugscheduler.shared.viewmodel.AppViewModelFactory
 import dev.ugscheduler.util.MainNavigationFragment
 import org.koin.android.ext.android.get
+import java.util.*
 
 class EnrolFragment : MainNavigationFragment() {
-//    private lateinit var binding: FragmentEnrol
+    private lateinit var binding: FragmentEnrolBinding
     private val viewModel by lazy {
         activityViewModelProvider<AppViewModel>(
             AppViewModelFactory(get())
@@ -26,13 +29,17 @@ class EnrolFragment : MainNavigationFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        /*binding = FragmentEnrolBinding.inflate(inflater)
-        return binding.root*/
-        return null
+        binding = FragmentEnrolBinding.inflate(inflater)
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        // todo: remove this block of code
+        for (i in 0..7) {
+            debugger(UUID.randomUUID())
+        }
 
         val course = arguments?.get("extra_course") as? Course
         val student = arguments?.get("extra_student") as? Student
@@ -47,6 +54,7 @@ class EnrolFragment : MainNavigationFragment() {
     // Bind details for the course
     private fun bindUI(course: Course, student: Student) {
         // todo: enable enrolment of student for course
+
     }
 
 

@@ -5,7 +5,7 @@
     "avatar": "",
     "email": "codelbas.quabynah@gmail.com",
     "fullName": "Dennis K. Bilson",
-    "rating": 4.0,
+    "rating": 3.0,
     "phone": "+233554635701"
   },
   {
@@ -14,7 +14,7 @@
     "avatar": "",
     "email": "brown@gmail.com",
     "fullName": "Derrick Brown",
-    "rating": 4.0,
+    "rating": 3.0,
     "phone": "+233554466321"
   },
   {
@@ -23,7 +23,7 @@
     "avatar": "",
     "email": "dennis@gmail.com",
     "fullName": "Dennis Boadi",
-    "rating": 4.0,
+    "rating": 3.0,
     "phone": "+233556699863"
   },
   {
@@ -32,7 +32,16 @@
     "avatar": "",
     "email": "boafo@gmail.com",
     "fullName": "Mr. Boafo",
-    "rating": 4.0,
+    "rating": 3.0,
     "phone": "+2335566998874"
+  },
+  {
+    "id": "2466c1b3-f2f4-4869-96dd-afef9ad2b384",
+    "timestamp": 1572096435635,
+    "avatar": "",
+    "email": "angelinaamengu@gmail.com",
+    "fullName": "Angelina Amengu Ankah",
+    "rating": 3.0,
+    "phone": "+233548174268"
   }
 ]

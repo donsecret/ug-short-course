@@ -49,8 +49,8 @@ fun isAtLeast(version: Int): Boolean = Build.VERSION.SDK_INT >= version
 
 fun Any.debugger(msg: Any?) {
     if (DEBUG) {
-//        Timber.d("${this::class.java.simpleName} ==> UGScheduler ==> ${msg.toString()}")
-        println("${this::class.java.simpleName} ==> UGScheduler ==> ${msg.toString()}")
+        Timber.d("${this::class.java.simpleName} ==> UGScheduler ==> ${msg.toString()}")
+//        println("${this::class.java.simpleName} ==> UGScheduler ==> ${msg.toString()}")
     }
 }
 

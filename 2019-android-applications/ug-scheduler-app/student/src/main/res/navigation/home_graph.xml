@@ -45,7 +45,7 @@
         android:id="@id/navigation_enrol"
         android:name="dev.ugscheduler.ui.enrol.EnrolFragment"
         android:label="@string/title_enrol"
-        tools:layout="@layout/enrol_fragment" />
+        tools:layout="@layout/fragment_enrol_course" />
     <fragment
         android:id="@id/navigation_settings"
         android:name="dev.ugscheduler.ui.settings.SettingsFragment"
