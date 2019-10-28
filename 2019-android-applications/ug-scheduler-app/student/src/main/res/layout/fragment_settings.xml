@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fitsSystemWindows="true"
-    android:id="@+id/container"
     tools:context=".ui.settings.SettingsFragment">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -118,19 +118,19 @@
                         android:textStyle="bold" />
 
                     <dev.ugscheduler.shared.widgets.PreferenceView
+                        android:id="@+id/phone_prefs"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_micro"
                         app:icon="@drawable/twotone_phone_24px"
-                        android:id="@+id/phone_prefs"
                         app:title="Phone Number" />
 
                     <dev.ugscheduler.shared.widgets.PreferenceView
+                        android:id="@+id/residence_prefs"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_micro"
                         app:icon="@drawable/twotone_home_24px"
-                        android:id="@+id/residence_prefs"
                         app:title="Residence" />
 
                     <dev.ugscheduler.shared.widgets.PreferenceView
@@ -173,6 +173,16 @@
                         app:icon="@drawable/twotone_business_24px"
                         app:title="Educational Background" />
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:alpha="?alphaDisabled"
+                        android:fontFamily="@font/google_sans_medium"
+                        android:padding="@dimen/margin_large"
+                        android:text="Your profile information is kept private from other users"
+                        android:textAlignment="center"
+                        android:textAppearance="?textAppearanceSubtitle1" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 

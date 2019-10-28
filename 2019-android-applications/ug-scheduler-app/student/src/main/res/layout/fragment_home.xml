@@ -39,4 +39,5 @@
             android:paddingBottom="@dimen/spacing_normal" />
 
     </dev.ugscheduler.shared.widgets.CustomSwipeRefreshLayout>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
