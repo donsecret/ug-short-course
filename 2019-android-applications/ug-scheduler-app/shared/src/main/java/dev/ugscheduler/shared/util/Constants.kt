@@ -19,4 +19,6 @@ object Constants {
     const val ENROLMENTS = "enrolments"
     const val NEWS = "news"
     const val RESULTS = "results"
+
+    const val DEFAULT_AUTHOR = "VDM6zsS9brX5OyHrISc7dhrgky52"
 }

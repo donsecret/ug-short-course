@@ -1,18 +1,22 @@
 package dev.ugscheduler.ui.news
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import dev.ugscheduler.databinding.NewsFragmentBinding
+import dev.ugscheduler.shared.data.News
 import dev.ugscheduler.shared.util.activityViewModelProvider
-import dev.ugscheduler.shared.util.debugger
 import dev.ugscheduler.shared.util.setupWithAdapter
 import dev.ugscheduler.shared.viewmodel.AppViewModel
 import dev.ugscheduler.shared.viewmodel.AppViewModelFactory
 import dev.ugscheduler.util.MainNavigationFragment
 import org.koin.android.ext.android.get
+import java.io.InputStreamReader
 
 class NewsFragment : MainNavigationFragment() {
     private lateinit var binding: NewsFragmentBinding
@@ -42,16 +46,23 @@ class NewsFragment : MainNavigationFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        // Get adapter instance
         val newsAdapter = NewsAdapter()
 
         // Get news from source
         viewModel.news.observe(viewLifecycleOwner, Observer { news ->
             binding.recyclerView.setupWithAdapter(newsAdapter)
-            // todo: Display News in a recyclerview
-            debugger(news)
+            //if (news != null) newsAdapter.submitList(news)
+            binding.emptyContent.visibility = View.GONE
+            newsAdapter.submitList(getSampleNews(requireContext()))
         })
-
-
     }
 
 }
+
+// Get sample news from json
+fun getSampleNews(context: Context): MutableList<News> =
+    Gson().fromJson<List<News>>(
+        InputStreamReader(context.assets.open("sample_news.json")),
+        object : TypeToken<List<News>>() {}.type
+    ).toMutableList()
