@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2019. Designed & developed by Quabynah Codelabs(c). For the love of Android development.
+ */
+
 package dev.ugscheduler.ui.settings
 
 import android.Manifest
@@ -126,11 +130,16 @@ class SettingsFragment : MainNavigationFragment() {
             val location =
                 Tasks.await(LocationServices.getFusedLocationProviderClient(requireActivity()).lastLocation)
             if (location != null) {
-                val address = geocoder.getFromLocation(location.latitude, location.longitude, 1)[0]
-                uiScope.launch {
-                    binding.residencePrefs.summary = address.adminArea
-                    binding.addressPrefs.summary = address.getAddressLine(0)
+                try {
+                    val address = geocoder.getFromLocation(location.latitude, location.longitude, 1)[0]
+                    uiScope.launch {
+                        binding.residencePrefs.summary = address.adminArea
+                        binding.addressPrefs.summary = address.getAddressLine(0)
+                    }
+                } catch (e: Exception) {
+                    debugger(e.localizedMessage)
                 }
+
             }
         }
     }

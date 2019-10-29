@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2019. Designed & developed by Quabynah Codelabs(c). For the love of Android development.
+ */
+
 package dev.ugscheduler.shared.notification
 
 import android.annotation.SuppressLint
@@ -32,10 +36,16 @@ import java.util.*
  * Notification handler
  */
 class NotificationUtils(private val context: Context) {
+    // Checks android version for Oreo
     private val isOreo: Boolean by lazy { Build.VERSION.SDK_INT >= Build.VERSION_CODES.O }
+
+    // NOtification Manager instance
     private val manager by lazy { NotificationManagerCompat.from(context) }
 
+    // Local database instance
     private val db by lazy { LocalDatabase.get(context) }
+
+    // Repository instance
     private val repository by lazy {
         AppRepository(
             RemoteDataSource(FirebaseFirestore.getInstance(), FirebaseAuth.getInstance()),
