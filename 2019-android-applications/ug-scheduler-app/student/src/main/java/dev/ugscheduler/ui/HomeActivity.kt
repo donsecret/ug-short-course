@@ -19,6 +19,7 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI.setupWithNavController
 import androidx.navigation.ui.setupWithNavController
 import dev.ugscheduler.R
 import dev.ugscheduler.databinding.ActivityHomeBinding
@@ -58,7 +59,6 @@ class HomeActivity : BaseActivity(), NavigationHost {
             R.id.navigation_settings
         )
     }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
@@ -100,9 +100,7 @@ class HomeActivity : BaseActivity(), NavigationHost {
 
         binding.statusBarScrim.setOnApplyWindowInsetsListener(HeightTopWindowInsetsListener)
 
-        navHeaderBinding = NavigationHeaderBinding.inflate(layoutInflater).apply {
-            //lifecycleOwner = this@HomeActivity
-        }
+        navHeaderBinding = NavigationHeaderBinding.inflate(layoutInflater)
 
         navHostFragment = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment?
@@ -161,11 +159,12 @@ class HomeActivity : BaseActivity(), NavigationHost {
     }
 
     override fun onBackPressed() {
-        /**
+        /*
          * If the drawer is open, the behavior changes based on the API level.
          * When gesture nav is enabled (Q+), we want back to exit when the drawer is open.
          * When button navigation is enabled (on Q or pre-Q) we want to close the drawer on back.
          */
+
         if (binding.drawer.isDrawerOpen(binding.navigation) && binding.drawer.shouldCloseDrawerFromBackPress()) {
             closeDrawer()
         } else {
