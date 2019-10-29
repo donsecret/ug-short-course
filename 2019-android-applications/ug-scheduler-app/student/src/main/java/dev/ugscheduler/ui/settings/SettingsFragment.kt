@@ -207,7 +207,7 @@ class SettingsFragment : MainNavigationFragment() {
                     setPositiveButton("Save") { dialog, _ ->
                         dialog.dismiss()
                         val content = edtContentBinding.editContent.text.toString()
-                        if (content.isNotEmpty()) viewModel.addStudent(student.copy(position = content))
+                        if (content.isNotEmpty()) viewModel.addStudent(student.copy(address = content))
                     }
                     setNegativeButton("Cancel") { dialog, _ -> dialog.dismiss() }
                     show()
@@ -222,7 +222,7 @@ class SettingsFragment : MainNavigationFragment() {
                     setPositiveButton("Save") { dialog, _ ->
                         dialog.dismiss()
                         val content = edtContentBinding.editContent.text.toString()
-                        if (content.isNotEmpty()) viewModel.addStudent(student.copy(position = content))
+                        if (content.isNotEmpty()) viewModel.addStudent(student.copy(dob = content))
                     }
                     setNegativeButton("Cancel") { dialog, _ -> dialog.dismiss() }
                     show()
@@ -237,7 +237,7 @@ class SettingsFragment : MainNavigationFragment() {
                     setPositiveButton("Save") { dialog, _ ->
                         dialog.dismiss()
                         val content = edtContentBinding.editContent.text.toString()
-                        if (content.isNotEmpty()) viewModel.addStudent(student.copy(position = content))
+                        if (content.isNotEmpty()) viewModel.addStudent(student.copy(eduBackground = content))
                     }
                     setNegativeButton("Cancel") { dialog, _ -> dialog.dismiss() }
                     show()
@@ -267,7 +267,7 @@ class SettingsFragment : MainNavigationFragment() {
                     setPositiveButton("Save") { dialog, _ ->
                         dialog.dismiss()
                         val content = edtContentBinding.editContent.text.toString()
-                        if (content.isNotEmpty()) viewModel.addStudent(student.copy(residence = content))
+                        if (content.isNotEmpty()) viewModel.addStudent(student.copy(phone = content))
                     }
                     setNegativeButton("Cancel") { dialog, _ -> dialog.dismiss() }
                     show()
