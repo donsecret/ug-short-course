@@ -12,5 +12,6 @@
     <string name="enrol_now">Enrol Now</string>
     <string name="enrol_long_text">Join one of the numerous courses available and get a life-long experience in your area of interest</string>
     <string name="facilitator">Facilitator</string>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyCx7LP1dpKBBZehAfWYdMcbtrzkwnDT6Vg</string>
 
 </resources>
