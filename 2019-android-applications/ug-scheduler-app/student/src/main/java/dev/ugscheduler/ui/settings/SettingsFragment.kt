@@ -80,6 +80,7 @@ class SettingsFragment : MainNavigationFragment() {
             val options =
                 arrayOf<CharSequence>("Light", "Dark", "Set by Battery Saver", "System Default")
             MaterialAlertDialogBuilder(this@SettingsFragment.requireContext()).apply {
+                setIcon(R.drawable.twotone_brightness_6_24px)
                 setTitle("Select theme")
                 setSingleChoiceItems(
                     options,
@@ -246,7 +247,7 @@ class SettingsFragment : MainNavigationFragment() {
 
             EditType.ORG -> {
                 MaterialAlertDialogBuilder(requireContext()).apply {
-                    setIcon(R.drawable.twotone_business_24px)
+                    setIcon(R.drawable.twotone_business_center_24px)
                     setTitle("Organisation")
                     setView(edtContentBinding.root)
                     setPositiveButton("Save") { dialog, _ ->
