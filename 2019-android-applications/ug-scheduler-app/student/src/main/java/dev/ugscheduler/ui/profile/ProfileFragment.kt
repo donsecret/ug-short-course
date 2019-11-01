@@ -58,6 +58,7 @@ class ProfileFragment : DialogFragment() {
             lifecycle(viewLifecycleOwner)
             diskCachePolicy(CachePolicy.ENABLED)
         }
+
     }
 
     override fun onResume() {
