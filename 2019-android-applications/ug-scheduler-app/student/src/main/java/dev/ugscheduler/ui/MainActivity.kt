@@ -20,7 +20,7 @@ class MainActivity : BaseActivity() {
         setContentView(binding.root)
 
         uiScope.launch {
-            delay(850)
+            delay(1500)
             intentTo(WelcomeActivity::class.java, true)
         }
     }

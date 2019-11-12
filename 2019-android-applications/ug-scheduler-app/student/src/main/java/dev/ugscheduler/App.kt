@@ -6,6 +6,7 @@ package dev.ugscheduler
 
 import android.app.Application
 import android.os.StrictMode
+import dev.ugscheduler.BuildConfig.DEBUG
 //import dev.ugscheduler.BuildConfig.DEBUG
 import dev.ugscheduler.shared.di.loadAppModules
 import dev.ugscheduler.shared.notification.NotificationUtils
@@ -19,7 +20,7 @@ class App : Application() {
     private val notificationUtils by lazy { get<NotificationUtils>() }
 
     override fun onCreate() {
-        if (true) {
+        if (DEBUG) {
             enableStrictMode()
             Timber.plant(Timber.DebugTree())
         }

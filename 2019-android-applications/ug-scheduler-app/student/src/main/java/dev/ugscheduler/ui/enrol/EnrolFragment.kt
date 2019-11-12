@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import dev.ugscheduler.databinding.FragmentEnrolBinding
 import dev.ugscheduler.shared.data.Course
 import dev.ugscheduler.shared.data.Student
@@ -22,6 +23,7 @@ import org.koin.android.ext.android.get
 import java.util.*
 
 class EnrolFragment : MainNavigationFragment() {
+//    private val args: FragmentEnrolArgs by navArgs()
     private lateinit var binding: FragmentEnrolBinding
     private val viewModel by lazy {
         activityViewModelProvider<AppViewModel>(
@@ -39,11 +41,6 @@ class EnrolFragment : MainNavigationFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-        // todo: remove this block of code
-        for (i in 0..7) {
-            debugger(UUID.randomUUID())
-        }
 
         val course = arguments?.get("extra_course") as? Course
         val student = arguments?.get("extra_student") as? Student
