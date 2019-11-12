@@ -25,7 +25,6 @@
         android:padding="@dimen/margin_normal"
         android:text="@string/onboarding_welcome_to_app"
         android:textAlignment="center"
-        android:fontFamily="@font/google_sans_medium"
         android:textAppearance="?textAppearanceHeadline6" />
 
     <TextView

@@ -36,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="end"
-            android:fontFamily="@font/google_sans_medium"
+            android:fontFamily="@font/fira_mono_medium"
             android:maxLines="1"
             android:textAppearance="?textAppearanceBody1"
             tools:text="Default SMS App" />
@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:ellipsize="end"
-            android:fontFamily="@font/google_sans"
+            android:fontFamily="@font/fira_mono"
             android:fontFeatureSettings="onum"
             android:maxLines="1"
             android:textAppearance="?textAppearanceBody2"

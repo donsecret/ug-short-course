@@ -48,7 +48,6 @@
                     android:id="@+id/course_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/google_sans_medium"
                     android:textAppearance="?textAppearanceHeadline5"
                     tools:text="@tools:sample/lorem" />
 
@@ -57,7 +56,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_normal"
-                    android:fontFamily="@font/google_sans"
                     android:textAppearance="?textAppearanceBody2"
                     tools:maxLines="12"
                     tools:text="@tools:sample/lorem/random" />
@@ -77,7 +75,6 @@
                     android:layout_gravity="start"
                     android:layout_marginStart="@dimen/margin_normal"
                     android:layout_marginTop="@dimen/margin_normal"
-                    android:fontFamily="@font/google_sans_medium"
                     android:text="@string/facilitator"
                     android:textStyle="bold" />
 
@@ -145,7 +142,6 @@
                     android:layout_gravity="start"
                     android:layout_marginStart="@dimen/margin_normal"
                     android:layout_marginTop="@dimen/margin_large"
-                    android:fontFamily="@font/google_sans_medium"
                     android:text="@string/title_sessions"
                     android:textStyle="bold" />
 

@@ -25,7 +25,6 @@
         android:padding="@dimen/margin_normal"
         android:text="@string/enrol_now"
         android:textAlignment="center"
-        android:fontFamily="@font/google_sans_medium"
         android:textAppearance="?textAppearanceHeadline6" />
 
     <TextView
