@@ -7,5 +7,7 @@
     <array name="preloaded_fonts" translatable="false">
         <item>@font/fira_mono</item>
         <item>@font/fira_mono_medium</item>
+        <item>@font/lato</item>
+        <item>@font/ubuntu</item>
     </array>
 </resources>
